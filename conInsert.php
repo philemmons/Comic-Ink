@@ -23,7 +23,7 @@ if(isset($_POST['logout'])){
 <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li><a href="indexFinal.php">Home</a></li>
+            <li><a href="index.php">Home</a></li>
             <li><a href="collection.php">Collection</a></li>
             <li><a href="convention.php">Convention</a></li>
             <li><a href="admin.php">Admin</a></li>
