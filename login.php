@@ -8,9 +8,9 @@ if (!isset($_SESSION["user"])) {  //Check whether the admin has logged in
 }
 
 include 'header.html';
-//include 'php/sourceFinal.php';
+include 'php/sourceFinal.php';
 
-//$dbConn = getDBConnection();
+$dbConn = getDBConnection();
 
 if(isset($_POST['logout'])){
     session_destroy();
