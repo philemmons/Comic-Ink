@@ -21,13 +21,11 @@ function getDBConnection() {
         $dbConn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
         // Setting Errorhandling to Exception
         $dbConn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
-        echo "Connected successfully";
+        //echo "Connected successfully";
     }
     catch (PDOException $e) {
-        
         echo "There was some problem connecting to the database! Error: $e";
         exit();
-        
     }
     return $dbConn;
 }
