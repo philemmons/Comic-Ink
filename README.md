@@ -1,7 +1,8 @@
 # Comic Ink
 ## “Kapow! comic book and pop culture collide.”
 ## Phillip Emmons
-05-08-2017
+05-08-2017, admin username: philemmons, password: 123qwe
+
 
 ### Our story
 Users will encounter are friendly splash page as they arrived at the site with some scrolling comic book covers ranging from the early fifties and up. All are welcome to browse our comic collection or North American conventions. Users will be presented with a display of the comic books available. They are welcome to sort through the collection by title creator publisher or be able to do a combination, and present the list and several orders buyer sort by function.
