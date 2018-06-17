@@ -5,13 +5,10 @@ if (!isset($_SESSION["username"])) {  //Check whether the admin has logged in
     header("Location: login.php"); 
 }
 
-
 include 'header.html';
 include 'php/sourceFinal.php';
 
-
-
-$dbConn = getDBConnection("comicDB");
+$dbConn = getDBConnection();
 
 if(isset($_POST['logout'])){
     session_destroy();

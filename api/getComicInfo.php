@@ -1,7 +1,7 @@
 <?php
 
     include '../php/dbConnection.php';
-    $dbConn = getDBConnection("comicDB");    
+    $dbConn = getDBConnection();    
     $sql = "create view matchCreator as 
             SELECT *
             FROM convention natural join comicBook";

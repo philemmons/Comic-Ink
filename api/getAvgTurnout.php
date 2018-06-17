@@ -1,7 +1,7 @@
 <?php
 
     include '../php/dbConnection.php';
-    $dbConn = getDBConnection("comicDB");    
+    $dbConn = getDBConnection();    
    
     $sql = "select avg(turnOut)
             from convention";

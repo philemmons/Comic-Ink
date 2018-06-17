@@ -10,7 +10,7 @@ if (!isset($_SESSION["user"])) {  //Check whether the admin has logged in
 include 'header.html';
 //include 'php/sourceFinal.php';
 
-//$dbConn = getDBConnection("comicDB");
+//$dbConn = getDBConnection();
 
 if(isset($_POST['logout'])){
     session_destroy();

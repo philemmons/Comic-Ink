@@ -1,10 +1,20 @@
 <?php
 
 
-function getDBConnection($dbname) {
-    $host = "localhost";
-    $username = "philemmons";//authorized user to have access to create and drop views
-    $password = "s3cr3t";
+function getDBConnection() {
+    
+    // https://devcenter.heroku.com/articles/jawsdb#using-jawsdb-with-php
+    $url = getenv('JAWSDB_URL');
+    $dbparts = parse_url($url);
+    $host = $dbparts['host'];
+    $username = $dbparts['user'];
+    $password = $dbparts['pass'];
+    $dbname= ltrim($dbparts['path'],'/');
+    
+    //old
+    //$host = "localhost";
+    //$username = "philemmons";//authorized user to have access to create and drop views
+    //$password = "s3cr3t";
     
     try {
         //Creating database connection

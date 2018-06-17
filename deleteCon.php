@@ -7,7 +7,7 @@
     
     include 'php/dbConnection.php';
     
-    $dbConn = getDBConnection("comicDB");
+    $dbConn = getDBConnection();
     $sql = "DELETE FROM convention
             WHERE con_id = " . $_GET['con_id'];
     //echo $sql;

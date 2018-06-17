@@ -1,7 +1,7 @@
 <?php
 include 'dbConnection.php';
 
-$dbConn = getDBConnection("comicDB");
+$dbConn = getDBConnection();
 
 /*
 *Form vars - All input converted to lower case.
@@ -81,8 +81,10 @@ function goSQLcomic($table){
         
     }
     if( $pub ){
-        if (strlen(stristr($sql,$needle))>0) { //String search for 'where': stristr returns the partial string up to 'where'.
-        // Needle Found                     compare lenth>0 means the keyword was found.  http://www.maxi-pedia.com/string+contains+substring+php
+        //String search for 'where': stristr returns the partial string up to 'where'.
+        // compare lenth>0 means the keyword was found.  http://www.maxi-pedia.com/string+contains+substring+php
+        if (strlen(stristr($sql,$needle))>0) { 
+        // Needle Found
             $sql .= " AND ";
         }else{
             $sql .= " WHERE ";
@@ -191,7 +193,7 @@ function goMain(){
      }
 }
 
-//admin.php
+//admin.php - display admin info
 /*
 function info(){
     //global $userData;
@@ -207,8 +209,9 @@ function info(){
             <iframe src="" width="300" height="300" name="userInfoFrame"></iframe>
         </div>        
 */
-//conInsert.php and conUpdate.php
 
+
+//conInsert.php and conUpdate.php
 function getConInfo($con_id){
     global $dbConn;
     $sql = "SELECT * FROM convention WHERE con_id = $con_id"; 
