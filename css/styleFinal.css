@@ -5,8 +5,8 @@
   left: 0;
   top: 0;
   width: 17%;
-  height: 130%;
-    opacity: .7;
+  height: 100%;
+  opacity: .7;
   z-index: -1;
 }
 
@@ -16,7 +16,7 @@
   right: 0;
   top: 0;
   width: 17%;
-  height: 130%;
+  height: 100%;
   opacity: .7;
   z-index: -1;
 }
@@ -57,6 +57,7 @@ header {
 
 body {
     text-transform: capitalize;
+    background-color: #ccc;
 }
 
 #carouselCointainer{

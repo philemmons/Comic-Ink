@@ -45,7 +45,7 @@ if(isset($_POST['logout'])){
         }
         ?>
         <br><br>
-        <img src="img/key-robot.jpg" alt="robot with a gold key" />
+        <img src="img/key-robot.png" alt="robot with a gold key" />
 </div>
 
 <div id="id01" class="modalAD">
