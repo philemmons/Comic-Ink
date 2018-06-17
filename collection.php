@@ -12,7 +12,7 @@ $dbConn = getDBConnection();
 
 if(isset($_POST['logout'])){
     session_destroy();
-    header("Location: indexFinal.php");
+    header("Location: index.php");
 }
 
 ?>
@@ -33,7 +33,7 @@ if(isset($_POST['logout'])){
             //to be sure something is being sent back from the api 
             // *****  inspect element when working with js -->network: remote server --> response  --> console to examine data
             //test the api in the browser to be certain it works
-            if(jQuery.isEmptyObject( data[0]) ){
+            if(jQuery.isEmptyObject( data[0] ) ){
                 $("#modalTitle").append("<h3>Sorry!</h3>")
                 $("#modalInfo").append("At this time the creator is not scheduled at any conventions.");
             }else{
