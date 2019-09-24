@@ -1,6 +1,6 @@
 # Comic Ink
 ## “Kapow! comic book and pop culture collide.”
-## Phillip Emmons
+###### by Phillip Emmons
 05-08-2017 
 
 ### Our story
@@ -24,9 +24,10 @@ To use the admin functionality: username: philemmons, password: 123qwe
 [https://github.com/philemmons/Comic-Ink/blob/master/document/erDiagram.pdf](https://github.com/philemmons/Comic-Ink/blob/master/document/erDiagram.pdf)
 
 ### Future Functions
- - Logout button should appear only if there is an admin logged in.
- - Scalability for various browsers and mobile devices.
- - Admin function to change username and password.
- - Encrypt password with php password_hash function as it wil secure the database. https://stackoverflow.com/questions/24862499/correct-way-of-creating-salted-hash-password.
+###### 09-23-19
+- Logout button should appear only if there is an admin logged in.
+- Scalability for various browsers and mobile devices.
+- Admin function to change username and password.
+- Encrypt password with php password_hash function as it wil secure the database. https://stackoverflow.com/questions/24862499/correct-way-of-creating-salted-hash-password.
  
  
