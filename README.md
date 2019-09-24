@@ -22,3 +22,11 @@ To use the admin functionality: username: philemmons, password: 123qwe
 
 ### ER Diagram
 [https://github.com/philemmons/Comic-Ink/blob/master/document/erDiagram.pdf](https://github.com/philemmons/Comic-Ink/blob/master/document/erDiagram.pdf)
+
+### Future Functions
+ - Logout button should appear only if there is an admin logged in.
+ - Scalability for various browsers and mobile devices.
+ - Admin function to change username and password.
+ - Encrypt password with php password_hash function as it wil secure the database. https://stackoverflow.com/questions/24862499/correct-way-of-creating-salted-hash-password.
+ 
+ 
