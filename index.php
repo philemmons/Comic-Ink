@@ -11,7 +11,7 @@ include 'php/sourceFinal.php';
             <li><a href="convention.php">Convention</a></li>
             <li><a href="login.php">Admin</a></li>
           </ul>
-   <?php if (isset($_SESSION["username"])) { ?> //Check whether the admin has logged in
+   <?php if (isset($_SESSION["username"])) { ?> 
         <form method ="get" id="one" >
                 <input type="submit" value="Logout" class="btn" name="logout" style="box-shadow: none !important; margin-top: 4px;"/>
        </form>
