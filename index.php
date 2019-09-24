@@ -11,12 +11,11 @@ include 'php/sourceFinal.php';
             <li><a href="convention.php">Convention</a></li>
             <li><a href="login.php">Admin</a></li>
           </ul>
-   <?php             
-   if (isset($_SESSION["username"])) {  //Check whether the admin has logged in
-        echo '<form method ="get" id="one" >'
-                echo '<input type="submit" value="Logout" class="btn" name="logout" style="box-shadow: none !important; margin-top: 4px;"/>'
-        echo '</form>'
-    ?>
+   <?php if (isset($_SESSION["username"])) { ?> //Check whether the admin has logged in
+        <form method ="get" id="one" >
+                <input type="submit" value="Logout" class="btn" name="logout" style="box-shadow: none !important; margin-top: 4px;"/>
+       </form>
+   <?php; } ?>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
