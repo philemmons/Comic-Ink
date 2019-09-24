@@ -30,9 +30,12 @@ if(isset($_POST['logout'])){
             <li class="active"><a href="conInsert.php">Insert<span class="sr-only">(current)</span></a></li>
           </ul>
 
-   <form method ="POST" id="one" >
-            <input type="submit" value="Logout" class="btn" name="logout" style="box-shadow: none !important; margin-top: 4px;"/>
-    </form>
+   <?php if (isset($_SESSION["username"])) { ?> 
+        <form method ="get" id="one" >
+                <input type="submit" value="Logout" class="btn" name="logout" style="box-shadow: none !important; margin-top: 4px;"/>
+       </form>
+   <?php; } ?>
+            
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
