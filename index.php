@@ -12,10 +12,10 @@ include 'php/sourceFinal.php';
             <li><a href="login.php">Admin</a></li>
           </ul>
    <?php             
-   if (!isset($_SESSION["username"])) {  //Check whether the admin has logged in
-        echo "<form method ="get" id="one" >"
-                echo "<input type="submit" value="Logout" class="btn" name="logout" style="box-shadow: none !important; margin-top: 4px;"/>"
-        echo "</form>"
+   if (isset($_SESSION["username"])) {  //Check whether the admin has logged in
+        echo '<form method ="get" id="one" >'
+                echo '<input type="submit" value="Logout" class="btn" name="logout" style="box-shadow: none !important; margin-top: 4px;"/>'
+        echo '</form>'
     ?>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
