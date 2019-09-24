@@ -163,6 +163,7 @@ function goSQLcon($table){
 /*
 *@input: login process accesssed by login.php with user input
 *@output: successful login  directs user to index.php
+*Future work - https://stackoverflow.com/questions/20764031/php-salt-and-hash-sha256-for-login-password
 */
 function goMain(){
     global $dbConn;
