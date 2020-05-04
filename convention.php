@@ -20,7 +20,7 @@ function displayCon($convention){
         echo"<tr>";
         //$str = $eachCon['conName'] . ", " .$eachCon['city'] .", ".$eachCon['state'] .", ".$eachCon['turnOut'] .", ".$eachCon['creator'];
         echo "<td>".$eachCon['conName'] . "</td><td>" .$eachCon['city'] ."</td><td>".$eachCon['state'] ."</td><td>".$eachCon['turnOut'] ."</td><td>".$eachCon['creator']."</td>";
-        echo "<td> <a href='".$eachCon[website]."' target='_blank'/>".$eachCon[website]."</a></td>";
+        echo "<td> <a href='".$eachCon['website']."' target='_blank'/>".$eachCon['website']."</a></td>";
         echo "</tr>";
     }
 }
@@ -34,11 +34,13 @@ function displayCon($convention){
             <li><a href="login.php">Admin</a></li>
           </ul>
             
-   <?php if (isset($_SESSION["username"])) { ?> 
-        <form method ="get" id="one" >
-                <input type="submit" value="Logout" class="btn" name="logout" style="box-shadow: none !important; margin-top: 4px;"/>
-       </form>
-   <?php; } ?>
+    <?php 
+    if (isset($_SESSION["username"])) { 
+      echo'<form method ="get" id="one" >';
+        echo'<input type="submit" value="Logout" class="btn" name="logout" style="box-shadow: none !important; margin-top: 4px;"/>';
+      echo'</form>';
+    } 
+    ?>
             
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
