@@ -2,6 +2,12 @@
 session_start();  //start or resume an existing session
 include 'header.html';
 include 'php/sourceFinal.php';
+
+if(isset($_POST['logout'])){
+  session_destroy();
+  header("Location: index.php");
+}
+
 ?>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
