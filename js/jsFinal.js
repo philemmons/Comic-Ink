@@ -53,7 +53,6 @@ function displayError(elementId, errorMessage){
 }
 
 
-
 function validateInsert(){
     var isValid =true;
       //alert(isValid);

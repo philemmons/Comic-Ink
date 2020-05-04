@@ -30,9 +30,9 @@ if(isset($_POST['logout'])){
           
    <?php if (isset($_SESSION["username"])) { ?> 
         <form method ="get" id="one" >
-                <input type="submit" value="Logout" class="btn" name="logout" style="box-shadow: none !important; margin-top: 4px;"/>
+                <input type="submit" value="logout" class="btn" name="logout" style="box-shadow: none !important; margin-top: 4px;"/>
        </form>
-   <?php; } ?>
+   <?php ; } ?>
             
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
