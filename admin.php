@@ -116,7 +116,7 @@ function getBig(){
           
     <?php 
     if (isset($_SESSION["username"])) { 
-      echo'<form method ="get" id="one" >';
+      echo'<form method ="POST" id="one" >';
         echo'<input type="submit" value="Logout" class="btn" name="logout" style="box-shadow: none !important; margin-top: 4px;"/>';
       echo'</form>';
     } 

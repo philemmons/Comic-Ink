@@ -20,6 +20,6 @@ include 'php/sourceFinal.php';
         </style>
     </head>
     <body>
-        <h2>Specific Data <?php echo info() ?></h2> <!-- https://stackoverflow.com/questions/2020445/what-does-mean-in-php -->
+        <h2>Specific Data <?php //echo info() ?></h2> <!-- https://stackoverflow.com/questions/2020445/what-does-mean-in-php -->
     </body>
 </html>
