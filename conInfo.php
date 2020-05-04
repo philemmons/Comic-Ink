@@ -6,8 +6,8 @@ if (!isset($_SESSION["username"])) {  //Check whether the admin has logged in
 }
 
 include 'php/sourceFinal.php';
-
 ?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,6 +20,6 @@ include 'php/sourceFinal.php';
         </style>
     </head>
     <body>
-        <h2>Specific Data <?=info() ?></h2>
+        <h2>Specific Data <?php echo info() ?></h2> <!-- https://stackoverflow.com/questions/2020445/what-does-mean-in-php -->
     </body>
 </html>
