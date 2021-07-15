@@ -8,6 +8,7 @@
   height: 100%;
   opacity: .7;
   z-index: -1;
+  background-attachment: fixed
 }
 
 #bgRight {
@@ -19,6 +20,7 @@
   height: 100%;
   opacity: .7;
   z-index: -1;
+  background-attachment: fixed
 }
 
 .mySlides {
