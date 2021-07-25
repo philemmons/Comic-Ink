@@ -21,14 +21,14 @@ if(isset($_POST['logout'])){
     $("#modalInfo").html("");
     $("#modalTitle").html("");
     $.ajax({
-        type: "get",
-        url: "api/getComicInfo.php",
-        dataType: "json",  
-        data: { "tID":titleId,
+        type: "get", // HTTP method to use for the request
+        url: "api/getComicInfo.php", // URL to which the request is sent.
+        dataType: "json",  // type of data expected back from the server
+        data: { "tID":titleId, // map that is sent to the server with the request.
                 "yID":yearId,
                 "iID":issueId
         },
-        success: function(data,status) {
+        success: function(data,status) { //callback function that is executed if the request succeeds.
             //alert(data[0].creator);  //ALSO THE BRACKETS in the preview indicate an object!
             //to be sure something is being sent back from the api 
             // *****  inspect element when working with js -->network: remote server --> response  --> console to examine data
@@ -45,7 +45,7 @@ if(isset($_POST['logout'])){
                 $("#modalInfo").append("<a href = '"+data[0].website+ "\'>"+data[0].website+"</a>" );
             }
         },
-            complete: function(data,status) { //optional, used for debugging purposes
+            complete: function(data,status) { //callback function that executes whenever the request finishes.
             //alert(status);
         }
     });//AJAX 1
