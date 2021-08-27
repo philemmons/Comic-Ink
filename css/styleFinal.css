@@ -5,9 +5,10 @@
   left: 0;
   top: 0;
   width: 17%;
-  height: 100%;
+  min-height: 1000px;
   opacity: .7;
   z-index: -1;
+  background-attachment: fixed
 }
 
 #bgRight {
@@ -16,9 +17,10 @@
   right: 0;
   top: 0;
   width: 17%;
-  height: 100%;
+  min-height: 1000px;
   opacity: .7;
   z-index: -1;
+  background-attachment: fixed
 }
 
 .mySlides {
