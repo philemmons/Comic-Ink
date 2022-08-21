@@ -29,4 +29,3 @@ function getDBConnection() {
     }
     return $dbConn;
 }
-?>

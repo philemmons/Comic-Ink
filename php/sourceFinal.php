@@ -254,5 +254,3 @@ if(isset($_GET['submit'])) {  //admin has submitted the "update user" form
            $nPara = array();  
         }//eof if
 }
-
-?>

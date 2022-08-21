@@ -26,6 +26,3 @@
     $sql = "drop view matchCreator";
     $stmt = $dbConn -> prepare($sql);
     $stmt -> execute();
-   
-        
-?>
