@@ -1,5 +1,5 @@
 # Comic-Ink
-## “Kapow! comic books and pop culture collide.”
+## “Ka-Pow! comic books and pop culture collide.”
 ###### by Phillip Emmons
 05-08-2017 
 
