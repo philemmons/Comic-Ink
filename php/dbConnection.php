@@ -11,7 +11,7 @@ function getDBConnection()
     $password = $dbparts['pass'];
     $dbname= ltrim($dbparts['path'],'/');
      *******/
-    $host = getenv('DB_HOST_brakeme');
+    $host = getenv('DB_HOST');
     $username = getenv('DB_USER');
     $password = getenv('DB_PW');
     $dbname = getenv('DB_NAME');
