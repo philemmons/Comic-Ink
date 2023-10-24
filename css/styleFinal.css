@@ -4,7 +4,7 @@
 }
 #bgLeft {
   position: absolute;
-  background-image: url("../img/bg1.jpg");
+  background-image: url("../img/bg1.png");
   left: 0;
   top: 0;
   width: 17%;
@@ -16,7 +16,7 @@
 
 #bgRight {
   position: absolute;
-  background-image: url("../img/bg2.jpg");
+  background-image: url("../img/bg2.png");
   right: 0;
   top: 0;
   width: 17%;
