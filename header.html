@@ -1,88 +1,67 @@
-<!-- Comic-Ink Redo v3.0:Phillip T. Emmons:10-24-23 -->
+<!-- Comic-Ink Redo v3.0:Phillip Emmons:10-24-23 -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>MoRe CoMiCs!</title>
-    <!-- Latest Bootstrap compiled and minified CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"
-    />
 
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>MoRe CoMiCs!</title>
 
-    <!-- Latest Bootstrap compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    <script src="js/jsFinal.js"></script>
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 
-    <!-- https://datatables.net/examples/styling/bootstrap.html-->
-    <!-- older library: <script src='https://code.jquery.com/jquery-1.12.4.js'></script> -->
-    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <style>
-      @import url("css/styleFinal.css");
-    </style>
-  </head>
+  <script src="js/jsFinal.js"></script>
 
-  <body>
-    <div id="bgRight"></div>
-    <div id="bgLeft"></div>
+  <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
 
-    <header>
-      <div id="wrapper">
-        <div class="title">
-          <img
-            src="img/headerBG.jpg"
-            alt="Comic Inc Header with a red background and rivets on the letters"
-          />
-        </div>
-        <!--
+  <style>
+    @import url("css/styleFinal.css");
+  </style>
+</head>
+
+<body>
+  <div id="bgRight"></div>
+  <div id="bgLeft"></div>
+
+  <header>
+    <div id="wrapper">
+      <div class="title">
+        <img src="img/headerBG.jpg" alt="Comic Inc Header with a red background and rivets on the letters">
+      </div>
+      <!--
         <p>...are a publication that consists of comic art in the form <br>of sequential juxtaposed panels that represent individual scenes.</p>
         -->
-      </div>
-    </header>
+    </div>
+  </header>
 
-    <nav class="navbar navbar-default navbar-inverse">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button
-            type="button"
-            class="navbar-toggle collapsed"
-            data-toggle="collapse"
-            data-target="#bs-example-navbar-collapse-1"
-            aria-expanded="false"
-          >
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a
-            data-toggle="tooltip"
-            title="<img src='img/pow.png' />"
-            class="navbar-brand"
-            href="#"
-            >COMICS</a
-          >
-        </div>
-        <script>
-          //tooltip - http://stackoverflow.com/questions/29473830/image-in-tooltip-using-bootstrap
-          $('a[data-toggle="tooltip"]').tooltip({
-            animated: "fade",
-            placement: "top",
-            html: true,
-          });
-        </script>
+  <nav class="navbar navbar-default navbar-inverse">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+          data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a data-toggle="tooltip" title="<img src='img/pow.png' />" class="navbar-brand" href="#">COMICS</a>
       </div>
-    </nav>
-  </body>
-</html>
+      <script>
+        //tooltip - http://stackoverflow.com/questions/29473830/image-in-tooltip-using-bootstrap
+        $('a[data-toggle="tooltip"]').tooltip({
+          animated: "fade",
+          placement: "top",
+          html: true,
+        });
+      </script>
+    </div>
+  </nav>
