@@ -3,42 +3,50 @@ include 'dbConnection.php';
 
 $dbConn = getDBConnection();
 
+/*********
+ * 10-24-23
+ * Updated functions with prepared statements to prevent SQL injection
+ * 
+ **********/
+
 /*
 *Form vars - All input converted to lower case.
 */
-$title= strtolower( $_POST['title']);// User input deviceName
-$creator= strtolower( $_POST['creator']);// User input deviceName
-$pub= strtolower( $_POST['publisher']);// User selected deviceType
-$year = $_POST['year'];// Selection display type
-$issue = $_POST['issue'];//User input item statusable selection
+$title = strtolower($_POST['title']); // User input deviceName
+$creator = strtolower($_POST['creator']); // User input deviceName
+$pub = strtolower($_POST['publisher']); // User selected deviceType
+$year = $_POST['year']; // Selection display type
+$issue = $_POST['issue']; //User input item statusable selection
 $sortBy = $_POST['sortBy'];
 
 //$creator, $sortBy - from above
 
-$city = strtolower( $_POST['city']);
-$conName= strtolower( $_POST['conName']);
-$state= strtoupper( $_POST['state']);
-$turnOut=  $_POST['turnOut'];
-$website= $_POST['website'];
+$city = strtolower($_POST['city']);
+$conName = strtolower($_POST['conName']);
+$state = strtoupper($_POST['state']);
+$turnOut =  $_POST['turnOut'];
+$website = $_POST['website'];
 
 
 /*
 *@input: sql string to be processed
 *@output: table from the sql query
 */
-function preExeFet($sql){
+function preExeFet($sql)
+{
     global $dbConn, $nPara;
-    
-    $stmt = $dbConn -> prepare ($sql);
-    $stmt -> execute($nPara);
+
+    $stmt = $dbConn->prepare($sql);
+    $stmt->execute($nPara);
     $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $records;
 }
-function preExeFetNOPARA($sql){
+function preExeFetNOPARA($sql)
+{
     global $dbConn;
-    
-    $stmt = $dbConn -> prepare ($sql);
-    $stmt -> execute();
+
+    $stmt = $dbConn->prepare($sql);
+    $stmt->execute();
     $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $records;
 }
@@ -47,113 +55,118 @@ function preExeFetNOPARA($sql){
 *@input: 
 *@output: all contents of device table for the user in alphebetical order
 */
-function getInfo( $table ) {
-    $sql = "SELECT * FROM ".$table;
-    return preExeFetNOPARA($sql);
+function getInfo($table)
+{
+    $nPara[':dTable'] = $table;
+    $sql = "SELECT * FROM :dTable";
+    return preExeFet($sql);
 }
 
 /*
 *@input: form input by user: partial device name, dropdown device type, order by price or name and statusablity
 *@output: returns a table based on the query including a device count. a-e letters allow for different output order.
-*/    
-function goSQLcomic($table){
+*/
+function goSQLcomic($table)
+{
     global $title, $creator, $pub, $year, $issue, $sortBy, $nPara;
-    $needle = "WHERE";//If the 'where' keyword is used  then 'and 'is added to the string in place of.
-    
-    $sql = "SELECT title, creator, publisher, year, issue FROM ".$table;
-    
-    if( $title ){
-        //Prevents SQL injection by using a named parameter.
-        $nPara[':dTitle'] = '%'.$title.'%';
-        $sql .= " WHERE title LIKE :dTitle ";
+    $needle = "WHERE"; //If the 'where' keyword is used  then 'and 'is added to the string in place of.
 
+    $nPara[':dTable'] = $table;
+    $sql = "SELECT title, creator, publisher, year, issue FROM :dTable";
+
+    if ($title) {
+        //Prevents SQL injection by using a named parameter.
+        $nPara[':dTitle'] = '%' . $title . '%';
+        $sql .= " WHERE title LIKE :dTitle ";
     }
-    if( $creator ){
-        if (strlen(stristr($sql,$needle))>0) { //String search for 'where': stristr returns the partial string up to 'where'.
-        // Needle Found                     compare lenth>0 means the keyword was found.  http://www.maxi-pedia.com/string+contains+substring+php
+    if ($creator) {
+        if (strlen(stristr($sql, $needle)) > 0) { //String search for 'where': stristr returns the partial string up to 'where'.
+            // Needle Found - compare lenth>0 means the keyword was found.  http://www.maxi-pedia.com/string+contains+substring+php
             $sql .= " AND ";
-        }else{
+        } else {
             $sql .= " WHERE ";
         }
         //Prevents SQL injection by using a named parameter.
-        $nPara[':dCreator'] = '%'.$creator.'%';
+        $nPara[':dCreator'] = '%' . $creator . '%';
         $sql .= " creator LIKE :dCreator ";
-        
     }
-    if( $pub ){
+    if ($pub) {
         //String search for 'where': stristr returns the partial string up to 'where'.
         // compare lenth>0 means the keyword was found.  http://www.maxi-pedia.com/string+contains+substring+php
-        if (strlen(stristr($sql,$needle))>0) { 
-        // Needle Found
+        if (strlen(stristr($sql, $needle)) > 0) {
+            // Needle Found
             $sql .= " AND ";
-        }else{
+        } else {
             $sql .= " WHERE ";
         }
         //Prevents SQL injection by using a named parameter.
-        $nPara[':dPub'] = '%'.$pub.'%';
+        $nPara[':dPub'] = '%' . $pub . '%';
         $sql .= " publisher LIKE :dPub ";
-        
     }
 
-    if( isset($_POST['allIn']) ){ // Added due to user submitting a blank form.
-       $sql.= " ";
+    if (isset($_POST['allIn'])) { // Added due to user submitting a blank form.
+        $sql .= " ";
     }
-    
-    if( $sortBy ){ // Name or price
-        $sql .=" ORDER BY ".$sortBy ;
+
+    if ($sortBy) { // Name or price
+        $nPara[':dSortBy'] = $sortBy;
+        $sql .= " ORDER BY :dSortBy ";
     }
     //echo $sql;
     return preExeFet($sql);
 }
 
-function get($table, $column){
-    $sql = "SELECT DISTINCT ".$column." FROM ".$table;
-    return preExeFetNOPARA($sql);
+function get($table, $column)
+{
+    $nPara[':dColumn'] = $column;
+    $nPara[':dTable'] = $table;
+    $sql = "SELECT DISTINCT :dColumn FROM :dTable";
+    return preExeFet($sql);
 }
 
-function goSQLcon($table){
+function goSQLcon($table)
+{
     global $city, $creator, $conName, $state, $turnOut, $website, $sortBy, $nPara;
-    $needle = "WHERE";//If the 'where' keyword is used  then 'and 'is added to the string in place of.
-    
-    $sql = "SELECT conName, city, state, turnOut, creator, website FROM ".$table;
-    
-    if( $conName ){
+    $needle = "WHERE"; //If the 'where' keyword is used  then 'and 'is added to the string in place of.
+
+    $nPara[':dTable'] = $table;
+    $sql = "SELECT conName, city, state, turnOut, creator, website FROM :dTable";
+
+    if ($conName) {
         //Prevents SQL injection by using a named parameter.
-        $nPara[':dConName'] = '%'.$conName.'%';
+        $nPara[':dConName'] = '%' . $conName . '%';
         $sql .= " WHERE conName LIKE :dConName ";
-
     }
-    if( $creator ){
-        if (strlen(stristr($sql,$needle))>0) { //String search for 'where': stristr returns the partial string up to 'where'.
-        // Needle Found                     compare lenth>0 means the keyword was found.  http://www.maxi-pedia.com/string+contains+substring+php
+    if ($creator) {
+        if (strlen(stristr($sql, $needle)) > 0) { //String search for 'where': stristr returns the partial string up to 'where'.
+            // Needle Found - compare lenth>0 means the keyword was found.  http://www.maxi-pedia.com/string+contains+substring+php
             $sql .= " AND ";
-        }else{
+        } else {
             $sql .= " WHERE ";
         }
         //Prevents SQL injection by using a named parameter.
-        $nPara[':dCreator'] = '%'.$creator.'%';
+        $nPara[':dCreator'] = '%' . $creator . '%';
         $sql .= " creator LIKE :dCreator ";
-        
     }
-    if( $state ){
-        if (strlen(stristr($sql,$needle))>0) { //String search for 'where': stristr returns the partial string up to 'where'.
-        // Needle Found                     compare lenth>0 means the keyword was found.  http://www.maxi-pedia.com/string+contains+substring+php
+    if ($state) {
+        if (strlen(stristr($sql, $needle)) > 0) { //String search for 'where': stristr returns the partial string up to 'where'.
+            // Needle Found - compare lenth>0 means the keyword was found.  http://www.maxi-pedia.com/string+contains+substring+php
             $sql .= " AND ";
-        }else{
+        } else {
             $sql .= " WHERE ";
         }
         //Prevents SQL injection by using a named parameter.
-        $nPara[':dState'] = '%'.$state.'%';
+        $nPara[':dState'] = '%' . $state . '%';
         $sql .= " state LIKE :dState ";
-        
     }
 
-    if( isset($_POST['allIn']) ){ // Added due to user submitting a blank form.
-       $sql.= " ";
+    if (isset($_POST['allIn'])) { // Added due to user submitting a blank form.
+        $sql .= " ";
     }
-    
-    if( $sortBy ){ // Name or price
-        $sql .=" ORDER BY ".$sortBy ;
+
+    if ($sortBy) { // Name or price
+        $nPara[':dSortBy'] = $sortBy;
+        $sql .= " ORDER BY :dSortBy ";
     }
     //echo $sql;
     return preExeFet($sql);
@@ -165,33 +178,34 @@ function goSQLcon($table){
 *@output: successful login  directs user to index.php
 *Future work - https://stackoverflow.com/questions/20764031/php-salt-and-hash-sha256-for-login-password
 */
-function goMain(){
+function goMain()
+{
     global $dbConn;
-    
+
     $userForm = $_POST['username'];
     $pwForm = sha1($_POST['password']);   //hash("sha1",$_POST['password']);
-    
+
     //USE NAMEDPARAMETERS TO PREVENT SQL INJECTION
-    $sql = "SELECT * FROM admin WHERE userName = :username AND password = :password";
-    
     $nPara[':username'] = $userForm;
     $nPara[':password'] = $pwForm;
-    
+
+    $sql = "SELECT * FROM admin WHERE userName = :username AND password = :password";
+
     $statement = $dbConn->prepare($sql);
     $statement->execute($nPara);
     $record = $statement->fetch(PDO::FETCH_ASSOC);
 
-     if (empty($record)) { //wrong credentials
-        echo"<form method='POST' action='login.php'>";
-            echo"<span style='color:red'><h3>Wrong username or password.</h3></span>";
-        echo"</form>";
-     } else {
-         $_SESSION["name"] = $record['firstName'] . " " . $record['lastName'];
-         $_SESSION["username"]  = $record['username'];
-         $_SESSION["user"] = "Admin";
-         //echo $_SESSION["user"];
-         header("Location: admin.php"); //redirect to home page
-     }
+    if (empty($record)) { //wrong credentials
+        echo "<form method='POST' action='login.php'>";
+        echo "<span style='color:red'><h3>Wrong username or password.</h3></span>";
+        echo "</form>";
+    } else {
+        $_SESSION["name"] = $record['firstName'] . " " . $record['lastName'];
+        $_SESSION["username"]  = $record['username'];
+        $_SESSION["user"] = "Admin";
+        //echo $_SESSION["user"];
+        header("Location: admin.php"); //redirect to home page
+    }
 }
 
 //admin.php - display admin info
@@ -213,20 +227,22 @@ function info(){
 
 
 //conInsert.php and conUpdate.php
-function getConInfo($con_id){
+function getConInfo($con_id)
+{
     global $dbConn;
-    $sql = "SELECT * FROM convention WHERE con_id = $con_id"; 
-    $stmt = $dbConn -> prepare ($sql);
-    $stmt -> execute();
+    $nPara[':dConId'] = $con_id;
+    $sql = "SELECT * FROM convention WHERE con_id = :dConId ";
+    $stmt = $dbConn->prepare($sql);
+    $stmt->execute();
     $record = $stmt->fetch(PDO::FETCH_ASSOC);
     return $record;
-    
 }
 //conInsert.php
-function addCon(){
+function addCon()
+{
     global $dbConn;
-if(isset($_GET['submit'])) {  //admin has submitted the "update user" form
-          $sql = "INSERT INTO convention (
+    if (isset($_GET['submit'])) {  //admin has submitted the "update user" form
+        $sql = "INSERT INTO convention (
                     con_id,  
                     conName,   
                     city,   
@@ -238,19 +254,19 @@ if(isset($_GET['submit'])) {  //admin has submitted the "update user" form
                 VALUES (
                 :con_id,:conName,:city, :state, :creator, :website,:turnOut
                 )";
-                  
-          $nPara = array();        
-          $nPara[':con_id'] = $_GET['con_id'];       
-          $nPara[':conName']  = $_GET['conName'];
-          $nPara[':city'] = $_GET['city'];
-          $nPara[':state'] = $_GET['state'];
-          $nPara[':creator'] = $_GET['creator'];
-          $nPara[':website'] = $_GET['website'];
-          $nPara[':turnOut'] = $_GET['turnOut'];
-          
-          $stmt = $dbConn->prepare($sql);
-          $stmt->execute($nPara);
-          //clear the value - prevent multiple insertions
-           $nPara = array();  
-        }//eof if
+
+        $nPara = array();
+        $nPara[':con_id'] = $_GET['con_id'];
+        $nPara[':conName']  = $_GET['conName'];
+        $nPara[':city'] = $_GET['city'];
+        $nPara[':state'] = $_GET['state'];
+        $nPara[':creator'] = $_GET['creator'];
+        $nPara[':website'] = $_GET['website'];
+        $nPara[':turnOut'] = $_GET['turnOut'];
+
+        $stmt = $dbConn->prepare($sql);
+        $stmt->execute($nPara);
+        //clear the value - prevent multiple insertions
+        $nPara = array();
+    } //eof if
 }
