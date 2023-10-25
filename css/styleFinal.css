@@ -326,9 +326,10 @@ footer {
   font-size: 0.670em;
   margin: auto;
   padding: 1em;
-  width: 100
+  width: 100%;
 }
 
-.footer>div>a {
+.sentence-case {
   text-transform: capitalize !important;
+  padding: 0 .5em;s
 }
