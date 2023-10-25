@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION["user"])) {  //Check whether the admin has logged in
+if (!isset($_SESSION["status"])) {  //Check whether the admin has logged in
     $_SESSION["name"] = "Guest";
 }
 
