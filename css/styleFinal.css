@@ -2,6 +2,7 @@
   font-family: iMan;
   src: url("../font/iMan.ttf");
 }
+
 #bgLeft {
   position: absolute;
   background-image: url("../img/bg1.png");
@@ -40,9 +41,11 @@ header {
   padding: 30px;
   width: 100%;
 }
+
 .title {
   border: solid 2px white;
 }
+
 #wrapper {
   background-color: red;
   color: white;
@@ -67,7 +70,8 @@ body {
 }
 
 #carouselCointainer {
-  margin: 0 auto; /*centers carousel*/
+  margin: 0 auto;
+  /*centers carousel*/
   width: 360px;
 }
 
@@ -89,13 +93,14 @@ td {
   padding: 5px;
   margin: 5px;
 }
+
 #textArea {
   border: solid 2px black;
   background-color: #ededed;
   width: 55%;
   height: 325px;
   display: inline-block;
-  box-shadow: 15px 15px 7px #656565;
+  box-shadow: 15px 15px 7px rgba(101, 101, 101, 0.8);
   padding: 5px;
 }
 
@@ -121,6 +126,7 @@ td {
   background-image: linear-gradient(to bottom, #4d0202, #ff0000);
   text-decoration: none;
 }
+
 .btn:active {
   text-decoration: none;
 }
@@ -132,6 +138,7 @@ td {
 #mLogin {
   text-align: center;
 }
+
 a {
   text-transform: lowercase;
 }
@@ -188,25 +195,35 @@ a {
 
 /* The Modal (background) */
 .modalAD {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
   padding-top: 60px;
 }
 
 /* Modal Content/Box */
 .modal-contentAD {
   background-color: #fefefe;
-  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  margin: 5% auto 15% auto;
+  /* 5% from the top, 15% from the bottom and centered */
   border: 1px solid #888;
-  width: 25%; /* Could be more or less, depending on screen size */
+  width: 25%;
+  /* Could be more or less, depending on screen size */
 }
 
 /* The Close Button (x) */
@@ -235,6 +252,7 @@ a {
   from {
     -webkit-transform: scale(0);
   }
+
   to {
     -webkit-transform: scale(1);
   }
@@ -244,6 +262,7 @@ a {
   from {
     transform: scale(0);
   }
+
   to {
     transform: scale(1);
   }
@@ -255,10 +274,12 @@ a {
     display: block;
     float: none;
   }
+
   .cancelbtnAD {
     width: 100%;
   }
 }
+
 /**** END login modal *****/
 
 /** NAVBAR ***/
@@ -282,6 +303,6 @@ a {
   text-transform: capitalize !important;
 }
 
-.container-fluid{
+.container-fluid {
   width: 95% !important;
 }
