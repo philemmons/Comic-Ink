@@ -51,7 +51,7 @@ if (isset($_SESSION["username"])) {
     <div class="carousel-item">
       <img src="img/3.png" class="d-block w-100" alt="weird fantasy #18 1953">
     </div>
-    <div class="carousel-item active" data-bs-interval="2000">
+    <div class="carousel-item" data-bs-interval="2000">
       <img src="img/4.png" class="d-block w-100" alt="mad magazine #1 1952">
     </div>
     <div class="carousel-item" data-bs-interval="2000">
@@ -60,7 +60,7 @@ if (isset($_SESSION["username"])) {
     <div class="carousel-item">
       <img src="img/6.png" class="d-block w-100" alt="doctor strange #169 1969">
     </div>
-    <div class="carousel-item active" data-bs-interval="2000">
+    <div class="carousel-item" data-bs-interval="2000">
       <img src="img/7.png" class="d-block w-100" alt="thor #126 1966">
     </div>
     <div class="carousel-item" data-bs-interval="2000">
@@ -69,7 +69,7 @@ if (isset($_SESSION["username"])) {
     <div class="carousel-item">
       <img src="img/9.png" class="d-block w-100" alt="detective comics #27 1939">
     </div>
-    <div class="carousel-item active" data-bs-interval="2000">
+    <div class="carousel-item" data-bs-interval="2000">
       <img src="img/10.png" class="d-block w-100" alt="watchmen #1 1986">
     </div>
     <div class="carousel-item" data-bs-interval="2000">
@@ -78,7 +78,7 @@ if (isset($_SESSION["username"])) {
     <div class="carousel-item">
       <img src="img/12.png" class="d-block w-100" alt="new mutants #98 1991">
     </div>
-    <div class="carousel-item active" data-bs-interval="2000">
+    <div class="carousel-item" data-bs-interval="2000">
       <img src="img/13.png" class="d-block w-100" alt="justice league of america #1 1960">
     </div>
   </div>
