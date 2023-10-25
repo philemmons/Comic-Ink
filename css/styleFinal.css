@@ -75,13 +75,10 @@ body {
   font-family: var(--bs-font-comics-ink) !important;
 }
 
-#carouselCointainer {
-  margin: 0 auto;
-  /*centers carousel*/
-  width: 360px;
-}
-
-#myCarousel {
+/*centers carousel*/
+#center-carousel {
+  width: 33%;
+  margin: auto;
   margin-top: 30px;
 }
 

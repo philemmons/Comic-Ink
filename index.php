@@ -39,7 +39,7 @@ if (isset($_SESSION["username"])) {
 
 <!-- https://getbootstrap.com/docs/5.0/components/carousel/ -->
 
-<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+<div id="carouselExampleFade center-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
       <img src="img/1.jpg" class="d-block w-100" alt="...">
