@@ -182,8 +182,8 @@ function goMain()
 {
     global $dbConn;
 
-    $userForm = $_POST['username'];
-    $pwForm = sha1($_POST['password']);   //hash("sha1",$_POST['password']);
+    $userForm = $_POST['formUN'];
+    $pwForm = sha1($_POST['formPW']);   //hash("sha1",$_POST['password']);
 
     //USE NAMEDPARAMETERS TO PREVENT SQL INJECTION
     $nPara[':username'] = $userForm;
@@ -201,7 +201,7 @@ function goMain()
         echo "</form>";
     } else {
         $_SESSION["name"] = $record['firstName'] . " " . $record['lastName'];
-        $_SESSION["username"]  = $record['username'];
+        $_SESSION["username"]  = $record['userName'];
         $_SESSION["status"] = "Admin";
         //echo $_SESSION["status"];
         header("Location: admin.php"); //redirect to home page
@@ -230,6 +230,7 @@ function info(){
 function getConInfo($con_id)
 {
     global $dbConn;
+
     $nPara[':dConId'] = $con_id;
     $sql = "SELECT * FROM convention WHERE con_id = :dConId ";
     $stmt = $dbConn->prepare($sql);
@@ -241,6 +242,7 @@ function getConInfo($con_id)
 function addCon()
 {
     global $dbConn;
+
     if (isset($_GET['submit'])) {  //admin has submitted the "update user" form
         $sql = "INSERT INTO convention (
                     con_id,  

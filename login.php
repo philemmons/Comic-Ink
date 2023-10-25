@@ -70,10 +70,10 @@ if (isset($_SESSION["status"])) {
 
     <div class="containerAD">
       <label><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="username" required id="ittAD">
+      <input type="text" placeholder="Enter Username" name="formUN" required id="ittAD">
 
       <label><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="password" required id="itpAD">
+      <input type="password" placeholder="Enter Password" name="formPW" required id="itpAD">
 
 
       <!--<button type="submit" class="btnAD" name="login" value="ok">Login</button> -->
