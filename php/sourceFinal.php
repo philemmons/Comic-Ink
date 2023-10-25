@@ -202,8 +202,8 @@ function goMain()
     } else {
         $_SESSION["name"] = $record['firstName'] . " " . $record['lastName'];
         $_SESSION["username"]  = $record['username'];
-        $_SESSION["user"] = "Admin";
-        //echo $_SESSION["user"];
+        $_SESSION["status"] = "Admin";
+        //echo $_SESSION["status"];
         header("Location: admin.php"); //redirect to home page
     }
 }

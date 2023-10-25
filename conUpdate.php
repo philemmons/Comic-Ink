@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION["username"])) {  //Check whether the admin has logged in
+if (!isset($_SESSION["status"])) {  //Check whether the admin has logged in
   header("Location: login.php");
 }
 
@@ -72,7 +72,7 @@ if (isset($_GET['con_id'])) {
   </ul>
 
   <?php
-  if (isset($_SESSION["username"])) {
+  if (isset($_SESSION["status"])) {
     echo '<form method ="POST" id="one" >';
     echo '<input type="submit" value="Logout" class="btn" name="logout" style="box-shadow: none !important; margin-top: 4px;"/>';
     echo '</form>';

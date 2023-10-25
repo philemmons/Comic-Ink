@@ -83,7 +83,7 @@ function dataDisplay($comic)
 </ul>
 
 <?php
-if (isset($_SESSION["username"])) {
+if (isset($_SESSION["status"])) {
     echo '<form method ="POST" id="one" >';
     echo '<input type="submit" value="Logout" class="btn" name="logout" style="box-shadow: none !important; margin-top: 4px;"/>';
     echo '</form>';

@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION["username"])) {  //Check whether the admin has logged in
+if (!isset($_SESSION["status"])) {  //Check whether the admin has logged in
   header("Location: login.php");
 }
 
