@@ -50,7 +50,8 @@ if (isset($_SESSION["status"])) {
 <!-- https://www.w3schools.com/howto/howto_css_login_form.asp -->
 <div id="mLogin">
   <h4>Please login to continue...</h4>
-  <button onclick="document.getElementById('id01').style.display='block'" class="btn" style="font-size:2.0em;">Login</button>
+  <br>
+  <button onclick="document.getElementById('id01').style.display='block'" class="btn">Login</button>
   <?php
   if (isset($_POST['login'])) {
     goMain();
