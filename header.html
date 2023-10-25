@@ -43,10 +43,10 @@
         individual scenes.</p>
     </div>
   </header>
-
+  <!--
   <nav class="navbar navbar-default navbar-inverse">
     <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
+
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
           data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -55,42 +55,27 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a data-toggle="tooltip" title="<img src='img/pow.png' />" class="navbar-brand" href="#">COMICS</a>
+        <a data-toggle="tooltip" title="<img src='img/pow.png'>" class="navbar-brand" href="#">COMICS</a>
       </div>
-
-      <script>
-        //tooltip - http://stackoverflow.com/questions/29473830/image-in-tooltip-using-bootstrap
-        $('a[data-toggle="tooltip"]').tooltip({
-          animated: "fade",
-          placement: "top",
-          html: true,
-        });
-      </script>
     </div>
   </nav>
+-->
+
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
         aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <a class="navbar-brand" href="#">Hidden brand</a>
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-          </li>
-        </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
-    </div>
-  </nav>
+
+        <a class="navbar-brand" data-toggle="tooltip" title="<img src='img/pow.png'>" href="#">Comics</a>
+        <script>
+          //tooltip - http://stackoverflow.com/questions/29473830/image-in-tooltip-using-bootstrap
+          $('a[data-toggle="tooltip"]').tooltip({
+            animated: "fade",
+            placement: "top",
+            html: true,
+          });
+        </script>
