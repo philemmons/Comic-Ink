@@ -1,3 +1,9 @@
+:root {
+  --bs-font-comics-ink: Raleway, Helvetica, Calibri, Arial, sans-serif;
+}
+
+
+
 @font-face {
   font-family: iMan;
   src: url("../font/iMan.ttf");
@@ -66,6 +72,7 @@ img {
 body {
   text-transform: capitalize;
   background-color: #ccc;
+  font-family: var(--bs-font-comics-ink) !important;
 }
 
 #carouselCointainer {
@@ -299,7 +306,7 @@ a {
   padding-bottom: 4px !important;
   margin-right: 2em !important;
   font-size: 1.5em !important;
-  color: #cccccc !important;
+  color: #ffffff !important;
   text-transform: capitalize !important;
 }
 
