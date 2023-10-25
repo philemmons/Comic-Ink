@@ -77,7 +77,7 @@ body {
 
 /*** INDEX CAROUSEL ***/
 .carousel {
-  width: 33% !important;
+  max-width: 500px !important;
   margin: 30px auto !important;
 }
 
