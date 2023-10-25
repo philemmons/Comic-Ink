@@ -11,14 +11,14 @@ function getDBConnection()
     $password = $dbparts['pass'];
     $dbname= ltrim($dbparts['path'],'/');
      *******/
-    $host = getenv('DB_HOST');
-    $username = getenv('DB_USER');
-    $password = getenv('DB_PW');
-    $dbname = getenv('DB_NAME');
+    $dbHost = getenv('DB_HOST');
+    $dbUser = getenv('DB_USER');
+    $dbPW = getenv('DB_PW');
+    $dbName = getenv('DB_NAME');
 
     try {
         //Creating database connection
-        $dbConn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+        $dbConn = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbUser, $dbPW);
         // Setting Errorhandling to Exception
         $dbConn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         //echo "Connected successfully";
