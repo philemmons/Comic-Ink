@@ -70,19 +70,18 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <a data-bs-toggle="tooltip" title="<img src='img/pow.png' />" href="#">Comics</a>
+        <a id="tipTop" data-bs-toggle="tooltip" title="<img src='img/pow.png' />" href="#">Comics</a>
 
         <script>
-          /** tooltip - https://www.tutorialrepublic.com/twitter-bootstrap-tutorial/bootstrap-tooltips.php **/
+          /** tooltip - https://www.tutorialrepublic.com/codelab.php?topic=bootstrap&file=tooltips-placement-via-javascript **/
           document.addEventListener("DOMContentLoaded", function () {
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-            var tooltipList = tooltipTriggerList.map(function (element) {
-              return new bootstrap.Tooltip(element);
+            // Placement of tooltip on top
+            var tipTop = document.getElementById("tipTop");
+            var tooltipTop = new bootstrap.Tooltip(tipTop, {
+              placement: "top",
+              animated: 'fade',
+              placement: 'bottom',
+              html: true
             });
-          });
-          $('a[data-bs-toggle="tooltip"]').tooltip({
-            animated: 'fade',
-            placement: 'bottom',
-            html: true
           });
         </script>
