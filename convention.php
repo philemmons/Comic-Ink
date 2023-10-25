@@ -123,6 +123,7 @@ if (isset($_SESSION["username"])) {
     </div>
 </form>
 
+<?php include 'footer.inc' ?>
 
 <script>
     //https://datatables.net/reference/option
@@ -134,6 +135,7 @@ if (isset($_SESSION["username"])) {
         });
     });
 </script>
+
 </body>
 
 </html>

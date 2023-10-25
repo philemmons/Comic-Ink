@@ -115,8 +115,10 @@ if (isset($_POST['logout'])) {
       </div>
     </div>
   </form>
-
 </div>
+
+<?php include 'footer.inc' ?>
+
 </body>
 
 </html>

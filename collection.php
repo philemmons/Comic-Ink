@@ -185,6 +185,7 @@ if (isset($_SESSION["username"])) {
     </div>
 </div>
 
+<?php include 'footer.inc' ?>
 
 <script>
     //https://datatables.net/reference/option

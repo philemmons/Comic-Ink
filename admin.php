@@ -235,6 +235,8 @@ function displayBig($big)
     </div>
   </div>
 
+  <?php include 'footer.inc' ?>
+
   <script>
     //https://datatables.net/reference/option
     $(document).ready(function() {
@@ -245,8 +247,6 @@ function displayBig($big)
       });
     });
   </script>
-
-
 
   </body>
 

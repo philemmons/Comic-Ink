@@ -87,6 +87,8 @@ if (isset($_SESSION["username"])) {
   </form>
 </div>
 
+<?php include 'footer.inc' ?>
+
 <script>
   // Get the modal
   var modal = document.getElementById('id01');

@@ -165,6 +165,7 @@ if (isset($_GET['con_id'])) {
   </div>
 </div>
 
+<?php include 'footer.inc' ?>
 
 </body>
 
