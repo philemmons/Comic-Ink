@@ -312,6 +312,10 @@ a {
 }
 
 /*** FOOTER ***/
+footer {
+  width: 100%;
+}
+
 .footer {
   position: fixed;
   left: 0;
@@ -321,4 +325,7 @@ a {
   color: #ffffff;
   font-size: 0.670em;
   text-transform: capitalize !important;
+  margin: auto;
+  padding: 3px;
+  s
 }
