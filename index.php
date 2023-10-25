@@ -21,10 +21,10 @@ if (isset($_POST['logout'])) {
 
 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
   <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="#">Home</a>
+    <a class="nav-link active" aria-current="page" href="index.php">Home</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" hhref="collection.php">Collection</a>
+    <a class="nav-link" href="collection.php">Collection</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="convention.php">Convention</a>
