@@ -9,7 +9,6 @@ if (isset($_POST['logout'])) {
 }
 ?>
 
-<!-- https://getbootstrap.com/docs/5.0/components/navbar/-->
 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
   <li class="nav-item">
     <a class="nav-link active" aria-current="page" href="index.php">Home</a>
