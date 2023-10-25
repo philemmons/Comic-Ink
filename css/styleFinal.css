@@ -270,3 +270,10 @@ a {
   --bs-bg-opacity: 1;
   background-color: #656565 !important;
 }
+
+.navbar-nav {
+  --bs-nav-link-padding-x: 0;
+  --bs-nav-link-padding-y: 0.5rem;
+  --bs-nav-link-font-weight: 800 !important;
+  --bs-nav-link-color: #ffffff !important;
+}
