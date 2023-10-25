@@ -279,9 +279,13 @@ a {
 
 .navbar-brand {
   padding-top: 0px !important;
-  padding-bottom: 10px !important;
+  padding-bottom: 4px !important;
   margin-right: 2em !important;
-  font-size: 2em !important;
+  font-size: 1.5em !important;
   color: #cccccc !important;
   text-transform: capitalize !important;
+}
+
+.container-fluid{
+  width: 95% !important;
 }
