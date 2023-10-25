@@ -293,6 +293,7 @@ a {
 .bg-body-tertiary {
   --bs-bg-opacity: 1;
   background-color: #656565 !important;
+  border: solid 2px white !important;
 }
 
 .nav-link {
