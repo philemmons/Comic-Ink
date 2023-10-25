@@ -45,7 +45,7 @@ if (isset($_SESSION["username"])) {
       <img src="img/1.png" class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item" data-bs-interval="2000">
-      <img src="img/3.png" class="d-block w-100" alt="...">
+      <img src="img/2.png" class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item">
       <img src="img/3.png" class="d-block w-100" alt="...">
@@ -61,6 +61,7 @@ if (isset($_SESSION["username"])) {
   </button>
 </div>
 
+<?php include 'footer.inc' ?>
 
 </body>
 
