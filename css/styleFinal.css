@@ -282,7 +282,7 @@ a {
 /**** END login modal *****/
 
 /** NAVBAR ***/
-/**
+
 .bg-body-tertiary {
   --bs-bg-opacity: 1;
   background-color: #656565 !important;
@@ -293,7 +293,7 @@ a {
   --bs-nav-link-color: #ffffff !important;
   text-transform: capitalize !important;
 }
-**/
+
 .navbar-brand {
   padding-top: 0px !important;
   padding-bottom: 4px !important;
