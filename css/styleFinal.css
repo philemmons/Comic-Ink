@@ -52,8 +52,7 @@ header {
   border: solid 2px black;
   font-family: cursive;
   font-size: 1.1em;
-  box-shadow: 10px 10px 3px gray;
-
+  box-shadow: 10px 10px 3px rgba(101, 101, 101, 0.7);
   margin: auto 0;
   display: inline-block;
   padding: 10px;
@@ -100,7 +99,7 @@ td {
   width: 55%;
   height: 325px;
   display: inline-block;
-  box-shadow: 15px 15px 7px rgba(101, 101, 101, 0.8);
+  box-shadow: 15px 15px 7px #656565;
   padding: 5px;
 }
 
