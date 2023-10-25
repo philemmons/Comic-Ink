@@ -324,7 +324,11 @@ footer {
   border: solid 2px white;
   color: #ffffff;
   font-size: 0.670em;
-  text-transform: capitalize !important;
   margin: auto;
-  padding: 3px;
+  padding: 1em;
+  width: 100
+}
+
+.footer>div>a {
+  text-transform: capitalize !important;
 }
