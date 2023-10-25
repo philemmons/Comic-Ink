@@ -271,9 +271,7 @@ a {
   background-color: #656565 !important;
 }
 
-.navbar-nav {
-  --bs-nav-link-padding-x: 0;
-  --bs-nav-link-padding-y: 0.7rem !important;
+.nav-link {
   --bs-nav-link-font-weight: 800 !important;
   --bs-nav-link-color: #ffffff !important;
   text-transform: capitalize !important;
