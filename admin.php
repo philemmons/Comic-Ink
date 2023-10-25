@@ -115,14 +115,22 @@ function displayBig($big)
     }
   }
 </script>
+
 <!-- Collect the nav links, forms, and other content for toggling -->
-<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-  <ul class="nav navbar-nav">
-    <li><a href="index.php">Home</a></li>
-    <li><a href="collection.php">Collection</a></li>
-    <li><a href="convention.php">Convention</a></li>
-    <li class="active"><a href="admin.php">Admin<span class="sr-only">(current)</span></a></li>
-  </ul>
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <li class="nav-item">
+        <a class="nav-link" href="index.php">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="collection.php">Collection</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="convention.php">Convention</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="login.php">Admin</a>
+    </li>
+</ul>
 
   <?php
   if (isset($_SESSION["status"])) {
@@ -140,7 +148,7 @@ function displayBig($big)
   <table class="table table-striped" id="adminDisplay">
     <thead>
       <tr>
-        <th colspan="3">Welcome <?= $_SESSION['username'] ?>
+        <th colspan="3">Welcome back <?= $_SESSION['status'] ?>
         <th></th>
         <th>
           <form action="conInsert.php">
