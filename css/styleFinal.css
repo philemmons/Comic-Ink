@@ -316,7 +316,7 @@ footer {
   width: 100%;
 }
 
-.footer {
+#footer {
   position: fixed;
   left: 0;
   bottom: 0;
@@ -327,9 +327,11 @@ footer {
   margin: auto;
   padding: 1em;
   width: 100%;
+  text-align: right;
 }
 
-.sentence-case {
+#sentence-case {
   text-transform: capitalize !important;
-  padding: 0 .5em;s
+  color: #ffffff;
+  padding: 0 .5em;
 }
