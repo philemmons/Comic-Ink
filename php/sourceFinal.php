@@ -197,7 +197,7 @@ function goMain()
 
     if (empty($record)) { //wrong credentials
         echo "<form method='POST' action='login.php'>";
-        echo "<span style='color:red'><br><h4>Wrong username or password.</h4></span>";
+        echo "<br><span style='color:red'><h4>Wrong username or password.</h4></span>";
         echo "</form>";
     } else {
         $_SESSION["name"] = $record['firstName'] . " " . $record['lastName'];
