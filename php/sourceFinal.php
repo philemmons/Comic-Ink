@@ -121,6 +121,8 @@ function get($table, $column)
     $nPara[':dColumn'] = $column;
     $nPara[':dTable'] = $table;
     $sql = "SELECT DISTINCT :dColumn FROM :dTable";
+    echo $sql;
+    die();
     return preExeFet($sql);
 }
 
@@ -184,8 +186,8 @@ function goMain()
 
     $userForm = $_POST['formUN'];
     $pwForm = hash('sha256', $_POST['formPW']);
-//echo $pwForm;
-//die();
+    //echo $pwForm;
+    //die();
     //USE NAMEDPARAMETERS TO PREVENT SQL INJECTION
     $nPara[':username'] = $userForm;
     $nPara[':password'] = $pwForm;

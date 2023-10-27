@@ -15,6 +15,8 @@ if (isset($_POST['logout'])) {
     header("Location: index.php");
 }
 
+
+
 ?>
 <script>
     function atCon(titleId, yearId, issueId) {
