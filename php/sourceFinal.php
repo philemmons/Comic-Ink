@@ -183,7 +183,7 @@ function goMain()
     global $dbConn;
 
     $userForm = $_POST['formUN'];
-    $pwForm = sha1($_POST['formPW']);   //hash("sha1",$_POST['password']);
+    $pwForm = hash(256,$_POST['formPW']);
 
     //USE NAMEDPARAMETERS TO PREVENT SQL INJECTION
     $nPara[':username'] = $userForm;
