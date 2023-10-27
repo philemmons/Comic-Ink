@@ -183,7 +183,7 @@ function goMain()
     global $dbConn;
 
     $userForm = $_POST['formUN'];
-    $pwForm = hash(256,$_POST['formPW']);
+    $pwForm = hash(256, $_POST['formPW']);
 
     //USE NAMEDPARAMETERS TO PREVENT SQL INJECTION
     $nPara[':username'] = $userForm;
@@ -197,7 +197,7 @@ function goMain()
 
     if (empty($record)) { //wrong credentials
         echo "<form method='POST' action='login.php'>";
-        echo "<span style='color:red'><h3>Wrong username or password.</h3></span>";
+        echo "<span style='color:red'><br><h4>Wrong username or password.</h4></span>";
         echo "</form>";
     } else {
         $_SESSION["name"] = $record['firstName'] . " " . $record['lastName'];
