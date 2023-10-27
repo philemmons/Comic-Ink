@@ -36,6 +36,10 @@ function preExeFet($sql)
 {
     global $dbConn, $nPara;
 
+    print_r($dbConn); 
+    echo '<br>';
+    print_r($nPara);
+
     $stmt = $dbConn->prepare($sql);
     $stmt->execute($nPara);
     $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
