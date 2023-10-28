@@ -36,7 +36,7 @@ function preExeFet($sql)
 {
     global $dbConn, $nPara;
 
-    print_r($dbConn); 
+    print_r($dbConn);
     echo '<br>';
     print_r($nPara);
 
@@ -61,6 +61,7 @@ function preExeFetNOPARA($sql)
 */
 function getInfo($table)
 {
+    global $nPara;
     $nPara[':dTable'] = $table;
     $sql = "SELECT * FROM :dTable";
     return preExeFet($sql);
@@ -122,6 +123,8 @@ function goSQLcomic($table)
 
 function get($table, $column)
 {
+    global $nPara;
+
     $nPara[':dColumn'] = $column;
     $nPara[':dTable'] = $table;
     $sql = "SELECT DISTINCT :dColumn FROM :dTable";
@@ -186,7 +189,7 @@ function goSQLcon($table)
 */
 function goMain()
 {
-    global $dbConn;
+    global $dbConn, $nPara;
 
     $userForm = $_POST['formUN'];
     $pwForm = hash('sha256', $_POST['formPW']);
@@ -236,7 +239,7 @@ function info(){
 //conInsert.php and conUpdate.php
 function getConInfo($con_id)
 {
-    global $dbConn;
+    global $dbConn, $nPara;
 
     $nPara[':dConId'] = $con_id;
     $sql = "SELECT * FROM convention WHERE con_id = :dConId ";
