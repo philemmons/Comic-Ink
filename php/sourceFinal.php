@@ -7,7 +7,7 @@ $dbConn = getDBConnection();
  * 10-24-23
  * Updated functions with prepared statements to prevent SQL injection
  * NOTE: https://dev.mysql.com/doc/refman/8.0/en/prepare.html
- *    **************  Parameter markers can be used only where data values should appear, not for SQL keywords, identifiers, and so forth.  ************
+ *    **************  Parameter markers can be used only where data values should appear, NOT for SQL keywords, identifiers, and so forth.  ************
  **********/
 
 /*
@@ -56,10 +56,6 @@ function preExeFet($sql)
 {
     global $dbConn, $nPara;
 
-    //print_r($dbConn);
-    //echo '<br>';
-    //print_r($nPara);
-
     $stmt = $dbConn->prepare($sql);
     $stmt->execute($nPara);
     $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -81,10 +77,8 @@ function preExeFetNOPARA($sql)
 */
 function getInfo($table)
 {
-    global $nPara;
-    $nPara[':dTable'] = $table;
-    $sql = "SELECT * FROM :dTable";
-    return preExeFet($sql);
+    $sql = "SELECT * FROM " . $table;
+    return preExeFetNOPARA($sql);
 }
 
 /*
@@ -96,8 +90,7 @@ function goSQLcomic($table)
     global $title, $creator, $pub, $year, $issue, $sortBy, $nPara;
     $needle = "WHERE"; //If the 'where' keyword is used  then 'and 'is added to the string in place of.
 
-    $nPara[':dTable'] = $table;
-    $sql = "SELECT title, creator, publisher, year, issue FROM :dTable";
+    $sql = "SELECT title, creator, publisher, year, issue FROM " . $table;
 
     if ($title) {
         //Prevents SQL injection by using a named parameter.
@@ -143,14 +136,7 @@ function goSQLcomic($table)
 
 function get($table, $column)
 {
-    global $nPara;
-
-    $nPara[':dColumn'] = $column;
-    $nPara[':dTable'] = $table;
-    //$sql = "SELECT DISTINCT :dColumn FROM :dTable";
     $sql = 'select distinct ' . $column . ' from ' * $table;
-    //echo $sql;
-    //die();
     return preExeFetNOPARA($sql);
 }
 
@@ -159,8 +145,7 @@ function goSQLcon($table)
     global $city, $creator, $conName, $state, $turnOut, $website, $sortBy, $nPara;
     $needle = "WHERE"; //If the 'where' keyword is used  then 'and 'is added to the string in place of.
 
-    $nPara[':dTable'] = $table;
-    $sql = "SELECT conName, city, state, turnOut, creator, website FROM :dTable";
+    $sql = "SELECT conName, city, state, turnOut, creator, website FROM " . $table;
 
     if ($conName) {
         //Prevents SQL injection by using a named parameter.
@@ -214,9 +199,8 @@ function goMain()
 
     $userForm = $_POST['formUN'];
     $pwForm = hash('sha256', $_POST['formPW']);
-    //echo $pwForm;
-    //die();
-    //USE NAMEDPARAMETERS TO PREVENT SQL INJECTION
+
+    //Prevents SQL injection by using a named parameter.
     $nPara[':username'] = $userForm;
     $nPara[':password'] = $pwForm;
 
@@ -255,7 +239,6 @@ function info(){
             <iframe src="" width="300" height="300" name="userInfoFrame"></iframe>
         </div>        
 */
-
 
 //conInsert.php and conUpdate.php
 function getConInfo($con_id)
