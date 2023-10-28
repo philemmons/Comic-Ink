@@ -61,14 +61,14 @@ global $nPara;
 $column = 'state';
 $table = 'convention';
 
-$nPara[':dColumn'] = $column;
-$nPara[':dTable'] = $table;
+//$nPara[':dColumn'] = $column;
+//$nPara[':dTable'] = $table;
 
-$sql = 'select distinct :dColumn from :dTable';
+$sql = 'select distinct ' . $state . ' from ' . $table;
 
 
 $stmt = $dbConn->prepare($sql);
-$stmt->execute($nPara);
+$stmt->execute();
 $allState = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
