@@ -137,10 +137,9 @@ function goSQLcomic($table)
 
 function getDropDown($table, $column)
 {
-    $sql = 'select distinct ' . $column . ' from ' * $table;
+    $sql = 'select distinct ' . $column . ' from ' . $table;
     echo $sql;
     echo '<br>';
-
     return preExeFetNOPARA($sql);
 }
 
