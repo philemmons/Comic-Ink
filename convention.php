@@ -61,11 +61,11 @@ global $dbConn, $nPara;
 $column = 'state';
 $table = 'convention';
 
-$nPara[':dColumn'] = &$column;
-$nPara[':dTable'] = &$table;
+$nPara[':dColumn'] = $column;
+$nPara[':dTable'] = $table;
 
 //$sql = 'select distinct ' . $column . ' from ' . $table;
-
+print_r($nPara);
 $sql = "SELECT DISTINCT :dColumn FROM :dTable";
 
 $stmt = $dbConn->prepare($sql);
