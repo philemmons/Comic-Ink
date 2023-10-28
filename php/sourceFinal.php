@@ -66,7 +66,7 @@ function preExeFetNOPARA($sql)
     global $dbConn;
 
     $stmt = $dbConn->prepare($sql);
-    var_dump($stmt);
+    //var_dump($stmt);
     $stmt->execute();
     $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $records;
@@ -138,8 +138,8 @@ function goSQLcomic($table)
 function getDropDown($table, $column)
 {
     $sql = 'select distinct ' . $column . ' from ' . $table;
-    echo $sql;
-    echo '<br>';
+    //echo $sql;
+    //echo '<br>';
     return preExeFetNOPARA($sql);
 }
 

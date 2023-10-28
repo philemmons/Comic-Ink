@@ -56,15 +56,6 @@ if (isset($_SESSION["status"])) {
 </nav>
 <br>
 
-<?php
-$allState = getDropDown('convention', 'state');
-print_r($allState);
-foreach ($allState as $singleState) {
-    echo "<option>" . $singleState['state'] . " </option>";
-}
-die();
-?>
-
 <form method="POST" name="conForm">
     <table>
         <th colspan="2">Welcome <?= $_SESSION['name'] ?>
@@ -84,7 +75,7 @@ die();
                     <option value="" disabled selected>select one</option>
                     <?php
                     $allState = getDropDown('convention', 'state');
-                    print_r($allState);
+                    //print_r($allState);
                     foreach ($allState as $singleState) {
                         echo "<option>" . $singleState['state'] . " </option>";
                     }
