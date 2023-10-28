@@ -66,7 +66,7 @@ if (isset($_SESSION["status"])) {
         </td>
         </th>
         <tr>
-            <td><label id="l5">Name:</label> <input type="text" name="conName" size="30" placeholder="enter convention name here." />
+            <td><label id="l5">Name:</label> <input type="text" name="conName" size="20" placeholder="enter convention name here." />
             </td>
             <td><label id="l6">Creator:</label> <input type="text" name="creator" size="20" placeholder="first or last name" />
             </td>
