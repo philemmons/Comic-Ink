@@ -97,7 +97,7 @@ if (isset($_SESSION["status"])) {
 
 <form method="POST" action="" class="form-display">
     <div class="wrapper">
-        <table class="table table-condensed" id="convDisplay">
+        <table class="table table-condensed table-striped table-hover" id="convDisplay">
             <!--https://www.w3schools.com/bootstrap/bootstrap_tables.asp-->
             <thead>
                 <tr>
