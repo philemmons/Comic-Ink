@@ -128,7 +128,7 @@ function get($table, $column)
     $nPara[':dColumn'] = $column;
     $nPara[':dTable'] = $table;
     //$sql = "SELECT DISTINCT :dColumn FROM :dTable";
-    $sql = 'select distinct ' . $table . ' from ' * $column;
+    $sql = 'select distinct ' . $column . ' from ' * $table;
     //echo $sql;
     //die();
     return preExeFetNOPARA($sql);
