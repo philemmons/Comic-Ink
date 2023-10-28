@@ -340,3 +340,8 @@ footer {
 .page-link {
   font-size: 12px;
 }
+
+/*** PAGINATION ***/
+.pagination {
+  --bs-pagination-padding-x: 0.50rem !important;
+}
