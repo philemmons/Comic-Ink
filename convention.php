@@ -56,12 +56,19 @@ if (isset($_SESSION["status"])) {
 <br>
 <?php
 
+global $nPara;
 
-$sql = 'select distinct state from convention';
+$column = 'state';
+$table = 'convention';
+
+$nPara[':dColumn'] = $column;
+$nPara[':dTable'] = $table;
+
+$sql = 'select distinct :dColumn from :dTable';
 
 
 $stmt = $dbConn->prepare($sql);
-$stmt->execute();
+$stmt->execute($nPara);
 $allState = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
