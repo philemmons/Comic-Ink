@@ -335,12 +335,7 @@ footer {
   padding: 0 .5em;
 }
 
-/*** FORM CLASS ***/
-.form-display {
-  font-size: 12px;
-}
-
-/*** TABLE ***/
-.pagination {
+/*** FORM and TABLE CLASS ***/
+.form-display .page-link {
   font-size: 12px;
 }
