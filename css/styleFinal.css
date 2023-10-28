@@ -336,6 +336,7 @@ footer {
 }
 
 /*** FORM and TABLE CLASS ***/
-.form-display .page-link {
+.form-display,
+.page-link {
   font-size: 12px;
 }
