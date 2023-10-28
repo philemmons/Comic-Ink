@@ -54,6 +54,13 @@ if (isset($_SESSION["status"])) {
 </div><!-- /.container-fluid -->
 </nav>
 <br>
+<?php
+                    $allState = get('convention', 'state');
+                    print_r($allState);
+                    foreach ($allState as $singleState) {
+                        echo "<option>" . $singleState['state'] . " </option>";
+                    }
+                    ?>
 <form method="POST" name="conForm">
     <table>
         <th colspan="2">Welcome <?= $_SESSION['name'] ?>
