@@ -26,6 +26,7 @@ function displayCon($convention)
     }
 }
 ?>
+
 <!-- Collect the nav links, forms, and other content for toggling -->
 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
     <li class="nav-item">
@@ -54,6 +55,16 @@ if (isset($_SESSION["status"])) {
 </div><!-- /.container-fluid -->
 </nav>
 <br>
+
+<?php
+$allState = getDropDown('convention', 'state');
+print_r($allState);
+foreach ($allState as $singleState) {
+    echo "<option>" . $singleState['state'] . " </option>";
+}
+die();
+?>
+
 <form method="POST" name="conForm">
     <table>
         <th colspan="2">Welcome <?= $_SESSION['name'] ?>
@@ -78,7 +89,6 @@ if (isset($_SESSION["status"])) {
                         echo "<option>" . $singleState['state'] . " </option>";
                     }
                     ?>
-
                 </select>
             </td>
             <td><label id="l8">Sort By:</label>
