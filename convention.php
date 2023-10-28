@@ -66,12 +66,13 @@ $nPara[':dTable'] = $table;
 
 //$sql = 'select distinct ' . $column . ' from ' . $table;
 print_r($nPara);
+echo '<br>';
 $sql = "SELECT DISTINCT '. :dColumn.' FROM '.:dTable";
 
 $stmt = $dbConn->prepare($sql);
 var_dump($stmt);
-var_dump($stmt->execute($nPara));
-var_dump($stmt->fetchAll(PDO::FETCH_ASSOC));
+echo '<br>';
+$stmt->execute($nPara);
 $allState = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
