@@ -74,7 +74,7 @@ $sql = "SELECT DISTINCT :dColumn FROM :dTable";
 $stmt = $dbConn->prepare($sql);
 var_dump($stmt);
 echo '<br>';
-$stmt->execute($nPara);
+$stmt->execute(array_values($nPara));
 $allState = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
