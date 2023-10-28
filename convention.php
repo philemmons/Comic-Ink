@@ -130,9 +130,10 @@ if (isset($_SESSION["status"])) {
     //https://datatables.net/reference/option
     $(document).ready(function() {
         $('#convDisplay').DataTable({
-            "lengthMenu": [5, 10, 15],
-            "searching": false,
-            "ordering": false
+            lengthMenu: [5, 10, 15],
+            searching: false,
+            ordering: false,
+            responsive: true
         });
     });
 </script>
