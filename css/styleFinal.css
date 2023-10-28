@@ -336,8 +336,11 @@ footer {
 }
 
 /*** FORM CLASS ***/
-.form-display ul>.pagination {
+.form-display {
   font-size: 12px;
 }
 
 /*** TABLE ***/
+.pagination {
+  font-size: 12px;
+}
