@@ -95,7 +95,7 @@ if (isset($_SESSION["status"])) {
     </table>
 </form>
 
-<form method="POST" action="" class="form-display">
+
     <div class="wrapper">
         <table class="table table-condensed table-striped table-hover" id="convDisplay">
             <!--https://www.w3schools.com/bootstrap/bootstrap_tables.asp-->
@@ -122,7 +122,7 @@ if (isset($_SESSION["status"])) {
             </tbody>
         </table>
     </div>
-</form>
+
 
 <?php include 'footer.inc' ?>
 
