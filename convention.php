@@ -61,8 +61,8 @@ global $dbConn, $nPara;
 $column = 'state';
 $table = 'convention';
 
-$nPara[':dColumn'] = $column;
-$nPara[':dTable'] = $table;
+$nPara[':dColumn'] = &$column;
+$nPara[':dTable'] = &$table;
 
 //$sql = 'select distinct ' . $column . ' from ' . $table;
 
