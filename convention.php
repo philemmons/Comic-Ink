@@ -131,8 +131,8 @@ if (isset($_SESSION["status"])) {
         $('#convDisplay').DataTable({
             lengthMenu: [7, 12],
             searching: false,
-            ordering: false,
-            responsive: true
+            ordering: false
+
         });
     });
 
