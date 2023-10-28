@@ -128,8 +128,6 @@ function get($table, $column)
     $nPara[':dColumn'] = $column;
     $nPara[':dTable'] = $table;
     $sql = "SELECT DISTINCT :dColumn FROM :dTable";
-    echo $sql;
-    die();
     return preExeFet($sql);
 }
 
