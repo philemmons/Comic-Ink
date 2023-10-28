@@ -129,16 +129,17 @@ if (isset($_SESSION["status"])) {
     //https://datatables.net/reference/option
     $(document).ready(function() {
         $('#convDisplay').DataTable({
-            lengthMenu: [7, 12],
+            lengthMenu: [10, 15, 20],
             searching: false,
-            ordering: false
+            ordering: false,
+            responsive: true
 
         });
     });
 
-    jQuery('#querytableDatasets').dataTable({
-        "bAutoWidth": false
-    });
+    //jQuery('#querytableDatasets').dataTable({
+    //    "bAutoWidth": false
+    //});
 </script>
 
 </body>
