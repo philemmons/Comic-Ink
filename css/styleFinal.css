@@ -336,6 +336,8 @@ footer {
 }
 
 /*** FORM CLASS ***/
-.form-display {
+.form-display ul>.pagination {
   font-size: 12px;
 }
+
+/*** TABLE ***/
