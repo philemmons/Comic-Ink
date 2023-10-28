@@ -64,7 +64,7 @@ $table = 'convention';
 //$nPara[':dColumn'] = $column;
 //$nPara[':dTable'] = $table;
 
-$sql = 'select distinct ' . $state . ' from ' . $table;
+$sql = 'select distinct ' . $column . ' from ' . $table;
 
 
 $stmt = $dbConn->prepare($sql);
