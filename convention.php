@@ -76,8 +76,6 @@ var_dump($stmt);
 echo '<br>';
 $stmt->execute($nPara);
 $allState = $stmt->fetchAll(PDO::FETCH_ASSOC);
-s
-
 
 
 print_r($allState);
