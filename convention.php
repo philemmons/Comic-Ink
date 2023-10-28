@@ -69,7 +69,9 @@ print_r($nPara);
 $sql = "SELECT DISTINCT :dColumn FROM :dTable";
 
 $stmt = $dbConn->prepare($sql);
-$stmt->execute($nPara);
+var_dump($stmt);
+var_dump($stmt->execute($nPara));
+var_dump($stmt->fetchAll(PDO::FETCH_ASSOC));
 $allState = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
