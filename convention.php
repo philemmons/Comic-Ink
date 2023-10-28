@@ -56,7 +56,7 @@ if (isset($_SESSION["status"])) {
 </nav>
 <br>
 
-<form method="POST" name="conForm">
+<form method="POST" name="conForm" class="form-display">
     <table>
         <th colspan="2">Welcome <?= $_SESSION['name'] ?>
         <td><input type="submit" value="Search" name="filterForm" class="btn" />
@@ -95,7 +95,7 @@ if (isset($_SESSION["status"])) {
     </table>
 </form>
 
-<form method="POST" action="">
+<form method="POST" action="" class="form-display">
     <div class="wrapper">
         <table class="table table-condensed" id="convDisplay">
             <!--https://www.w3schools.com/bootstrap/bootstrap_tables.asp-->

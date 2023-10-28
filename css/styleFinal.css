@@ -88,7 +88,6 @@ body {
 table {
   margin: auto;
   width: 60%;
-  margin-top: 1em;
 }
 
 td {
@@ -334,4 +333,9 @@ footer {
   text-transform: capitalize !important;
   color: #ffffff;
   padding: 0 .5em;
+}
+
+/*** FORM CLASS ***/
+.form-display {
+  font-size: 12px;
 }
