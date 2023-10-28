@@ -95,33 +95,32 @@ if (isset($_SESSION["status"])) {
     </table>
 </form>
 
-
-    <div class="wrapper">
-        <table class="table table-condensed table-striped table-hover" id="convDisplay">
-            <!--https://www.w3schools.com/bootstrap/bootstrap_tables.asp-->
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>City</th>
-                    <th>State</th>
-                    <th>Attendance</th>
-                    <th>Creator</th>
-                    <th>Offical</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                if (isset($_POST['filterForm'])) {
-                    $filterCon = goSQLcon("convention");
-                    displayCon($filterCon);
-                } else { // Display inventory initially.
-                    $convention = getInfo("convention");
-                    displayCon($convention);
-                }
-                ?>
-            </tbody>
-        </table>
-    </div>
+<div class="wrapper">
+    <table class="table table-sm table-striped table-hover table-responsive" id="convDisplay">
+        <!--https://www.w3schools.com/bootstrap/bootstrap_tables.asp-->
+        <thead class='table-dark'>
+            <tr>
+                <th>Name</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Attendance</th>
+                <th>Creator</th>
+                <th>Offical</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            if (isset($_POST['filterForm'])) {
+                $filterCon = goSQLcon("convention");
+                displayCon($filterCon);
+            } else { // Display inventory initially.
+                $convention = getInfo("convention");
+                displayCon($convention);
+            }
+            ?>
+        </tbody>
+    </table>
+</div>
 
 
 <?php include 'footer.inc' ?>
