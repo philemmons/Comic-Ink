@@ -72,8 +72,8 @@ if (isset($_SESSION["status"])) {
                 <select name="state">
                     <option value="" disabled selected>select one</option>
                     <?php
-                    $allState = get('convention', 'state');
-                    //print_r($allState);
+                    $allState = getDropDown('convention', 'state');
+                    print_r($allState);
                     foreach ($allState as $singleState) {
                         echo "<option>" . $singleState['state'] . " </option>";
                     }

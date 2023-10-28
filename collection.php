@@ -114,8 +114,8 @@ if (isset($_SESSION["status"])) {
                 <select name="publisher">
                     <option value="" disabled selected>select one</option>
                     <?php
-                    $allPub = get('comicBook', 'publisher');
-                    //print_r($allPub);
+                    $allPub = getDropDown('comicBook', 'publisher');
+                    print_r($allPub);
                     foreach ($allPub as $singlePub) {
                         echo "<option>" . $singlePub['publisher'] . " </option>";
                     }
