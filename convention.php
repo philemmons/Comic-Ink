@@ -55,12 +55,27 @@ if (isset($_SESSION["status"])) {
 </nav>
 <br>
 <?php
-                    $allState = get('convention', 'state');
-                    print_r($allState);
-                    foreach ($allState as $singleState) {
-                        echo "<option>" . $singleState['state'] . " </option>";
-                    }
-                    ?>
+
+
+$sql = 'select distinct state from convention';
+
+
+$stmt = $dbConn->prepare($sql);
+$stmt->execute();
+$allState = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+
+
+print_r($allState);
+foreach ($allState as $singleState) {
+    echo "<option>" . $singleState['state'] . " </option>";
+}
+die();
+?>
+
+
+
 <form method="POST" name="conForm">
     <table>
         <th colspan="2">Welcome <?= $_SESSION['name'] ?>
