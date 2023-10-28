@@ -66,7 +66,7 @@ $nPara[':dTable'] = $table;
 
 //$sql = 'select distinct ' . $column . ' from ' . $table;
 print_r($nPara);
-$sql = "SELECT DISTINCT :dColumn FROM :dTable";
+$sql = "SELECT DISTINCT '. :dColumn.' FROM '.:dTable";
 
 $stmt = $dbConn->prepare($sql);
 var_dump($stmt);
