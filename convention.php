@@ -6,9 +6,7 @@ if (!isset($_SESSION["status"])) {  //Check whether the admin has logged in
 }
 
 include 'header.html';
-//include 'php/sourceFinal.php';
-
-include 'php/dbConnection.php';
+include 'php/sourceFinal.php';
 
 $dbConn = getDBConnection();
 
@@ -56,37 +54,6 @@ if (isset($_SESSION["status"])) {
 </div><!-- /.container-fluid -->
 </nav>
 <br>
-<?php
-
-global $dbConn, $nPara;
-
-$column = 'state';
-$table = 'convention';
-
-$nPara[':dColumn'] = $column;
-$nPara[':dTable'] = $table;
-
-//$sql = 'select distinct ' . $column . ' from ' . $table;
-print_r($nPara);
-echo '<br>';
-$sql = "SELECT DISTINCT :dColumn FROM :dTable";
-
-$stmt = $dbConn->prepare($sql);
-var_dump($stmt);
-echo '<br>';
-$stmt->execute($nPara);
-$allState = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-
-print_r($allState);
-foreach ($allState as $singleState) {
-    echo "<option>" . $singleState['state'] . " </option>";
-}
-die();
-?>
-
-
-
 <form method="POST" name="conForm">
     <table>
         <th colspan="2">Welcome <?= $_SESSION['name'] ?>
@@ -106,7 +73,7 @@ die();
                     <option value="" disabled selected>select one</option>
                     <?php
                     $allState = get('convention', 'state');
-                    print_r($allState);
+                    //print_r($allState);
                     foreach ($allState as $singleState) {
                         echo "<option>" . $singleState['state'] . " </option>";
                     }

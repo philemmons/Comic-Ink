@@ -6,7 +6,8 @@ $dbConn = getDBConnection();
 /*********
  * 10-24-23
  * Updated functions with prepared statements to prevent SQL injection
- * 
+ * NOTE: https://dev.mysql.com/doc/refman/8.0/en/prepare.html
+ *    **************  Parameter markers can be used only where data values should appear, not for SQL keywords, identifiers, and so forth.  ************
  **********/
 
 /*
