@@ -73,7 +73,7 @@ if (isset($_SESSION["status"])) {
                     <option value="" disabled selected>select one</option>
                     <?php
                     $allState = get('convention', 'state');
-                    //print_r($allState);
+                    print_r($allState);
                     foreach ($allState as $singleState) {
                         echo "<option>" . $singleState['state'] . " </option>";
                     }
