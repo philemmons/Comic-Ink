@@ -96,7 +96,7 @@ if (isset($_SESSION["status"])) {
 </form>
 
 <div class="wrapper form-display">
-    <table class="table table-sm table-striped table-hover" id="convDisplay">
+    <table class="table table-sm table-striped table-hover display nowrap" id="convDisplay" style="width:100%">
         <!--https://www.w3schools.com/bootstrap/bootstrap_tables.asp-->
         <thead class='table-dark'>
             <tr>
@@ -122,9 +122,9 @@ if (isset($_SESSION["status"])) {
     </table>
 </div>
 
-<div class='wrapper'>
-    <table id="example" class="display nowrap" style="width:100%">
-        <thead>
+<div class='wrapper form-display'>
+    <table id="example" class="table table-sm table-striped table-hover display nowrap" style="width:100%">
+        <thead class='table-dark'>
             <tr>
                 <th>First name</th>
                 <th>Last name</th>
@@ -772,17 +772,20 @@ if (isset($_SESSION["status"])) {
 
 <script>
     //https://datatables.net/reference/option
-    $(document).ready(function() {
-        $('#convDisplay').DataTable({
-            lengthMenu: [10, 15, 20],
-            searching: false,
-            ordering: false,
-            responsive: true
 
-        });
+    new DataTable('#convDisplay', {
+        lengthMenu: [3, 5, 7],
+        searching: false,
+        ordering: false,
+        responsive: true
+
     });
 
+
     new DataTable('#example', {
+        lengthMenu: [3, 5, 7],
+        searching: false,
+        ordering: false,
         responsive: true
     });
 
