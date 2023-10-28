@@ -95,8 +95,8 @@ if (isset($_SESSION["status"])) {
     </table>
 </form>
 
-<div class="wrapper form-display">
-    <table class="table table-sm table-striped table-hover table-responsive" id="convDisplay">
+<div class="wrapper form-display table-responsive">
+    <table class="table table-sm table-striped table-hover" id="convDisplay">
         <!--https://www.w3schools.com/bootstrap/bootstrap_tables.asp-->
         <thead class='table-dark'>
             <tr>
@@ -134,6 +134,10 @@ if (isset($_SESSION["status"])) {
             ordering: false,
             responsive: true
         });
+    });
+
+    jQuery('#querytableDatasets').dataTable({
+        "bAutoWidth": false
     });
 </script>
 
