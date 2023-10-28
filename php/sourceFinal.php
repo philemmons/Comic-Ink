@@ -12,20 +12,39 @@ $dbConn = getDBConnection();
 /*
 *Form vars - All input converted to lower case.
 */
-$title = strtolower($_POST['title']); // User input deviceName
-$creator = strtolower($_POST['creator']); // User input deviceName
-$pub = strtolower($_POST['publisher']); // User selected deviceType
-$year = $_POST['year']; // Selection display type
-$issue = $_POST['issue']; //User input item statusable selection
-$sortBy = $_POST['sortBy'];
+if (isset($_POST['title']))
+    $title = strtolower($_POST['title']); // User input deviceName
+
+if (isset($_POST['creator']))
+    $creator = strtolower($_POST['creator']); // User input deviceName
+
+if (isset($_POST['']))
+    $pub = strtolower($_POST['publisher']); // User selected deviceType
+
+if (isset($_POST['year']))
+    $year = $_POST['year']; // Selection display type
+
+if (isset($_POST['issue']))
+    $issue = $_POST['issue']; //User input item statusable selection
+
+if (isset($_POST['sortBy']))
+    $sortBy = $_POST['sortBy'];
 
 //$creator, $sortBy - from above
+if (isset($_POST['city']))
+    $city = strtolower($_POST['city']);
 
-$city = strtolower($_POST['city']);
-$conName = strtolower($_POST['conName']);
-$state = strtoupper($_POST['state']);
-$turnOut =  $_POST['turnOut'];
-$website = $_POST['website'];
+if (isset($_POST['conName']))
+    $conName = strtolower($_POST['conName']);
+
+if (isset($_POST['state']))
+    $state = strtoupper($_POST['state']);
+
+if (isset($_POST['turnOut']))
+    $turnOut =  $_POST['turnOut'];
+
+if (isset($_POST['website']))
+    $website = $_POST['website'];
 
 
 /*
