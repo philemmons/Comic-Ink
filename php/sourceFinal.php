@@ -182,18 +182,21 @@ function goSQLcon($table)
         $sql .= " ";
     }
 
-    if ($sortBy == 'Name') { // Name or price
-        $sortBy = 'conName';
-    } else if ($sortBy == 'Creator') {
-        $sortBy = 'creator';
-    } else if ($sortBy == 'Name') {
-        $sortBy = 'creator';
-    } else if ($sortBy == 'Turn Out: Low to High') {
-        $sortBy = 'turnOut ASC';
-    } else {
-        $sortBy = 'turnOut DESC';
+    if (isset($_POST['sortBy'])) {
+        if ($sortBy == 'Name') { // Name or price
+            $sortBy = 'conName';
+        } else if ($sortBy == 'Creator') {
+            $sortBy = 'creator';
+        } else if ($sortBy == 'Name') {
+            $sortBy = 'creator';
+        } else if ($sortBy == 'Turn Out: Low to High') {
+            $sortBy = 'turnOut ASC';
+        } else if ($sortBy == 'Turn Out: High to Low') {
+            $sortBy = 'turnOut DESC';
+        }
+        $sql .= " ORDER BY " . $sortBy;
     }
-    $sql .= " ORDER BY " . $sortBy;
+
     return preExeFet($sql);
 }
 
