@@ -57,18 +57,10 @@ if (isset($_SESSION["status"])) {
 
 <br>
 <div class="wrapper form-display">
-    <div>
+    <h4>
         Welcome <?= $_SESSION['name'] ?>
-    </div>
+    </h4>
     <form method="POST" name="conForm" class="row gx-4 gy-3 align-items-center">
-        <div class="col-auto">
-            <input type="submit" value="Search" name="filterForm" class="btn" />
-        </div>
-
-        <div class="col-auto">
-            <input type="submit" value="All Conventions" name="allIn" class="btn" />
-        </div>
-
         <div class="col-auto">
             <div class="input-group">
                 <div class="input-group-text">Name</div>
@@ -110,6 +102,14 @@ if (isset($_SESSION["status"])) {
                     <option value="turnOut DESC">Turn Out: High to Low</option>
                 </select>
             </div>
+        </div>
+
+        <div class="col-auto">
+            <input type="submit" value="Search" name="filterForm" class="btn" />
+        </div>
+
+        <div class="col-auto">
+            <input type="submit" value="All Conventions" name="allIn" class="btn" />
         </div>
     </form>
 </div>
