@@ -10,14 +10,12 @@
 }
 
 #bgLeft {
-  position: absolute;
-  background-image: url("../img/bg1.png");
+  position: fixed;
   left: 0;
   top: 0;
   width: 17%;
-  height: 116%;
+  height: 100%;
   z-index: -1;
-  background-size: cover;
 }
 
 #bgRight {
