@@ -60,6 +60,7 @@ if (isset($_SESSION["status"])) {
     <h4>
         Welcome <?= $_SESSION['name'] ?>
     </h4>
+    <br>
     <form method="POST" name="conForm" class="row gx-4 gy-3 align-items-center">
         <div class="col-auto">
             <div class="input-group">

@@ -68,7 +68,6 @@ img {
 }
 
 body {
-  text-transform: capitalize;
   background-color: #ccc;
   font-family: var(--bs-font-comics-ink) !important;
 }
@@ -108,12 +107,11 @@ td {
 }
 
 .btn {
-  border: 5px double #000;
+  border: 2px solid #000000;
   box-shadow: 4px 7px 3px #656565;
   color: white;
-  border-radius: 15px;
   background-color: red;
-  background-image: linear-gradient(to bottom, #ff0000, #4d0202);
+  background-image: linear-gradient(to bottom, #ff0000, #520000);
   padding: 0px 20px;
   text-decoration: none;
 }
@@ -121,7 +119,7 @@ td {
 .btn:hover {
   color: #fff;
   opacity: 0.8;
-  background-image: linear-gradient(to bottom, #4d0202, #ff0000);
+  background-image: linear-gradient(to bottom, #520000, #ff0000);
   text-decoration: none;
 }
 
