@@ -108,7 +108,7 @@ td {
 
 .btn {
   border: 2px solid #000000;
-  box-shadow: 4px 7px 3px #656565;
+  box-shadow: 10px 10px 3px rgba(101, 101, 101, 0.7);
   color: white;
   background-color: red;
   background-image: linear-gradient(to bottom, #ff0000, #520000);
