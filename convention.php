@@ -57,7 +57,7 @@ if (isset($_SESSION["status"])) {
 
 <br>
 <div class="wrapper form-display">
-    <form method="POST" name="conForm" class="table display nowrap" id="conForm" style="width:100%">
+    <form method="POST" name="conForm" class="table display nowrap" id="conventionForm" style="width:100%">
         <table>
             <th colspan="2">Welcome <?= $_SESSION['name'] ?>
             <td>
@@ -142,7 +142,7 @@ if (isset($_SESSION["status"])) {
         responsive: true
     });
 
-    new DataTable('#conForm', {
+    new DataTable('#conventionForm', {
         searching: false,
         ordering: false,
         responsive: true
