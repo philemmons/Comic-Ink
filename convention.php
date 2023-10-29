@@ -57,8 +57,8 @@ if (isset($_SESSION["status"])) {
 
 <br>
 <div class="wrapper form-display">
-    <form method="POST" name="conForm" class="table display nowrap" id="conventionForm" style="width:100%">
-        <table>
+    <form method="POST" name="conForm">
+        <table class="table display nowrap" id="conventionForm" style="width:100%">
             <th colspan="2">Welcome <?= $_SESSION['name'] ?>
             <td>
                 <input type="submit" value="Search" name="filterForm" class="btn" />
