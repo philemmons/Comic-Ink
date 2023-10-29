@@ -182,18 +182,7 @@ function goSQLcon($table)
         $sql .= " ";
     }
 
-    if (isset($_POST['sortBy'])) {
-        if ($sortBy == 'Name') { // Name or price
-            $sortBy = 'conName';
-        } else if ($sortBy == 'Creator') {
-            $sortBy = 'creator';
-        } else if ($sortBy == 'Name') {
-            $sortBy = 'creator';
-        } else if ($sortBy == 'Turn Out: Low to High') {
-            $sortBy = 'turnOut ASC';
-        } else if ($sortBy == 'Turn Out: High to Low') {
-            $sortBy = 'turnOut DESC';
-        }
+    if ($sortBy) {
         $sql .= " ORDER BY " . $sortBy;
     }
 
