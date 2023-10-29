@@ -137,7 +137,7 @@ function goSQLcomic($table)
 
 function getDropDown($table, $column)
 {
-    $sql = 'SELECT DISTINCT ' . $column . ' FROM ' . $table . 'ORDER BY ' . $column . 'ASC';
+    $sql = 'SELECT DISTINCT ' . $column . ' FROM ' . $table . ' ORDER BY ' . $column . ' ASC';
     //echo $sql;
     //echo '<br>';
     return preExeFetNOPARA($sql);
