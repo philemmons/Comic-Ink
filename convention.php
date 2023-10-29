@@ -58,54 +58,83 @@ if (isset($_SESSION["status"])) {
 
 <form class="row row-cols-lg-auto g-3 align-items-center">
     <div class="col-12">
-        <label class="visually-hidden" for="inlineFormInputGroupUsername">Username</label>
+        <label class="visually-hidden" for="inlineFormInputGroupWelcome">Welcome User</label>
         <div class="input-group">
-            <div class="input-group-text">@</div>
-            <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Username">
+            Welcome <?= $_SESSION['name'] ?>
         </div>
     </div>
 
     <div class="col-12">
-        <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
-        <select class="form-select" id="inlineFormSelectPref">
-            <option selected="">Choose...</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+        <input type="submit" value="Search" name="filterForm" class="btn" />
+    </div>
+
+    <div class="col-12">
+        <input type="submit" value="All Conventions" name="allIn" class="btn" />
+    </div>
+
+    <div class="col-12">
+        <label class="visually-hidden" for="inlineFormInputGroupConventionName" id="l5">Convention Name</label>
+        <div class="input-group">
+            <div class="input-group-text">Convention Name</div>
+            <input type="text" name="conName" class="form-control" placeholder="Convention Name" />
+        </div>
+    </div>
+
+    <div class="col-12">
+        <label class="visually-hidden" for="inlineFormInputGroupCreator" id="l6">Creator</label>
+        <div class="input-group">
+            <div class="input-group-text">Creator</div>
+            <input type="text" name="creator" class="form-control" id="inlineFormInputGroupCreator" placeholder="first or last name" />
+        </div>
+    </div>
+
+    <div class="col-12">
+        <label class="visually-hidden" for="inlineFormSelectState" id="l7">State</label>
+        <select name="state" class="form-select" id="inlineFormSelectState">
+            <option value="" disabled selected>select one</option>
+            <?php
+            $allState = getDropDown('convention', 'state');
+            //print_r($allState);
+            foreach ($allState as $singleState) {
+                echo "<option>" . $singleState['state'] . " </option>";
+            }
+            ?>
         </select>
     </div>
 
     <div class="col-12">
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="inlineFormCheck">
-            <label class="form-check-label" for="inlineFormCheck">
-                Remember me
-            </label>
-        </div>
-    </div>
+        <label class="visually-hidden" for="inlineFormSelectSortBy" id="l8">Sort By</label>
+        <select name="sortBy" class="form-select" id="inlineFormSelectSortBy">
+            <option value="" disabled selected>select one</option>
+            <option value="conName">Name</option>
+            <option value="creator">Creator</option>
+            <option value="turnOut ASC">Turn Out: Low to High</option>
+            <option value="turnOut DESC">Turn Out: High to Low</option>
+        </select </div>
 
-    <div class="col-12">
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
 </form>
-
-
 
 <form method="POST" name="conForm" class="form-display">
     <table>
         <th colspan="2">Welcome <?= $_SESSION['name'] ?>
-        <td><input type="submit" value="Search" name="filterForm" class="btn" />
+        <td>
+            <input type="submit" value="Search" name="filterForm" class="btn" />
         </td>
         <td>
             <input type="submit" value="All Conventions" name="allIn" class="btn" />
         </td>
         </th>
         <tr>
-            <td><label id="l5">Name:</label> <input type="text" name="conName" size="20" placeholder="enter convention name here." />
+            <td>
+                <label id="l5">Name:</label>
+                <input type="text" name="conName" size="20" placeholder="enter convention name here." />
             </td>
-            <td><label id="l6">Creator:</label> <input type="text" name="creator" size="20" placeholder="first or last name" />
+            <td>
+                <label id="l6">Creator:</label>
+                <input type="text" name="creator" size="20" placeholder="first or last name" />
             </td>
-            <td><label id="l7">State:</label>
+            <td>
+                <label id="l7">State:</label>
                 <select name="state">
                     <option value="" disabled selected>select one</option>
                     <?php
@@ -117,7 +146,8 @@ if (isset($_SESSION["status"])) {
                     ?>
                 </select>
             </td>
-            <td><label id="l8">Sort By:</label>
+            <td>
+                <label id="l8">Sort By:</label>
                 <select name="sortBy">
                     <option value="" disabled selected>select one</option>
                     <option value="conName">Name</option>
