@@ -137,7 +137,7 @@ function goSQLcomic($table)
 
 function getDropDown($table, $column)
 {
-    $sql = 'select distinct ' . $column . ' from ' . $table;
+    $sql = 'SELECT DISTINCT ' . $column . ' FROM ' . $table . 'ORDER BY ' . $column . 'ASC';
     //echo $sql;
     //echo '<br>';
     return preExeFetNOPARA($sql);
@@ -182,11 +182,18 @@ function goSQLcon($table)
         $sql .= " ";
     }
 
-    if ($sortBy) { // Name or price
-        $nPara[':dSortBy'] = $sortBy;
-        $sql .= " ORDER BY :dSortBy ";
+    if ($sortBy == 'Name') { // Name or price
+        $sortBy = 'conName';
+    } else if ($sortBy == 'Creator') {
+        $sortBy = 'creator';
+    } else if ($sortBy == 'Name') {
+        $sortBy = 'creator';
+    } else if ($sortBy == 'Turn Out: Low to High') {
+        $sortBy = 'turnOut ASC';
+    } else {
+        $sortBy = 'turnOut DESC';
     }
-    //echo $sql;
+    $sql .= " ORDER BY " . $sortBy;
     return preExeFet($sql);
 }
 
