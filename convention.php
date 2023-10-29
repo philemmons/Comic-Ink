@@ -57,8 +57,8 @@ if (isset($_SESSION["status"])) {
 
 <br>
 <div class="wrapper form-display">
-    <form method="POST" name="conForm" class="row row-cols-lg-auto g-3 align-items-center">
-        <table class="col-12">
+    <form method="POST" name="conForm" class="table display nowrap" id="conForm" style="width:100%">
+        <table>
             <th colspan="2">Welcome <?= $_SESSION['name'] ?>
             <td>
                 <input type="submit" value="Search" name="filterForm" class="btn" />
@@ -140,7 +140,12 @@ if (isset($_SESSION["status"])) {
         searching: false,
         ordering: false,
         responsive: true
+    });
 
+    new DataTable('#conForm', {
+        searching: false,
+        ordering: false,
+        responsive: true
     });
 </script>
 
