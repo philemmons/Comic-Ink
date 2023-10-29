@@ -1,5 +1,5 @@
 :root {
-  --bs-font-comics-ink: Raleway, Helvetica, Calibri, Arial, sans-serif;
+  --bs-font-comics-ink: Raleway, Helvetica, Roboto, Calibri, Arial, sans-serif;
 }
 
 
@@ -335,7 +335,7 @@ footer {
 .form-display,
 .page-link,
 .input-group-text {
-  font-size: 12px !important; 
+  font-size: 12px !important;
 }
 
 /*** PAGINATION ***/
