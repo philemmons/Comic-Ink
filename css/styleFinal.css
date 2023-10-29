@@ -14,8 +14,8 @@
   background-image: url("../img/bg1.png");
   left: 0;
   top: 0;
-  width: 17%;
-  height: 116%;
+  width: 15%;
+  height: 120%;
   z-index: -1;
   /*background-attachment: fixed;*/
 }
@@ -25,8 +25,8 @@
   background-image: url("../img/bg2.png");
   right: 0;
   top: 0;
-  width: 17%;
-  height: 116%;
+  width: 15%;
+  height: 120%;
   z-index: -1;
   /*background-attachment: fixed;*/
 }
@@ -144,6 +144,7 @@ a {
   width: 60%;
   margin: auto;
   padding: 10px;
+  overflow: auto;
 }
 
 /**** BEGIN login modal *****/
