@@ -60,8 +60,8 @@ if (isset($_SESSION["status"])) {
     <form method="POST" name="conForm">
         <table class="table display nowrap" style="width:100%" id="conInput">
             <tr>
-                <td>Welcome <?= $_SESSION['name'] ?></td>
-                <td></td>
+                <td>Welcome</td>
+                <td><?= $_SESSION['name'] ?> </td>
                 <td>
                     <input type="submit" value="Search" name="filterForm" class="btn" />
                 </td>
