@@ -333,8 +333,9 @@ footer {
 
 /*** FORM and TABLE CLASS ***/
 .form-display,
-.page-link {
-  font-size: 12px;
+.page-link,
+.input-group-text {
+  font-size: 12px !important;
 }
 
 /*** PAGINATION ***/
