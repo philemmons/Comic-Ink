@@ -56,6 +56,41 @@ if (isset($_SESSION["status"])) {
 </nav>
 <br>
 
+<form class="row row-cols-lg-auto g-3 align-items-center">
+    <div class="col-12">
+        <label class="visually-hidden" for="inlineFormInputGroupUsername">Username</label>
+        <div class="input-group">
+            <div class="input-group-text">@</div>
+            <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Username">
+        </div>
+    </div>
+
+    <div class="col-12">
+        <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
+        <select class="form-select" id="inlineFormSelectPref">
+            <option selected="">Choose...</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+        </select>
+    </div>
+
+    <div class="col-12">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="inlineFormCheck">
+            <label class="form-check-label" for="inlineFormCheck">
+                Remember me
+            </label>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+
+
+
 <form method="POST" name="conForm" class="form-display">
     <table>
         <th colspan="2">Welcome <?= $_SESSION['name'] ?>
@@ -126,26 +161,13 @@ if (isset($_SESSION["status"])) {
 
 <script>
     //https://datatables.net/reference/option
-
     new DataTable('#convDisplay', {
-        lengthMenu: [3, 5, 7],
+        lengthMenu: [8, 16, 24],
         searching: false,
         ordering: false,
         responsive: true
 
     });
-
-
-    new DataTable('#example', {
-        lengthMenu: [3, 5, 7],
-        searching: false,
-        ordering: false,
-        responsive: true
-    });
-
-    //jQuery('#querytableDatasets').dataTable({
-    //    "bAutoWidth": false
-    //});
 </script>
 
 </body>
