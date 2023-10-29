@@ -57,49 +57,64 @@ if (isset($_SESSION["status"])) {
 
 <br>
 <div class="wrapper form-display">
+    <div>
+        Welcome <?= $_SESSION['name'] ?>
+    </div>
     <form method="POST" name="conForm" class="row gx-3 gy-2 align-items-center">
-        <div class="col-auto">
-            Welcome <?= $_SESSION['name'] ?>
-        </div>
         <div class="col-auto">
             <input type="submit" value="Search" name="filterForm" class="btn" />
         </div>
+
         <div class="col-auto">
             <input type="submit" value="All Conventions" name="allIn" class="btn" />
         </div>
 
         <div class="col-auto">
-            <label id="l5">Name:</label>
-            <input type="text" name="conName" size="20" placeholder="enter convention name here." />
+            <div class="input-group">
+                <div class="input-group-text">@</div>
+                <label id="l5">Name:</label>
+                <input type="text" name="conName" size="20" placeholder="enter convention name here." />
+            </div>
         </div>
+
         <div class="col-auto">
-            <label id="l6">Creator:</label>
-            <input type="text" name="creator" size="20" placeholder="first or last name" />
+            <div class="input-group">
+                <div class="input-group-text">@</div>
+                <label id="l6">Creator:</label>
+                <input type="text" name="creator" size="20" placeholder="first or last name" />
+            </div>
         </div>
+
         <div class="col-auto">
-            <label id="l7">State:</label>
-            <select name="state">
-                <option value="" disabled selected>select one</option>
-                <?php
-                $allState = getDropDown('convention', 'state');
-                //print_r($allState);
-                foreach ($allState as $singleState) {
-                    echo "<option>" . $singleState['state'] . " </option>";
-                }
-                ?>
-            </select>
+            <div class="input-group">
+                <div class="input-group-text">@</div>
+                <label id="l7">State:</label>
+                <select name="state">
+                    <option value="" disabled selected>select one</option>
+                    <?php
+                    $allState = getDropDown('convention', 'state');
+                    //print_r($allState);
+                    foreach ($allState as $singleState) {
+                        echo "<option>" . $singleState['state'] . " </option>";
+                    }
+                    ?>
+                </select>
+            </div>
         </div>
+
         <div class="col-auto">
-            <label id="l8">Sort By:</label>
-            <select name="sortBy">
-                <option value="" disabled selected>select one</option>
-                <option value="conName">Name</option>
-                <option value="creator">Creator</option>
-                <option value="turnOut ASC">Turn Out: Low to High</option>
-                <option value="turnOut DESC">Turn Out: High to Low</option>
-            </select>
+            <div class="input-group">
+                <div class="input-group-text">@</div>
+                <label id="l8">Sort By:</label>
+                <select name="sortBy">
+                    <option value="" disabled selected>select one</option>
+                    <option value="conName">Name</option>
+                    <option value="creator">Creator</option>
+                    <option value="turnOut ASC">Turn Out: Low to High</option>
+                    <option value="turnOut DESC">Turn Out: High to Low</option>
+                </select>
+            </div>
         </div>
-        </table>
     </form>
 </div>
 
