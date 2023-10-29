@@ -58,15 +58,16 @@ if (isset($_SESSION["status"])) {
 <br>
 <div class="wrapper form-display">
     <form method="POST" name="conForm">
-        <table class="table display nowrap" id="conventionForm" style="width:100%">
-            <th colspan="2">Welcome <?= $_SESSION['name'] ?>
-            <td>
-                <input type="submit" value="Search" name="filterForm" class="btn" />
-            </td>
-            <td>
-                <input type="submit" value="All Conventions" name="allIn" class="btn" />
-            </td>
-            </th>
+        <table class="table display nowrap" style="width:100%" id="conInput">
+            <tr>Welcome <?= $_SESSION['name'] ?>
+                <td></td>
+                <td>
+                    <input type="submit" value="Search" name="filterForm" class="btn" />
+                </td>
+                <td>
+                    <input type="submit" value="All Conventions" name="allIn" class="btn" />
+                </td>
+            </tr>
             <tr>
                 <td>
                     <label id="l5">Name:</label>
@@ -141,8 +142,7 @@ if (isset($_SESSION["status"])) {
         ordering: false,
         responsive: true
     });
-
-    new DataTable('#conventionForm', {
+    new DataTable('#conInput', {
         searching: false,
         ordering: false,
         responsive: true
