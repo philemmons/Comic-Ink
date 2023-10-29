@@ -60,7 +60,7 @@ if (isset($_SESSION["status"])) {
     <div>
         Welcome <?= $_SESSION['name'] ?>
     </div>
-    <form method="POST" name="conForm" class="row gx-3 gy-2 align-items-center">
+    <form method="POST" name="conForm" class="row gx-4 gy-3 align-items-center">
         <div class="col-auto">
             <input type="submit" value="Search" name="filterForm" class="btn" />
         </div>
@@ -71,26 +71,23 @@ if (isset($_SESSION["status"])) {
 
         <div class="col-auto">
             <div class="input-group">
-                <div class="input-group-text">@</div>
-                <label id="l5">Name:</label>
-                <input type="text" name="conName" size="20" placeholder="enter convention name here." />
+                <div class="input-group-text">Name</div>
+                <input type="text" name="conName" placeholder="Enter Convention Name" />
             </div>
         </div>
 
         <div class="col-auto">
             <div class="input-group">
-                <div class="input-group-text">@</div>
-                <label id="l6">Creator:</label>
-                <input type="text" name="creator" size="20" placeholder="first or last name" />
+                <div class="input-group-text">Creator</div>
+                <input type="text" name="creator" placeholder="Enter First or Last Name" />
             </div>
         </div>
 
         <div class="col-auto">
             <div class="input-group">
-                <div class="input-group-text">@</div>
-                <label id="l7">State:</label>
+                <div class="input-group-text">State</div>
                 <select name="state">
-                    <option value="" disabled selected>select one</option>
+                    <option value="" disabled selected>Select One</option>
                     <?php
                     $allState = getDropDown('convention', 'state');
                     //print_r($allState);
@@ -104,10 +101,9 @@ if (isset($_SESSION["status"])) {
 
         <div class="col-auto">
             <div class="input-group">
-                <div class="input-group-text">@</div>
-                <label id="l8">Sort By:</label>
+                <div class="input-group-text">Sort By</div>
                 <select name="sortBy">
-                    <option value="" disabled selected>select one</option>
+                    <option value="" disabled selected>Select One</option>
                     <option value="conName">Name</option>
                     <option value="creator">Creator</option>
                     <option value="turnOut ASC">Turn Out: Low to High</option>
