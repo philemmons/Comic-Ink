@@ -110,7 +110,8 @@ if (isset($_SESSION["status"])) {
                 <option value="creator">Creator</option>
                 <option value="turnOut ASC">Turn Out: Low to High</option>
                 <option value="turnOut DESC">Turn Out: High to Low</option>
-            </select </div>
+            </select>
+        </div>
 
     </form>
 </div>
