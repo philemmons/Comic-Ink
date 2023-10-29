@@ -58,10 +58,11 @@ if (isset($_SESSION["status"])) {
 <br>
 <div class="wrapper form-display">
     <form method="POST" name="conForm">
-        <table class="table display nowrap" style="width:100%" id="conInput">
+        <table>
             <tr>
-                <td>Welcome</td>
-                <td><?= $_SESSION['name'] ?> </td>
+                <td colspan="2">
+                    Welcome <?= $_SESSION['name'] ?>
+                </td>
                 <td>
                     <input type="submit" value="Search" name="filterForm" class="btn" />
                 </td>
@@ -139,11 +140,6 @@ if (isset($_SESSION["status"])) {
     //https://datatables.net/reference/option
     new DataTable('#convDisplay', {
         lengthMenu: [8, 16, 24],
-        searching: false,
-        ordering: false,
-        responsive: true
-    });
-    new DataTable('#conInput', {
         searching: false,
         ordering: false,
         responsive: true
