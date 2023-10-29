@@ -10,12 +10,14 @@
 }
 
 #bgLeft {
-  position: fixed;
+  position: absolute;
+  background-image: url("../img/bg1.png");
   left: 0;
   top: 0;
   width: 17%;
-  height: 100%;
+  height: 116%;
   z-index: -1;
+  /*background-attachment: fixed;*/
 }
 
 #bgRight {
@@ -26,6 +28,7 @@
   width: 17%;
   height: 116%;
   z-index: -1;
+  /*background-attachment: fixed;*/
 }
 
 .mySlides {
@@ -330,9 +333,8 @@ footer {
 
 /*** FORM and TABLE CLASS ***/
 .form-display,
-.page-link,
-.input-group-text {
-  font-size: 12px !important;
+.page-link {
+  font-size: 12px;
 }
 
 /*** PAGINATION ***/
