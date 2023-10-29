@@ -335,7 +335,7 @@ footer {
 .form-display,
 .page-link,
 .input-group-text {
-  font-size: 12px !important;
+  font-size: 12px !important; 
 }
 
 /*** PAGINATION ***/
