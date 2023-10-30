@@ -114,7 +114,7 @@ if (isset($_SESSION["status"])) {
         </div>
     </form>
 </div>
-
+<br><br>
 <div class="wrapper form-display" style="overflow: auto;">
     <table class="table table-sm table-striped table-hover display nowrap" id="convDisplay" style="width:100%;">
         <!--https://www.w3schools.com/bootstrap/bootstrap_tables.asp-->
@@ -141,13 +141,13 @@ if (isset($_SESSION["status"])) {
         </tbody>
     </table>
 </div>
-
+<br><br>
 <?php include 'footer.inc' ?>
 
 <script>
     //https://datatables.net/reference/option
     new DataTable('#convDisplay', {
-        lengthMenu: [8, 16, 24],
+        lengthMenu: [8, 16],
         searching: false,
         ordering: true,
         responsive: true

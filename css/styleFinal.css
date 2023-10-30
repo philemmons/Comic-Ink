@@ -337,10 +337,6 @@ footer {
   font-size: 12px !important;
 }
 
-.form-display {
-  margin: 1em 0;
-}
-
 /*** PAGINATION ***/
 .pagination {
   --bs-pagination-padding-x: 0.50rem !important;
