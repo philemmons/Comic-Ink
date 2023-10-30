@@ -150,7 +150,8 @@ if (isset($_SESSION["status"])) {
         lengthMenu: [8, 16],
         searching: false,
         ordering: true,
-        responsive: true
+        responsive: true,
+        pagingType: 'full'
     });
 </script>
 

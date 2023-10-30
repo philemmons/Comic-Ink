@@ -337,6 +337,10 @@ footer {
   font-size: 12px !important;
 }
 
+.input-group-text {
+  padding: .3rem .6rem !important;
+}
+
 /*** PAGINATION ***/
 .pagination {
   --bs-pagination-padding-x: 0.50rem !important;
