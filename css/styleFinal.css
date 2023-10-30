@@ -2,13 +2,6 @@
   --bs-font-comics-ink: Raleway, Helvetica, Roboto, Calibri, Arial, sans-serif;
 }
 
-
-
-@font-face {
-  font-family: iMan;
-  src: url("../font/iMan.ttf");
-}
-
 #bgLeft {
   position: absolute;
   background-image: url("../img/bg1.png");
@@ -67,8 +60,9 @@ body {
 
 /*** INDEX CAROUSEL ***/
 .carousel {
-  max-width: 350px !important;
+  max-width: 325px !important;
   margin: 30px auto !important;
+  border: 2px solid #ffffff;
 }
 
 .item {
