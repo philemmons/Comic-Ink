@@ -15,9 +15,9 @@
   left: 0;
   top: 0;
   width: 15%;
-  height: 120%;
+  min-height: 115%;
   z-index: -1;
-  /*background-attachment: fixed;*/
+  background-attachment: cover;
 }
 
 #bgRight {
@@ -26,9 +26,9 @@
   right: 0;
   top: 0;
   width: 15%;
-  height: 120%;
+  min-height: 115%;
   z-index: -1;
-  /*background-attachment: fixed;*/
+  background-attachment: cover;
 }
 
 .mySlides {
