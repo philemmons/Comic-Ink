@@ -185,7 +185,7 @@ function goSQLcon($table)
     if ($sortBy) {
         $sql .= " ORDER BY " . $sortBy;
         echo $sql;
-        die();
+
         if (strlen(stristr($sql, $needle)) < 0) {
             return preExeFetNOPARA($sql);
         }
