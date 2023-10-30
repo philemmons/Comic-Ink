@@ -149,7 +149,7 @@ if (isset($_SESSION["status"])) {
     new DataTable('#convDisplay', {
         lengthMenu: [8, 16],
         searching: false,
-        ordering: true,
+        ordering: false,
         responsive: true,
         pagingType: 'simple'
     });
