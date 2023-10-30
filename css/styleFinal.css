@@ -17,7 +17,7 @@
   width: 15%;
   min-height: 115%;
   z-index: -1;
-  background-attachment: cover;
+  background-size: cover;
 }
 
 #bgRight {
@@ -28,7 +28,7 @@
   width: 15%;
   min-height: 115%;
   z-index: -1;
-  background-attachment: cover;
+  background-size: cover;
 }
 
 .mySlides {
@@ -143,7 +143,6 @@ a {
 .wrapper {
   width: 60%;
   margin: auto;
-  padding: 10px;
 }
 
 /**** BEGIN login modal *****/
