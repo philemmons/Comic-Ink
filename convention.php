@@ -115,8 +115,8 @@ if (isset($_SESSION["status"])) {
     </form>
 </div>
 
-<div class="wrapper form-display">
-    <table class="table table-sm table-striped table-hover display nowrap" id="convDisplay" style="width:100%; overflow: auto;">
+<div class="wrapper form-display" style="overflow: auto;">
+    <table class="table table-sm table-striped table-hover display nowrap" id="convDisplay" style="width:100%;">
         <!--https://www.w3schools.com/bootstrap/bootstrap_tables.asp-->
         <thead class='table-dark'>
             <tr>
