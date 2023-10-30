@@ -151,7 +151,7 @@ if (isset($_SESSION["status"])) {
         searching: false,
         ordering: true,
         responsive: true,
-        pagingType: 'full'
+        pagingType: 'simple'
     });
 </script>
 
