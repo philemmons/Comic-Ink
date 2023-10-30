@@ -308,7 +308,6 @@ a {
 /*** FOOTER ***/
 footer {
   width: 100%;
-  margin-top: 1em;
 }
 
 #footer {
@@ -336,6 +335,10 @@ footer {
 .page-link,
 .input-group-text {
   font-size: 12px !important;
+}
+
+.form-display {
+  margin: 1em 0;
 }
 
 /*** PAGINATION ***/
