@@ -141,7 +141,7 @@ if (isset($_SESSION["status"])) {
         </tbody>
     </table>
 </div>
-
+<br><br>
 <?php include 'footer.inc' ?>
 
 <script>
