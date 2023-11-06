@@ -1,5 +1,6 @@
 :root {
   --bs-font-comics-ink: Raleway, Helvetica, Roboto, Calibri, Arial, sans-serif;
+  --bs-body-font-size: 12px !important;
 }
 
 #bgLeft {
@@ -128,7 +129,7 @@ a {
 }
 
 .wrapper {
-  width: 60%;
+  width: 65%;
   margin: auto;
 }
 
