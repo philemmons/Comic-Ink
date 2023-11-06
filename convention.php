@@ -73,9 +73,9 @@ if (isset($_SESSION["status"])) {
 
 <br>
 <div class="wrapper form-display">
-    <h4>
+    <h6>
         Welcome <?= $_SESSION['name'] ?>
-    </h4>
+    </h6>
     <br>
     <form method="POST" name="conForm" class="row gx-4 gy-3 align-items-center">
         <div class="col-auto">
