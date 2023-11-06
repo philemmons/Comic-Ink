@@ -77,8 +77,15 @@ if (isset($_SESSION["status"])) {
 
         <div class="col-auto">
             <div class="input-group">
-                <div class="input-group-text">Creator</div>
-                <input type="text" name="creator" placeholder="Enter First or Last Name" />
+                <div class="input-group-text">Date</div>
+                <input type="date" name="conDate" />
+            </div>
+        </div>
+
+        <div class="col-auto">
+            <div class="input-group">
+                <div class="input-group-text">City</div>
+                <input type="text" name="conCity" placeholder="Enter a City" />
             </div>
         </div>
 
@@ -89,7 +96,6 @@ if (isset($_SESSION["status"])) {
                     <option value="" disabled selected>Select One</option>
                     <?php
                     $allState = getDropDown('convention', 'state');
-                    //print_r($allState);
                     foreach ($allState as $singleState) {
                         echo "<option>" . $singleState['state'] . " </option>";
                     }
@@ -104,9 +110,9 @@ if (isset($_SESSION["status"])) {
                 <select name="sortBy">
                     <option value="" disabled selected>Select One</option>
                     <option value="conName">Name</option>
-                    <option value="creator">Creator</option>
-                    <option value="turnOut ASC">Turn Out: Low to High</option>
-                    <option value="turnOut DESC">Turn Out: High to Low</option>
+                    <option value="city">City</option>
+                    <option value="state">State</option>
+                    <option value="country">Country</option>
                 </select>
             </div>
         </div>
@@ -123,14 +129,18 @@ if (isset($_SESSION["status"])) {
 <br><br>
 <div class="wrapper form-display" style="overflow: auto;">
     <table class="table table-sm table-striped table-hover display nowrap" id="convDisplay" style="width:100%;">
+    <caption>Comic Book Conventions</caption>
         <!--https://www.w3schools.com/bootstrap/bootstrap_tables.asp-->
         <thead class='table-dark'>
             <tr>
                 <th>Name</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Year</th>
+                <th>Event Location</th>
                 <th>City</th>
                 <th>State</th>
-                <th>Attendance</th>
-                <th>Creator</th>
+                <th>Country</th>
                 <th>Official</th>
             </tr>
         </thead>
@@ -148,7 +158,7 @@ if (isset($_SESSION["status"])) {
     </table>
 </div>
 <br><br>
-<?php include 'footer.inc' ?>
+<?php include_once 'footer.inc' ?>
 
 <script>
     //https://datatables.net/reference/option
