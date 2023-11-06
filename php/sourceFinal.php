@@ -162,11 +162,11 @@ function goSQLcon($table)
         //Convert date to text
         //Prevents SQL injection by using a named parameter.
         $nPara[':dConDate'] = date("F j", strtotime($conDate));;
-        $sql .= " date LIKE :dConDate ";
+        $sql .= " starting_date LIKE :dConDate ";
     }
     if ($conCity) {
         if (strlen(stristr($sql, $needle)) > 0) { //String search for 'where': stristr returns the partial string up to 'where'.
-            // Needle Found - compare lenth>0 means the keyword was found.  http://www.maxi-pedia.com/string+contains+substring+php
+            // Needle Found - compare length>0 means the keyword was found.  http://www.maxi-pedia.com/string+contains+substring+php
             $sql .= " AND ";
         } else {
             $sql .= " WHERE ";
