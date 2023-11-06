@@ -153,6 +153,8 @@ function goSQLcon($table)
         //Prevents SQL injection by using a named parameter.
         $nPara[':dConName'] = '%' . $conName . '%';
         $sql .= " WHERE conName LIKE :dConName ";
+
+        echo $sql;die();
     }
     if ($conDate) {
         if (strlen(stristr($sql, $needle)) > 0) { //String search for 'where': stristr returns the partial string up to 'where'.
@@ -166,10 +168,13 @@ function goSQLcon($table)
  
         $textDate= $conDate->format("m/d");
 
-        
+
         //Prevents SQL injection by using a named parameter.
         $nPara[':dConDate'] = '%' . $textDate . '%';
         $sql .= " date LIKE :dConDate ";
+
+        echo $sql;die();
+
     }
     if ($conCity) {
         if (strlen(stristr($sql, $needle)) > 0) { //String search for 'where': stristr returns the partial string up to 'where'.
@@ -181,6 +186,9 @@ function goSQLcon($table)
         //Prevents SQL injection by using a named parameter.
         $nPara[':dCity'] = '%' . $conCity . '%';
         $sql .= " city LIKE :dCity ";
+
+        echo $sql;die();
+
     }
     if ($state) {
         if (strlen(stristr($sql, $needle)) > 0) { //String search for 'where': stristr returns the partial string up to 'where'.
@@ -192,18 +200,30 @@ function goSQLcon($table)
         //Prevents SQL injection by using a named parameter.
         $nPara[':dState'] = '%' . $state . '%';
         $sql .= " state LIKE :dState ";
+        
+        echo $sql;die();
+
     }
 
     if (isset($_POST['allIn'])) { // Added due to user submitting a blank form.
         $sql .= " ";
+
+        echo $sql;die();
+
     }
 
     if ($sortBy) {
         $sql .= " ORDER BY " . $sortBy . "DESC";
         //echo $sql;
         if (strlen(stristr($sql, $needle)) < 0) {
+
+            echo $sql;die();
+
             return preExeFetNOPARA($sql);
         }
+
+        echo $sql;die();
+        
     }
 
     return preExeFet($sql);
