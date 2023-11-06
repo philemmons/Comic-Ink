@@ -162,7 +162,7 @@ function goSQLcon($table)
         //Convert date to text
         //Prevents SQL injection by using a named parameter.
         $nPara[':dConDate'] = date("F j", strtotime($conDate));;
-        $sql .= " starting_date LIKE :dConDate ";
+        $sql .= " start_date LIKE :dConDate ";
     }
     if ($conCity) {
         if (strlen(stristr($sql, $needle)) > 0) { //String search for 'where': stristr returns the partial string up to 'where'.
