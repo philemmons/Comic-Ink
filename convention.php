@@ -5,8 +5,8 @@ if (!isset($_SESSION["status"])) {  //Check whether the admin has logged in
     $_SESSION["name"] = "Guest";
 }
 
-include 'header.html';
-include 'php/sourceFinal.php';
+include_once 'header.html';
+include_once 'php/sourceFinal.php';
 
 $dbConn = getDBConnection();
 
@@ -19,9 +19,15 @@ function displayCon($convention)
 {
     foreach ($convention as $eachCon) {
         echo "<tr>";
-        //$str = $eachCon['conName'] . ", " .$eachCon['city'] .", ".$eachCon['state'] .", ".$eachCon['turnOut'] .", ".$eachCon['creator'];
-        echo "<td>" . $eachCon['conName'] . "</td><td>" . $eachCon['city'] . "</td><td>" . $eachCon['state'] . "</td><td>" . $eachCon['turnOut'] . "</td><td>" . $eachCon['creator'] . "</td>";
-        echo "<td> <a href='" . $eachCon['website'] . "' target='_blank'/>" . $eachCon['website'] . "</a></td>";
+        echo "<td>" . $eachCon['conName'] . "</td>";
+        echo "<td>" . $eachCon['start_date'] ."</td>";
+        echo "<td>" . $eachCon['end_date'] ."</td>";
+        echo "<td>" . $eachCon['year'] ."</td>";
+        echo "<td>" . $eachCon['event_location'] . "</td>";
+        echo "<td>" . $eachCon['city'] . "</td>";
+        echo "<td>" . $eachCon['state'] . "</td>";
+        echo "<td>" . $eachCon['country'] . "</td>";
+        echo "<td> <a href='https://" . $eachCon['website'] . "' target='_blank'/>" . $eachCon['website'] . "</a></td>";
         echo "</tr>";
     }
 }
@@ -125,7 +131,7 @@ if (isset($_SESSION["status"])) {
                 <th>State</th>
                 <th>Attendance</th>
                 <th>Creator</th>
-                <th>Offical</th>
+                <th>Official</th>
             </tr>
         </thead>
         <tbody>
