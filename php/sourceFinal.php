@@ -31,22 +31,20 @@ if (isset($_POST['issue']))
 if (isset($_POST['sortBy']))
     $sortBy = $_POST['sortBy'];
 
-//$creator, $sortBy - from above
-if (isset($_POST['city']))
-    $city = strtolower($_POST['city']);
+/* Convention below */
+/* $sortBy - from above*/
 
 if (isset($_POST['conName']))
     $conName = strtolower($_POST['conName']);
 
+if (isset($_POST['conDate']))
+    $conDate = $_POST['conDate'];
+
+if (isset($_POST['conCity']))
+    $conCity =  strtolower($_POST['conCity']);
+
 if (isset($_POST['state']))
     $state = strtoupper($_POST['state']);
-
-if (isset($_POST['turnOut']))
-    $turnOut =  $_POST['turnOut'];
-
-if (isset($_POST['website']))
-    $website = $_POST['website'];
-
 
 /*
 *@input: sql string to be processed
@@ -99,8 +97,8 @@ function goSQLcomic($table)
     }
     if ($creator) {
         if (strlen(stristr($sql, $needle)) > 0) {
-        /*String search for 'where': stristr returns the partial string up to 'where'. */
-        /* Needle Found - compare lenth>0 means the keyword was found.  http://www.maxi-pedia.com/string+contains+substring+php */
+            /*String search for 'where': stristr returns the partial string up to 'where'. */
+            /* Needle Found - compare lenth>0 means the keyword was found.  http://www.maxi-pedia.com/string+contains+substring+php */
             $sql .= " AND ";
         } else {
             $sql .= " WHERE ";
@@ -154,7 +152,8 @@ function goSQLcon($table)
         $nPara[':dConName'] = '%' . $conName . '%';
         $sql .= " WHERE conName LIKE :dConName ";
 
-        echo $sql;die();
+        echo $sql;
+        die();
     }
     if ($conDate) {
         if (strlen(stristr($sql, $needle)) > 0) { //String search for 'where': stristr returns the partial string up to 'where'.
@@ -164,17 +163,17 @@ function goSQLcon($table)
             $sql .= " WHERE ";
         }
         //Convert date to text
-     
- 
-        $textDate= $conDate->format("m/d");
+
+
+        $textDate = $conDate->format("m/d");
 
 
         //Prevents SQL injection by using a named parameter.
         $nPara[':dConDate'] = '%' . $textDate . '%';
         $sql .= " date LIKE :dConDate ";
 
-        echo $sql;die();
-
+        echo $sql;
+        die();
     }
     if ($conCity) {
         if (strlen(stristr($sql, $needle)) > 0) { //String search for 'where': stristr returns the partial string up to 'where'.
@@ -187,8 +186,8 @@ function goSQLcon($table)
         $nPara[':dCity'] = '%' . $conCity . '%';
         $sql .= " city LIKE :dCity ";
 
-        echo $sql;die();
-
+        echo $sql;
+        die();
     }
     if ($state) {
         if (strlen(stristr($sql, $needle)) > 0) { //String search for 'where': stristr returns the partial string up to 'where'.
@@ -200,16 +199,16 @@ function goSQLcon($table)
         //Prevents SQL injection by using a named parameter.
         $nPara[':dState'] = '%' . $state . '%';
         $sql .= " state LIKE :dState ";
-        
-        echo $sql;die();
 
+        echo $sql;
+        die();
     }
 
     if (isset($_POST['allIn'])) { // Added due to user submitting a blank form.
         $sql .= " ";
 
-        echo $sql;die();
-
+        echo $sql;
+        die();
     }
 
     if ($sortBy) {
@@ -217,13 +216,14 @@ function goSQLcon($table)
         //echo $sql;
         if (strlen(stristr($sql, $needle)) < 0) {
 
-            echo $sql;die();
+            echo $sql;
+            die();
 
             return preExeFetNOPARA($sql);
         }
 
-        echo $sql;die();
-
+        echo $sql;
+        die();
     }
 
     return preExeFet($sql);
