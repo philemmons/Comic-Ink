@@ -146,7 +146,7 @@ if (isset($_SESSION["status"])) {
                 <th>Name</th>
                 <th>Date</th>
                 <th>Year</th>
-                <th>Event Location</th>
+                <th>Location</th>
                 <th>City</th>
                 <th>State</th>
                 <th>Country</th>
