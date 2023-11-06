@@ -192,7 +192,7 @@ function goSQLcon($table)
     }
 
     if ($sortBy) {
-        $sql .= " ORDER BY " . $sortBy . " DESC";
+        $sql .= " ORDER BY " . $sortBy . " ASC";
         //echo $sql;
         if (strlen(stristr($sql, $needle)) < 0) {
             return preExeFetNOPARA($sql);
