@@ -164,7 +164,7 @@ function goSQLcon($table)
         }
         //Convert date to text
 
-
+echo $conDate. "<br>";
         $textDate = $conDate->format("m/d");
 
 
