@@ -1,5 +1,5 @@
 <?php
-include 'dbConnection.php';
+include_once 'dbConnection.php';
 
 $dbConn = getDBConnection();
 
@@ -66,15 +66,14 @@ function preExeFetNOPARA($sql)
     global $dbConn;
 
     $stmt = $dbConn->prepare($sql);
-    //var_dump($stmt);
     $stmt->execute();
     $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $records;
 }
 
 /*
-*@input: 
-*@output: all contents of device table for the user in alphebetical order
+*@input:
+*@output: all contents of device table for the user in alphabetical order
 */
 function getInfo($table)
 {
@@ -83,7 +82,7 @@ function getInfo($table)
 }
 
 /*
-*@input: form input by user: partial device name, dropdown device type, order by price or name and statusablity
+*@input: form input by user: partial device name, dropdown device type, order by price or name and status ability
 *@output: returns a table based on the query including a device count. a-e letters allow for different output order.
 */
 function goSQLcomic($table)
@@ -99,8 +98,9 @@ function goSQLcomic($table)
         $sql .= " WHERE title LIKE :dTitle ";
     }
     if ($creator) {
-        if (strlen(stristr($sql, $needle)) > 0) { //String search for 'where': stristr returns the partial string up to 'where'.
-            // Needle Found - compare lenth>0 means the keyword was found.  http://www.maxi-pedia.com/string+contains+substring+php
+        if (strlen(stristr($sql, $needle)) > 0) {
+        /*String search for 'where': stristr returns the partial string up to 'where'. */
+        /* Needle Found - compare lenth>0 means the keyword was found.  http://www.maxi-pedia.com/string+contains+substring+php */
             $sql .= " AND ";
         } else {
             $sql .= " WHERE ";
@@ -111,7 +111,7 @@ function goSQLcomic($table)
     }
     if ($pub) {
         //String search for 'where': stristr returns the partial string up to 'where'.
-        // compare lenth>0 means the keyword was found.  http://www.maxi-pedia.com/string+contains+substring+php
+        // compare length>0 means the keyword was found.  http://www.maxi-pedia.com/string+contains+substring+php
         if (strlen(stristr($sql, $needle)) > 0) {
             // Needle Found
             $sql .= " AND ";
@@ -139,23 +139,40 @@ function getDropDown($table, $column)
 {
     $sql = 'SELECT DISTINCT ' . $column . ' FROM ' . $table . ' ORDER BY ' . $column . ' ASC';
     //echo $sql;
-    //echo '<br>';
     return preExeFetNOPARA($sql);
 }
 
 function goSQLcon($table)
 {
-    global $city, $creator, $conName, $state, $turnOut, $website, $sortBy, $nPara;
+    global $conName, $conDate, $conCity, $state, $sortBy, $nPara;
     $needle = "WHERE"; //If the 'where' keyword is used  then 'and 'is added to the string in place of.
 
-    $sql = "SELECT conName, city, state, turnOut, creator, website FROM " . $table;
+    $sql = "SELECT *  FROM " . $table;
 
     if ($conName) {
         //Prevents SQL injection by using a named parameter.
         $nPara[':dConName'] = '%' . $conName . '%';
         $sql .= " WHERE conName LIKE :dConName ";
     }
-    if ($creator) {
+    if ($conDate) {
+        if (strlen(stristr($sql, $needle)) > 0) { //String search for 'where': stristr returns the partial string up to 'where'.
+            // Needle Found - compare lenth>0 means the keyword was found.  http://www.maxi-pedia.com/string+contains+substring+php
+            $sql .= " AND ";
+        } else {
+            $sql .= " WHERE ";
+        }
+        //Convert date to text
+     
+ 
+        $textDate= $conDate->format("m/d");
+ echo $textDate;
+ die();
+
+        //Prevents SQL injection by using a named parameter.
+        $nPara[':dConDate'] = '%' . $textDate . '%';
+        $sql .= " date LIKE :dConDate ";
+    }
+    if ($conCity) {
         if (strlen(stristr($sql, $needle)) > 0) { //String search for 'where': stristr returns the partial string up to 'where'.
             // Needle Found - compare lenth>0 means the keyword was found.  http://www.maxi-pedia.com/string+contains+substring+php
             $sql .= " AND ";
@@ -163,8 +180,8 @@ function goSQLcon($table)
             $sql .= " WHERE ";
         }
         //Prevents SQL injection by using a named parameter.
-        $nPara[':dCreator'] = '%' . $creator . '%';
-        $sql .= " creator LIKE :dCreator ";
+        $nPara[':dCity'] = '%' . $conCity . '%';
+        $sql .= " city LIKE :dCity ";
     }
     if ($state) {
         if (strlen(stristr($sql, $needle)) > 0) { //String search for 'where': stristr returns the partial string up to 'where'.
@@ -183,7 +200,7 @@ function goSQLcon($table)
     }
 
     if ($sortBy) {
-        $sql .= " ORDER BY " . $sortBy;
+        $sql .= " ORDER BY " . $sortBy . "DESC";
         //echo $sql;
         if (strlen(stristr($sql, $needle)) < 0) {
             return preExeFetNOPARA($sql);
@@ -243,7 +260,7 @@ function info(){
 
 <div id="iframecss">
             <iframe src="" width="300" height="300" name="userInfoFrame"></iframe>
-        </div>        
+        </div>
 */
 
 //conInsert.php and conUpdate.php
@@ -265,13 +282,13 @@ function addCon()
 
     if (isset($_GET['submit'])) {  //admin has submitted the "update user" form
         $sql = "INSERT INTO convention (
-                    con_id,  
-                    conName,   
-                    city,   
-                    state,  
-                    creator,  
-                    website,  
-                    turnOut   
+                    con_id,
+                    conName,
+                    city,
+                    state,
+                    creator,
+                    website,
+                    turnOut
                 )
                 VALUES (
                 :con_id,:conName,:city, :state, :creator, :website,:turnOut
