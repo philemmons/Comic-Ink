@@ -17,9 +17,8 @@ if (isset($_POST['logout'])) {
 
 function dateDisplay($startDate, $endDate)
 {
-    $d1 = new DateTime($startDate);
-    $d2 = new DateTime($endDate);
-    if ($d1 == $d2) {
+    $result = strcasecmp($startDate, $endDate);
+    if ($result == 0) {
         return $startDate;
     }
     return $startDate . "-" . substr($endDate, strrpos($endDate, ' ') + 1);
