@@ -213,7 +213,7 @@ function goSQLcon($table)
     }
 
     if ($sortBy) {
-        $sql .= " ORDER BY " . $sortBy . "DESC";
+        $sql .= " ORDER BY " . $sortBy . " DESC";
         //echo $sql;
         if (strlen(stristr($sql, $needle)) < 0) {
 
@@ -223,7 +223,7 @@ function goSQLcon($table)
         }
 
         echo $sql;die();
-        
+
     }
 
     return preExeFet($sql);
