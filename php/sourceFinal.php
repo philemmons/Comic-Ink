@@ -165,9 +165,8 @@ function goSQLcon($table)
      
  
         $textDate= $conDate->format("m/d");
- echo $textDate;
- die();
 
+        
         //Prevents SQL injection by using a named parameter.
         $nPara[':dConDate'] = '%' . $textDate . '%';
         $sql .= " date LIKE :dConDate ";
