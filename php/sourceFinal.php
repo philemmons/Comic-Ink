@@ -165,6 +165,7 @@ function goSQLcon($table)
         //Convert date to text
 
 echo $conDate. "<br>";
+echo gettype($conDate). "<br>";
         $textDate = $conDate->format("Y-m-d");
 echo $textDate. "<br>";
 
