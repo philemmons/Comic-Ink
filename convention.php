@@ -15,14 +15,25 @@ if (isset($_POST['logout'])) {
     header("Location: index.php");
 }
 
+function dateDisplay($startDate, $endDate)
+{
+    $d1 = new DateTime($startDate);
+    $d2 = new DateTime($endDate);
+    if ($d1 == $d2) {
+        return $startDate;
+    }
+    return $startDate . "-" . substr($endDate, strrpos($endDate, ' ') + 1);
+}
+
 function displayCon($convention)
 {
     foreach ($convention as $eachCon) {
+        $newDate = dateDisplay($eachCon['start_date'], $eachCon['end_date']);
+
         echo "<tr>";
         echo "<td>" . $eachCon['conName'] . "</td>";
-        echo "<td>" . $eachCon['start_date'] ."</td>";
-        echo "<td>" . $eachCon['end_date'] ."</td>";
-        echo "<td>" . $eachCon['year'] ."</td>";
+        echo "<td>" . $newDate . "</td>";
+        echo "<td>" . $eachCon['year'] . "</td>";
         echo "<td>" . $eachCon['event_location'] . "</td>";
         echo "<td>" . $eachCon['city'] . "</td>";
         echo "<td>" . $eachCon['state'] . "</td>";
@@ -129,13 +140,12 @@ if (isset($_SESSION["status"])) {
 <br><br>
 <div class="wrapper form-display" style="overflow: auto;">
     <table class="table table-sm table-striped table-hover display nowrap" id="convDisplay" style="width:100%;">
-    <caption>Comic Book Conventions</caption>
+        <caption>Comic Book Conventions Updated Last 11.06.23</caption>
         <!--https://www.w3schools.com/bootstrap/bootstrap_tables.asp-->
         <thead class='table-dark'>
             <tr>
                 <th>Name</th>
-                <th>Start Date</th>
-                <th>End Date</th>
+                <th>Date</th>
                 <th>Year</th>
                 <th>Event Location</th>
                 <th>City</th>
