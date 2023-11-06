@@ -166,7 +166,8 @@ function goSQLcon($table)
 
 echo $conDate. "<br>";
 echo gettype($conDate). "<br>";
-        $textDate = $conDate->format("Y-m-d");
+
+        $textDate = date("F j", strtotime($conDate));
 echo $textDate. "<br>";
 
         //Prevents SQL injection by using a named parameter.
