@@ -127,7 +127,7 @@ function goSQLcomic($table)
 
     /*Added due to user submitting a blank form.*/
     if (isset($_POST['allIn'])) {
-        $sql .= " ";
+        getInfo('comicBook');
     }
     /*Name or price*/
     if ($sortBy) {
