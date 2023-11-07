@@ -1,6 +1,7 @@
 :root {
   --bs-font-comics-ink: Raleway, Helvetica, Roboto, Calibri, Arial, sans-serif;
   --bs-body-font-size: 12px !important;
+  --bs-btn-font-size: 1em !important;
 }
 
 #bgLeft {

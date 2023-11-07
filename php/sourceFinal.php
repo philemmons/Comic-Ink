@@ -70,7 +70,7 @@ function preExeFetNOPARA($sql)
 }
 
 /*
-*@input:
+*@input: Name of the database table 
 *@output: all contents of device table for the user in alphabetical order
 */
 function getInfo($table)
@@ -80,8 +80,8 @@ function getInfo($table)
 }
 
 /*
-*@input:
-*@output: all contents of CONVENTION table for the user by ascending date
+*@input: Name of the convention table
+*@output: all contents of CONVENTION table for the user by ascending date with TBA values last
 */
 function getConData($table)
 {
@@ -120,8 +120,6 @@ function goSQLcomic($table)
         $sql .= " creator LIKE :dCreator ";
     }
     if ($pub) {
-        //String search for 'where': stristr returns the partial string up to 'where'.
-        // compare length>0 means the keyword was found.  http://www.maxi-pedia.com/string+contains+substring+php
         if (strlen(stristr($sql, $needle)) > 0) {
             // Needle Found
             $sql .= " AND ";
@@ -133,11 +131,12 @@ function goSQLcomic($table)
         $sql .= " publisher LIKE :dPub ";
     }
 
-    if (isset($_POST['allIn'])) { // Added due to user submitting a blank form.
+    /*Added due to user submitting a blank form.*/
+    if (isset($_POST['allIn'])) {
         $sql .= " ";
     }
-
-    if ($sortBy) { // Name or price
+    /*Name or price*/
+    if ($sortBy) { 
         $nPara[':dSortBy'] = $sortBy;
         $sql .= " ORDER BY :dSortBy ";
     }
@@ -151,7 +150,7 @@ function getDropDown($table, $column)
     //echo $sql;
     return preExeFetNOPARA($sql);
 }
-
+ /* convention.php */
 function goSQLcon($table)
 {
     global $conName, $conDate, $conCity, $state, $sortBy, $nPara;
@@ -179,9 +178,7 @@ function goSQLcon($table)
     }
 
     if ($conCity) {
-        if (strlen(stristr($sql, $needle)) > 0) { //String search for 'where': stristr returns the partial string up to 'where'.
-            // Needle Found - compare length>0 means the keyword was found.  http://www.maxi-pedia.com/string+contains+substring+php
-            $sql .= " AND ";
+        if (strlen(stristr($sql, $needle)) > 0) {
         } else {
             $sql .= " WHERE ";
         }
@@ -191,8 +188,7 @@ function goSQLcon($table)
     }
 
     if ($state) {
-        if (strlen(stristr($sql, $needle)) > 0) { //String search for 'where': stristr returns the partial string up to 'where'.
-            // Needle Found - compare lenth>0 means the keyword was found.  http://www.maxi-pedia.com/string+contains+substring+php
+        if (strlen(stristr($sql, $needle)) > 0) {
             $sql .= " AND ";
         } else {
             $sql .= " WHERE ";
@@ -252,23 +248,6 @@ function goMain()
         header("Location: admin.php"); //redirect to home page
     }
 }
-
-//admin.php - display admin info
-/*
-function info(){
-    //global $userData;
-    //http://php.net/manual/en/function.explode.php
-    //$data = $_GET['$userData'];
-    $pie = explode(",", $_GET['con_Id']);
-    foreach($pie as $slice){
-        echo"<br>".$slice;
-    }
-}
-
-<div id="iframecss">
-            <iframe src="" width="300" height="300" name="userInfoFrame"></iframe>
-        </div>
-*/
 
 //conInsert.php and conUpdate.php
 function getConInfo($con_id)
