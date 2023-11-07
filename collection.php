@@ -59,7 +59,11 @@ function dataDisplay($comic)
 {
     foreach ($comic as $page) {
         echo "<tr>";
-        echo "<td>" . $page['title'] . "</td><td>" . $page['creator'] . "</td><td>" . $page['issue'] . "</td><td>" . $page['publisher'] . "</td><td>" . $page['year'] . "</td>";
+        echo "<td>" . $page['title'] . "</td>";
+        echo "<td>" . $page['creator'] . "</td>";
+        echo "<td>" . $page['issue'] . "</td>";
+        echo "<td>" . $page['publisher'] . "</td>";
+        echo "<td>" . $page['year'] . "</td>";
         echo "<td> <a data-toggle='modal' href='#myModal' onclick = 'atCon(\"" . $page['title'] . "\",\"" . $page['year'] . "\",\"" . $page['issue'] . "\")'>more</a></td>";
         echo "</tr>";
     }
@@ -101,15 +105,6 @@ if (isset($_SESSION["status"])) {
     </h6>
     <br>
     <form method="POST" name="comicForm" class="row gx-4 gy-3 align-items-center">
-
-        <div class="col-auto">
-            <input type="submit" value="Search" name="filterForm" class="btn" />
-        </div>
-
-        <div class="col-auto">
-            <input type="submit" value="All Comics" name="allIn" class="btn" /></span>
-        </div>
-
         <div class="col-auto">
             <div class="input-group">
                 <div class="input-group-text">Title</div>
@@ -153,6 +148,14 @@ if (isset($_SESSION["status"])) {
                     <option value="issue DESC">Issue: High to Low</option>
                 </select>
             </div>
+        </div>
+
+        <div class="col-auto">
+            <input type="submit" value="Search" name="filterForm" class="btn" />
+        </div>
+
+        <div class="col-auto">
+            <input type="submit" value="All Comics" name="allIn" class="btn" /></span>
         </div>
     </form>
 </div>
@@ -204,6 +207,32 @@ if (isset($_SESSION["status"])) {
 
     </div>
 </div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 <br><br>
 <?php include_once 'footer.inc' ?>
