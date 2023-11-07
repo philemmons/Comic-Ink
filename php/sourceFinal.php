@@ -87,7 +87,7 @@ function getConInfo($table)
 {
     $sql = "SELECT *, STR_TO_DATE(CONCAT(start_date, ' ', year),
     '%M %d %Y') AS result FROM " . $table . " ORDER BY result IS NULL , result ASC";
-    
+
     return preExeFetNOPARA($sql);
 }
 
@@ -164,6 +164,7 @@ function goSQLcon($table)
         $nPara[':dConName'] = '%' . $conName . '%';
         $sql .= " WHERE conName LIKE :dConName ";
     }
+
     if ($conDate) {
         if (strlen(stristr($sql, $needle)) > 0) { //String search for 'where': stristr returns the partial string up to 'where'.
             // Needle Found - compare lenth>0 means the keyword was found.  http://www.maxi-pedia.com/string+contains+substring+php
@@ -176,6 +177,7 @@ function goSQLcon($table)
         $nPara[':dConDate'] = date("F j", strtotime($conDate));
         $sql .= " start_date LIKE :dConDate ";
     }
+
     if ($conCity) {
         if (strlen(stristr($sql, $needle)) > 0) { //String search for 'where': stristr returns the partial string up to 'where'.
             // Needle Found - compare length>0 means the keyword was found.  http://www.maxi-pedia.com/string+contains+substring+php
@@ -187,6 +189,7 @@ function goSQLcon($table)
         $nPara[':dCity'] = '%' . $conCity . '%';
         $sql .= " city LIKE :dCity ";
     }
+
     if ($state) {
         if (strlen(stristr($sql, $needle)) > 0) { //String search for 'where': stristr returns the partial string up to 'where'.
             // Needle Found - compare lenth>0 means the keyword was found.  http://www.maxi-pedia.com/string+contains+substring+php
@@ -204,12 +207,11 @@ function goSQLcon($table)
     }
 
     if ($sortBy) {
-            $sql .= " ORDER BY " . $sortBy . " ASC";
-        }
-        //echo $sql;
-        if (strlen(stristr($sql, $needle)) < 0) {
-            return preExeFetNOPARA($sql);
-        }
+        $sql .= " ORDER BY " . $sortBy . " ASC";
+    }
+    //echo $sql;
+    if (strlen(stristr($sql, $needle)) < 0) {
+        return preExeFetNOPARA($sql);
     }
 
     return preExeFet($sql);
