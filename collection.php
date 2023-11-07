@@ -5,8 +5,8 @@ if (!isset($_SESSION["status"])) {  //Check whether the admin has logged in
     $_SESSION["name"] = "Guest";
 }
 
-include 'header.html';
-include 'php/sourceFinal.php';
+include_once 'header.html';
+include_once 'php/sourceFinal.php';
 
 $dbConn = getDBConnection();
 
@@ -14,8 +14,6 @@ if (isset($_POST['logout'])) {
     session_destroy();
     header("Location: index.php");
 }
-
-
 
 ?>
 <script>
@@ -96,23 +94,41 @@ if (isset($_SESSION["status"])) {
 </div><!-- /.container-fluid -->
 </nav>
 <br>
-<form method="POST" name="comicForm">
-    <table>
-        <th colspan="2">Welcome <?= $_SESSION['name'] ?>
-        <td><input type="submit" value="Search" name="filterForm" class="btn" />
-        </td>
-        <td>
+
+<div class="wrapper form-display">
+    <h6>
+        Welcome <?= $_SESSION['name'] ?>
+    </h6>
+    <br>
+    <form method="POST" name="comicForm" class="row gx-4 gy-3 align-items-center">
+
+        <div class="col-auto">
+            <input type="submit" value="Search" name="filterForm" class="btn" />
+        </div>
+
+        <div class="col-auto">
             <input type="submit" value="All Comics" name="allIn" class="btn" /></span>
-        </td>
-        </th>
-        <tr>
-            <td><label id="l1">Title:</label> <input type="text" name="title" size="30" placeholder="enter comic title here." />
-            </td>
-            <td><label id="l2">Creator:</label> <input type="text" name="creator" size="20" placeholder="first or last name" />
-            </td>
-            <td><label id="l3">publisher:</label>
+        </div>
+
+        <div class="col-auto">
+            <div class="input-group">
+                <div class="input-group-text">Title</div>
+                <input type="text" name="title" placeholder="Enter comic title Here" />
+            </div>
+        </div>
+
+        <div class="col-auto">
+            <div class="input-group">
+                <div class="input-group-text">Creator</div>
+                <input type="text" name="creator" placeholder="First or Last Name" />
+            </div>
+        </div>
+
+        <div class="col-auto">
+            <div class="input-group">
+                <div class="input-group-text">Publisher</div>
                 <select name="publisher">
-                    <option value="" disabled selected>select one</option>
+                    <option value="" disabled selected>Select One</option>
                     <?php
                     $allPub = getDropDown('comicBook', 'publisher');
                     print_r($allPub);
@@ -121,10 +137,14 @@ if (isset($_SESSION["status"])) {
                     }
                     ?>
                 </select>
-            </td>
-            <td><label id="l4">Sort By:</label>
+            </div>
+        </div>
+
+        <div class="col-auto">
+            <div class="input-group">
+                <div class="input-group-text">Sort By</div>
                 <select name="sortBy">
-                    <option value="" disabled selected>select one</option>
+                    <option value="" disabled selected>Select One</option>
                     <option value="title">Title</option>
                     <option value="creator">Creator</option>
                     <option value="year ASC">Year: Low to High</option>
@@ -132,39 +152,37 @@ if (isset($_SESSION["status"])) {
                     <option value="issue ASC">Issue: Low to High</option>
                     <option value="issue DESC">Issue: High to Low</option>
                 </select>
-            </td>
-        </tr>
+            </div>
+        </div>
+    </form>
+</div>
+<br><br>
+<div class="wrapper form-display" style="overflow: auto;">
+    <table class="table table-sm table-striped table-hover display nowrap" id="comDisplay" style="width:100%;">
+        <!--https://www.w3schools.com/bootstrap/bootstrap_tables.asp-->
+        <thead class='table-dark'>
+            <tr>
+                <th>Title</th>
+                <th>Creator</th>
+                <th>Issue</th>
+                <th>Publisher</th>
+                <th>Year</th>
+                <th>Autograph</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            if (isset($_POST['filterForm'])) {
+                $filterList = goSQLcomic("comicBook");
+                dataDisplay($filterList);
+            } else { // Display inventory initially.
+                $comic = getInfo("comicBook");
+                dataDisplay($comic);
+            }
+            ?>
+        </tbody>
     </table>
-</form>
-
-<form method="POST" action="">
-    <div class="wrapper">
-        <table class="table table-condensed" id="comDisplay">
-            <!--https://www.w3schools.com/bootstrap/bootstrap_tables.asp-->
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Creator</th>
-                    <th>Issue</th>
-                    <th>Publisher</th>
-                    <th>Year</th>
-                    <th>Autograph</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                if (isset($_POST['filterForm'])) {
-                    $filterList = goSQLcomic("comicBook");
-                    dataDisplay($filterList);
-                } else { // Display inventory initially.
-                    $comic = getInfo("comicBook");
-                    dataDisplay($comic);
-                }
-                ?>
-            </tbody>
-        </table>
-    </div>
-</form>
+</div>
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -187,18 +205,20 @@ if (isset($_SESSION["status"])) {
     </div>
 </div>
 
-<?php include 'footer.inc' ?>
+<br><br>
+<?php include_once 'footer.inc' ?>
 
 <script>
     //https://datatables.net/reference/option
-    $(document).ready(function() {
-        $('#comDisplay').DataTable({
-            "lengthMenu": [10, 15, 30],
-            "searching": false,
-            "ordering": false
-        });
+    new DataTable('#comDisplay', {
+        lengthMenu: [8, 16],
+        searching: false,
+        ordering: false,
+        responsive: true,
+        pagingType: 'simple'
     });
 </script>
+
 </body>
 
 </html>

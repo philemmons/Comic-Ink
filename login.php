@@ -7,8 +7,8 @@ if (!isset($_SESSION["status"])) {  //Check whether the admin has logged in
   header("Location:admin.php");
 }
 
-include 'header.html';
-include 'php/sourceFinal.php';
+include_once 'header.html';
+include_once 'php/sourceFinal.php';
 
 $dbConn = getDBConnection();
 
@@ -49,7 +49,7 @@ if (isset($_SESSION["status"])) {
 
 <!-- https://www.w3schools.com/howto/howto_css_login_form.asp -->
 <div id="mLogin">
-  <h4>Please login to continue...</h4>
+  <h6>Please login to continue...</h6>
   <br>
   <button onclick="document.getElementById('id01').style.display='block'" class="btn">Login</button>
   <?php
@@ -88,7 +88,7 @@ if (isset($_SESSION["status"])) {
   </form>
 </div>
 
-<?php include 'footer.inc' ?>
+<?php include_once 'footer.inc' ?>
 
 <script>
   // Get the modal
