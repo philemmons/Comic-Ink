@@ -187,11 +187,11 @@ if (isset($_SESSION["status"])) {
     </table>
 </div>
 
-<!-- Modal -->
+<!-- Modal
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-sm">
 
-        <!-- Modal content-->
+    
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -206,7 +206,7 @@ if (isset($_SESSION["status"])) {
         </div>
 
     </div>
-</div>
+</div> -->
 
 <!-- Button trigger modal
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
