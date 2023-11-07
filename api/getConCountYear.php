@@ -1,10 +1,9 @@
 <?php
 
-    include '../php/dbConnection.php';
+    include_once '../php/dbConnection.php';
     $dbConn = getDBConnection();    
    
-    $sql = "select avg(turnOut)
-            from convention";
+    $sql = "SELECT year, COUNT(*) AS c FROM convention GROUP BY year ORDER BY c ASC";
             
     $stmt = $dbConn -> prepare($sql);
     $stmt -> execute();
