@@ -11,22 +11,27 @@ $dbConn = getDBConnection();
  **********/
 
 /*
-*Form vars - All input converted to lower case.
+*Form vars - All input converted to lower case unless numerical
 */
+
+/* comic book table */
 if (isset($_POST['title']))
     $title = strtolower($_POST['title']); // User input deviceName
 
-if (isset($_POST['creator']))
-    $creator = strtolower($_POST['creator']); // User input deviceName
-
-if (isset($_POST['publisher']))
-    $pub = strtolower($_POST['publisher']); // User selected deviceType
+if (isset($_POST['issue']))
+    $issue = strtolower($_POST['issue']); 
 
 if (isset($_POST['year']))
-    $year = $_POST['year']; // Selection display type
+    $year = $_POST['year']; 
 
-if (isset($_POST['issue']))
-    $issue = $_POST['issue']; //User input item statusable selection
+if (isset($_POST['volume']))
+    $volume = $_POST['volume'];
+
+if (isset($_POST['total_issues']))
+    $tot_issues= strtolower($_POST['total_issues']);
+
+if (isset($_POST['publisher']))
+    $pub = strtolower($_POST['publisher']);
 
 if (isset($_POST['sortBy']))
     $sortBy = $_POST['sortBy'];
@@ -38,18 +43,19 @@ if (isset($_POST['conName']))
     $conName = strtolower($_POST['conName']);
 
 if (isset($_POST['conDate']))
-    $conDate = $_POST['conDate'];
+    $conDate = strtolower($_POST['conDate']);
 
 if (isset($_POST['conCity']))
     $conCity =  strtolower($_POST['conCity']);
 
 if (isset($_POST['state']))
-    $state = strtoupper($_POST['state']);
+    $state = strtolower($_POST['state']);
 
 /*
 *@input: sql string to be processed
 *@output: table from the sql query
 */
+
 function preExeFet($sql)
 {
     global $dbConn, $nPara;
@@ -71,11 +77,11 @@ function preExeFetNOPARA($sql)
 
 /*
 *@input: Name of the database table 
-*@output: all contents of device table for the user in alphabetical order
+*@output: all contents of device table for the user in alphabetical order BY title
 */
 function getInfo($table)
 {
-    $sql = "SELECT * FROM " . $table;
+    $sql = "SELECT * FROM " . $table . " ORDER BY title ASC";
     return preExeFetNOPARA($sql);
 }
 
@@ -97,27 +103,15 @@ function getConData($table)
 */
 function goSQLcomic($table)
 {
-    global $title, $creator, $pub, $year, $issue, $sortBy, $nPara;
+    global $title, $issue, $year, $volume, $tot_issues, $pub, $sortBy, $nPara;
     $needle = "WHERE"; //If the 'where' keyword is used  then 'and 'is added to the string in place of.
 
-    $sql = "SELECT title, creator, publisher, year, issue FROM " . $table;
+    $sql = "SELECT * FROM " . $table;
 
     if ($title) {
         //Prevents SQL injection by using a named parameter.
         $nPara[':dTitle'] = '%' . $title . '%';
         $sql .= " WHERE title LIKE :dTitle ";
-    }
-    if ($creator) {
-        if (strlen(stristr($sql, $needle)) > 0) {
-            /*String search for 'where': stristr returns the partial string up to 'where'. */
-            /* Needle Found - compare lenth>0 means the keyword was found.  http://www.maxi-pedia.com/string+contains+substring+php */
-            $sql .= " AND ";
-        } else {
-            $sql .= " WHERE ";
-        }
-        //Prevents SQL injection by using a named parameter.
-        $nPara[':dCreator'] = '%' . $creator . '%';
-        $sql .= " creator LIKE :dCreator ";
     }
     if ($pub) {
         if (strlen(stristr($sql, $needle)) > 0) {
@@ -136,7 +130,7 @@ function goSQLcomic($table)
         $sql .= " ";
     }
     /*Name or price*/
-    if ($sortBy) { 
+    if ($sortBy) {
         $nPara[':dSortBy'] = $sortBy;
         $sql .= " ORDER BY :dSortBy ";
     }
@@ -150,7 +144,7 @@ function getDropDown($table, $column)
     //echo $sql;
     return preExeFetNOPARA($sql);
 }
- /* convention.php */
+/* convention.php */
 function goSQLcon($table)
 {
     global $conName, $conDate, $conCity, $state, $sortBy, $nPara;

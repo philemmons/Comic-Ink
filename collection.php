@@ -60,11 +60,14 @@ function dataDisplay($comic)
     foreach ($comic as $page) {
         echo "<tr>";
         echo "<td>" . $page['title'] . "</td>";
-        echo "<td>" . $page['creator'] . "</td>";
         echo "<td>" . $page['issue'] . "</td>";
-        echo "<td>" . $page['publisher'] . "</td>";
         echo "<td>" . $page['year'] . "</td>";
+        echo "<td>" . $page['volume'] . "</td>";
+        echo "<td>" . $page['total_issues'] . "</td>";
+        echo "<td>" . $page['publisher'] . "</td>";
+        /*
         echo "<td> <a data-toggle='modal' href='#myModal' onclick = 'atCon(\"" . $page['title'] . "\",\"" . $page['year'] . "\",\"" . $page['issue'] . "\")'>more</a></td>";
+        */
         echo "</tr>";
     }
 }
@@ -114,19 +117,12 @@ if (isset($_SESSION["status"])) {
 
         <div class="col-auto">
             <div class="input-group">
-                <div class="input-group-text">Creator</div>
-                <input type="text" name="creator" placeholder="First or Last Name" />
-            </div>
-        </div>
-
-        <div class="col-auto">
-            <div class="input-group">
                 <div class="input-group-text">Publisher</div>
                 <select name="publisher">
                     <option value="" disabled selected>Select One</option>
                     <?php
                     $allPub = getDropDown('comicBook', 'publisher');
-                    print_r($allPub);
+                    //print_r($allPub);
                     foreach ($allPub as $singlePub) {
                         echo "<option>" . $singlePub['publisher'] . " </option>";
                     }
@@ -141,11 +137,9 @@ if (isset($_SESSION["status"])) {
                 <select name="sortBy">
                     <option value="" disabled selected>Select One</option>
                     <option value="title">Title</option>
-                    <option value="creator">Creator</option>
+                    <option value="publisher ASC">Publisher</option>
                     <option value="year ASC">Year: Low to High</option>
                     <option value="year DESC">Year: High to Low</option>
-                    <option value="issue ASC">Issue: Low to High</option>
-                    <option value="issue DESC">Issue: High to Low</option>
                 </select>
             </div>
         </div>
@@ -157,6 +151,7 @@ if (isset($_SESSION["status"])) {
         <div class="col-auto">
             <input type="submit" value="All Comics" name="allIn" class="btn" /></span>
         </div>
+
     </form>
 </div>
 <br><br>
@@ -166,11 +161,11 @@ if (isset($_SESSION["status"])) {
         <thead class='table-dark'>
             <tr>
                 <th>Title</th>
-                <th>Creator</th>
                 <th>Issue</th>
-                <th>Publisher</th>
                 <th>Year</th>
-                <th>Autograph</th>
+                <th>Volume</th>
+                <th>Total Issues</th>
+                <th>Publisher</th>
             </tr>
         </thead>
         <tbody>
