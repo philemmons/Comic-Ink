@@ -83,7 +83,7 @@ function getInfo($table)
 *@input:
 *@output: all contents of CONVENTION table for the user by ascending date
 */
-function getConInfo($table)
+function getConData($table)
 {
     $sql = "SELECT *, STR_TO_DATE(CONCAT(start_date, ' ', year),
     '%M %d %Y') AS result FROM " . $table . " ORDER BY result IS NULL , result ASC";

@@ -159,7 +159,7 @@ if (isset($_SESSION["status"])) {
                 $filterCon = goSQLcon("convention");
                 displayCon($filterCon);
             } else { // Display inventory initially.
-                $convention = getConInfo("convention");
+                $convention = getConData("convention");
                 displayCon($convention);
             }
             ?>
