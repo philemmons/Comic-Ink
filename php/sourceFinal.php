@@ -19,16 +19,16 @@ if (isset($_POST['title']))
     $title = strtolower($_POST['title']); // User input deviceName
 
 if (isset($_POST['issue']))
-    $issue = strtolower($_POST['issue']); 
+    $issue = strtolower($_POST['issue']);
 
 if (isset($_POST['year']))
-    $year = $_POST['year']; 
+    $year = $_POST['year'];
 
 if (isset($_POST['volume']))
     $volume = $_POST['volume'];
 
 if (isset($_POST['total_issues']))
-    $tot_issues= strtolower($_POST['total_issues']);
+    $tot_issues = strtolower($_POST['total_issues']);
 
 if (isset($_POST['publisher']))
     $pub = strtolower($_POST['publisher']);
@@ -36,8 +36,7 @@ if (isset($_POST['publisher']))
 if (isset($_POST['sortBy']))
     $sortBy = $_POST['sortBy'];
 
-/* Convention below */
-/* $sortBy - from above*/
+/* convention table below, except for sortBy*/
 
 if (isset($_POST['conName']))
     $conName = strtolower($_POST['conName']);
@@ -52,10 +51,9 @@ if (isset($_POST['state']))
     $state = strtolower($_POST['state']);
 
 /*
-*@input: sql string to be processed
+*@input: PDO sql string to be processed with or without parameterized variable(s)
 *@output: table from the sql query
 */
-
 function preExeFet($sql)
 {
     global $dbConn, $nPara;
@@ -65,6 +63,7 @@ function preExeFet($sql)
     $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $records;
 }
+
 function preExeFetNOPARA($sql)
 {
     global $dbConn;
@@ -115,7 +114,6 @@ function goSQLcomic($table)
     }
     if ($pub) {
         if (strlen(stristr($sql, $needle)) > 0) {
-            // Needle Found
             $sql .= " AND ";
         } else {
             $sql .= " WHERE ";
@@ -124,16 +122,11 @@ function goSQLcomic($table)
         $nPara[':dPub'] = '%' . $pub . '%';
         $sql .= " publisher LIKE :dPub ";
     }
-
-    /*Added due to user submitting a blank form.*/
-    if (isset($_POST['allIn'])) {
-        $sql .= " ";
-    }
-    /*Name or price*/
+    /*Sort by title, year, or publisher*/
     if ($sortBy) {
         $sql .= " ORDER BY " . $sortBy;
     }
- 
+    /* no parameters included */
     if (strlen(stristr($sql, $needle)) < 0) {
         return preExeFetNOPARA($sql);
     }
@@ -193,10 +186,6 @@ function goSQLcon($table)
         //Prevents SQL injection by using a named parameter.
         $nPara[':dState'] = '%' . $state . '%';
         $sql .= " state LIKE :dState ";
-    }
-
-    if (isset($_POST['allIn'])) { // Added due to user submitting a blank form.
-        $sql .= " ";
     }
 
     if ($sortBy) {
