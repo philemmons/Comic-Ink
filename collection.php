@@ -136,7 +136,7 @@ if (isset($_SESSION["status"])) {
                 <div class="input-group-text">Sort By</div>
                 <select name="sortBy">
                     <option value="" disabled selected>Select One</option>
-                    <option value="title">Title</option>
+                    <option value="title ASC">Title</option>
                     <option value="publisher ASC">Publisher</option>
                     <option value="year ASC">Year: Low to High</option>
                     <option value="year DESC">Year: High to Low</option>

@@ -98,12 +98,12 @@ function getConData($table)
 }
 
 /*
-*@input: form input by user: partial device name, dropdown device type, order by price or name and status ability
-*@output: returns a table based on the query including a device count. a-e letters allow for different output order.
+*@input: form input by user: title, publisher dropdown option from DB, and sort function
+*@output: returns a table based on the query including titles, publishers, and sort by title, publisher, and year.
 */
 function goSQLcomic($table)
 {
-    global $title, $issue, $year, $volume, $tot_issues, $pub, $sortBy, $nPara;
+    global $title, $year, $pub, $sortBy, $nPara;
     $needle = "WHERE"; //If the 'where' keyword is used  then 'and 'is added to the string in place of.
 
     $sql = "SELECT * FROM " . $table;
@@ -131,8 +131,11 @@ function goSQLcomic($table)
     }
     /*Name or price*/
     if ($sortBy) {
-        $nPara[':dSortBy'] = $sortBy;
-        $sql .= " ORDER BY :dSortBy ";
+        $sql .= " ORDER BY " . $sortBy;
+    }
+ 
+    if (strlen(stristr($sql, $needle)) < 0) {
+        return preExeFetNOPARA($sql);
     }
     //echo $sql;
     return preExeFet($sql);
