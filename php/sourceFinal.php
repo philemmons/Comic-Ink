@@ -19,7 +19,7 @@ if (isset($_POST['title']))
 if (isset($_POST['creator']))
     $creator = strtolower($_POST['creator']); // User input deviceName
 
-if (isset($_POST['']))
+if (isset($_POST['publisher']))
     $pub = strtolower($_POST['publisher']); // User selected deviceType
 
 if (isset($_POST['year']))
@@ -76,6 +76,18 @@ function preExeFetNOPARA($sql)
 function getInfo($table)
 {
     $sql = "SELECT * FROM " . $table;
+    return preExeFetNOPARA($sql);
+}
+
+/*
+*@input:
+*@output: all contents of CONVENTION table for the user by ascending date
+*/
+function getConInfo($table)
+{
+    $sql = "SELECT *, STR_TO_DATE(CONCAT(start_date, ' ', year),
+    '%M %d %Y') AS result FROM " . $table . " ORDER BY result IS NULL , result ASC";
+    
     return preExeFetNOPARA($sql);
 }
 
@@ -161,7 +173,7 @@ function goSQLcon($table)
         }
         //Convert date to text
         //Prevents SQL injection by using a named parameter.
-        $nPara[':dConDate'] = date("F j", strtotime($conDate));;
+        $nPara[':dConDate'] = date("F j", strtotime($conDate));
         $sql .= " start_date LIKE :dConDate ";
     }
     if ($conCity) {
@@ -192,7 +204,8 @@ function goSQLcon($table)
     }
 
     if ($sortBy) {
-        $sql .= " ORDER BY " . $sortBy . " ASC";
+            $sql .= " ORDER BY " . $sortBy . " ASC";
+        }
         //echo $sql;
         if (strlen(stristr($sql, $needle)) < 0) {
             return preExeFetNOPARA($sql);
