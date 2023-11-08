@@ -97,6 +97,7 @@ function displayConAdmin($convention)
     $newDate = dateDisplay($eachCon['start_date'], $eachCon['end_date']);
 
     echo "<tr>";
+    echo "<td>" . $eachCon['conName'] . "</td>";
     echo "<td>
     <a href='conUpdate.php?id=" . $eachCon['id'] . "'>
       <button type=\"button\" class=\"btn btn-sm\">
@@ -111,7 +112,6 @@ function displayConAdmin($convention)
       </button>
     </a>";
     echo "</td>";
-    echo "<td>" . $eachCon['conName'] . "</td>";
     echo "<td>" . $newDate . "</td>";
     echo "<td>" . $eachCon['year'] . "</td>";
     echo "<td>" . $eachCon['event_location'] . "</td>";
@@ -202,9 +202,9 @@ if (isset($_SESSION["status"])) {
     <!--https://www.w3schools.com/bootstrap/bootstrap_tables.asp-->
     <thead class='table-dark'>
       <tr>
+        <th>Name</th>
         <th>Alter</th>
         <th>Remove</th>
-        <th>Name</th>
         <th>Date</th>
         <th>Year</th>
         <th>Location</th>
