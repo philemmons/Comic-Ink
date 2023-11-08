@@ -170,7 +170,7 @@ if (isset($_SESSION["status"])) {
     <tbody>
 
       <?php
-      $convention = getInfo("convention");
+      $convention = getConData("convention");
       foreach ($convention as $eachCon) {
         //$conData="con_id=".$eachCon['con_id']."<br>".$eachCon['conName']."<br>".$eachCon['city']."<br>".$eachCon['state']."<br>".$eachCon['creator']."<br>".$eachCon['website']."<br>".$eachCon['turnOut']."<br>";
         echo "<tr>";
