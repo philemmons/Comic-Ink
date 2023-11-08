@@ -85,15 +85,10 @@ function getNextCon()
           PREPARE STMT FROM 
           '" . $sqlPart1 . " LIMIT ?';
           EXECUTE STMT USING @a;";
-
-  echo $sql;
-  die();
-
   $groupCons =  preExeFetNOPARA($sql);
   //print_r($groupCons);
   return $groupCons;
 }
-/* end admin reports*/
 
 /* convention display with update and delete buttons for each */
 function displayConAdmin($convention)
@@ -129,7 +124,7 @@ function displayConAdmin($convention)
     echo "</tr>";
   }
 }
-
+/* end admin reports*/
 ?>
 
 <script>
@@ -196,7 +191,7 @@ if (isset($_SESSION["status"])) {
 </div>
 <br><br>
 <div class="wrapper form-display" style="overflow: auto;">
-  <table class="table table-sm table-striped table-hover display nowrap" id="adminDisplay" style="width:100%;">
+    <table class="table table-sm table-striped table-hover display nowrap" id="adminDisplay" style="width:100%;">
     <caption>Admin Conventions</caption>
     <!--https://www.w3schools.com/bootstrap/bootstrap_tables.asp-->
     <thead class='table-dark'>
