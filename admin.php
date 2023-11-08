@@ -84,11 +84,11 @@ function getNextCon()
            WHERE result > CURRENT_DATE() ) as t2
            GROUP BY result ORDER BY result asc limit 1);
           PREPARE STMT FROM 
-          \'SELECT * 
+          'SELECT * 
             FROM (SELECT *, STR_TO_DATE(CONCAT(start_date, \" \", year), \"%M %d %Y\") AS result
                   FROM convention 
                   ORDER BY result IS NULL , result ASC) AS t1 
-            WHERE result > CURRENT_DATE() LIMIT ?\';
+            WHERE result > CURRENT_DATE() LIMIT ?';
           EXECUTE STMT USING @a;";
 
   echo $sql;
