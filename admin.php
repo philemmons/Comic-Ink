@@ -89,9 +89,18 @@ function getNextCon()
                   ORDER BY result IS NULL , result ASC) AS t1 
             WHERE result > CURRENT_DATE() LIMIT ?';
           EXECUTE STMT USING @a;";
-  $groupCons =  preExeFetNOPARA($sql);
-  print_r($groupCons);
- die();
+
+          $stmt = $dbConn->prepare($sql);
+          var_dump($stmt);
+          echo "<br>";
+          $stmt->execute();
+          var_dump($stmt);
+          echo "<br>";
+          $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
+          var_dump($records);
+          echo "<br>";
+          die();
+          return $records;
 }
 
 /* convention display with update and delete buttons for each */
