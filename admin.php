@@ -178,7 +178,7 @@ if (isset($_SESSION["status"])) {
 </nav>
 
 <br>
-<div class="wrapper form-display">
+<div class="wrapper form-display row align-items-center">
   <h6>
     Welcome <?= $_SESSION['name'] ?>
   </h6>
@@ -197,7 +197,7 @@ if (isset($_SESSION["status"])) {
 <br><br>
 <div class="wrapper form-display" style="overflow: auto;">
   <table class="table table-sm table-striped table-hover display nowrap" id="convDisplay" style="width:100%;">
-    <caption>Comic Book Conventions Updated Last 11.06.23</caption>
+    <caption>Admin Conventions</caption>
     <!--https://www.w3schools.com/bootstrap/bootstrap_tables.asp-->
     <thead class='table-dark'>
       <tr>
@@ -209,6 +209,8 @@ if (isset($_SESSION["status"])) {
         <th>State</th>
         <th>Country</th>
         <th>Official</th>
+        <th>Alter</th>
+        <th>Remove</th>
       </tr>
     </thead>
     <tbody>
@@ -249,7 +251,7 @@ if (isset($_SESSION["status"])) {
 
 <script>
   //https://datatables.net/reference/option
-  new DataTable('#adminDisplay', {
+  new DataTable('#adminDisplay', '#convDisplay',{
     lengthMenu: [8, 16],
     searching: false,
     ordering: false,
