@@ -5,7 +5,6 @@ if (!isset($_SESSION["status"])) {  //Check whether the admin has logged in
   header("Location: login.php");
 }
 
-
 include_once 'header.html';
 include_once 'php/sourceFinal.php';
 
@@ -15,81 +14,73 @@ if (isset($_POST['logout'])) {
   session_destroy();
   header("Location: index.php");
 }
+
 //admin reports
-function getAvg()
+function getConAvg()
 {
   global $dbConn;
-  $sql = "select round(avg(turnOut))
-            from convention";
+  $sql = "SELECT ROUND(COUNT(*) / COUNT(DISTINCT (state))) as result FROM convention";
   $ans =  preExeFetNOPARA($sql);
   //print_r($ans);
   return $ans;
 }
 
-function displayNum($num)
+function displayConAvg($num)
 {
   foreach ($num as $digit) {
-    echo $digit['round(avg(turnOut))'] . " ";
+    echo $digit['result'] . " ";
   }
 }
 
-function getList()
+function getConByState()
 {
   global $dbConn;
-  $sql = "SELECT state, count( * )
-          FROM convention
-          GROUP BY state 
-          ORDER BY count( * ) DESC, state ASC";
+  $sql = "SELECT state, count( * ) FROM convention GROUP BY state ORDER BY count( * ) DESC, state ASC";
   $list =  preExeFetNOPARA($sql);
   //print_r($list);
   return $list;
 }
 
-function displayList($list)
+function displayConByState($list)
 {
   foreach ($list as $item) {
     echo $item['state'] . " " . $item['count( * )'] . ", ";
   }
 }
-function getTot()
+
+function getConTot()
 {
   global $dbConn;
-  $sql = "SELECT sum(turnOut)
-          FROM convention";
+  $sql = "SELECT count(*) as conTotal FROM convention";
   $tot =  preExeFetNOPARA($sql);
   //print_r($tot);
   return $tot;
 }
-function displayTot($tot)
+
+function displayConTot($tot)
 {
   foreach ($tot as $part) {
-    echo $part['sum(turnOut)'] . " ";
-  }
-}
-function getCount()
-{
-  global $dbConn;
-  $sql = "SELECT count(con_id)
-          FROM convention";
-  $cnt =  preExeFetNOPARA($sql);
-  //print_r($cnt);
-  return $cnt;
-}
-function displayCount($cnt)
-{
-  foreach ($cnt as $one) {
-    echo $one['count(con_id)'] . " ";
+    echo $part['conTotal'] . " ";
   }
 }
 
-function getBig()
+
+function getNextCon()
 {
   global $dbConn;
-  $sql = "SELECT *
-        FROM convention
-        WHERE turnOut = (
-        SELECT max( turnOut )
-        FROM convention ) ";
+$sqlPart1= "SELECT *
+FROM (SELECT id, STR_TO_DATE(CONCAT(start_date, ' ', year), '%M %d %Y') AS result 
+      FROM convention
+      ORDER BY result IS NULL , result ASC) AS t1
+WHERE result > CURRENT_DATE()";
+
+$sql= "SET @a = (SELECT COUNT(result) AS c FROM (". $sqlPart1 . " ) as t2
+GROUP BY result ORDER BY result asc limit 1);
+PREPARE STMT FROM 
+'" . $sqlPart1 . " LIMIT ?';
+EXECUTE STMT USING @a;";
+echo $sql; die();
+
   $big =  preExeFetNOPARA($sql);
   //print_r($big);
   return $big;
@@ -177,6 +168,7 @@ if (isset($_SESSION["status"])) {
       </tr>
     </thead>
     <tbody>
+
       <?php
       $convention = getInfo("convention");
       foreach ($convention as $eachCon) {
@@ -199,6 +191,7 @@ if (isset($_SESSION["status"])) {
         echo "</td></tr>";
       }
       ?>
+
     </tbody>
   </table>
 </div>
@@ -216,18 +209,18 @@ if (isset($_SESSION["status"])) {
       <div class="modal-body">
         <p>Total convention attendance:
           <?php
-          $tot = getTot();
-          displayTot($tot);
+          $tot = getConTot();
+          displayConTot($tot);
           ?></p>
         <p>Average attendance conventions:
           <?php
-          $num = getAvg();
-          displayNum($num);
+          $num = getConAvg();
+          displayConAvg($num);
           ?></p>
         <p>Number of convention by state:<br>
           <?php
-          $list = getList();
-          displayList($list);
+          $list = getConByState();
+          displayConByState($list);
           ?></p>
         <p>Total conventions:
           <?php
@@ -236,7 +229,7 @@ if (isset($_SESSION["status"])) {
           ?></p>
         <p>Largest attendance convention details:<br>
         <div style='padding-left: 20px' <?php
-                                        $big = getBig();
+                                        $big = getNextCon();
                                         displayBig($big);
                                         ?></div>
           </p>
