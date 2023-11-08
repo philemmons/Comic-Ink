@@ -85,6 +85,8 @@ function getNextCon()
           PREPARE STMT FROM 
           '" . $sqlPart1 . " LIMIT ?';
           EXECUTE STMT USING @a;";
+
+          echo $sql; die();
   $groupCons =  preExeFetNOPARA($sql);
   //print_r($groupCons);
   return $groupCons;
