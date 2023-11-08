@@ -15,32 +15,38 @@ if (isset($_POST['logout'])) {
   header("Location: index.php");
 }
 
-//admin reports
+/*admin report*/
+/* average number of conventions per state */
 function getConAvg()
 {
   global $dbConn;
-  $sql = "SELECT ROUND(COUNT(*) / COUNT(DISTINCT (state))) as result FROM convention";
+  $sql = "SELECT ROUND(COUNT(*) / COUNT(DISTINCT (state))) as result 
+          FROM convention";
   $ans =  preExeFetNOPARA($sql);
   //print_r($ans);
   return $ans;
 }
-
 function displayConAvg($num)
 {
   foreach ($num as $digit) {
     echo $digit['result'] . " ";
   }
 }
-
+/* number of conventions per state greater than four*/
 function getConByState()
 {
   global $dbConn;
-  $sql = "SELECT state, count( * ) FROM convention GROUP BY state ORDER BY count( * ) DESC, state ASC";
+  $sql = "SELECT state, c
+          FROM
+            (SELECT state, COUNT(*) AS c
+             FROM convention AS t1
+             GROUP BY state
+             ORDER BY c DESC) AS t2
+          WHERE t2.c > 4";
   $list =  preExeFetNOPARA($sql);
   //print_r($list);
   return $list;
 }
-
 function displayConByState($list)
 {
   foreach ($list as $item) {
@@ -48,6 +54,7 @@ function displayConByState($list)
   }
 }
 
+/* total convention */
 function getConTot()
 {
   global $dbConn;
@@ -56,7 +63,6 @@ function getConTot()
   //print_r($tot);
   return $tot;
 }
-
 function displayConTot($tot)
 {
   foreach ($tot as $part) {
@@ -64,7 +70,7 @@ function displayConTot($tot)
   }
 }
 
-
+/* list of the upcoming conventions based on date, one or more */
 function getNextCon()
 {
   global $dbConn;
@@ -225,65 +231,16 @@ if (isset($_SESSION["status"])) {
         <h3 class="modal-title">Admin Reports:</h3>
       </div>
       <div class="modal-body">
-        <p>Total convention attendance:
-          <?php
-          $tot = getConTot();
-          displayConTot($tot);
-          ?></p>
-        <p>Average attendance conventions:
-          <?php
-          $num = getConAvg();
-          displayConAvg($num);
-          ?></p>
-        <p>Number of convention by state:<br>
-          <?php
-          $list = getConByState();
-          displayConByState($list);
-          ?></p>
-        <p>Total conventions:
-          <?php
-          $cnt = getConTot();
-          displayConTot($cnt);
-          ?></p>
-        <p>Largest attendance convention details:<br>
-        <div style='padding-left: 20px'>
-          <?php
-          $groupCons = getNextCon();
-          displayCon($groupCons);
-          ?>
-        </div>
-        </p>
+        <p>Average number of conventions per State: <?php $num = getConAvg(); displayConAvg($num); ?></p>
+        <p>Number of convention per State with more than four: <?php $list = getConByState(); displayConByState($list); ?></p>
+        <p>Total conventions: <?php $cnt = getConTot(); displayConTot($cnt); ?> </p>
+        <p>One or more upcoming conventions based on date:<br> <?php $groupCons = getNextCon(); displayCon($groupCons); ?> </p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn" data-dismiss="modal">Close</button>
       </div>
     </div>
 
-  </div>
-</div>
-
-<!-- new modal-->
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
   </div>
 </div>
 
