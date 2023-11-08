@@ -1,101 +1,134 @@
-<form method="POST" name="conForm" class="form-display">
-    <table>
-        <tr>
-            <td colspan="2">
-                Welcome <?= $_SESSION['name'] ?>
-            </td>
-            <td>
-                <input type="submit" value="Search" name="filterForm" class="btn" />
-            </td>
-            <td>
-                <input type="submit" value="All Conventions" name="allIn" class="btn" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label id="l5">Name:</label>
-                <input type="text" name="conName" size="20" placeholder="enter convention name here." />
-            </td>
-            <td>
-                <label id="l6">Creator:</label>
-                <input type="text" name="creator" size="20" placeholder="first or last name" />
-            </td>
-            <td>
-                <label id="l7">State:</label>
-                <select name="state">
-                    <option value="" disabled selected>select one</option>
-                    <?php
-                    $allState = getDropDown('convention', 'state');
-                    //print_r($allState);
-                    foreach ($allState as $singleState) {
-                        echo "<option>" . $singleState['state'] . " </option>";
-                    }
-                    ?>
-                </select>
-            </td>
-            <td>
-                <label id="l8">Sort By:</label>
-                <select name="sortBy">
-                    <option value="" disabled selected>select one</option>
-                    <option value="conName">Name</option>
-                    <option value="creator">Creator</option>
-                    <option value="turnOut ASC">Turn Out: Low to High</option>
-                    <option value="turnOut DESC">Turn Out: High to Low</option>
-                </select>
-            </td>
-        </tr>
-    </table>
-</form>
+/**** BEGIN login modal *****/
+/* Full-width input fields */
+#ittAD,
+#itpAD {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
 
+/* Set a style for all buttons 
+.btnAD {
+  background-color: #4caf50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: 4px double black;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 15px;
+}
 
-<div class="wrapper form-display">
-    <form method="POST" name="conForm">
-        <table id="conInput">
-            <tr>
-                <td>
-                    Welcome <?= $_SESSION['name'] ?>
-                </td>
-                <td></td>
-                <td>
-                    <input type=" submit" value="Search" name="filterForm" class="btn" />
-                </td>
-                <td>
-                    <input type="submit" value="All Conventions" name="allIn" class="btn" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label id="l5">Name:</label>
-                    <input type="text" name="conName" size="20" placeholder="enter convention name here." />
-                </td>
-                <td>
-                    <label id="l6">Creator:</label>
-                    <input type="text" name="creator" size="20" placeholder="first or last name" />
-                </td>
-                <td>
-                    <label id="l7">State:</label>
-                    <select name="state">
-                        <option value="" disabled selected>select one</option>
-                        <?php
-                        $allState = getDropDown('convention', 'state');
-                        //print_r($allState);
-                        foreach ($allState as $singleState) {
-                            echo "<option>" . $singleState['state'] . " </option>";
-                        }
-                        ?>
-                    </select>
-                </td>
-                <td>
-                    <label id="l8">Sort By:</label>
-                    <select name="sortBy">
-                        <option value="" disabled selected>select one</option>
-                        <option value="conName">Name</option>
-                        <option value="creator">Creator</option>
-                        <option value="turnOut ASC">Turn Out: Low to High</option>
-                        <option value="turnOut DESC">Turn Out: High to Low</option>
-                    </select>
-                </td>
-            </tr>
-        </table>
-    </form>
-</div>
+.btnAD:hover {
+  opacity: 0.8;
+}
+*/ 
+
+/* Extra styles for the cancel button */
+#cancelbtnAD:active {
+  box-shadow: 8px 8px 5px #000;
+}
+
+/* Center the image and position the close button */
+#imgcontainerAD {
+  text-align: center;
+  margin: 24px 0 12px 0;
+  position: relative;
+}
+
+.containerAD {
+  padding: 16px;
+}
+
+/* The Modal (background) */
+.modalAD {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+  padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-contentAD {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto;
+  /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 25%;
+  /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button (x) */
+.closeAD {
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: #000;
+  /*font-size: 35px;*/
+  font-size: var(--bs-body-font-size);
+  font-weight: bold;
+}
+
+.closeAD:hover,
+.closeAD:focus {
+  color: red;
+  cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animateAD {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s;
+}
+
+@-webkit-keyframes animatezoom {
+  from {
+    -webkit-transform: scale(0);
+  }
+
+  to {
+    -webkit-transform: scale(1);
+  }
+}
+
+@keyframes animatezoom {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.pswAD {
+    display: block;
+    float: none;
+  }
+
+  .cancelbtnAD {
+    width: 100%;
+  }
+}
+
+/**** END login modal *****/
