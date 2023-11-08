@@ -195,7 +195,7 @@ if (isset($_SESSION["status"])) {
 
     <div class="col-auto">
       <!-- Button trigger modal -->
-      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#myModal">
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
         Admin Reports
       </button>
     </div>
@@ -236,14 +236,12 @@ if (isset($_SESSION["status"])) {
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
-  <div class="modal-dialog modal-sm">
-
-    <!-- Modal content-->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h3 class="modal-title">Admin Reports:</h3>
+        <h6 class="modal-title fs-5" id="myModalLabel">Admin Report</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <p>Average number of conventions per State:
@@ -258,12 +256,11 @@ if (isset($_SESSION["status"])) {
         <p>One or more upcoming conventions based on date:<br>
           <?php $groupCons = getNextCon();
           displayCon($groupCons); ?> </p>
-      </div>
+            </div>
       <div class="modal-footer">
-        <button type="button" class="btn" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
-
   </div>
 </div>
 
