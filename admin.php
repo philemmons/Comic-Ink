@@ -98,9 +98,6 @@ function displayConAdmin($convention)
 
     echo "<tr>";
     echo "<td>
-    <a href='https://" . $eachCon['website'] . "' target='_blank'>" . $eachCon['website'] . "</a>
-  </td>";
-    echo "<td>
     <a href='conUpdate.php?id=" . $eachCon['id'] . "'>
       <button type=\"button\" class=\"btn btn-sm\">
         <span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span> Update
@@ -121,6 +118,7 @@ function displayConAdmin($convention)
     echo "<td>" . $eachCon['city'] . "</td>";
     echo "<td>" . $eachCon['state'] . "</td>";
     echo "<td>" . $eachCon['country'] . "</td>";
+    echo "<td> <a href='https://" . $eachCon['website'] . "' target='_blank'>" . $eachCon['website'] . "</a> </td>";
     echo "</tr>";
   }
 }
