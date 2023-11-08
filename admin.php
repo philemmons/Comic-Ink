@@ -177,6 +177,7 @@ if (isset($_SESSION["status"])) {
   </h6>
   <br>
   <form method="POST" name="conForm" class="row gx-4 gy-3 align-items-center">
+
     <div class="col-auto">
       <div class="input-group">
         <div class="input-group-text">Name</div>
@@ -222,8 +223,8 @@ if (isset($_SESSION["status"])) {
     </thead>
     <tbody>
       <?php
-      if (isset($_POST['filterform'])) {
-        $filterCon = goSQLcon('convention');
+      if (isset($_POST['filterForm'])) {
+        $filterCon = goSQLcon("convention");
         displayConAdmin($filterCon);
       } else {
         $convention = getConData("convention");

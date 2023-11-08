@@ -52,6 +52,7 @@ if (isset($_SESSION["status"])) {
     </h6>
     <br>
     <form method="POST" name="conForm" class="row gx-4 gy-3 align-items-center">
+
         <div class="col-auto">
             <div class="input-group">
                 <div class="input-group-text">Name</div>
@@ -108,7 +109,7 @@ if (isset($_SESSION["status"])) {
         <div class="col-auto">
             <input type="submit" value="All Conventions" name="allIn" class="btn" />
         </div>
-        
+
     </form>
 </div>
 <br><br>
