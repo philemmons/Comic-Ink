@@ -198,7 +198,7 @@ if (isset($_SESSION["status"])) {
         Admin Reports
       </button>
     </div>
-    
+
   </form>
 </div>
 <br><br>
@@ -222,8 +222,13 @@ if (isset($_SESSION["status"])) {
     </thead>
     <tbody>
       <?php
-      $convention = getConData("convention");
-      displayConAdmin($convention);
+      if (isset($_POST['filterform'])) {
+        $filterCon = goSQLcon('convention');
+        displayConAdmin($filterCon);
+      } else {
+        $convention = getConData("convention");
+        displayConAdmin($convention);
+      }
       ?>
     </tbody>
   </table>
