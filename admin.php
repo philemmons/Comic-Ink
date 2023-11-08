@@ -90,9 +90,6 @@ function getNextCon()
                   ORDER BY result IS NULL , result ASC) AS t1 
             WHERE result > CURRENT_DATE() LIMIT ?';
           EXECUTE STMT USING @a;";
-
-  echo $sql;
-  die();
   $groupCons =  preExeFetNOPARA($sql);
   //print_r($groupCons);
   return $groupCons;
