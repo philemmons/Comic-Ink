@@ -93,8 +93,8 @@ function getNextCon()
   //var_dump($stmt);
   //echo "<br>";
   $stmt->execute();
-  //var_dump($stmt);
-  //echo "<br>";
+  var_dump($stmt);
+  echo "<br>";
   $stmt = $dbConn->prepare($sql2);
   $stmt->execute();
   $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
