@@ -15,32 +15,6 @@ if (isset($_POST['logout'])) {
     header("Location: index.php");
 }
 
-function dateDisplay($startDate, $endDate)
-{
-    $result = strcasecmp($startDate, $endDate);
-    if ($result == 0) {
-        return $startDate;
-    }
-    return $startDate . "-" . substr($endDate, strrpos($endDate, ' ') + 1);
-}
-
-function displayCon($convention)
-{
-    foreach ($convention as $eachCon) {
-        $newDate = dateDisplay($eachCon['start_date'], $eachCon['end_date']);
-
-        echo "<tr>";
-        echo "<td>" . $eachCon['conName'] . "</td>";
-        echo "<td>" . $newDate . "</td>";
-        echo "<td>" . $eachCon['year'] . "</td>";
-        echo "<td>" . $eachCon['event_location'] . "</td>";
-        echo "<td>" . $eachCon['city'] . "</td>";
-        echo "<td>" . $eachCon['state'] . "</td>";
-        echo "<td>" . $eachCon['country'] . "</td>";
-        echo "<td> <a href='https://" . $eachCon['website'] . "' target='_blank'>" . $eachCon['website'] . "</a></td>";
-        echo "</tr>";
-    }
-}
 ?>
 
 <!-- Collect the nav links, forms, and other content for toggling -->

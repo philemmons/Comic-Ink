@@ -1,4 +1,5 @@
 <?php
+
 include_once 'dbConnection.php';
 
 $dbConn = getDBConnection();
@@ -279,4 +280,35 @@ function addCon()
         //clear the value - prevent multiple insertions
         $nPara = array();
     } //eof if
+}
+
+
+/* convention.php and admin.php */
+function dateDisplay($startDate, $endDate)
+{
+    $result = strcasecmp($startDate, $endDate);
+    if ($result == 0) {
+        return $startDate;
+    }
+    return $startDate . "-" . substr($endDate, strrpos($endDate, ' ') + 1);
+}
+
+function displayCon($convention)
+{
+    foreach ($convention as $eachCon) {
+        $newDate = dateDisplay($eachCon['start_date'], $eachCon['end_date']);
+
+        echo "<tr>";
+        echo "<td>" . $eachCon['conName'] . "</td>";
+        echo "<td>" . $newDate . "</td>";
+        echo "<td>" . $eachCon['year'] . "</td>";
+        echo "<td>" . $eachCon['event_location'] . "</td>";
+        echo "<td>" . $eachCon['city'] . "</td>";
+        echo "<td>" . $eachCon['state'] . "</td>";
+        echo "<td>" . $eachCon['country'] . "</td>";
+        echo "<td>
+                <a href='https://" . $eachCon['website'] . "' target='_blank'>" . $eachCon['website'] . "</a>
+              </td>";
+        echo "</tr>";
+    }
 }
