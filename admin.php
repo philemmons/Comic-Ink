@@ -75,7 +75,6 @@ function getNextCon()
 {
   global $dbConn;
 
-
   $sql = "SET @a = (SELECT COUNT(result) AS c FROM
           (SELECT *
            FROM (SELECT id, STR_TO_DATE(CONCAT(start_date, \" \", year), \"%M %d %Y\") AS result 
@@ -91,8 +90,8 @@ function getNextCon()
             WHERE result > CURRENT_DATE() LIMIT ?';
           EXECUTE STMT USING @a;";
   $groupCons =  preExeFetNOPARA($sql);
-  //print_r($groupCons);
-  return $groupCons;
+  print_r($groupCons);
+ die();
 }
 
 /* convention display with update and delete buttons for each */
@@ -277,9 +276,6 @@ if (isset($_SESSION["status"])) {
           <tbody>
             <?php
             $groupCons = getNextCon();
-
-            var_dump($groupCons); die();
-            
             displayCon($groupCons);
             ?>
           </tbody>
