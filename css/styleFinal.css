@@ -98,7 +98,7 @@ td {
   text-align: center !important;
 }
 
-.btn {
+.btn, .btnAD  {
   border: 2px solid #000000;
   box-shadow: 10px 10px 3px rgba(101, 101, 101, 0.7);
   color: white;
@@ -108,7 +108,7 @@ td {
   text-decoration: none;
 }
 
-.btn:hover {
+.btn:hover, .btnAD:hover  {
   color: #fff;
   opacity: 0.8;
   background-image: linear-gradient(to bottom, #520000, #ff0000);
@@ -149,7 +149,7 @@ a {
   box-sizing: border-box;
 }
 
-/* Set a style for all buttons */
+/* Set a style for all buttons 
 .btnAD {
   background-color: #4caf50;
   color: white;
@@ -164,6 +164,7 @@ a {
 .btnAD:hover {
   opacity: 0.8;
 }
+*/ 
 
 /* Extra styles for the cancel button */
 #cancelbtnAD:active {

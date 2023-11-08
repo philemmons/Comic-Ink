@@ -78,7 +78,7 @@ if (isset($_SESSION["status"])) {
 
 
       <!--<button type="submit" class="btnAD" name="login" value="ok">Login</button> -->
-      <input type="submit" name="login" value="Login" class="btnAD btn-sm" />
+      <input type="submit" name="login" value="Login" class="btnAD btn" />
 
     </div>
 
