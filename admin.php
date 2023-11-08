@@ -50,7 +50,7 @@ function getConByState()
 function displayConByState($list)
 {
   foreach ($list as $item) {
-    echo $item['state'] . " " . $item['count( * )'] . ", ";
+    echo $item['state'] . " " . $item['c'] . "<br>";
   }
 }
 
