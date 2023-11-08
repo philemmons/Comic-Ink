@@ -173,25 +173,33 @@ if (isset($_SESSION["status"])) {
 </nav>
 
 <br>
-<div class="wrapper form-display row align-items-center">
+<div class="wrapper form-display">
   <h6>
     Welcome <?= $_SESSION['name'] ?>
   </h6>
   <br>
-  <div class="col-auto">
-    <a href="conInsert.php" class="btn btn-sm">Add New Con!</a>
-  </div>
+  <form method="POST" name="conForm" class="row gx-4 gy-3 align-items-center">
+    <div class="col-auto">
+      <div class="input-group">
+        <div class="input-group-text">Name</div>
+        <input type="text" name="conName" placeholder="Enter Convention Name" />
+      </div>
+    </div>
+    <div class="col-auto">
+      <a href="conInsert.php" class="btn btn-sm">Add New Con!</a>
+    </div>
 
-  <div class="col-auto">
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#myModal">
-      Admin Reports
-    </button>
-  </div>
+    <div class="col-auto">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#myModal">
+        Admin Reports
+      </button>
+    </div>
+  </form>
 </div>
 <br><br>
 <div class="wrapper form-display" style="overflow: auto;">
-    <table class="table table-sm table-striped table-hover display nowrap" id="adminDisplay" style="width:100%;">
+  <table class="table table-sm table-striped table-hover display nowrap" id="adminDisplay" style="width:100%;">
     <caption>Admin Conventions</caption>
     <!--https://www.w3schools.com/bootstrap/bootstrap_tables.asp-->
     <thead class='table-dark'>
@@ -228,10 +236,14 @@ if (isset($_SESSION["status"])) {
         <h3 class="modal-title">Admin Reports:</h3>
       </div>
       <div class="modal-body">
-        <p>Average number of conventions per State: <?php $num = getConAvg(); displayConAvg($num); ?></p>
-        <p>Number of convention per State with more than four: <?php $list = getConByState(); displayConByState($list); ?></p>
-        <p>Total conventions: <?php $cnt = getConTot(); displayConTot($cnt); ?> </p>
-        <p>One or more upcoming conventions based on date:<br> <?php $groupCons = getNextCon(); displayCon($groupCons); ?> </p>
+        <p>Average number of conventions per State: <?php $num = getConAvg();
+                                                    displayConAvg($num); ?></p>
+        <p>Number of convention per State with more than four: <?php $list = getConByState();
+                                                                displayConByState($list); ?></p>
+        <p>Total conventions: <?php $cnt = getConTot();
+                              displayConTot($cnt); ?> </p>
+        <p>One or more upcoming conventions based on date:<br> <?php $groupCons = getNextCon();
+                                                                displayCon($groupCons); ?> </p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn" data-dismiss="modal">Close</button>
@@ -246,7 +258,7 @@ if (isset($_SESSION["status"])) {
 
 <script>
   //https://datatables.net/reference/option
-  new DataTable('#adminDisplay',{
+  new DataTable('#adminDisplay', {
     lengthMenu: [8, 16],
     searching: false,
     ordering: false,
