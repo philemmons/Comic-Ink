@@ -128,10 +128,6 @@ td {
   padding-top: 25px;
 }
 
-a {
-  text-transform: lowercase;
-}
-
 .wrapper {
   width: 65%;
   margin: auto;
