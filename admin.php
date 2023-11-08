@@ -74,19 +74,25 @@ function displayConTot($tot)
 function getNextCon()
 {
   global $dbConn;
-  $sqlPart1 = "SELECT *
-                FROM (SELECT id, STR_TO_DATE(CONCAT(start_date, ' ', year), '%M %d %Y') AS result 
-                      FROM convention
-                      ORDER BY result IS NULL , result ASC) AS t1
-                WHERE result > CURRENT_DATE()";
 
-  $sql = "SET @a = (SELECT COUNT(result) AS c FROM (" . $sqlPart1 . " ) as t2
-          GROUP BY result ORDER BY result asc limit 1);
+
+  $sql = "SET @a = (SELECT COUNT(result) AS c FROM
+          (SELECT *
+           FROM (SELECT id, STR_TO_DATE(CONCAT(start_date, \" \", year), \"%M %d %Y\") AS result 
+                 FROM convention
+                 ORDER BY result IS NULL , result ASC) AS t1
+           WHERE result > CURRENT_DATE() ) as t2
+           GROUP BY result ORDER BY result asc limit 1);
           PREPARE STMT FROM 
-          '" . $sqlPart1 . " LIMIT ?';
+          \'SELECT * 
+            FROM (SELECT *, STR_TO_DATE(CONCAT(start_date, \" \", year), \"%M %d %Y\") AS result
+                  FROM convention 
+                  ORDER BY result IS NULL , result ASC) AS t1 
+            WHERE result > CURRENT_DATE() LIMIT ?\';
           EXECUTE STMT USING @a;";
 
-          echo $sql; die();
+  echo $sql;
+  die();
   $groupCons =  preExeFetNOPARA($sql);
   //print_r($groupCons);
   return $groupCons;
