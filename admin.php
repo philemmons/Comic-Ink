@@ -75,28 +75,26 @@ function getNextCon()
 {
   global $dbConn;
 
-  $sql1 = "SET @q = (SELECT COUNT(result) AS c FROM
+  $nPara[':dSet'] = "SELECT COUNT(result) AS c FROM
           (SELECT *
            FROM (SELECT id, STR_TO_DATE(CONCAT(start_date, ' ', year), '%M %d %Y') AS result 
                  FROM convention
                  ORDER BY result IS NULL , result ASC) AS t1
            WHERE result > CURRENT_DATE() ) as t2
-           GROUP BY result ORDER BY result asc limit 1);";
+           GROUP BY result ORDER BY result asc limit 1";
 
-  $sql2 = "SELECT * 
+  $sql = "SELECT * 
             FROM (SELECT *, STR_TO_DATE(CONCAT(start_date, ' ', year), '%M %d %Y') AS result
                   FROM convention 
                   ORDER BY result IS NULL , result ASC) AS t1 
-            WHERE result > CURRENT_DATE() LIMIT @q";
+            WHERE result > CURRENT_DATE() LIMIT (:dSet)";
 
-  $stmt = $dbConn->prepare($sql1);
-  //var_dump($stmt);
-  //echo "<br>";
-  $stmt->execute();
+  $stmt = $dbConn->prepare($sql);
   var_dump($stmt);
   echo "<br>";
-  $stmt = $dbConn->prepare($sql2);
-  $stmt->execute();
+  $stmt->execute($nPara);
+  var_dump($stmt);
+  echo "<br>";
   $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
   var_dump($records);
   echo "<br>";
