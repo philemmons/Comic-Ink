@@ -277,6 +277,9 @@ if (isset($_SESSION["status"])) {
           <tbody>
             <?php
             $groupCons = getNextCon();
+
+            var_dump($groupCons); die();
+            
             displayCon($groupCons);
             ?>
           </tbody>
