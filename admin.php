@@ -247,16 +247,36 @@ if (isset($_SESSION["status"])) {
         <p>Average number of conventions per State:
           <?php $num = getConAvg();
           displayConAvg($num); ?></p>
-        <p>Number of convention per State with more than four:
+        <p>Number of convention per State with more than four:<br>
           <?php $list = getConByState();
           displayConByState($list); ?></p>
         <p>Total conventions:
           <?php $cnt = getConTot();
           displayConTot($cnt); ?> </p>
-        <p>One or more upcoming conventions based on date:<br>
-          <?php $groupCons = getNextCon();
-          displayCon($groupCons); ?> </p>
-            </div>
+        <p>One or more upcoming conventions based on date:</p>
+
+        <table class="table table-sm table-striped table-hover display nowrap" id="summaryDisplay" style="width:100%;">
+          <caption>Admin Upcoming Convention Summary</caption>
+          <thead class='table-dark'>
+            <tr>
+              <th>Name</th>
+              <th>Date</th>
+              <th>Year</th>
+              <th>Location</th>
+              <th>City</th>
+              <th>State</th>
+              <th>Country</th>
+              <th>Official</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php
+            $groupCons = getNextCon();
+            displayCon($groupCons);
+            ?>
+          </tbody>
+        </table>
+      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
@@ -271,6 +291,12 @@ if (isset($_SESSION["status"])) {
   //https://datatables.net/reference/option
   new DataTable('#adminDisplay', {
     lengthMenu: [8, 16],
+    searching: false,
+    ordering: false,
+    responsive: true,
+    pagingType: 'simple'
+  });
+  new DataTable('#summaryDisplay', {
     searching: false,
     ordering: false,
     responsive: true,
