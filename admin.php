@@ -97,6 +97,23 @@ function displayConAdmin($convention)
     $newDate = dateDisplay($eachCon['start_date'], $eachCon['end_date']);
 
     echo "<tr>";
+    echo "<td>
+    <a href='https://" . $eachCon['website'] . "' target='_blank'>" . $eachCon['website'] . "</a>
+  </td>";
+    echo "<td>
+    <a href='conUpdate.php?id=" . $eachCon['id'] . "'>
+      <button type=\"button\" class=\"btn btn-sm\">
+        <span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span> Update
+      </button>
+    </a>";
+    echo "</td>";
+    echo "<td>
+    <a href='deleteCon.php?id=" . $eachCon['id'] . "' onclick= 'return confirmDelete(\"" . $eachCon['conName'] . "\")' >
+      <button type=\"button\" class=\"btn btn-sm\">
+        <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span> Delete
+      </button>
+    </a>";
+    echo "</td>";
     echo "<td>" . $eachCon['conName'] . "</td>";
     echo "<td>" . $newDate . "</td>";
     echo "<td>" . $eachCon['year'] . "</td>";
@@ -104,23 +121,6 @@ function displayConAdmin($convention)
     echo "<td>" . $eachCon['city'] . "</td>";
     echo "<td>" . $eachCon['state'] . "</td>";
     echo "<td>" . $eachCon['country'] . "</td>";
-    echo "<td>
-            <a href='https://" . $eachCon['website'] . "' target='_blank'>" . $eachCon['website'] . "</a>
-          </td>";
-    echo "<td>
-            <a href='conUpdate.php?id=" . $eachCon['id'] . "'>
-              <button type=\"button\" class=\"btn btn-sm\">
-                <span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span> Update
-              </button>
-            </a>";
-    echo "</td>";
-    echo "<td>
-            <a href='deleteCon.php?id=" . $eachCon['id'] . "' onclick= 'return confirmDelete(\"" . $eachCon['conName'] . "\")' >
-              <button type=\"button\" class=\"btn btn-sm\">
-                <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span> Delete
-              </button>
-            </a>";
-    echo "</td>";
     echo "</tr>";
   }
 }
@@ -204,6 +204,8 @@ if (isset($_SESSION["status"])) {
     <!--https://www.w3schools.com/bootstrap/bootstrap_tables.asp-->
     <thead class='table-dark'>
       <tr>
+        <th>Alter</th>
+        <th>Remove</th>
         <th>Name</th>
         <th>Date</th>
         <th>Year</th>
@@ -212,8 +214,6 @@ if (isset($_SESSION["status"])) {
         <th>State</th>
         <th>Country</th>
         <th>Official</th>
-        <th>Alter</th>
-        <th>Remove</th>
       </tr>
     </thead>
     <tbody>
@@ -236,14 +236,18 @@ if (isset($_SESSION["status"])) {
         <h3 class="modal-title">Admin Reports:</h3>
       </div>
       <div class="modal-body">
-        <p>Average number of conventions per State: <?php $num = getConAvg();
-                                                    displayConAvg($num); ?></p>
-        <p>Number of convention per State with more than four: <?php $list = getConByState();
-                                                                displayConByState($list); ?></p>
-        <p>Total conventions: <?php $cnt = getConTot();
-                              displayConTot($cnt); ?> </p>
-        <p>One or more upcoming conventions based on date:<br> <?php $groupCons = getNextCon();
-                                                                displayCon($groupCons); ?> </p>
+        <p>Average number of conventions per State:
+          <?php $num = getConAvg();
+          displayConAvg($num); ?></p>
+        <p>Number of convention per State with more than four:
+          <?php $list = getConByState();
+          displayConByState($list); ?></p>
+        <p>Total conventions:
+          <?php $cnt = getConTot();
+          displayConTot($cnt); ?> </p>
+        <p>One or more upcoming conventions based on date:<br>
+          <?php $groupCons = getNextCon();
+          displayCon($groupCons); ?> </p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn" data-dismiss="modal">Close</button>
