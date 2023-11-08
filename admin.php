@@ -71,7 +71,38 @@ function displayConTot($tot)
 }
 
 /* list of the upcoming conventions based on date, one or more */
+function getNextCon()
+{
+  global $dbConn;
 
+  $sql1 = "SET @q = (SELECT COUNT(result) AS c FROM
+          (SELECT *
+           FROM (SELECT id, STR_TO_DATE(CONCAT(start_date, ' ', year), '%M %d %Y') AS result 
+                 FROM convention
+                 ORDER BY result IS NULL , result ASC) AS t1
+           WHERE result > CURRENT_DATE() ) as t2
+           GROUP BY result ORDER BY result asc limit 1);";
+
+  $sql2 = "SELECT * 
+            FROM (SELECT *, STR_TO_DATE(CONCAT(start_date, ' ', year), '%M %d %Y') AS result
+                  FROM convention 
+                  ORDER BY result IS NULL , result ASC) AS t1 
+            WHERE result > CURRENT_DATE() LIMIT @q";
+
+  $stmt = $dbConn->prepare($sql1);
+  //var_dump($stmt);
+  //echo "<br>";
+  $stmt->execute();
+  //var_dump($stmt);
+  //echo "<br>";
+  $stmt = $dbConn->prepare($sql2);
+  $stmt->execute();
+  $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  var_dump($records);
+  echo "<br>";
+  die();
+  return $records;
+}
 
 /* convention display with update and delete buttons for each */
 function displayConAdmin($convention)
