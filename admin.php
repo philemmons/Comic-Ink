@@ -100,14 +100,14 @@ function displayConAdmin($convention)
     echo "<td>" . $eachCon['conName'] . "</td>";
     echo "<td>
     <a href='conUpdate.php?id=" . $eachCon['id'] . "'>
-      <button type=\"button\" class=\"btn btn-sm\">
+      <button type=\"button\" class=\"btn\">
         <span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span> Update
       </button>
     </a>";
     echo "</td>";
     echo "<td>
     <a href='deleteCon.php?id=" . $eachCon['id'] . "' onclick= 'return confirmDelete(\"" . $eachCon['conName'] . "\")' >
-      <button type=\"button\" class=\"btn btn-sm\">
+      <button type=\"button\" class=\"btn\">
         <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span> Delete
       </button>
     </a>";
@@ -189,12 +189,12 @@ if (isset($_SESSION["status"])) {
     </div>
 
     <div class="col-auto">
-      <a href="conInsert.php" class="btn btn-sm">Add New Con!</a>
+      <a href="conInsert.php" class="btn">Add New Con!</a>
     </div>
 
     <div class="col-auto">
       <!-- Button trigger modal -->
-      <button type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#myModal">
+      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#myModal">
         Admin Reports
       </button>
     </div>
