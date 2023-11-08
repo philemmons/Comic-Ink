@@ -108,6 +108,7 @@ if (isset($_SESSION["status"])) {
         <div class="col-auto">
             <input type="submit" value="All Conventions" name="allIn" class="btn" />
         </div>
+        
     </form>
 </div>
 <br><br>

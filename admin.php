@@ -183,6 +183,11 @@ if (isset($_SESSION["status"])) {
         <input type="text" name="conName" placeholder="Enter Convention Name" />
       </div>
     </div>
+
+    <div class="col-auto">
+      <input type="submit" value="Search" name="filterForm" class="btn" />
+    </div>
+
     <div class="col-auto">
       <a href="conInsert.php" class="btn btn-sm">Add New Con!</a>
     </div>
@@ -193,6 +198,7 @@ if (isset($_SESSION["status"])) {
         Admin Reports
       </button>
     </div>
+    
   </form>
 </div>
 <br><br>
