@@ -49,8 +49,8 @@ if (isset($_POST['submit'])) {  //admin has submitted the "update user" form
 
 } //eof if
 
-if (isset($_POST['id'])) {
-  $conInfo = getConInfo($_POST['id']);
+if (isset($_GET['id'])) {
+  $conInfo = getConInfo($_GET['id']);
 }
 
 ?>
