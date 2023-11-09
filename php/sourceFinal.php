@@ -236,17 +236,18 @@ function goMain()
 }
 
 //conInsert.php and conUpdate.php
-function getConInfo($con_id)
+function getConInfo($conID)
 {
     global $dbConn, $nPara;
 
-    $nPara[':dConId'] = $con_id;
-    $sql = "SELECT * FROM convention WHERE con_id = :dConId ";
+    $nPara[':dConId'] = $conID;
+    $sql = "SELECT * FROM convention WHERE id = :dConId ";
     $stmt = $dbConn->prepare($sql);
     $stmt->execute();
     $record = $stmt->fetch(PDO::FETCH_ASSOC);
     return $record;
 }
+
 //conInsert.php
 function addCon()
 {

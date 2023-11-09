@@ -100,8 +100,8 @@ if (isset($_SESSION["status"])) {
 </div><!-- /.navbar-collapse -->
 </div><!-- /.container-fluid -->
 </nav>
-<br>
 
+<br>
 <div class="wrapper form-display">
     <h6>
         Welcome <?= $_SESSION['name'] ?>
