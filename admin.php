@@ -213,7 +213,7 @@ if (isset($_SESSION["status"])) {
 
     <div class="col-auto">
       <!-- Button trigger modal -->
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#myModal">
         Admin Reports
       </button>
     </div>
