@@ -95,7 +95,11 @@ function getNextCon()
   $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
   var_dump($records);
   echo "<br>";
-  echo $records[1];
+  print_r($records);
+  echo "<br>";
+  foreach ($records as $item) {
+    echo $item['c'];
+  }
   die();
   return $records;
 }
