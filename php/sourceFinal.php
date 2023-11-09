@@ -240,11 +240,11 @@ function getConInfo($conID)
 {
     global $dbConn, $nPara;
     echo $conID. "<br>";
-    
+
     $nPara[':dConId'] = $conID;
     $sql = "SELECT * FROM convention WHERE id = :dConId ";
     $stmt = $dbConn->prepare($sql);
-    $stmt->execute();
+    $stmt->execute($nPara);
     $record = $stmt->fetch(PDO::FETCH_ASSOC);
     return $record;
 }
