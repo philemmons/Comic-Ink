@@ -92,7 +92,7 @@ function getNextCon()
   $stmt = $dbConn->prepare($sql);
   $stmt->execute();
   $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
-  
+
   foreach ($records as $item) {
     $limit =  $item['c'];
   }
@@ -255,12 +255,13 @@ if (isset($_SESSION["status"])) {
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
         <h6 class="modal-title fs-5" id="myModalLabel">Admin Report</h6>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+
       <div class="modal-body">
         <p>Average number of conventions per State:
           <?php $num = getConAvg();
@@ -295,9 +296,11 @@ if (isset($_SESSION["status"])) {
           </tbody>
         </table>
       </div>
+
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
+      
     </div>
   </div>
 </div>
@@ -315,6 +318,7 @@ if (isset($_SESSION["status"])) {
     pagingType: 'simple'
   });
   new DataTable('#summaryDisplay', {
+    lengthMenu: [5, 10],
     searching: false,
     ordering: false,
     responsive: true,
