@@ -64,10 +64,6 @@ if (isset($_SESSION["status"])) {
 <div id="id01" class="modalAD">
 
   <form method="POST" class="modal-contentAD animateAD" name="loginForm">
-    <div class="imgcontainerAD">
-      <span onclick="document.getElementById('id01').style.display='none'" class="closeAD" title="Close Modal">&times;</span>
-
-    </div>
 
     <div class="containerAD">
       <label><b>Username</b></label>
@@ -76,10 +72,7 @@ if (isset($_SESSION["status"])) {
       <label><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="formPW" required id="itpAD">
 
-
-      <!--<button type="submit" class="btnAD" name="login" value="ok">Login</button> -->
       <input type="submit" name="login" value="Login" class="btnAD btn" style="width: 100%;"/>
-
     </div>
 
     <div class="containerAD" style="background-color:#f1f1f1">
@@ -93,7 +86,6 @@ if (isset($_SESSION["status"])) {
 <script>
   // Get the modal
   var modal = document.getElementById('id01');
-
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
     if (event.target == modal) {

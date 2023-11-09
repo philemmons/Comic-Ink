@@ -215,31 +215,17 @@ footer {
 
 /* Set a style for all buttons */
 .btnAD {
-  background-color: #4caf50;
-  color: white;
-  padding: 14px 20px;
   margin: 8px 0;
-  border: 4px double black;
-  cursor: pointer;
   width: 100%;
-  border-radius: 15px;
 }
 
 .btnAD:hover {
   opacity: 0.8;
 }
 
-
 /* Extra styles for the cancel button */
 #cancelbtnAD:active {
   box-shadow: 8px 8px 5px #000;
-}
-
-/* Center the image and position the close button */
-#imgcontainerAD {
-  text-align: center;
-  margin: 24px 0 12px 0;
-  position: relative;
 }
 
 .containerAD {
@@ -273,27 +259,8 @@ footer {
 .modal-contentAD {
   background-color: #fefefe;
   margin: 5% auto 15% auto;
-  /* 5% from the top, 15% from the bottom and centered */
-  border: 1px solid #888;
+  border: 2px solid #555;
   width: 25%;
-  /* Could be more or less, depending on screen size */
-}
-
-/* The Close Button (x) */
-.closeAD {
-  position: absolute;
-  right: 25px;
-  top: 0;
-  color: #000;
-  /*font-size: 35px;*/
-  font-size: var(--bs-body-font-size);
-  font-weight: bold;
-}
-
-.closeAD:hover,
-.closeAD:focus {
-  color: red;
-  cursor: pointer;
 }
 
 /* Add Zoom Animation */
