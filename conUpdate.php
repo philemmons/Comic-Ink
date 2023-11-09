@@ -16,7 +16,7 @@ if (isset($_POST['logout'])) {
 }
 //NOTE: the next 3 sections of code sequence matters for the updated output
 
-if (isset($_GET['submit'])) {  //admin has submitted the "update user" form
+if (isset($_POST['submit'])) {  //admin has submitted the "update user" form
   $sql = "UPDATE convention
           SET conName = :conName,
               start_date = :start_date,
@@ -27,20 +27,20 @@ if (isset($_GET['submit'])) {  //admin has submitted the "update user" form
               state = :state,
               country =:country,
               website = :website   
-            WHERE con_id = :con_id";
+            WHERE id = :con_id";
 
   $np = array();
 
-  $np[':con_id'] = htmlspecialchars($_GET['conID'], ENT_QUOTES);
-  $np[':conName']  = htmlspecialchars($_GET['conName'], ENT_QUOTES);
-  $np[':start_date'] = htmlspecialchars($_GET['start_date'], ENT_QUOTES);
-  $np[':end_date'] = htmlspecialchars($_GET['end_date'], ENT_QUOTES);
-  $np[':year'] = htmlspecialchars($_GET['year'], ENT_QUOTES);
-  $np[':event_location'] = htmlspecialchars($_GET['event_location'], ENT_QUOTES);
-  $np[':city'] = htmlspecialchars($_GET['city'], ENT_QUOTES);
-  $np[':state'] = htmlspecialchars($_GET['state'], ENT_QUOTES);
-  $np[':country'] = htmlspecialchars($_GET['country'], ENT_QUOTES);
-  $np[':website'] = htmlspecialchars($_GET['website'], ENT_QUOTES);
+  $np[':con_id'] = htmlspecialchars($_POST['conID'], ENT_QUOTES);
+  $np[':conName']  = htmlspecialchars($_POST['conName'], ENT_QUOTES);
+  $np[':start_date'] = htmlspecialchars($_POST['start_date'], ENT_QUOTES);
+  $np[':end_date'] = htmlspecialchars($_POST['end_date'], ENT_QUOTES);
+  $np[':year'] = htmlspecialchars($_POST['year'], ENT_QUOTES);
+  $np[':event_location'] = htmlspecialchars($_POST['event_location'], ENT_QUOTES);
+  $np[':city'] = htmlspecialchars($_POST['city'], ENT_QUOTES);
+  $np[':state'] = htmlspecialchars($_POST['state'], ENT_QUOTES);
+  $np[':country'] = htmlspecialchars($_POST['country'], ENT_QUOTES);
+  $np[':website'] = htmlspecialchars($_POST['website'], ENT_QUOTES);
 
   $stmt = $dbConn->prepare($sql);
   $stmt->execute($np);
@@ -49,8 +49,8 @@ if (isset($_GET['submit'])) {  //admin has submitted the "update user" form
 
 } //eof if
 
-if (isset($_GET['id'])) {
-  $conInfo = getConInfo($_GET['id']);
+if (isset($_POST['id'])) {
+  $conInfo = getConInfo($_POST['id']);
 }
 
 ?>
@@ -105,7 +105,7 @@ if (isset($_SESSION["status"])) {
     Welcome <?= $_SESSION['name'] ?> - Update Convention Info
   </h6>
   <br>
-  <form class='row gx-4 gy-3 align-items-center' onsubmit="return validateUpdate()">
+  <form method='post' class='row gx-4 gy-3 align-items-center' onsubmit="return validateUpdate()">
 
     <div class="col-md-2">
       <div class="form-floating">
