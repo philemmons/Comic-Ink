@@ -78,7 +78,7 @@ function getNextCon()
 
 
   $sql = "SELECT COUNT(result) AS c 
-  FROM 
+   FROM 
     (SELECT * FROM 
       (SELECT id, STR_TO_DATE(CONCAT(start_date, ' ', year), '%M %d %Y') AS result 
           FROM convention 
@@ -93,7 +93,7 @@ function getNextCon()
   var_dump($stmt);
   echo "<br>";
   $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
-  var_dump($records);
+  //var_dump($records);
   echo "<br>";
   print_r($records);
   echo "<br>";
