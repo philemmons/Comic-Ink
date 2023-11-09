@@ -77,14 +77,17 @@ function getNextCon()
 
 
 
-  $sql = "SELECT COUNT(result) AS c 
-   FROM 
-    (SELECT * FROM 
-      (SELECT id, STR_TO_DATE(CONCAT(start_date, ' ', year), '%M %d %Y') AS result 
-          FROM convention 
-          ORDER BY result IS NULL , result ASC) AS t1 
-          WHERE result > CURRENT_DATE() ) as t2 
-    GROUP BY result ORDER BY result asc limit 1";
+  $sql = "SELECT COUNT(*) as c
+          FROM
+              (SELECT 
+                  id, STR_TO_DATE(CONCAT(start_date, ' ', year), '%M %d %Y') AS result
+              FROM convention
+              ORDER BY result IS NULL , result ASC) AS t1
+          WHERE
+              result > CURRENT_DATE()
+          GROUP BY result
+          ORDER BY result ASC
+          limit 1";
 
   $stmt = $dbConn->prepare($sql);
   var_dump($stmt);
