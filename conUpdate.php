@@ -31,7 +31,8 @@ if (isset($_POST['submitUpdate'])) {  //admin has submitted the "update user" fo
 
   $np = array();
 
-echo $_POST['conID']."<br>";die();
+echo $_POST['conID'];
+die();
 
   $np[':con_id'] = htmlspecialchars($_POST['conID'], ENT_QUOTES);
   $np[':conName']  = htmlspecialchars($_POST['conName'], ENT_QUOTES);
