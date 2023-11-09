@@ -116,7 +116,7 @@ if (isset($_SESSION["status"])) {
 
     <div class="col-md-2">
       <div class="form-floating">
-        <input type="int" class="form-control" id="conID" placeholder="Default - auto incremented" name="conID" value="<?= $conInfo['id'] ?>" disabled />
+        <input type="text" class="form-control" id="conID" placeholder="Default - auto incremented" name="conID" value="<?= $conInfo['id'] ?>" disabled />
         <label for="conID">ConID</label>
         <span id="conIDError"></span>
       </div>
