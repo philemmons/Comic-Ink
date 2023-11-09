@@ -29,24 +29,20 @@ if (isset($_POST['submitUpdate'])) {  //admin has submitted the "update user" fo
               website = :website   
           WHERE id = :con_id";
 
-  $np = array();
 
-echo $_POST['conID'];
-die();
-
-  $np[':con_id'] = htmlspecialchars($_POST['conID'], ENT_QUOTES);
-  $np[':conName']  = htmlspecialchars($_POST['conName'], ENT_QUOTES);
-  $np[':start_date'] = htmlspecialchars($_POST['start_date'], ENT_QUOTES);
-  $np[':end_date'] = htmlspecialchars($_POST['end_date'], ENT_QUOTES);
-  $np[':year'] = htmlspecialchars($_POST['year'], ENT_QUOTES);
-  $np[':event_location'] = htmlspecialchars($_POST['event_location'], ENT_QUOTES);
-  $np[':city'] = htmlspecialchars($_POST['city'], ENT_QUOTES);
-  $np[':state'] = htmlspecialchars($_POST['state'], ENT_QUOTES);
-  $np[':country'] = htmlspecialchars($_POST['country'], ENT_QUOTES);
-  $np[':website'] = htmlspecialchars($_POST['website'], ENT_QUOTES);
+  $nPara[':con_id'] = htmlspecialchars($_GET['id'], ENT_QUOTES);
+  $nPara[':conName']  = htmlspecialchars($_POST['conName'], ENT_QUOTES);
+  $nPara[':start_date'] = htmlspecialchars($_POST['start_date'], ENT_QUOTES);
+  $nPara[':end_date'] = htmlspecialchars($_POST['end_date'], ENT_QUOTES);
+  $nPara[':year'] = htmlspecialchars($_POST['year'], ENT_QUOTES);
+  $nPara[':event_location'] = htmlspecialchars($_POST['event_location'], ENT_QUOTES);
+  $nPara[':city'] = htmlspecialchars($_POST['city'], ENT_QUOTES);
+  $nPara[':state'] = htmlspecialchars($_POST['state'], ENT_QUOTES);
+  $nPara[':country'] = htmlspecialchars($_POST['country'], ENT_QUOTES);
+  $nPara[':website'] = htmlspecialchars($_POST['website'], ENT_QUOTES);
 
   $stmt = $dbConn->prepare($sql);
-  $stmt->execute($np);
+  $stmt->execute($nPara);
 
   sleep(2); // pause the modal
 
@@ -54,9 +50,6 @@ die();
 
 if (isset($_GET['id'])) {
   $conInfo = getConInfo($_GET['id']);
-  //echo gettype($conInfo)."<br>";
-  //var_dump($conInfo);
-  //die();
 }
 
 ?>
@@ -111,11 +104,11 @@ if (isset($_SESSION["status"])) {
     Welcome <?= $_SESSION['name'] ?> - Update Convention Info
   </h6>
   <br>
-  <form method='POST' name= "updateConForm" class='row gx-4 gy-3 align-items-center' action="">
+  <form method='POST' name= "updateConForm" class='row gx-4 gy-3 align-items-center' onsubmit='validateUpdate()';>
 
     <div class="col-md-2">
       <div class="form-floating">
-        <input type="text" class="form-control" id="conID" placeholder="Default - auto incremented" name="conID" value="<?= $conInfo['id'] ?>" />
+        <input type="text" class="form-control" id="conID" placeholder="Default - auto incremented" name="conID" value="<?= $conInfo['id'] ?>" disabled/>
         <label for="conID">ConID</label>
         <span id="conIDError"></span>
       </div>
