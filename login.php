@@ -60,7 +60,7 @@ if (isset($_SESSION["status"])) {
   <br><br>
   <div id='wrapper-robot'>
     <div class='title'>
-      <img src="img/robot.png" alt="robot with a gold key" />
+      <img src="img/robot.png" alt="Small robot typing on a small laptop at a desk." />
     </div>
   </div>
 </div>
