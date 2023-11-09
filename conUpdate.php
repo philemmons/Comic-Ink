@@ -49,6 +49,7 @@ if (isset($_POST['submitUpdate'])) {  //admin has submitted the "update user" fo
 } //eof if
 
 if (isset($_GET['id'])) {
+  echo $_GET['id']; die();
   $conInfo = getConInfo($_GET['id']);
 }
 
