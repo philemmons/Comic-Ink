@@ -239,7 +239,7 @@ function goMain()
 function getConInfo($conID)
 {
     global $dbConn, $nPara;
-
+ec
     $nPara[':dConId'] = $conID;
     $sql = "SELECT * FROM convention WHERE id = :dConId ";
     $stmt = $dbConn->prepare($sql);
