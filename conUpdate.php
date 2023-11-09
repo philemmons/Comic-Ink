@@ -53,11 +53,9 @@ echo $_POST['conID']."<br>";die();
 
 if (isset($_GET['id'])) {
   $conInfo = getConInfo($_GET['id']);
-
-
-  echo gettype($conInfo)."<br>";
-  var_dump($conInfo);
-die();
+  //echo gettype($conInfo)."<br>";
+  //var_dump($conInfo);
+  //die();
 }
 
 ?>
