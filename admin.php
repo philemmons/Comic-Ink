@@ -90,20 +90,21 @@ function getNextCon()
           limit 1";
 
   $stmt = $dbConn->prepare($sql);
-  var_dump($stmt);
-  echo "<br>";
   $stmt->execute();
-  var_dump($stmt);
-  echo "<br>";
   $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
-  //var_dump($records);
-  echo "<br>";
-  print_r($records);
-  echo "<br>";
+  
   foreach ($records as $item) {
-    echo $item['c'];
+    $limit =  $item['c'];
   }
-  die();
+
+  $sql = "SELECT *, STR_TO_DATE(CONCAT(start_date, ' ', year), '%M %d %Y') AS r
+          FROM convention 
+          WHERE STR_TO_DATE(CONCAT(start_date, ' ', year), '%M %d %Y') > CURRENT_DATE() 
+          ORDER BY r IS NULL , r ASC limit ". $limit;
+  $stmt = $dbConn->prepare($sql);
+  $stmt->execute();
+  $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
   return $records;
 }
 
