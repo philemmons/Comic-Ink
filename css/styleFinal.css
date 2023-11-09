@@ -310,3 +310,8 @@ footer {
 }
 
 /**** END login modal *****/
+
+/**** CON UPDATE FORM *****/
+.form-floating > label{
+  font-size: 1.5em !important;
+}
