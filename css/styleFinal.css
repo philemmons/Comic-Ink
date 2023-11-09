@@ -113,6 +113,7 @@ td {
   opacity: 0.8;
   background-image: linear-gradient(to bottom, #520000, #ff0000);
   text-decoration: none;
+  background-color:transparent !important; 
 }
 
 .btn:active {
