@@ -39,7 +39,7 @@ if (isset($_POST['submitUpdate'])) {  //admin has submitted the "update user" fo
   $nPara[':city'] = htmlspecialchars($_POST['city'], ENT_QUOTES);
   $nPara[':state'] = htmlspecialchars($_POST['state'], ENT_QUOTES);
   $nPara[':country'] = htmlspecialchars($_POST['country'], ENT_QUOTES);
-  $nPara[':website'] = htmlspecialchars($_POST['website'], ENT_QUOTES);
+  $nPara[':website'] = htmlspecialchars(preg_replace("(^https?://)", "",$_POST['website']), ENT_QUOTES);
 
   $stmt = $dbConn->prepare($sql);
   $stmt->execute($nPara);
@@ -125,7 +125,7 @@ if (isset($_SESSION["status"])) {
     <div class="col-md-4">
       <div class="form-floating">
         <input type="text" class="form-control" id="start_date" name="start_date" value="<?= $conInfo['start_date'] ?>" />
-        <label for="start_date">Start Date</label>
+        <label for="start_date">Start Date(Month and Day only)</label>
         <span id="start_dateError"></span>
       </div>
     </div>
@@ -133,7 +133,7 @@ if (isset($_SESSION["status"])) {
     <div class="col-md-4">
       <div class="form-floating">
         <input type="text" class="form-control" id="end_date" name="end_date" value="<?= $conInfo['end_date'] ?>" />
-        <label for="end_date">End Date</label>
+        <label for="end_date">End Date(Month and Day only)</label>
         <span id="end_dateError"></span>
       </div>
     </div>

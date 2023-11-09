@@ -1,96 +1,108 @@
 // JavaScript File -- careful !!!!  examine url for '?''
 
 function lettersOnly(cs) {
-    var valid = true;
-    var str = $(cs).val();
+  let valid = true;
+  let str = $(cs).val();
 
-    $(cs + "Error").html("");
-    if (/[0-9]+/g.test(str)) {
-        displayError(cs, "Letters Only.");
-        valid = false;
-    } else
-        $(cs).css("backgroundColor", "");
-    return valid;
+  $(cs + "Error").html("");
+  if (/[0-9]+/g.test(str)) {
+    displayError(cs, "Letters Only.");
+    valid = false;
+  } else $(cs).css("backgroundColor", "");
+  return valid;
 }
 
 function notBlank(field) {
-    var valid = true;
-    var str = $(field).val();
+  let valid = true;
+  let str = $(field).val();
 
-    $(field + "Error").html("");
-    if (str === "") {
-        displayError(field, "Must enter a name.");
-        valid = false;
-    } else
-        $(field).css("backgroundColor", "");
-    return valid;
+  $(field + "Error").html("");
+  if (str === "") {
+    displayError(field, "Must enter a name.");
+    valid = false;
+  } else $(field).css("backgroundColor", "");
+  return valid;
 }
 
 function validateUpdate() {
-    var isValid = false;
-    if (lettersOnly("#city") && lettersOnly("#state") && notBlank("#conName")) {
-        isValid = true;
+  let isValid = false;
+  if (lettersOnly("#city") && lettersOnly("#state") && notBlank("#conName") && validateYear("#year")) {
+    isValid = true;
 
-        //javascript - Bootstrap modal show event - Stack Overflow
-        //http://jsfiddle.net/BeL2V/1233/
-        // set focus when modal is opened
-        $('#modal-content').on('shown.bs.modal', function () {
-            $("#txtname").focus();
-        });
+    //javascript - Bootstrap modal show event - Stack Overflow
+    //http://jsfiddle.net/BeL2V/1233/
+    // set focus when modal is opened
+    $("#modal-content").on("shown.bs.modal", function () {
+      $("#txtname").focus();
+    });
 
-        // show the modal onload
-        $('#modal-content').modal({
-            show: true
-        });
-
-    }
-    return isValid;
+    // show the modal onload
+    $("#modal-content").modal({
+      show: true,
+    });
+  }
+  return isValid;
 }
 
 function displayError(elementId, errorMessage) {
-    $(elementId + "Error").css("color", "red").append(errorMessage);   //NOTE: +"Error" modifies the element ID!
-    $(elementId).css("backgroundColor", "#FFDEDE").focus();
+  $(elementId + "Error")
+    .css("color", "red")
+    .append(errorMessage); //NOTE: +"Error" modifies the element ID!
+  $(elementId).css("backgroundColor", "#FFDEDE").focus();
 }
 
-
 function validateInsert() {
-    var isValid = true;
-    //alert(isValid);
-    $(":input[type=text]").each(function () {
-        if ($(this).val() == "") {
-            //alert(this.val());
-            //alert($(this).attr('id'))
-            var formID = $(this).attr('id');
-            $("#" + formID + "Error").html("");
-            displayError("#" + formID, "This is a required field.");
-            isValid = false;
+  let isValid = true;
+  //alert(isValid);
+  $(":input[type=text]").each(function () {
+    if ($(this).val() == "") {
+      //alert(this.val());
+      //alert($(this).attr('id'))
+      let formID = $(this).attr("id");
+      $("#" + formID + "Error").html("");
+      displayError("#" + formID, "This is a required field.");
+      isValid = false;
+    }
+  });
 
-        }
-    });
-
-    //alert(isValid);
-    return isValid;
+  //alert(isValid);
+  return isValid;
 }
 
 $(document).ready(function () {
-    $("#city").change(function () {
-        lettersOnly("#city");
-    });
+  $("#city").change(function () {
+    lettersOnly("#city");
+  });
 
-    $("#state").change(function () {
-        lettersOnly("#state");
-    });
+  $("#state").change(function () {
+    lettersOnly("#state");
+  });
 
-});//documentReady
+  $("#year").change(function () {
+    validateYear("#year");
+  });
+
+}); //documentReady
 
 function resetFields() {
-    $(":input").each(function () {
-
-        var formID = $(this).attr('id');
-        $("#" + formID + "Error").html("");
-        $("#" + formID).css("backgroundColor", "");
-        isValid = false;
-    });
-    $("#addDisplay").html("");
-    return isValid
+  $(":input").each(function () {
+    let formID = $(this).attr("id");
+    $("#" + formID + "Error").html("");
+    $("#" + formID).css("backgroundColor", "");
+    isValid = false;
+  });
+  $("#addDisplay").html("");
+  return isValid;
 }
+
+function validateYear(userYear) {
+  let thisYear = new Date().getFullYear();
+  const userYear = parseInt(userYear);
+
+  if (userYear.length != 4) return false;
+  if (!userYear.match(/\d{4}/)) return false;
+  if (thisYear + 2 > userYear || userYear < thisYear - 2) return false;
+  
+  return true;
+}
+
