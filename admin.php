@@ -95,6 +95,7 @@ function getNextCon()
   $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
   var_dump($records);
   echo "<br>";
+  echo $records['c'];
   die();
   return $records;
 }
