@@ -16,7 +16,7 @@ if (isset($_POST['logout'])) {
 }
 //NOTE: the next 3 sections of code sequence matters for the updated output
 
-if (isset($_POST['submit'])) {  //admin has submitted the "update user" form
+if (isset($_POST['submitUpdate'])) {  //admin has submitted the "update user" form
   $sql = "UPDATE convention
           SET conName = :conName,
               start_date = :start_date,
@@ -107,7 +107,7 @@ if (isset($_SESSION["status"])) {
     Welcome <?= $_SESSION['name'] ?> - Update Convention Info
   </h6>
   <br>
-  <form method='post' class='row gx-4 gy-3 align-items-center' onsubmit="return validateUpdate()">
+  <form method='POST' class='row gx-4 gy-3 align-items-center' onsubmit="return validateUpdate()">
 
     <div class="col-md-2">
       <div class="form-floating">
@@ -190,7 +190,7 @@ if (isset($_SESSION["status"])) {
     </div>
 
     <div class="col-md-4">
-      <button type="submit" name="submit" value="update" class="btn"> Update </button>
+      <button type="submit" name="submitUpdate" value="update" class="btn"> Update </button>
     </div>
     <div class="col-md-4">
       <button type="reset" name="reset" value="reset" class="btn"> Reset </button>
