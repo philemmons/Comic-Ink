@@ -222,7 +222,7 @@ if (isset($_SESSION["status"])) {
 </div>
 <br><br>
 <div class="wrapper form-display" style="overflow: auto;">
-  <table class="table table-sm table-striped table-hover display nowrap" id="adminDisplay" style="width:auto;">
+  <table class="table table-sm table-striped table-hover display nowrap" id="adminDisplay" style="width:100%;">
     <caption>Admin Conventions</caption>
     <!--https://www.w3schools.com/bootstrap/bootstrap_tables.asp-->
     <thead class='table-dark'>
@@ -274,7 +274,7 @@ if (isset($_SESSION["status"])) {
           displayConTot($cnt); ?> </p>
         <p>One or more upcoming conventions based on date:</p>
 
-        <table class="table table-sm table-striped table-hover display nowrap" id="summaryDisplay" style="width:100%;">
+        <table class="table table-sm table-striped table-hover display nowrap" id="summaryDisplay" style="width:auto%;">
           <caption>Admin Upcoming Convention Summary</caption>
           <thead class='table-dark'>
             <tr>
