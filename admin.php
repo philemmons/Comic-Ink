@@ -222,7 +222,7 @@ if (isset($_SESSION["status"])) {
 </div>
 <br><br>
 <div class="wrapper form-display" style="overflow: auto;">
-  <table class="table table-sm table-striped table-hover display nowrap" id="adminDisplay" style="width:100%;">
+  <table class="table table-sm table-striped table-hover display nowrap" id="adminDisplay" style="width:auto;">
     <caption>Admin Conventions</caption>
     <!--https://www.w3schools.com/bootstrap/bootstrap_tables.asp-->
     <thead class='table-dark'>
