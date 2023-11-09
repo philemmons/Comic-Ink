@@ -58,9 +58,12 @@ if (isset($_SESSION["status"])) {
   }
   ?>
   <br><br>
-  <img src="img/key-robot.png" alt="robot with a gold key" />
+  <div id='wrapper-robot'>
+    <div class='title'>
+      <img src="img/robot.png" alt="robot with a gold key" />
+    </div>
+  </div>
 </div>
-
 <div id="id01" class="modalAD">
 
   <form method="POST" class="modal-contentAD animateAD" name="loginForm">
@@ -72,7 +75,7 @@ if (isset($_SESSION["status"])) {
       <label><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="formPW" required id="itpAD">
 
-      <input type="submit" name="login" value="Login" class="btnAD btn" style="width: 100%;"/>
+      <input type="submit" name="login" value="Login" class="btnAD btn" style="width: 100%;" />
     </div>
 
     <div class="containerAD">

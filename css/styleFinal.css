@@ -48,7 +48,7 @@ header {
   border: solid 2px white;
 }
 
-#wrapper-header {
+#wrapper-header, #wrapper-robot {
   margin: auto 0;
   display: inline-block;
 }
