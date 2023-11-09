@@ -105,84 +105,84 @@ if (isset($_SESSION["status"])) {
     Welcome <?= $_SESSION['name'] ?> - Update Convention Info
   </h6>
   <br>
-  <form class='row gx-4 gy-3 align-items-center' onsubmit="return validateUpdate()" >
+  <form class='row gx-4 gy-3 align-items-center' onsubmit="return validateUpdate()">
 
     <div class="col-md-2">
-      <div class="input-group">
-        <div class="input-group-text">ConID:</div>
+      <div class="form-floating">
         <input type="int" class="form-control" id="conID" placeholder="Default - auto incremented" name="conID" value="<?= $conInfo['id'] ?>" disabled />
+        <label for="conID">ConID</label>
         <span id="conIDError"></span>
       </div>
     </div>
 
     <div class="col-md-10">
-      <div class="input-group">
-        <div class="input-group-text">Convention Name:</div>
+      <div class="form-floating">
         <input type="text" class="form-control" id="conName" placeholder="Enter Convention Name" name="conName" value="<?= $conInfo['conName'] ?>" />
+        <label for="conName">Convention Name</label>
         <span id="conNameError"></span>
       </div>
     </div>
 
     <div class="col-md-4">
-      <div class="input-group">
-        <div class="input-group-text">Start Date:</div>
+      <div class="form-floating">
         <input type="text" class="form-control" id="start_date" name="start_date" value="<?= $conInfo['start_date'] ?>" />
+        <label for="start_date">Start Date</label>
         <span id="start_dateError"></span>
       </div>
     </div>
 
     <div class="col-md-4">
-      <div class="input-group">
-        <div class="input-group-text">End Date:</div>
+      <div class="form-floating">
         <input type="text" class="form-control" id="end_date" name="end_date" value="<?= $conInfo['end_date'] ?>" />
+        <label for="end_date">End Date</label>
         <span id="end_dateError"></span>
       </div>
     </div>
 
     <div class="col-md-4">
-      <div class="input-group">
-        <div class="input-group-text">Year</div>
+      <div class="form-floating">
         <input type="int" class="form-control" id="year" placeholder="Enter Year:" name="year" value="<?= $conInfo['year'] ?>" />
+        <label for="year">Year</label>
         <span id="yearError"></span>
       </div>
     </div>
 
     <div class="col-12">
-      <div class="input-group">
-        <div class="input-group-text">Event Location:</div>
+      <div class="form-floating">
         <input type="text" class="form-control" id="event_location" placeholder="Enter Location" name="event_location" value="<?= $conInfo['event_location'] ?>" />
+        <label for="event_location">Event Location</label>
         <span id="event_locationError"></span>
       </div>
     </div>
 
     <div class="col-md-4">
-      <div class="input-group">
-        <div class="input-group-text">City:</div>
+      <div class="form-floating">
         <input type="text" class="form-control" id="city" placeholder="Enter City" name="city" value="<?= $conInfo['city'] ?>" />
+        <label for="city">City</label>
         <span id="cityError"></span>
       </div>
     </div>
 
     <div class="col-md-4">
-      <div class="input-group">
-        <div class="input-group-text">State:</div>
+      <div class="form-floating">
         <input type="text" class="form-control" id="state" placeholder="Enter State" name="state" value="<?= $conInfo['state'] ?>" />
+        <label for="state">State</label>
         <span id="stateError"></span>
       </div>
     </div>
 
     <div class="col-md-4">
-      <div class="input-group">
-        <div class="input-group-text">Country:</div>
-        <input type="text" class="form-control" id="state" placeholder="Enter Country" name="country" value="<?= $conInfo['country'] ?>" />
+      <div class="form-floating">
+        <input type="text" class="form-control" id="country" placeholder="Enter Country" name="country" value="<?= $conInfo['country'] ?>" />
+        <label for="country">Country</label>
         <span id="countryError"></span>
       </div>
     </div>
 
     <div class="col-md-12">
-      <div class="input-group">
-        <div class="input-group-text">Website:</div>
+      <div class="form-floating">
         <input type="text" class="form-control" id="website" placeholder="xxx.example.xxx" name="website" value="<?= $conInfo['website'] ?>" />
+        <label for="website">Website</label>
         <span id="websiteError"></span>
       </div>
     </div>
