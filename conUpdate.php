@@ -107,7 +107,7 @@ if (isset($_SESSION["status"])) {
   <br>
   <form class='row gx-4 gy-3 align-items-center' onsubmit="return validateUpdate()" >
 
-    <div class="col-auto">
+    <div class="col-md-2">
       <div class="input-group">
         <div class="input-group-text">ConID:</div>
         <input type="int" class="form-control" id="conID" placeholder="Default - auto incremented" name="conID" value="<?= $conInfo['id'] ?>" disabled />
@@ -115,7 +115,7 @@ if (isset($_SESSION["status"])) {
       </div>
     </div>
 
-    <div class="col-auto">
+    <div class="col-md-10">
       <div class="input-group">
         <div class="input-group-text">Convention Name:</div>
         <input type="text" class="form-control" id="conName" placeholder="Enter Convention Name" name="conName" value="<?= $conInfo['conName'] ?>" />
@@ -123,7 +123,7 @@ if (isset($_SESSION["status"])) {
       </div>
     </div>
 
-    <div class="col-auto">
+    <div class="col-md-4">
       <div class="input-group">
         <div class="input-group-text">Start Date:</div>
         <input type="text" class="form-control" id="start_date" name="start_date" value="<?= $conInfo['start_date'] ?>" />
@@ -131,7 +131,7 @@ if (isset($_SESSION["status"])) {
       </div>
     </div>
 
-    <div class="col-auto">
+    <div class="col-md-4">
       <div class="input-group">
         <div class="input-group-text">End Date:</div>
         <input type="text" class="form-control" id="end_date" name="end_date" value="<?= $conInfo['end_date'] ?>" />
@@ -139,7 +139,7 @@ if (isset($_SESSION["status"])) {
       </div>
     </div>
 
-    <div class="col-auto">
+    <div class="col-md-4">
       <div class="input-group">
         <div class="input-group-text">Year</div>
         <input type="int" class="form-control" id="year" placeholder="Enter Year:" name="year" value="<?= $conInfo['year'] ?>" />
@@ -147,7 +147,7 @@ if (isset($_SESSION["status"])) {
       </div>
     </div>
 
-    <div class="col-auto">
+    <div class="col-12">
       <div class="input-group">
         <div class="input-group-text">Event Location:</div>
         <input type="text" class="form-control" id="event_location" placeholder="Enter Location" name="event_location" value="<?= $conInfo['event_location'] ?>" />
@@ -155,7 +155,7 @@ if (isset($_SESSION["status"])) {
       </div>
     </div>
 
-    <div class="col-auto">
+    <div class="col-md-4">
       <div class="input-group">
         <div class="input-group-text">City:</div>
         <input type="text" class="form-control" id="city" placeholder="Enter City" name="city" value="<?= $conInfo['city'] ?>" />
@@ -163,7 +163,7 @@ if (isset($_SESSION["status"])) {
       </div>
     </div>
 
-    <div class="col-auto">
+    <div class="col-md-4">
       <div class="input-group">
         <div class="input-group-text">State:</div>
         <input type="text" class="form-control" id="state" placeholder="Enter State" name="state" value="<?= $conInfo['state'] ?>" />
@@ -171,7 +171,7 @@ if (isset($_SESSION["status"])) {
       </div>
     </div>
 
-    <div class="col-auto">
+    <div class="col-md-4">
       <div class="input-group">
         <div class="input-group-text">Country:</div>
         <input type="text" class="form-control" id="state" placeholder="Enter Country" name="country" value="<?= $conInfo['country'] ?>" />
@@ -179,7 +179,7 @@ if (isset($_SESSION["status"])) {
       </div>
     </div>
 
-    <div class="col-auto">
+    <div class="col-md-12">
       <div class="input-group">
         <div class="input-group-text">Website:</div>
         <input type="text" class="form-control" id="website" placeholder="xxx.example.xxx" name="website" value="<?= $conInfo['website'] ?>" />
@@ -187,13 +187,13 @@ if (isset($_SESSION["status"])) {
       </div>
     </div>
 
-    <div class="col-auto">
+    <div class="col-md-4">
       <button type="submit" name="submit" value="update" class="btn"> Update </button>
     </div>
-    <div class="col-auto">
+    <div class="col-md-4">
       <button type="reset" name="reset" value="reset" class="btn"> Reset </button>
     </div>
-    <div class="col-auto">
+    <div class="col-md-4">
       <a href="admin.php" class="btn" data-dismiss="modal" style="float:right">Return to Admin</a>
     </div>
   </form>
