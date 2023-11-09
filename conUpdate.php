@@ -27,7 +27,7 @@ if (isset($_POST['submitUpdate'])) {  //admin has submitted the "update user" fo
               state = :state,
               country =:country,
               website = :website   
-            WHERE id = :con_id";
+          WHERE id = :con_id";
 
   $np = array();
 
@@ -190,14 +190,17 @@ if (isset($_SESSION["status"])) {
     </div>
 
     <div class="col-md-4">
-      <button type="submit" name="submitUpdate" value="update" class="btn"> Update </button>
+      <input type="submit" name="submitUpdate" value="Update" class="btn" />
     </div>
+
     <div class="col-md-4">
       <button type="reset" name="reset" value="reset" class="btn"> Reset </button>
     </div>
+
     <div class="col-md-4">
       <a href="admin.php" class="btn" data-dismiss="modal" style="float:right">Return to Admin</a>
     </div>
+    
   </form>
 </div>
 
