@@ -75,7 +75,7 @@ if (isset($_SESSION["status"])) {
       <input type="submit" name="login" value="Login" class="btnAD btn" style="width: 100%;"/>
     </div>
 
-    <div class="containerAD" style="background-color:#f1f1f1">
+    <div class="containerAD">
       <button type="button" onclick="document.getElementById('id01').style.display='none'" id="cancelbtnAD" class="btn">Cancel</button>
     </div>
   </form>
