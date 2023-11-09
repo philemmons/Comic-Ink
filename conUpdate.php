@@ -53,6 +53,11 @@ echo $_POST['conID']."<br>";die();
 
 if (isset($_GET['id'])) {
   $conInfo = getConInfo($_GET['id']);
+
+
+  echo gettype($conInfo)."<br>";
+  var_dump($conInfo);
+die();
 }
 
 ?>
@@ -200,7 +205,7 @@ if (isset($_SESSION["status"])) {
     <div class="col-md-4">
       <a href="admin.php" class="btn" data-dismiss="modal" style="float:right">Return to Admin</a>
     </div>
-    
+
   </form>
 </div>
 
