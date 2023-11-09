@@ -31,6 +31,8 @@ if (isset($_POST['submit'])) {  //admin has submitted the "update user" form
 
   $np = array();
 
+echo $_POST['conID']."<br>";die();
+
   $np[':con_id'] = htmlspecialchars($_POST['conID'], ENT_QUOTES);
   $np[':conName']  = htmlspecialchars($_POST['conName'], ENT_QUOTES);
   $np[':start_date'] = htmlspecialchars($_POST['start_date'], ENT_QUOTES);
