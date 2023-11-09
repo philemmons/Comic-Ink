@@ -110,7 +110,7 @@ if (isset($_SESSION["status"])) {
     <div class="col-auto">
       <div class="input-group">
         <div class="input-group-text">ConID:</div>
-        <input type="int" class="form-control" id="conID" placeholder="Default - auto incremented" name="conID" value="<?= $conInfo['con_id'] ?>" disabled />
+        <input type="int" class="form-control" id="conID" placeholder="Default - auto incremented" name="conID" value="<?= $conInfo['id'] ?>" disabled />
         <span id="conIDError"></span>
       </div>
     </div>
