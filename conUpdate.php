@@ -105,7 +105,7 @@ if (isset($_SESSION["status"])) {
     Welcome <?= $_SESSION['name'] ?> - Update Convention Info
   </h6>
   <br>
-  <form class="form-horizontal" onsubmit="return validateUpdate()" class='row gx-4 gy-3 align-items-center'>
+  <form class='row gx-4 gy-3 align-items-center' onsubmit="return validateUpdate()" >
 
     <div class="col-auto">
       <div class="input-group">
