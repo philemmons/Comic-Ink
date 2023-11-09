@@ -107,7 +107,7 @@ if (isset($_SESSION["status"])) {
     Welcome <?= $_SESSION['name'] ?> - Update Convention Info
   </h6>
   <br>
-  <form method='POST' class='row gx-4 gy-3 align-items-center' onsubmit="return validateUpdate()">
+  <form method='POST' class='row gx-4 gy-3 align-items-center' >
 
     <div class="col-md-2">
       <div class="form-floating">
