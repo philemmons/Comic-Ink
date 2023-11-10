@@ -188,8 +188,8 @@ if (isset($_SESSION["status"])) {
         </div>
       </div>
 
-      <div class="col-md-3">
-        <button type="submit" name="submitUpdate" value="update" class="btn" > Update</btn>
+      <div class="col-md-3"><!-- Button trigger modal -->
+        <button type="submit" name="submitUpdate" value="update" class="btn" data-bs-toggle="modal" data-bs-target="#updateModal">Update</btn>
       </div>
 
       <div class="col-md-3">
@@ -200,18 +200,22 @@ if (isset($_SESSION["status"])) {
     <?php } ?>
 
     <div class="col-md-6">
-      <a href="admin.php" class="btn" data-dismiss="modal" style="float:right">Return to Admin</a>
+      <a href="admin.php" class="btn" data-bs-dismiss="modal" style="float:right">Return to Admin</a>
     </div>
 
     </form>
 </div>
 
-<div id="modal-content" class="modal fade" tabindex="-1" role="dialog">
+<!-- Modal -->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-body" style="text-align: center">
-        <h3 id="txtname">Update</h3>
+      <h3>Update</h3>
         <img src='img/complete.png' alt='complete word with red border with a brick like texture.' />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
