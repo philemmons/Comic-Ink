@@ -158,7 +158,7 @@ if (isset($_SESSION["status"])) {
       </div>
 
       <div class="col-md-6">
-        <a href="admin.php" class="btn" data-dismiss="modal" style="float:right">Return to Admin</a>
+        <a href="admin.php#middlePage" class="btn" data-dismiss="modal" style="float:right">Return to Admin</a>
       </div>
     </form>
   </div>
