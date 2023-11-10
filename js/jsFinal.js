@@ -91,8 +91,7 @@ $(document).ready(function () {
 }); //documentReady
 
 
-/* not in use 11.10.23 */
-/*
+/* only for conInsert */
 function resetFields() {
   $(":input").each(function () {
     let formID = $(this).attr("id");
@@ -103,8 +102,8 @@ function resetFields() {
   $("#addDisplay").html("");
   return true;
 }
-*/
 
+/* only for conUpdate */
 function myReset(myForm){
   document.getElementById(myForm).reset(); 
 }
