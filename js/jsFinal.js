@@ -22,6 +22,17 @@ function notBlank(field) {
   return true;
 }
 
+function validateYear(userYear) {
+  let thisYear = new Date().getFullYear();
+  const pYear = parseInt(userYear);
+
+  if (pYear.length != 4) return false;
+  if (!pYear.match(/\d{4}/)) return false;
+  if (thisYear + 2 < pYear || pYear < thisYear - 2) return false;
+  
+  return true;
+}
+
 function validateUpdate() {
   if (lettersOnly("#city") && lettersOnly("#state") && notBlank("#conName") && validateYear("#year")) {
     //javascript - Bootstrap modal show event - Stack Overflow
@@ -76,6 +87,8 @@ $(document).ready(function () {
 
 }); //documentReady
 
+
+// not in use //
 function resetFields() {
   $(":input").each(function () {
     let formID = $(this).attr("id");
@@ -87,18 +100,7 @@ function resetFields() {
   return true;
 }
 
+
 function myReset(){
   document.getElementById("myForm").reset(); 
 }
-
-function validateYear(userYear) {
-  let thisYear = new Date().getFullYear();
-  const pYear = parseInt(userYear);
-
-  if (pYear.length != 4) return false;
-  if (!pYear.match(/\d{4}/)) return false;
-  if (thisYear + 2 < pYear || pYear < thisYear - 2) return false;
-  
-  return true;
-}
-

@@ -155,7 +155,7 @@ if (isset($_SESSION["status"])) {
       </div>
 
       <div class="col-md-3">
-        <button type="reset" name="reset" value="reset" class="btn" onclick="resetFields()"> Reset </button>
+        <button type="reset" name="reset" value="reset" class="btn" onclick="myReset()"> Reset </button>
       </div>
 
       <div class="col-md-6">
