@@ -101,7 +101,7 @@ if (isset($_SESSION["status"])) {
     Welcome <?= $_SESSION['name'] ?> - Update Convention Info
   </h6>
   <br>
-  
+
   <?php
   if (isset($_GET['id'])) {
     $conInfo = getConInfo($_GET['id']);
@@ -189,7 +189,7 @@ if (isset($_SESSION["status"])) {
       </div>
 
       <div class="col-md-4">
-        <input type="submit" name="submitUpdate" value="Update" class="btn" />
+        <button type="submit" name="submitUpdate" value="update" class="btn" > Update</btn>
       </div>
 
       <div class="col-md-4">

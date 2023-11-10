@@ -10,7 +10,7 @@
     
     $dbConn = getDBConnection();
 
-    $nPara[':dConId'] = $_GET['con_id'];
+    $nPara[':dConId'] = $_GET['id'];
     $sql = "DELETE FROM convention
             WHERE con_id = :dConId ";
     //echo $sql;
