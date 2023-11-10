@@ -168,7 +168,7 @@ if (isset($_SESSION["status"])) {
       </div>
 
       <div class="col-md-3">
-        <button type="submit" name="submitInsert" value="insert" class="btn" data-bs-toggle="modal" data-bs-target="#insertModal"> Add New Convention </button>
+        <button type="submit"  class="btn" data-bs-toggle="modal" data-bs-target="#insertModal"> Add New Convention </button>
       </div>
 
       <div class="col-md-3">
