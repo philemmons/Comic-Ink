@@ -141,15 +141,15 @@ if (isset($_SESSION["status"])) {
         </div>
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-3">
         <button type="submit" name="submit" value="insert" class="btn"> Insert </button>
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-3">
         <button type="reset" name="reset" value="reset" class="btn" onclick="resetFields()"> Reset </button>
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-6">
         <a href="admin.php" class="btn" data-dismiss="modal" style="float:right">Return to Admin</a>
       </div>
 
