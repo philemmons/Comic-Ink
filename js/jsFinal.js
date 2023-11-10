@@ -105,6 +105,6 @@ function resetFields() {
 }
 */
 
-function myReset(){
-  document.getElementById("myForm").reset(); 
+function myReset(myForm){
+  document.getElementById(myForm).reset(); 
 }
