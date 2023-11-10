@@ -324,6 +324,11 @@ if (isset($_SESSION["status"])) {
     responsive: true,
     pagingType: 'simple'
   });
+
+  $('#myModal').on('shown.bs.modal', function () {
+       var table = $('#summaryDisplay').DataTable();
+       table.columns.adjust();
+   });
 </script>
 
 </body>
