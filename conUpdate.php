@@ -193,7 +193,7 @@ if (isset($_SESSION["status"])) {
       </div>
 
       <div class="col-md-3">
-        <button type="reset" name="reset" value="reset" class="btn"> Reset </button>
+        <button type="reset" name="reset" value="reset" class="btn" onlclick= "myReset()";> Reset </button>
       </div>
     <?php } else {  ?>
       <h6> Hello, there was no convention selected which to update, and please select one from the Admin panel.</h6>

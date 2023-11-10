@@ -48,7 +48,7 @@ function displayError(elementId, errorMessage) {
 }
 
 function validateInsert() {
-  $(":input[type=text]").each(function () {
+  $(":input").each(function () {
     if ($(this).val() == "") {
       //alert(this.val());
       //alert($(this).attr('id'))
@@ -85,6 +85,10 @@ function resetFields() {
   });
   $("#addDisplay").html("");
   return true;
+}
+
+function myReset(){
+  document.getElementById("myForm").reset(); 
 }
 
 function validateYear(userYear) {
