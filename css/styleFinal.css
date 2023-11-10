@@ -154,6 +154,7 @@ td {
   --bs-nav-link-font-weight: 600 !important;
   --bs-nav-link-color: #ffffff !important;
   text-transform: capitalize !important;
+  font-size: 1.2em !important;
 }
 
 .navbar-brand {
