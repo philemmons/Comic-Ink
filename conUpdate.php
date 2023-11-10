@@ -45,7 +45,7 @@ if (isset($_POST['submitUpdate'])) {  //admin has submitted the "update user" fo
 
   $nPara = array();
 
-  sleep(2); // pause the modal
+  sleep(5); // pause the modal
 
 } //eof if
 
