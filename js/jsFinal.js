@@ -97,11 +97,11 @@ function resetFields() {
 
 function validateYear(userYear) {
   let thisYear = new Date().getFullYear();
-  const userYear = parseInt(userYear);
+  const pYear = parseInt(userYear);
 
-  if (userYear.length != 4) return false;
-  if (!userYear.match(/\d{4}/)) return false;
-  if (thisYear + 2 > userYear || userYear < thisYear - 2) return false;
+  if (pYear.length != 4) return false;
+  if (!pYear.match(/\d{4}/)) return false;
+  if (thisYear + 2 > pYear || pYear < thisYear - 2) return false;
   
   return true;
 }
