@@ -29,8 +29,6 @@ if (isset($_POST['submitUpdate'])) {  //admin has submitted the "update user" fo
               website = :website   
           WHERE id = :con_id";
 
- $nPara = array();
-
   $nPara[':con_id'] = htmlspecialchars($_GET['id'], ENT_QUOTES);
   $nPara[':conName']  = htmlspecialchars($_POST['conName'], ENT_QUOTES);
   $nPara[':start_date'] = htmlspecialchars($_POST['start_date'], ENT_QUOTES);
@@ -44,6 +42,8 @@ if (isset($_POST['submitUpdate'])) {  //admin has submitted the "update user" fo
 
   $stmt = $dbConn->prepare($sql);
   $stmt->execute($nPara);
+
+  $nPara = array();
 
   sleep(2); // pause the modal
 
