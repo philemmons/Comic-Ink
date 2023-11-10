@@ -214,7 +214,7 @@ if (isset($_SESSION["status"])) {
             event.preventDefault()
             event.stopPropagation()
           }else{
-            $('#insertModal').modal('show');
+            let timeout = setTimeout($('#insertModal').modal('show'), 4000);
           }
 
           form.classList.add('was-validated')
