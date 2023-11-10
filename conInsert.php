@@ -60,6 +60,14 @@ if (isset($_SESSION["status"])) {
       Welcome <?= $_SESSION['name'] ?> - New Convention Form
     </h6>
     <br>
+
+    <?php
+      if (isset($_POST['submitInsert'])) {
+        //echo "form was submitted";
+        addCon();
+        echo "<h6 id='addDisplay'>Convention Added!</h6>";
+      }
+      ?>
     <form method='POST' name="insertConForm" class='row gx-4 gy-3 align-items-center' onsubmit='validateInsert()' ;>
 
       <div class="col-md-2">
@@ -152,15 +160,6 @@ if (isset($_SESSION["status"])) {
       <div class="col-md-6">
         <a href="admin.php" class="btn" data-dismiss="modal" style="float:right">Return to Admin</a>
       </div>
-
-      <?php
-      if (isset($_POST['submitInsert'])) {
-        //echo "form was submitted";
-        addCon();
-        echo "<h3 id='addDisplay'>Convention Added!</h3>";
-      }
-      ?>
-
     </form>
   </div>
 
