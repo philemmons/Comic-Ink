@@ -124,6 +124,7 @@ td {
 }
 
 .btn:active, .btnAD:active {
+  text-decoration: none;
   color: #fff !important;
 }
 
