@@ -12,7 +12,7 @@
 
     $nPara[':dConId'] = $_GET['id'];
     $sql = "DELETE FROM convention
-            WHERE con_id = :dConId ";
+            WHERE id = :dConId ";
     //echo $sql;
     $stmt = $dbConn->prepare($sql);
     $stmt->execute($nPara);
