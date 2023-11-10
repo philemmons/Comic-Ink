@@ -248,33 +248,35 @@ function getConInfo($conID)
     return $record;
 }
 
-//conInsert.php
+/*conInsert.php*/
 function addCon()
 {
     global $dbConn;
 
-    if (isset($_GET['submit'])) {  //admin has submitted the "update user" form
+    if (isset($_POST['submitInsert'])) {
         $sql = "INSERT INTO convention (
-                    con_id,
                     conName,
+                    start_date,
+                    end_date,
+                    year,
+                    event_location,
                     city,
                     state,
-                    creator,
-                    website,
-                    turnOut
-                )
-                VALUES (
-                :con_id,:conName,:city, :state, :creator, :website,:turnOut
+                    country,
+                    website
+                ) VALUES (
+                :conName, :start_date, :end_date, :year, :event_location, :city, :state, :country, :website
                 )";
 
-        $nPara = array();
-        $nPara[':con_id'] = $_GET['con_id'];
-        $nPara[':conName']  = $_GET['conName'];
-        $nPara[':city'] = $_GET['city'];
-        $nPara[':state'] = $_GET['state'];
-        $nPara[':creator'] = $_GET['creator'];
-        $nPara[':website'] = $_GET['website'];
-        $nPara[':turnOut'] = $_GET['turnOut'];
+        $nPara[':conName']  = htmlspecialchars($_POST['conName'], ENT_QUOTES);
+        $nPara[':start_date'] = htmlspecialchars($_POST['start_date'], ENT_QUOTES);
+        $nPara[':end_date'] = htmlspecialchars($_POST['end_date'], ENT_QUOTES);
+        $nPara[':year'] = htmlspecialchars($_POST['year'], ENT_QUOTES);
+        $nPara[':event_location'] = htmlspecialchars($_POST['event_location'], ENT_QUOTES);
+        $nPara[':city'] = htmlspecialchars($_POST['city'], ENT_QUOTES);
+        $nPara[':state'] = htmlspecialchars($_POST['state'], ENT_QUOTES);
+        $nPara[':country'] = htmlspecialchars($_POST['country'], ENT_QUOTES);
+        $nPara[':website'] = htmlspecialchars(preg_replace("(^https?://)", "", $_POST['website']), ENT_QUOTES);
 
         $stmt = $dbConn->prepare($sql);
         $stmt->execute($nPara);

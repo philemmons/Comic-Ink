@@ -142,7 +142,7 @@ if (isset($_SESSION["status"])) {
       </div>
 
       <div class="col-md-3">
-        <button type="submit" name="submit" value="insert" class="btn"> Insert </button>
+        <button type="submit" name="submitInsert" value="insert" class="btn"> Add New Convention </button>
       </div>
 
       <div class="col-md-3">
@@ -154,7 +154,7 @@ if (isset($_SESSION["status"])) {
       </div>
 
       <?php
-      if (isset($_GET['submit'])) {
+      if (isset($_POST['submitInsert'])) {
         //echo "form was submitted";
         addCon();
         echo "<h3 id='addDisplay'>Convention Added!</h3>";
