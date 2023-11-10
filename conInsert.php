@@ -79,7 +79,7 @@ if (isset($_SESSION["status"])) {
 
       <div class="col-md-10">
         <div class="form-floating">
-          <input type="text" class="form-control" id="conName" placeholder="Enter Convention Name" name="conName" required />
+          <input type="text" class="form-control" id="conName" placeholder="Enter Convention Name" name="conName" required="" />
           <label for="conName" class="form-label">Convention Name</label>
           <div class="invalid-feedback">
             Please provide a convention name.
@@ -89,7 +89,7 @@ if (isset($_SESSION["status"])) {
 
       <div class="col-md-4">
         <div class="form-floating">
-          <input type="text" class="form-control" id="start_date" name="start_date" required />
+          <input type="text" class="form-control" id="start_date" name="start_date" required="" />
           <label for="start_date" class="form-label">Start Month & Day Only</label>
           <div class="invalid-feedback">
             Please provide a month and day only.
@@ -99,7 +99,7 @@ if (isset($_SESSION["status"])) {
 
       <div class="col-md-4">
         <div class="form-floating">
-          <input type="text" class="form-control" id="end_date" name="end_date" required />
+          <input type="text" class="form-control" id="end_date" name="end_date" required="" />
           <label for="end_date" class="form-label">End Month & Day Only</label>
           <div class="invalid-feedback">
             Please provide a month and day only.
@@ -109,7 +109,7 @@ if (isset($_SESSION["status"])) {
 
       <div class="col-md-4">
         <div class="form-floating">
-          <input type="int" class="form-control" id="year" placeholder="Enter Year:" name="year" required />
+          <input type="int" class="form-control" id="year" placeholder="Enter Year:" name="year" required="" />
           <label for="year" class="form-label">Year</label>
           <div class="invalid-feedback">
             Please provide a year.
@@ -119,7 +119,7 @@ if (isset($_SESSION["status"])) {
 
       <div class="col-12">
         <div class="form-floating">
-          <input type="text" class="form-control" id="event_location" placeholder="Enter Location" name="event_location" required />
+          <input type="text" class="form-control" id="event_location" placeholder="Enter Location" name="event_location" required="" />
           <label for="event_location" class="form-label">Event Location</label>
           <div class="invalid-feedback">
             Please provide an event location.
@@ -129,7 +129,7 @@ if (isset($_SESSION["status"])) {
 
       <div class="col-md-4">
         <div class="form-floating">
-          <input type="text" class="form-control" id="city" placeholder="Enter City" name="city" required />
+          <input type="text" class="form-control" id="city" placeholder="Enter City" name="city" required="" />
           <label for="city" class="form-label">City</label>
           <div class="invalid-feedback">
             Please provide a city.
@@ -139,7 +139,7 @@ if (isset($_SESSION["status"])) {
 
       <div class="col-md-4">
         <div class="form-floating">
-          <input type="text" class="form-control" id="state" placeholder="Enter State" name="state" required />
+          <input type="text" class="form-control" id="state" placeholder="Enter State" name="state" required="" />
           <label for="state" class="form-label">State</label>
           <div class="invalid-feedback">
             Please provide a state.
@@ -149,7 +149,7 @@ if (isset($_SESSION["status"])) {
 
       <div class="col-md-4">
         <div class="form-floating">
-          <input type="text" class="form-control" id="country" placeholder="Enter Country" name="country" required />
+          <input type="text" class="form-control" id="country" placeholder="Enter Country" name="country" required="" />
           <label for="country" class="form-label">Country</label>
           <div class="invalid-feedback">
             Please provide a country.
@@ -159,7 +159,7 @@ if (isset($_SESSION["status"])) {
 
       <div class="col-md-12">
         <div class="form-floating">
-          <input type="text" class="form-control" id="website" placeholder="xxx.example.xxx" name="website" required />
+          <input type="text" class="form-control" id="website" placeholder="xxx.example.xxx" name="website" required="" />
           <label for="website" class="form-label">Website</label>
           <div class="invalid-feedback">
             Please provide a website url.
@@ -209,7 +209,7 @@ if (isset($_SESSION["status"])) {
 
       // Loop over them and prevent submission
       Array.from(forms).forEach(form => {
-        form.addEventListener('submitInsert', event => {
+        form.addEventListener('submit', event => {
           if (!form.checkValidity()) {
             event.preventDefault()
             event.stopPropagation()
