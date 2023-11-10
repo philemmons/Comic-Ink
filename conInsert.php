@@ -79,16 +79,16 @@ if (isset($_SESSION["status"])) {
 
       <div class="col-md-4">
         <div class="form-floating">
-          <input type="text" class="form-control" id="start_date" name="start_date" placeholder="Month and Day only"/>
-          <label for="start_date">Start Date</label>
+          <input type="text" class="form-control" id="start_date" name="start_date" />
+          <label for="start_date">Start Date(Month and Day only)</label>
           <span id="start_dateError"></span>
         </div>
       </div>
 
       <div class="col-md-4">
         <div class="form-floating">
-          <input type="text" class="form-control" id="end_date" name="end_date" placeholder="Month and Day only"/>
-          <label for="end_date">End Date</label>
+          <input type="text" class="form-control" id="end_date" name="end_date" />
+          <label for="end_date">End Date(Month and Day only)</label>
           <span id="end_dateError"></span>
         </div>
       </div>
