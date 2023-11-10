@@ -274,7 +274,7 @@ if (isset($_SESSION["status"])) {
           displayConTot($cnt); ?> </p>
         <p>One or more upcoming conventions based on today's date:</p>
 
-        <table class="table table-sm table-striped table-hover display nowrap" id="summaryDisplay" style="width:100%;">
+        <table class="table table-sm table-striped table-hover display nowrap" id="summaryDisplay">
           <caption>Admin Upcoming Convention Summary</caption>
           <thead class='table-dark'>
             <tr>
