@@ -266,13 +266,13 @@ if (isset($_SESSION["status"])) {
         <p>Average number of conventions per State:
           <?php $num = getConAvg();
           displayConAvg($num); ?></p>
-        <p>Number of convention per State with more than four:<br>
+        <p>The States with more than four convention in descending order:<br>
           <?php $list = getConByState();
           displayConByState($list); ?></p>
-        <p>Total conventions:
+        <p>Total overall conventions:
           <?php $cnt = getConTot();
           displayConTot($cnt); ?> </p>
-        <p>One or more upcoming conventions based on date:</p>
+        <p>One or more upcoming conventions based on today's date:</p>
 
         <table class="table table-sm table-striped table-hover display nowrap" id="summaryDisplay" style="width:100%;">
           <caption>Admin Upcoming Convention Summary</caption>
