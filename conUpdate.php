@@ -29,6 +29,7 @@ if (isset($_POST['submitUpdate'])) {  //admin has submitted the "update user" fo
               website = :website   
           WHERE id = :con_id";
 
+ $nPara = array();
 
   $nPara[':con_id'] = htmlspecialchars($_GET['id'], ENT_QUOTES);
   $nPara[':conName']  = htmlspecialchars($_POST['conName'], ENT_QUOTES);
