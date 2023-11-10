@@ -123,8 +123,9 @@ td {
   background-color:transparent !important; 
 }
 
-.btn:active {
+.btn:active, .btnAD:active {
   text-decoration: none;
+  color: #fff;
 }
 
 .w3-content {
