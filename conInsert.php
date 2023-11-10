@@ -168,7 +168,7 @@ if (isset($_SESSION["status"])) {
       </div>
 
       <div class="col-md-3">
-        <button type="submit"  class="btn" data-bs-toggle="modal" data-bs-target="#insertModal"> Add New Convention </button>
+        <button type="submit" name="submitInsert" value="insert" class="btn"> Add New Convention </button>
       </div>
 
       <div class="col-md-3">
@@ -213,6 +213,8 @@ if (isset($_SESSION["status"])) {
           if (!form.checkValidity()) {
             event.preventDefault()
             event.stopPropagation()
+          }else{
+            $('#insertModal').modal('show');
           }
 
           form.classList.add('was-validated')
