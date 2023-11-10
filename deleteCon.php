@@ -2,7 +2,7 @@
     session_start();
     /* Update SQL query with named parameters that prevent SQL injection */
     
-    if (!isset($_SESSION["username"])) {  //Check whether the admin has logged in
+    if (!isset($_SESSION["status"])) {  //Check whether the admin has logged in
         header("Location: login.php"); 
     }
     
