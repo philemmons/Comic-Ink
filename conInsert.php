@@ -68,7 +68,7 @@ if (isset($_SESSION["status"])) {
         echo "<h6 id='addDisplay'>Convention Added!</h6>";
       }
       ?>
-    <form method='POST' name="insertConForm" class='row gx-4 gy-3 align-items-center' onsubmit='validateInsert()' ;>
+    <form method='POST' name="insertConForm" class='row gx-4 gy-3 align-items-center' onsubmit='return validateInsert()' ;>
 
       <div class="col-md-2">
         <div class="form-floating">

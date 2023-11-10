@@ -1,34 +1,29 @@
 // JavaScript File -- careful !!!!  examine url for '?''
 
 function lettersOnly(cs) {
-  let valid = true;
   let str = $(cs).val();
 
   $(cs + "Error").html("");
   if (/[0-9]+/g.test(str)) {
     displayError(cs, "Letters Only.");
-    valid = false;
+    return false;
   } else $(cs).css("backgroundColor", "");
-  return valid;
+  return true;
 }
 
 function notBlank(field) {
-  let valid = true;
   let str = $(field).val();
 
   $(field + "Error").html("");
   if (str === "") {
     displayError(field, "Must enter a name.");
-    valid = false;
+    return false;
   } else $(field).css("backgroundColor", "");
-  return valid;
+  return true;
 }
 
 function validateUpdate() {
-  let isValid = false;
   if (lettersOnly("#city") && lettersOnly("#state") && notBlank("#conName") && validateYear("#year")) {
-    isValid = true;
-
     //javascript - Bootstrap modal show event - Stack Overflow
     //http://jsfiddle.net/BeL2V/1233/
     // set focus when modal is opened
@@ -40,8 +35,9 @@ function validateUpdate() {
     $("#modal-content").modal({
       show: true,
     });
+    return true;
   }
-  return isValid;
+  return false;
 }
 
 function displayError(elementId, errorMessage) {
@@ -52,8 +48,6 @@ function displayError(elementId, errorMessage) {
 }
 
 function validateInsert() {
-  let isValid = true;
-  //alert(isValid);
   $(":input[type=text]").each(function () {
     if ($(this).val() == "") {
       //alert(this.val());
@@ -61,12 +55,10 @@ function validateInsert() {
       let formID = $(this).attr("id");
       $("#" + formID + "Error").html("");
       displayError("#" + formID, "This is a required field.");
-      isValid = false;
+     return false;
     }
   });
-
-  //alert(isValid);
-  return isValid;
+  return true;
 }
 
 $(document).ready(function () {
@@ -89,10 +81,10 @@ function resetFields() {
     let formID = $(this).attr("id");
     $("#" + formID + "Error").html("");
     $("#" + formID).css("backgroundColor", "");
-    isValid = false;
+    return false;
   });
   $("#addDisplay").html("");
-  return isValid;
+  return true;
 }
 
 function validateYear(userYear) {
