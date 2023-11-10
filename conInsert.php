@@ -150,7 +150,7 @@ if (isset($_SESSION["status"])) {
       </div>
 
       <div class="col-md-3">
-        <button type="submit" name="submitInsert" value="insert" class="btn"> Add New Convention </button>
+        <button type="submit" name="submitInsert" value="insert" class="btn" data-bs-toggle="modal" data-bs-target="#insertModal"> Add New Convention </button>
       </div>
 
       <div class="col-md-3">
@@ -158,10 +158,25 @@ if (isset($_SESSION["status"])) {
       </div>
 
       <div class="col-md-6">
-        <a href="admin.php#middlePage" class="btn" data-dismiss="modal" style="float:right">Return to Admin</a>
+        <a href="admin.php#middlePage" class="btn" style="float:right">Return to Admin</a>
       </div>
     </form>
   </div>
+
+  <!-- Modal -->
+<div class="modal fade" id="insertModal" tabindex="-1" aria-labelledby="insertModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body" style="text-align: center">
+      <h3>Update</h3>
+        <img src='img/complete.png' alt='complete word with red border with a brick like texture.' />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
   <br><br>
   <?php include 'footer.inc' ?>

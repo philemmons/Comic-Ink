@@ -282,6 +282,8 @@ function addCon()
         $stmt->execute($nPara);
         //clear the value - prevent multiple insertions
         $nPara = array();
+
+        sleep(5);
     } //eof if
 }
 
