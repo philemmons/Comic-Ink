@@ -322,8 +322,7 @@ if (isset($_SESSION["status"])) {
     searching: false,
     ordering: false,
     responsive: true,
-    pagingType: 'simple',
-    autoWidth: false
+    pagingType: 'simple'
   });
 </script>
 
