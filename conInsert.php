@@ -88,7 +88,7 @@ if (isset($_SESSION["status"])) {
       <div class="col-md-4">
         <div class="form-floating">
           <input type="text" class="form-control" id="start_date" name="start_date" />
-          <label for="start_date">Start Month and Day only</label>
+          <label for="start_date">Start Month & Day Only</label>
           <span id="start_dateError"></span>
         </div>
       </div>
@@ -96,7 +96,7 @@ if (isset($_SESSION["status"])) {
       <div class="col-md-4">
         <div class="form-floating">
           <input type="text" class="form-control" id="end_date" name="end_date" />
-          <label for="end_date">End Month and Day only</label>
+          <label for="end_date">End Month & Day Only</label>
           <span id="end_dateError"></span>
         </div>
       </div>
