@@ -101,7 +101,7 @@ function validateYear(userYear) {
 
   if (pYear.length != 4) return false;
   if (!pYear.match(/\d{4}/)) return false;
-  if (thisYear + 2 > pYear || pYear < thisYear - 2) return false;
+  if (thisYear + 2 > pYear || pYear > thisYear - 2) return false;
   
   return true;
 }

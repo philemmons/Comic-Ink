@@ -251,6 +251,7 @@ function getConInfo($conID)
 /*conInsert.php*/
 function addCon()
 {
+    echo "add function called"."<br>";die();
     global $dbConn;
 
     if (isset($_POST['submitInsert'])) {
