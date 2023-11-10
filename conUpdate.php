@@ -188,18 +188,18 @@ if (isset($_SESSION["status"])) {
         </div>
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-3">
         <button type="submit" name="submitUpdate" value="update" class="btn" > Update</btn>
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-3">
         <button type="reset" name="reset" value="reset" class="btn"> Reset </button>
       </div>
     <?php } else {  ?>
       <h6> Hello, there was no convention selected which to update, and please select one from the Admin panel.</h6>
     <?php } ?>
 
-    <div class="col-md-4">
+    <div class="col-md-6">
       <a href="admin.php" class="btn" data-dismiss="modal" style="float:right">Return to Admin</a>
     </div>
 
