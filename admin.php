@@ -262,7 +262,7 @@ if (isset($_SESSION["status"])) {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
-      <div class="modal-body">
+      <div class="modal-body" style="overflow: auto;">
         <p>Average number of conventions per State:
           <?php $num = getConAvg();
           displayConAvg($num); ?></p>
