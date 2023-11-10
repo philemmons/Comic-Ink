@@ -68,7 +68,7 @@ if (isset($_SESSION["status"])) {
     }
     ?>
     <!-- https://getbootstrap.com/docs/5.3/forms/validation/? -->
-    <form method='POST' name="insertConForm" class='row gx-4 gy-3 align-items-center needs-validation' novalidate'>
+    <form method='POST' name="insertConForm" class='row gx-4 gy-3 align-items-center needs-validation' novalidate>
 
       <div class="col-md-2">
         <div class="form-floating">
