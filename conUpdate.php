@@ -106,7 +106,7 @@ if (isset($_SESSION["status"])) {
   if (isset($_GET['id'])) {
     $conInfo = getConInfo($_GET['id']);
   ?>
-    <form method='POST' name="updateConForm" class='row gx-4 gy-3 align-items-center' onsubmit='validateUpdate()' ;>
+    <form method='POST' name="updateConForm" class='row gx-4 gy-3 align-items-center' onsubmit='validateUpdate();'>
 
       <div class="col-md-2">
         <div class="form-floating">

@@ -62,91 +62,108 @@ if (isset($_SESSION["status"])) {
     <br>
 
     <?php
-      if (isset($_POST['submitInsert'])) {
-        echo "form was submitted";
-        die();
-        addCon();
-        echo "<h6 id='addDisplay'>Convention Added!</h6>";
-      }
-      ?>
-    <form method='POST' name="insertConForm" class='row gx-4 gy-3 align-items-center' onsubmit='return validateInsert()' ;>
+    if (isset($_POST['submitInsert'])) {
+      addCon();
+      echo "<h6 id='addDisplay'>Convention Added!</h6>";
+    }
+    ?>
+    <!-- https://getbootstrap.com/docs/5.3/forms/validation/? -->
+    <form method='POST' name="insertConForm" class='row gx-4 gy-3 align-items-center needs-validation' novalidate'>
 
       <div class="col-md-2">
         <div class="form-floating">
           <input type="text" class="form-control" id="conID" placeholder="Default - auto incremented" name="conID" disabled />
-          <label for="conID">ConID</label>
+          <label for="conID" class="form-label">ConID</label>
         </div>
       </div>
 
       <div class="col-md-10">
         <div class="form-floating">
-          <input type="text" class="form-control" id="conName" placeholder="Enter Convention Name" name="conName" />
-          <label for="conName">Convention Name</label>
-          <span id="conNameError"></span>
+          <input type="text" class="form-control" id="conName" placeholder="Enter Convention Name" name="conName" required />
+          <label for="conName" class="form-label">Convention Name</label>
+          <div class="invalid-feedback">
+            Please provide a convention name.
+          </div>
         </div>
       </div>
 
       <div class="col-md-4">
         <div class="form-floating">
-          <input type="text" class="form-control" id="start_date" name="start_date" />
-          <label for="start_date">Start Month & Day Only</label>
-          <span id="start_dateError"></span>
+          <input type="text" class="form-control" id="start_date" name="start_date" required />
+          <label for="start_date" class="form-label">Start Month & Day Only</label>
+          <div class="invalid-feedback">
+            Please provide a month and day only.
+          </div>
         </div>
       </div>
 
       <div class="col-md-4">
         <div class="form-floating">
-          <input type="text" class="form-control" id="end_date" name="end_date" />
-          <label for="end_date">End Month & Day Only</label>
-          <span id="end_dateError"></span>
+          <input type="text" class="form-control" id="end_date" name="end_date" required />
+          <label for="end_date" class="form-label">End Month & Day Only</label>
+          <div class="invalid-feedback">
+            Please provide a month and day only.
+          </div>
         </div>
       </div>
 
       <div class="col-md-4">
         <div class="form-floating">
-          <input type="int" class="form-control" id="year" placeholder="Enter Year:" name="year" />
-          <label for="year">Year</label>
-          <span id="yearError"></span>
+          <input type="int" class="form-control" id="year" placeholder="Enter Year:" name="year" required />
+          <label for="year" class="form-label">Year</label>
+          <div class="invalid-feedback">
+            Please provide a year.
+          </div>
         </div>
       </div>
 
       <div class="col-12">
         <div class="form-floating">
-          <input type="text" class="form-control" id="event_location" placeholder="Enter Location" name="event_location" />
-          <label for="event_location">Event Location</label>
-          <span id="event_locationError"></span>
+          <input type="text" class="form-control" id="event_location" placeholder="Enter Location" name="event_location" required />
+          <label for="event_location" class="form-label">Event Location</label>
+          <div class="invalid-feedback">
+            Please provide an event location.
+          </div>
         </div>
       </div>
 
       <div class="col-md-4">
         <div class="form-floating">
-          <input type="text" class="form-control" id="city" placeholder="Enter City" name="city" />
-          <label for="city">City</label>
-          <span id="cityError"></span>
+          <input type="text" class="form-control" id="city" placeholder="Enter City" name="city" required />
+          <label for="city" class="form-label">City</label>
+          <div class="invalid-feedback">
+            Please provide a city.
+          </div>
         </div>
       </div>
 
       <div class="col-md-4">
         <div class="form-floating">
-          <input type="text" class="form-control" id="state" placeholder="Enter State" name="state" />
-          <label for="state">State</label>
-          <span id="stateError"></span>
+          <input type="text" class="form-control" id="state" placeholder="Enter State" name="state" required />
+          <label for="state" class="form-label">State</label>
+          <div class="invalid-feedback">
+            Please provide a state.
+          </div>
         </div>
       </div>
 
       <div class="col-md-4">
         <div class="form-floating">
-          <input type="text" class="form-control" id="country" placeholder="Enter Country" name="country" />
-          <label for="country">Country</label>
-          <span id="countryError"></span>
+          <input type="text" class="form-control" id="country" placeholder="Enter Country" name="country" required />
+          <label for="country" class="form-label">Country</label>
+          <div class="invalid-feedback">
+            Please provide a country.
+          </div>
         </div>
       </div>
 
       <div class="col-md-12">
         <div class="form-floating">
-          <input type="text" class="form-control" id="website" placeholder="xxx.example.xxx" name="website" />
-          <label for="website">Website</label>
-          <span id="websiteError"></span>
+          <input type="text" class="form-control" id="website" placeholder="xxx.example.xxx" name="website" required />
+          <label for="website" class="form-label">Website</label>
+          <div class="invalid-feedback">
+            Please provide a website url.
+          </div>
         </div>
       </div>
 
@@ -165,22 +182,44 @@ if (isset($_SESSION["status"])) {
   </div>
 
   <!-- Modal -->
-<div class="modal fade" id="insertModal" tabindex="-1" aria-labelledby="insertModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-body" style="text-align: center">
-      <h3>Update</h3>
-        <img src='img/complete.png' alt='complete word with red border with a brick like texture.' />
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+  <div class="modal fade" id="insertModal" tabindex="-1" aria-labelledby="insertModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-body" style="text-align: center">
+          <h3>Update</h3>
+          <img src='img/complete.png' alt='complete word with red border with a brick like texture.' />
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
   <br><br>
   <?php include 'footer.inc' ?>
+
+  <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (() => {
+      'use strict'
+
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      const forms = document.querySelectorAll('.needs-validation')
+
+      // Loop over them and prevent submission
+      Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+
+          form.classList.add('was-validated')
+        }, false)
+      })
+    })()
+  </script>
 
   </body>
 

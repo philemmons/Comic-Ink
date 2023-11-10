@@ -58,6 +58,8 @@ function displayError(elementId, errorMessage) {
   $(elementId).css("backgroundColor", "#FFDEDE").focus();
 }
 
+/* Use bootstrap validation for insertCon - 11.10.23 */
+/*
 function validateInsert() {
   $(":input").each(function () {
     if ($(this).val() == "") {
@@ -71,6 +73,7 @@ function validateInsert() {
   });
   return true;
 }
+*/
 
 $(document).ready(function () {
   $("#city").change(function () {
@@ -88,7 +91,8 @@ $(document).ready(function () {
 }); //documentReady
 
 
-// not in use //
+/* not in use 11.10.23 */
+/*
 function resetFields() {
   $(":input").each(function () {
     let formID = $(this).attr("id");
@@ -99,7 +103,7 @@ function resetFields() {
   $("#addDisplay").html("");
   return true;
 }
-
+*/
 
 function myReset(){
   document.getElementById("myForm").reset(); 
