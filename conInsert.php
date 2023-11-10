@@ -62,6 +62,9 @@ if (isset($_SESSION["status"])) {
     <br>
 
     <?php
+    echo isset($_POST['submitInsert']);
+    echo "<br>";
+    die();
       if (isset($_POST['submitInsert'])) {
         //echo "form was submitted";
         addCon();
