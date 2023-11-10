@@ -200,7 +200,7 @@ if (isset($_SESSION["status"])) {
     <?php } ?>
 
     <div class="col-md-6">
-      <a href="admin.php" class="btn" style="float:right">Return to Admin</a>
+      <a href="admin.php#middlePage" class="btn" style="float:right">Return to Admin</a>
     </div>
 
     </form>
