@@ -25,9 +25,6 @@ function dataDisplay($comic)
         echo "<td>" . $page['volume'] . "</td>";
         echo "<td>" . $page['total_issues'] . "</td>";
         echo "<td>" . $page['publisher'] . "</td>";
-        /*
-        echo "<td> <a data-toggle='modal' href='#myModal' onclick = 'atCon(\"" . $page['title'] . "\",\"" . $page['year'] . "\",\"" . $page['issue'] . "\")'>more</a></td>";
-        */
         echo "</tr>";
     }
 }
