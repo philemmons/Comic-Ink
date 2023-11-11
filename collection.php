@@ -71,7 +71,7 @@ if (isset($_SESSION["status"])) {
         <div class="col-auto">
             <div class="input-group">
                 <div class="input-group-text">Title</div>
-                <input type="text" name="title" placeholder="Enter comic title Here" />
+                <input type="text" name="title" placeholder="Enter Title Here" />
             </div>
         </div>
 
