@@ -1,0 +1,37 @@
+<script>
+    function atCon(titleId, yearId, issueId) {
+        $("#modalInfo").html("");
+        $("#modalTitle").html("");
+        $.ajax({
+            type: "get", // HTTP method to use for the request
+            url: "api/getComicInfo.php", // URL to which the request is sent.
+            dataType: "json", // type of data expected back from the server
+            data: {
+                "tID": titleId, // map that is sent to the server with the request.
+                "yID": yearId,
+                "iID": issueId
+            },
+            success: function(data, status) { //callback function that is executed if the request succeeds.
+                alert(data[0].creator); //ALSO THE BRACKETS in the preview indicate an object!
+                //to be sure something is being sent back from the api 
+                // *****  inspect element when working with js -->network: remote server --> response  --> console to examine data
+                //test the api in the browser to be certain it works
+                if (jQuery.isEmptyObject(data[0])) {
+                    $("#modalTitle").append("<h3>Sorry!</h3>")
+                    $("#modalInfo").append("At this time the creator is not scheduled at any conventions.");
+                } else {
+                    $("#modalTitle").append("Creator: " + data[0].creator);
+                    $("#modalInfo").append("Convention: " + data[0].conName + "<br>");
+                    $("#modalInfo").append("City: " + data[0].city + "<br>");
+                    $("#modalInfo").append("State: " + data[0].state + "<br>");
+                    $("#modalInfo").append("Attendance: " + data[0].turnOut + "<br>");
+                    $("#modalInfo").append("<a href = '" + data[0].website + "\'>" + data[0].website + "</a>");
+                }
+            },
+            complete: function(data, status) { //callback function that executes whenever the request finishes.
+                alert(status);
+            }
+        }); //AJAX 1
+
+    }
+</script>
