@@ -1,4 +1,4 @@
-// JavaScript File -- careful !!!!  examine url for '?''
+/* JavaScript File - careful examining url for '?'*/
 
 function lettersOnly(cs) {
   let str = $(cs).val();

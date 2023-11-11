@@ -109,7 +109,7 @@ function goSQLcomic($table)
 
     if ($title) {
         //Prevents SQL injection by using a named parameter.
-        $nPara[':dTitle'] = '%' . $title . '%';
+        $nPara[':dTitle'] = '%' .  htmlspecialchars($title, ENT_QUOTES) . '%';
         $sql .= " WHERE title LIKE :dTitle ";
     }
     if ($pub) {
@@ -150,7 +150,7 @@ function goSQLcon($table)
 
     if ($conName) {
         //Prevents SQL injection by using a named parameter.
-        $nPara[':dConName'] = '%' . $conName . '%';
+        $nPara[':dConName'] = '%' . htmlspecialchars($conName, ENT_QUOTES) . '%';
         $sql .= " WHERE conName LIKE :dConName ";
     }
 
@@ -173,7 +173,7 @@ function goSQLcon($table)
             $sql .= " WHERE ";
         }
         //Prevents SQL injection by using a named parameter.
-        $nPara[':dCity'] = '%' . $conCity . '%';
+        $nPara[':dCity'] = '%' . htmlspecialchars($conCity,ENT_QUOTES) . '%';
         $sql .= " city LIKE :dCity ";
     }
 
@@ -209,7 +209,7 @@ function goMain()
 {
     global $dbConn, $nPara;
 
-    $userForm = $_POST['formUN'];
+    $userForm = htmlspecialchars($_POST['formUN'],ENT_QUOTES);
     $pwForm = hash('sha256', $_POST['formPW']);
 
     //Prevents SQL injection by using a named parameter.
