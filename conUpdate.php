@@ -70,7 +70,10 @@ if (isset($_POST['submitUpdate'])) {  //admin has submitted the "update user" fo
     <a class="nav-link" href="collection.php">Collection</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="convention.php">Convention</a>
+    <a class="nav-link" href="graphicNovel.php">Graphic Novels</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="convention.php">Conventions</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="login.php">Admin</a>
@@ -193,7 +196,7 @@ if (isset($_SESSION["status"])) {
       </div>
 
       <div class="col-md-3">
-        <button type="reset" name="reset" value="reset" class="btn" onlclick= "myReset('updateConForm')";> Reset </button>
+        <button type="reset" name="reset" value="reset" class="btn" onlclick="myReset('updateConForm')" ;> Reset </button>
       </div>
     <?php } else {  ?>
       <h6> Hello, there was no convention selected which to update, and please select one from the Admin panel.</h6>
@@ -211,7 +214,7 @@ if (isset($_SESSION["status"])) {
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-body" style="text-align: center">
-      <h3>Update</h3>
+        <h3>Update</h3>
         <img src='img/complete.png' alt='complete word with red border with a brick like texture.' />
       </div>
       <div class="modal-footer">

@@ -39,7 +39,10 @@ function dataDisplay($comic)
         <a class="nav-link active" aria-current="page" href="collection.php">Collection</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="convention.php">Convention</a>
+        <a class="nav-link" href="graphicNovel.php">Graphic Novels</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="convention.php">Conventions</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="login.php">Admin</a>
@@ -137,26 +140,6 @@ if (isset($_SESSION["status"])) {
             ?>
         </tbody>
     </table>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-
-        <div class="modal-content">
-            <div class="modal-header">
-                
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
-                <h4 class="modal-title fs-5" id="modalTitle"></h4>
-            </div>
-            <div class="modal-body">
-                <div id="modalInfo"></div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
 </div>
 
 <br><br>

@@ -18,7 +18,10 @@ if (isset($_POST['logout'])) {
     <a class="nav-link" href="collection.php">Collection</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="convention.php">Convention</a>
+    <a class="nav-link" href="graphicNovel.php">Graphic Novels</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="convention.php">Conventions</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="login.php">Admin</a>

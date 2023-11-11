@@ -74,7 +74,7 @@ function displayConTot($tot)
 function getNextCon()
 {
   global $dbConn;
-  
+
   $sql = "SELECT COUNT(*) as c
           FROM
               (SELECT 
@@ -98,7 +98,7 @@ function getNextCon()
   $sql = "SELECT *, STR_TO_DATE(CONCAT(start_date, ' ', year), '%M %d %Y') AS r
           FROM convention 
           WHERE STR_TO_DATE(CONCAT(start_date, ' ', year), '%M %d %Y') > CURRENT_DATE() 
-          ORDER BY r IS NULL , r ASC limit ". $limit;
+          ORDER BY r IS NULL , r ASC limit " . $limit;
   $stmt = $dbConn->prepare($sql);
   $stmt->execute();
   $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -161,7 +161,10 @@ function displayConAdmin($convention)
     <a class="nav-link" href="collection.php">Collection</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="convention.php">Convention</a>
+    <a class="nav-link" href="graphicNovel.php">Graphic Novels</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="convention.php">Conventions</a>
   </li>
   <li class="nav-item">
     <a class="nav-link active" aria-current="page" href="login.php">Admin</a>
@@ -298,7 +301,7 @@ if (isset($_SESSION["status"])) {
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
-      
+
     </div>
   </div>
 </div>
@@ -323,10 +326,10 @@ if (isset($_SESSION["status"])) {
     pagingType: 'simple'
   });
 
-  $('#myModal').on('shown.bs.modal', function () {
-       var table = $('#summaryDisplay').DataTable();
-       table.columns.adjust();
-   });
+  $('#myModal').on('shown.bs.modal', function() {
+    var table = $('#summaryDisplay').DataTable();
+    table.columns.adjust();
+  });
 </script>
 
 </body>
