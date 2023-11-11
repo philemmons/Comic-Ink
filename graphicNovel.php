@@ -34,7 +34,7 @@ function dataDisplay($gNovels)
           <a class="nav-link" href="index.php">Home</a>
      </li>
      <li class="nav-item">
-          <a class="nav-link active" href="collection.php">Collection</a>
+          <a class="nav-link" href="collection.php">Collection</a>
      </li>
      <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="graphicNovel.php">Graphic Novels</a>
@@ -69,7 +69,7 @@ if (isset($_SESSION["status"])) {
           <div class="col-auto">
                <div class="input-group">
                     <div class="input-group-text">Title</div>
-                    <input type="text" name="title" placeholder="Enter graphic novel title Here" />
+                    <input type="text" name="title" placeholder="Enter Title Here" />
                </div>
           </div>
 
@@ -107,7 +107,7 @@ if (isset($_SESSION["status"])) {
           </div>
 
           <div class="col-auto">
-               <input type="submit" value="All Comics" name="allIn" class="btn" /></span>
+               <input type="submit" value="All Graphic Novels" name="allIn" class="btn" /></span>
           </div>
 
      </form>
