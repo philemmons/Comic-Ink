@@ -197,7 +197,7 @@ if (isset($_SESSION["status"])) {
   </div>
 
   <br><br>
-  <?php include 'footer.inc' ?>
+  <?php include_once 'footer.inc' ?>
 
   <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields

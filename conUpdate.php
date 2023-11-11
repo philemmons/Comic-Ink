@@ -5,9 +5,8 @@ if (!isset($_SESSION["status"])) {  //Check whether the admin has logged in
   header("Location: login.php");
 }
 
-include 'header.html';
-include 'php/sourceFinal.php';
-
+include_once 'header.html';
+include_once
 $dbConn = getDBConnection();
 
 if (isset($_POST['logout'])) {
@@ -222,7 +221,7 @@ if (isset($_SESSION["status"])) {
 </div>
 
 <br><br>
-<?php include 'footer.inc' ?>
+<?php include_once 'footer.inc' ?>
 
 </body>
 

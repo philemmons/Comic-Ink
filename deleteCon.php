@@ -6,7 +6,7 @@
         header("Location: login.php"); 
     }
     
-    include 'php/dbConnection.php';
+    include_once 'php/dbConnection.php';
     
     $dbConn = getDBConnection();
 

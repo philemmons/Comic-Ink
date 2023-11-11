@@ -1,7 +1,8 @@
 <?php
 session_start();  //start or resume an existing session
-include 'header.html';
-include 'php/sourceFinal.php';
+
+include_once 'header.html';
+include_once 'php/sourceFinal.php';
 
 if (isset($_POST['logout'])) {
   session_destroy();
@@ -91,7 +92,7 @@ if (isset($_SESSION["status"])) {
   </button>
 </div>
 
-<?php include 'footer.inc' ?>
+<?php include_once 'footer.inc' ?>
 
 </body>
 

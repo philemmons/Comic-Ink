@@ -142,32 +142,6 @@ if (isset($_SESSION["status"])) {
     </table>
 </div>
 
-<!-- Modal
-<div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-sm">
-
-    
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title" id="modalTitle"></h4>
-            </div>
-            <div class="modal-body">
-                <div id="modalInfo"></div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
-</div> -->
-
-<!-- Button trigger modal
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Launch demo modal
-</button> -->
-
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -187,8 +161,6 @@ if (isset($_SESSION["status"])) {
         </div>
     </div>
 </div>
-
-
 
 <br><br>
 <?php include_once 'footer.inc' ?>

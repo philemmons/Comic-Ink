@@ -306,7 +306,7 @@ if (isset($_SESSION["status"])) {
 </div>
 
 <br><br>
-<?php include 'footer.inc' ?>
+<?php include_once 'footer.inc' ?>
 
 <script>
   //https://datatables.net/reference/option
