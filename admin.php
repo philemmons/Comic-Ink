@@ -74,9 +74,7 @@ function displayConTot($tot)
 function getNextCon()
 {
   global $dbConn;
-
-
-
+  
   $sql = "SELECT COUNT(*) as c
           FROM
               (SELECT 

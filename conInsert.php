@@ -5,7 +5,6 @@ if (!isset($_SESSION["status"])) {  //Check whether the admin has logged in
   header("Location: login.php");
 }
 
-
 include_once 'header.html';
 include_once 'php/sourceFinal.php';
 

@@ -6,7 +6,8 @@ if (!isset($_SESSION["status"])) {  //Check whether the admin has logged in
 }
 
 include_once 'header.html';
-include_once
+include_once 'php/sourceFinal.php';
+
 $dbConn = getDBConnection();
 
 if (isset($_POST['logout'])) {
