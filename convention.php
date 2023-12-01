@@ -5,8 +5,8 @@ if (!isset($_SESSION["status"])) {  //Check whether the admin has logged in
     $_SESSION["name"] = "Guest";
 }
 
-include 'header.html';
-include 'php/sourceFinal.php';
+include_once 'header.html';
+include_once 'php/sourceFinal.php';
 
 $dbConn = getDBConnection();
 
@@ -15,16 +15,6 @@ if (isset($_POST['logout'])) {
     header("Location: index.php");
 }
 
-function displayCon($convention)
-{
-    foreach ($convention as $eachCon) {
-        echo "<tr>";
-        //$str = $eachCon['conName'] . ", " .$eachCon['city'] .", ".$eachCon['state'] .", ".$eachCon['turnOut'] .", ".$eachCon['creator'];
-        echo "<td>" . $eachCon['conName'] . "</td><td>" . $eachCon['city'] . "</td><td>" . $eachCon['state'] . "</td><td>" . $eachCon['turnOut'] . "</td><td>" . $eachCon['creator'] . "</td>";
-        echo "<td> <a href='" . $eachCon['website'] . "' target='_blank'/>" . $eachCon['website'] . "</a></td>";
-        echo "</tr>";
-    }
-}
 ?>
 
 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -36,7 +26,10 @@ function displayCon($convention)
         <a class="nav-link" href="collection.php">Collection</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="convention.php">Convention</a>
+        <a class="nav-link" href="graphicNovel.php">Graphic Novels</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="convention.php">Conventions</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="login.php">Admin</a>
@@ -57,11 +50,12 @@ if (isset($_SESSION["status"])) {
 
 <br>
 <div class="wrapper form-display">
-    <h4>
+    <h6>
         Welcome <?= $_SESSION['name'] ?>
-    </h4>
+    </h6>
     <br>
     <form method="POST" name="conForm" class="row gx-4 gy-3 align-items-center">
+
         <div class="col-auto">
             <div class="input-group">
                 <div class="input-group-text">Name</div>
@@ -71,8 +65,15 @@ if (isset($_SESSION["status"])) {
 
         <div class="col-auto">
             <div class="input-group">
-                <div class="input-group-text">Creator</div>
-                <input type="text" name="creator" placeholder="Enter First or Last Name" />
+                <div class="input-group-text">Date</div>
+                <input type="date" name="conDate" />
+            </div>
+        </div>
+
+        <div class="col-auto">
+            <div class="input-group">
+                <div class="input-group-text">City</div>
+                <input type="text" name="conCity" placeholder="Enter a City" />
             </div>
         </div>
 
@@ -83,7 +84,6 @@ if (isset($_SESSION["status"])) {
                     <option value="" disabled selected>Select One</option>
                     <?php
                     $allState = getDropDown('convention', 'state');
-                    //print_r($allState);
                     foreach ($allState as $singleState) {
                         echo "<option>" . $singleState['state'] . " </option>";
                     }
@@ -98,9 +98,9 @@ if (isset($_SESSION["status"])) {
                 <select name="sortBy">
                     <option value="" disabled selected>Select One</option>
                     <option value="conName">Name</option>
-                    <option value="creator">Creator</option>
-                    <option value="turnOut ASC">Turn Out: Low to High</option>
-                    <option value="turnOut DESC">Turn Out: High to Low</option>
+                    <option value="city">City</option>
+                    <option value="state">State</option>
+                    <option value="country">Country</option>
                 </select>
             </div>
         </div>
@@ -112,20 +112,24 @@ if (isset($_SESSION["status"])) {
         <div class="col-auto">
             <input type="submit" value="All Conventions" name="allIn" class="btn" />
         </div>
+
     </form>
 </div>
 <br><br>
 <div class="wrapper form-display" style="overflow: auto;">
     <table class="table table-sm table-striped table-hover display nowrap" id="convDisplay" style="width:100%;">
+        <caption>Comic Book Conventions Updated Last 11.06.23</caption>
         <!--https://www.w3schools.com/bootstrap/bootstrap_tables.asp-->
         <thead class='table-dark'>
             <tr>
                 <th>Name</th>
+                <th>Date</th>
+                <th>Year</th>
+                <th>Location</th>
                 <th>City</th>
                 <th>State</th>
-                <th>Attendance</th>
-                <th>Creator</th>
-                <th>Offical</th>
+                <th>Country</th>
+                <th>Official</th>
             </tr>
         </thead>
         <tbody>
@@ -134,7 +138,7 @@ if (isset($_SESSION["status"])) {
                 $filterCon = goSQLcon("convention");
                 displayCon($filterCon);
             } else { // Display inventory initially.
-                $convention = getInfo("convention");
+                $convention = getConData("convention");
                 displayCon($convention);
             }
             ?>
@@ -142,7 +146,7 @@ if (isset($_SESSION["status"])) {
     </table>
 </div>
 <br><br>
-<?php include 'footer.inc' ?>
+<?php include_once 'footer.inc' ?>
 
 <script>
     //https://datatables.net/reference/option

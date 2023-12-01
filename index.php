@@ -1,7 +1,8 @@
 <?php
 session_start();  //start or resume an existing session
-include 'header.html';
-include 'php/sourceFinal.php';
+
+include_once 'header.html';
+include_once 'php/sourceFinal.php';
 
 if (isset($_POST['logout'])) {
   session_destroy();
@@ -17,7 +18,10 @@ if (isset($_POST['logout'])) {
     <a class="nav-link" href="collection.php">Collection</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="convention.php">Convention</a>
+    <a class="nav-link" href="graphicNovel.php">Graphic Novels</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="convention.php">Conventions</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="login.php">Admin</a>
@@ -91,7 +95,7 @@ if (isset($_SESSION["status"])) {
   </button>
 </div>
 
-<?php include 'footer.inc' ?>
+<?php include_once 'footer.inc' ?>
 
 </body>
 

@@ -5,9 +5,8 @@ if (!isset($_SESSION["status"])) {  //Check whether the admin has logged in
   header("Location: login.php");
 }
 
-
-include 'header.html';
-include 'php/sourceFinal.php';
+include_once 'header.html';
+include_once 'php/sourceFinal.php';
 
 $dbConn = getDBConnection();
 
@@ -15,94 +14,131 @@ if (isset($_POST['logout'])) {
   session_destroy();
   header("Location: index.php");
 }
-//admin reports
-function getAvg()
+
+/*admin report*/
+/* average number of conventions per state */
+function getConAvg()
 {
   global $dbConn;
-  $sql = "select round(avg(turnOut))
-            from convention";
+  $sql = "SELECT ROUND(COUNT(*) / COUNT(DISTINCT (state))) as result 
+          FROM convention";
   $ans =  preExeFetNOPARA($sql);
   //print_r($ans);
   return $ans;
 }
-
-function displayNum($num)
+function displayConAvg($num)
 {
   foreach ($num as $digit) {
-    echo $digit['round(avg(turnOut))'] . " ";
+    echo $digit['result'] . " ";
   }
 }
-
-function getList()
+/* number of conventions per state greater than four*/
+function getConByState()
 {
   global $dbConn;
-  $sql = "SELECT state, count( * )
-          FROM convention
-          GROUP BY state 
-          ORDER BY count( * ) DESC, state ASC";
+  $sql = "SELECT state, c
+          FROM
+            (SELECT state, COUNT(*) AS c
+             FROM convention AS t1
+             GROUP BY state
+             ORDER BY c DESC) AS t2
+          WHERE t2.c > 4";
   $list =  preExeFetNOPARA($sql);
   //print_r($list);
   return $list;
 }
-
-function displayList($list)
+function displayConByState($list)
 {
   foreach ($list as $item) {
-    echo $item['state'] . " " . $item['count( * )'] . ", ";
+    echo $item['state'] . " " . $item['c'] . "<br>";
   }
 }
-function getTot()
+
+/* total convention */
+function getConTot()
 {
   global $dbConn;
-  $sql = "SELECT sum(turnOut)
-          FROM convention";
+  $sql = "SELECT count(*) as conTotal FROM convention";
   $tot =  preExeFetNOPARA($sql);
   //print_r($tot);
   return $tot;
 }
-function displayTot($tot)
+function displayConTot($tot)
 {
   foreach ($tot as $part) {
-    echo $part['sum(turnOut)'] . " ";
-  }
-}
-function getCount()
-{
-  global $dbConn;
-  $sql = "SELECT count(con_id)
-          FROM convention";
-  $cnt =  preExeFetNOPARA($sql);
-  //print_r($cnt);
-  return $cnt;
-}
-function displayCount($cnt)
-{
-  foreach ($cnt as $one) {
-    echo $one['count(con_id)'] . " ";
+    echo $part['conTotal'] . " ";
   }
 }
 
-function getBig()
+/* list of the upcoming conventions based on date, one or more */
+function getNextCon()
 {
   global $dbConn;
-  $sql = "SELECT *
-        FROM convention
-        WHERE turnOut = (
-        SELECT max( turnOut )
-        FROM convention ) ";
-  $big =  preExeFetNOPARA($sql);
-  //print_r($big);
-  return $big;
+
+  $sql = "SELECT COUNT(*) as c
+          FROM
+              (SELECT 
+                  id, STR_TO_DATE(CONCAT(start_date, ' ', year), '%M %d %Y') AS result
+              FROM convention
+              ORDER BY result IS NULL , result ASC) AS t1
+          WHERE
+              result > CURRENT_DATE()
+          GROUP BY result
+          ORDER BY result ASC
+          limit 1";
+
+  $stmt = $dbConn->prepare($sql);
+  $stmt->execute();
+  $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+  foreach ($records as $item) {
+    $limit =  $item['c'];
+  }
+
+  $sql = "SELECT *, STR_TO_DATE(CONCAT(start_date, ' ', year), '%M %d %Y') AS r
+          FROM convention 
+          WHERE STR_TO_DATE(CONCAT(start_date, ' ', year), '%M %d %Y') > CURRENT_DATE() 
+          ORDER BY r IS NULL , r ASC limit " . $limit;
+  $stmt = $dbConn->prepare($sql);
+  $stmt->execute();
+  $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+  return $records;
 }
-function displayBig($big)
+
+/* convention display with update and delete buttons for each */
+function displayConAdmin($convention)
 {
-  foreach ($big as $small) {
-    echo $small['conName'] . "<br>" . $small['city'] . ", " . $small['state'] . "<br>" . $small['turnOut'] . "<br>" . $small['creator'] .
-      "<br> <a href='" . $small['website'] . "' target='_blank'/>" . $small['website'] . "</a>";
+  foreach ($convention as $eachCon) {
+    $newDate = dateDisplay($eachCon['start_date'], $eachCon['end_date']);
+
+    echo "<tr>";
+    echo "<td>" . $eachCon['conName'] . "</td>";
+    echo "<td>
+    <a href='conUpdate.php?id=" . $eachCon['id'] . "'>
+      <button type=\"button\" class=\"btn\">
+        <span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span> Update
+      </button>
+    </a>";
+    echo "</td>";
+    echo "<td>
+    <a href='deleteCon.php?id=" . $eachCon['id'] . "' onclick= 'return confirmDelete(\"" . $eachCon['conName'] . "\")' >
+      <button type=\"button\" class=\"btn\">
+        <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span> Delete
+      </button>
+    </a>";
+    echo "</td>";
+    echo "<td>" . $newDate . "</td>";
+    echo "<td>" . $eachCon['year'] . "</td>";
+    echo "<td>" . $eachCon['event_location'] . "</td>";
+    echo "<td>" . $eachCon['city'] . "</td>";
+    echo "<td>" . $eachCon['state'] . "</td>";
+    echo "<td>" . $eachCon['country'] . "</td>";
+    echo "<td> <a href='https://" . $eachCon['website'] . "' target='_blank'>" . $eachCon['website'] . "</a> </td>";
+    echo "</tr>";
   }
 }
-//end admin reports
-
+/* end admin reports*/
 ?>
 
 <script>
@@ -125,7 +161,10 @@ function displayBig($big)
     <a class="nav-link" href="collection.php">Collection</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="convention.php">Convention</a>
+    <a class="nav-link" href="graphicNovel.php">Graphic Novels</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="convention.php">Conventions</a>
   </li>
   <li class="nav-item">
     <a class="nav-link active" aria-current="page" href="login.php">Admin</a>
@@ -150,53 +189,65 @@ if (isset($_SESSION["status"])) {
 </div><!-- /.container-fluid -->
 </nav>
 
-<div class="wrapper">
-  <table class="table table-striped" id="adminDisplay">
-    <thead>
-      <tr>
-        <th colspan="3">Welcome back <?= $_SESSION['status'] ?>
-        <th></th>
-        <th>
-          <form action="conInsert.php">
-            <input type="submit" value="Add New Con!" class="btn btn-sm" />
-          </form>
-        </th>
-        <th colspan="3"><button type="" class="btn btn-sm" data-toggle="modal" data-target="#myModal">Admin Reports</button>
-        </th>
+<br>
+<div class="wrapper form-display">
+  <h6>
+    Welcome <?= $_SESSION['name'] ?>
+  </h6>
+  <br>
+  <form method="POST" name="conForm" id="middlePage" class="row gx-4 gy-3 align-items-center">
 
-      </tr>
+    <div class="col-auto">
+      <div class="input-group">
+        <div class="input-group-text">Name</div>
+        <input type="text" name="conName" placeholder="Enter Convention Name" />
+      </div>
+    </div>
+
+    <div class="col-auto">
+      <input type="submit" value="Search" name="filterForm" class="btn" />
+    </div>
+
+    <div class="col-auto">
+      <a href="conInsert.php" class="btn">Add New Con!</a>
+    </div>
+
+    <div class="col-auto">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#myModal">
+        Admin Reports
+      </button>
+    </div>
+
+  </form>
+</div>
+<br><br>
+<div class="wrapper form-display" style="overflow: auto;">
+  <table class="table table-sm table-striped table-hover display nowrap" id="adminDisplay" style="width:100%;">
+    <caption>Admin Conventions</caption>
+    <!--https://www.w3schools.com/bootstrap/bootstrap_tables.asp-->
+    <thead class='table-dark'>
       <tr>
         <th>Name</th>
+        <th>Alter</th>
+        <th>Remove</th>
+        <th>Date</th>
+        <th>Year</th>
+        <th>Location</th>
         <th>City</th>
         <th>State</th>
-        <th>Creator</th>
-        <th>More Info</th>
-        <th>Attendance</th>
-        <th></th>
-        <th></th>
+        <th>Country</th>
+        <th>Official</th>
       </tr>
     </thead>
     <tbody>
       <?php
-      $convention = getInfo("convention");
-      foreach ($convention as $eachCon) {
-        //$conData="con_id=".$eachCon['con_id']."<br>".$eachCon['conName']."<br>".$eachCon['city']."<br>".$eachCon['state']."<br>".$eachCon['creator']."<br>".$eachCon['website']."<br>".$eachCon['turnOut']."<br>";
-        echo "<tr>";
-        //echo "<td><a href='conInfo.php?".$conData."' target='userInfoFrame'>" . $eachCon['conName'] . "</a></td> ";
-
-        echo "<td>" . $eachCon['conName'] . "</td><td>" . $eachCon['city'] . "</td><td>" . $eachCon['state'] . "</td><td>" . $eachCon['creator'] . "</td><td style='text-transform: lowercase'>" . $eachCon['website'] . "</td><td>" . $eachCon['turnOut'];
-
-
-        echo "</td><td><a href='conUpdate.php?con_id=" . $eachCon['con_id'] . "'>
-                      <button type=\"button\" class=\"btn btn-sm\">
-                      <span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span> Update
-                      </button></a>";
-
-        echo "</td><td><a href='deleteCon.php?con_id=" . $eachCon['con_id'] . "' onclick= 'return confirmDelete(\"" . $eachCon['conName'] . "\")' >
-                      <button type=\"button\" class=\"btn btn-sm\">
-                      <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span> Delete
-                      </button></a>";
-        echo "</td></tr>";
+      if (isset($_POST['filterForm'])) {
+        $filterCon = goSQLcon("convention");
+        displayConAdmin($filterCon);
+      } else {
+        $convention = getConData("convention");
+        displayConAdmin($convention);
       }
       ?>
     </tbody>
@@ -204,64 +255,83 @@ if (isset($_SESSION["status"])) {
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
-  <div class="modal-dialog modal-sm">
-
-    <!-- Modal content-->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h3 class="modal-title">Admin Reports:</h3>
+        <h6 class="modal-title fs-5" id="myModalLabel">Admin Report</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <p>Total convention attendance:
-          <?php
-          $tot = getTot();
-          displayTot($tot);
-          ?></p>
-        <p>Average attendance conventions:
-          <?php
-          $num = getAvg();
-          displayNum($num);
-          ?></p>
-        <p>Number of convention by state:<br>
-          <?php
-          $list = getList();
-          displayList($list);
-          ?></p>
-        <p>Total conventions:
-          <?php
-          $cnt = getCount();
-          displayCount($cnt);
-          ?></p>
-        <p>Largest attendance convention details:<br>
-        <div style='padding-left: 20px' <?php
-                                        $big = getBig();
-                                        displayBig($big);
-                                        ?></div>
-          </p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn" data-dismiss="modal">Close</button>
-        </div>
+
+      <div class="modal-body" style="overflow: auto;">
+        <p>Average number of conventions per State:
+          <?php $num = getConAvg();
+          displayConAvg($num); ?></p>
+        <p>The States with more than four convention in descending order:<br>
+          <?php $list = getConByState();
+          displayConByState($list); ?></p>
+        <p>Total overall conventions:
+          <?php $cnt = getConTot();
+          displayConTot($cnt); ?> </p>
+        <p>One or more upcoming conventions based on today's date:</p>
+
+        <table class="table table-sm table-striped table-hover display nowrap" id="summaryDisplay" style="width:100%;">
+          <caption>Admin Upcoming Convention Summary</caption>
+          <thead class='table-dark'>
+            <tr>
+              <th>Name</th>
+              <th>Date</th>
+              <th>Year</th>
+              <th>Location</th>
+              <th>City</th>
+              <th>State</th>
+              <th>Country</th>
+              <th>Official</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php
+            $groupCons = getNextCon();
+            displayCon($groupCons);
+            ?>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
 
     </div>
   </div>
+</div>
 
-  <?php include 'footer.inc' ?>
+<br><br>
+<?php include_once 'footer.inc' ?>
 
-  <script>
-    //https://datatables.net/reference/option
-    $(document).ready(function() {
-      $('#adminDisplay').DataTable({
-        "lengthMenu": [5, 10, 20],
-        "searching": false,
-        "ordering": false
-      });
-    });
-  </script>
+<script>
+  //https://datatables.net/reference/option
+  new DataTable('#adminDisplay', {
+    lengthMenu: [8, 16],
+    searching: false,
+    ordering: false,
+    responsive: true,
+    pagingType: 'simple'
+  });
+  new DataTable('#summaryDisplay', {
+    lengthMenu: [5, 10],
+    searching: false,
+    ordering: false,
+    responsive: true,
+    pagingType: 'simple'
+  });
 
-  </body>
+  $('#myModal').on('shown.bs.modal', function() {
+    var table = $('#summaryDisplay').DataTable();
+    table.columns.adjust();
+  });
+</script>
 
-  </html>
+</body>
+
+</html>

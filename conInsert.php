@@ -5,9 +5,8 @@ if (!isset($_SESSION["status"])) {  //Check whether the admin has logged in
   header("Location: login.php");
 }
 
-
-include 'header.html';
-include 'php/sourceFinal.php';
+include_once 'header.html';
+include_once 'php/sourceFinal.php';
 
 $dbConn = getDBConnection();
 
@@ -29,7 +28,10 @@ if (isset($_POST['logout'])) {
     <a class="nav-link" href="collection.php">Collection</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="convention.php">Convention</a>
+    <a class="nav-link" href="graphicNovel.php">Graphic Novels</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="convention.php">Conventions</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="login.php">Admin</a>
@@ -54,83 +56,175 @@ if (isset($_SESSION["status"])) {
 </div><!-- /.container-fluid -->
 </nav>
 
-<div class="wrapper">
-  <form class="form-horizontal" onsubmit="return validateInsert()">
+<<br>
+  <div class="wrapper form-display">
+    <h6>
+      Welcome <?= $_SESSION['name'] ?> - New Convention Form
+    </h6>
+    <br>
 
-    <h4>Welcome <?= $_SESSION['name'] ?> - New Convention Info</h4>
-    <div class="form-group">
-      <label for="con_id" class="col-sm-2 control-label">Con_ID:</label>
-      <div class="col-sm-10">
-        <input class="form-control" id="con_id" placeholder="Default value" type="int" name="con_id" value="default" />
-        <span id="con_idError"></span>
+    <?php
+    if (isset($_POST['submitInsert'])) {
+      addCon();
+      echo "<h6 id='addDisplay'>Convention Added!</h6>";
+    }
+    ?>
+    <!-- https://getbootstrap.com/docs/5.3/forms/validation/? -->
+    <form method='POST' name="insertConForm" class='row gx-4 gy-3 align-items-center needs-validation' novalidate>
+
+      <div class="col-md-2">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="conID" placeholder="Default - auto incremented" name="conID" disabled />
+          <label for="conID" class="form-label">ConID</label>
+        </div>
+      </div>
+
+      <div class="col-md-10">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="conName" placeholder="Enter Convention Name" name="conName" required="" />
+          <label for="conName" class="form-label">Convention Name</label>
+          <div class="invalid-feedback">
+            Please provide a convention name.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="start_date" name="start_date" required="" />
+          <label for="start_date" class="form-label">Start Month & Day Only</label>
+          <div class="invalid-feedback">
+            Please provide a month and day only.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="end_date" name="end_date" required="" />
+          <label for="end_date" class="form-label">End Month & Day Only</label>
+          <div class="invalid-feedback">
+            Please provide a month and day only.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-floating">
+          <input type="int" class="form-control" id="year" placeholder="Enter Year:" name="year" required="" />
+          <label for="year" class="form-label">Year</label>
+          <div class="invalid-feedback">
+            Please provide a year.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="event_location" placeholder="Enter Location" name="event_location" required="" />
+          <label for="event_location" class="form-label">Event Location</label>
+          <div class="invalid-feedback">
+            Please provide an event location.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="city" placeholder="Enter City" name="city" required="" />
+          <label for="city" class="form-label">City</label>
+          <div class="invalid-feedback">
+            Please provide a city.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="state" placeholder="Enter State" name="state" required="" />
+          <label for="state" class="form-label">State</label>
+          <div class="invalid-feedback">
+            Please provide a state.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="country" placeholder="Enter Country" name="country" required="" />
+          <label for="country" class="form-label">Country</label>
+          <div class="invalid-feedback">
+            Please provide a country.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="website" placeholder="xxx.example.xxx" name="website" required="" />
+          <label for="website" class="form-label">Website</label>
+          <div class="invalid-feedback">
+            Please provide a website url.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <button type="submit" name="submitInsert" value="insert" class="btn"> Add New Convention </button>
+      </div>
+
+      <div class="col-md-3">
+        <button type="reset" name="reset" value="reset" class="btn" onclick="resetFields();"> Reset </button>
+      </div>
+
+      <div class="col-md-6">
+        <a href="admin.php#middlePage" class="btn" style="float:right">Return to Admin</a>
+      </div>
+    </form>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="insertModal" tabindex="-1" aria-labelledby="insertModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-body" style="text-align: center">
+          <h3>Update</h3>
+          <img src='img/complete.png' alt='complete word with red border with a brick like texture.' />
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
-    <div class="form-group">
-      <label for="conName" class="col-sm-2 control-label">Convention Name:</label>
-      <div class="col-sm-10">
-        <input class="form-control" id="conName" placeholder="enter name" type="text" name="conName" />
-        <span id="conNameError"></span>
-      </div>
-    </div>
+  </div>
 
-    <div class="form-group">
-      <label for="city" class="col-sm-2 control-label">City:</label>
-      <div class="col-sm-10">
-        <input class="form-control" id="city" placeholder="enter city" type="text" name="city" />
-        <span id="cityError"></span>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="state" class="col-sm-2 control-label">State:</label>
-      <div class="col-sm-10">
-        <input class="form-control" id="state" placeholder="eg - CA UT KA" type="text" name="state" />
-        <span id="stateError"></span>
-      </div>
-    </div>
+  <br><br>
+  <?php include_once 'footer.inc' ?>
 
-    <div class="form-group">
-      <label for="creator" class="col-sm-2 control-label">Creator:</label>
-      <div class="col-sm-10">
-        <input class="form-control" id="creator" placeholder="enter first or last name" type="text" name="creator" />
-        <span id="creatorError"></span>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="website" class="col-sm-2 control-label">Full Website:</label>
-      <div class="col-sm-10">
-        <input class="form-control" id="website" placeholder="http(s)://xxx.example.xxx" type="text" name="website" />
-        <span id="websiteError"></span>
-      </div>
-    </div>
+  <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (() => {
+      'use strict'
 
-    <div class="form-group">
-      <label for="turnOut" class="col-sm-2 control-label">Attendance:</label>
-      <div class="col-sm-10">
-        <input class="form-control" id="turnOut" placeholder="est number" type="decimal" name="turnOut" />
-        <span id="turnOutError"></span>
-      </div>
-    </div>
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      const forms = document.querySelectorAll('.needs-validation')
 
-    <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-10">
-        <!-- <button type="submit" class="btn btn-default">Sign in</button> -->
-        <button type="submit" name="submit" value="insert" class="btn"> Insert </button>
-        <button type="reset" name="reset" value="reset" class="btn" onclick="resetFields()"> Reset </button>
-        <a href="admin.php" class="btn" data-dismiss="modal" style="float:right">Return to Admin</a>
-        <?php
-        if (isset($_GET['submit'])) {
-          //echo "form was submitted";
-          addCon();
-          echo "<h3 id='addDisplay'>Convention Added!</h3>";
-        }
-        ?>
-      </div>
-    </div>
-  </form>
-</div>
+      // Loop over them and prevent submission
+      Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          } else {
+            let timeout = setTimeout($('#insertModal').modal('show'), 4000);
+          }
 
-<?php include 'footer.inc' ?>
+          form.classList.add('was-validated')
+        }, false)
+      })
+    })()
+  </script>
 
-</body>
+  </body>
 
-</html>
+  </html>

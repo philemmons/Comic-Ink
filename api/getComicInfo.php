@@ -1,6 +1,6 @@
 <?php
 
-    include '../php/dbConnection.php';
+    include_once '../php/dbConnection.php';
     $dbConn = getDBConnection();    
     $sql = "create view matchCreator as 
             SELECT *
