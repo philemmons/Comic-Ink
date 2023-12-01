@@ -8,4 +8,3 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/vjwszppa/Comic-Ink/
     - /bin/cp -R * $DEPLOYPATH
-    
