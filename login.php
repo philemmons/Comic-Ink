@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-if (!isset($_SESSION["status"])) {  //Check whether the admin has logged in
-  $_SESSION["name"] = "Guest";
-} else {
+if (isset($_SESSION["status"]) && ($_SESSION['status'] == getenv('LOGIN_STATUS'))) {  //Check whether the admin has logged in
   header("Location:admin.php");
+} else {
+  $_SESSION["name"] = "Guest";
 }
 
 include_once 'header.html';
