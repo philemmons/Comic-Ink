@@ -94,7 +94,7 @@ img {
   height: auto;
 }
 
-.btn-test{
+.btn {
   --bs-btn-font-size: 1em !important;
 }
 
@@ -232,7 +232,7 @@ td {
   text-align: center !important;
 }
 
-
+.btn,
 .btnAD {
   border: 2px solid var(--color-5);
   box-shadow: 10px 10px 3px rgba(101, 101, 101, 0.7);
@@ -243,7 +243,7 @@ td {
   text-decoration: none;
 }
 
-
+.btn:hover,
 .btnAD:hover {
   color: var(--color-2);
   opacity: 0.8;
@@ -252,7 +252,7 @@ td {
   background-color: transparent !important;
 }
 
-
+.btn:active,
 .btnAD:active {
   text-decoration: none;
   color: var(--color-2) !important;
@@ -445,6 +445,6 @@ footer {
 
 /**** datatable ****/
 
-#comDisplay_length{
+#comDisplay_length {
   padding: 0.5em 0em !important;
 }
