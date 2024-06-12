@@ -1,12 +1,15 @@
 :root {
   --color-1: #f8f8f8;
   --color-2: #ffffff;
-  --color-3: #dcdcdc;
+  --color-3: #eeeeee;
   --color-4: #333333;
   --color-5: #000000;
   --color-6: #a8a8a8;
   --color-7: #555555;
   --color-8: #656565;
+
+  --color-21: #ff0000;
+  --color-22: #520000;
 
   --error-color: #ff0019;
   --success-color: #009b00;
@@ -25,35 +28,35 @@ body {
 }
 
 
-/* Small devices (landscape phones, 576px and up)*/
+/**** Small devices (landscape phones, 576px and up)*/
 @media (min-width: 576px) {
   :root {
     --bs-body-font-size: 10px !important;
   }
 }
 
-/* Medium devices (tablets, 768px and up)*/
+/**** Medium devices (tablets, 768px and up)*/
 @media (min-width: 768px) {
   :root {
     --bs-body-font-size: 11px !important;
   }
 }
 
-/* Large devices (desktops, 992px and up)*/
+/**** Large devices (desktops, 992px and up)*/
 @media (min-width: 992px) {
   :root {
     --bs-body-font-size: 12px !important;
   }
 }
 
-/* X-Large devices (large desktops, 1200px and up)*/
+/**** X-Large devices (large desktops, 1200px and up)*/
 @media (min-width: 1200px) {
   :root {
     --bs-body-font-size: 13px !important;
   }
 }
 
-/* XX-Large devices (larger desktops, 1400px and up) */
+/**** XX-Large devices (larger desktops, 1400px and up) ****/
 @media (min-width: 1400px) {
   :root {
     --bs-body-font-size: 14px !important;
@@ -108,8 +111,30 @@ a {
   opacity: 0;
   transition: opacity .5s linear;
   z-index: 11;
+  background-color: var(--color-4);
+}
+
+/**** content skip ****/
+
+.btn-skip {
+  font-weight: 600;
+  cursor: pointer;
+  position: absolute;
+  z-index: 21;
+  left: 0.5em;
+  right: auto;
+  top: 0.5em;
+  opacity: 1;
+  transition: transform 0.1875s ease-out;
   background-color: var(--color-11);
 }
+
+.btn-skip:not(:focus):not(:hover) {
+  transform: translateY(-4em);
+  opacity: 0;
+}
+
+/**** background ****/
 
 #bgLeft {
   position: absolute;
@@ -133,6 +158,8 @@ a {
   background-size: cover;
 }
 
+
+
 .mySlides {
   display: none;
 }
@@ -149,7 +176,7 @@ header {
 }
 
 .title {
-  border: solid 2px white;
+  border: solid 2px var(--color-2);
 }
 
 #wrapper-header {
@@ -169,19 +196,15 @@ img {
 
 }
 
-
-/*** INDEX CAROUSEL ***/
+/*** carousel ***/
 
 .carousel {
   max-width: 325px !important;
   margin: 30px auto !important;
-  border: 2px solid #ffffff;
+  border: 2px solid var(--color-2);
 }
 
-.item {
-  border: 1px solid #eee;
-}
-
+/**** table format ****/
 table {
   margin: auto;
   width: 60%;
@@ -193,12 +216,12 @@ td {
 }
 
 #textArea {
-  border: solid 2px black;
+  border: solid 2px var(--color-5);
   background-color: #ededed;
   width: 55%;
   height: 325px;
   display: inline-block;
-  box-shadow: 15px 15px 7px #656565;
+  box-shadow: 15px 15px 7px var(--color-8);
   padding: 5px;
 }
 
@@ -208,20 +231,20 @@ td {
 
 .btn,
 .btnAD {
-  border: 2px solid #000000;
+  border: 2px solid var(--color-5);
   box-shadow: 10px 10px 3px rgba(101, 101, 101, 0.7);
-  color: white;
-  background-color: red;
-  background-image: linear-gradient(to bottom, #ff0000, #520000);
+  color: var(--color-2);
+  background-color: var(--color-21);
+  background-image: linear-gradient(to bottom, var(--color-21), var(--color-22));
   padding: 0px 20px;
   text-decoration: none;
 }
 
 .btn:hover,
 .btnAD:hover {
-  color: #fff;
+  color: var(--color-2);
   opacity: 0.8;
-  background-image: linear-gradient(to bottom, #520000, #ff0000);
+  background-image: linear-gradient(to bottom, var(--color-22), var(--color-21));
   text-decoration: none;
   background-color: transparent !important;
 }
@@ -229,7 +252,7 @@ td {
 .btn:active,
 .btnAD:active {
   text-decoration: none;
-  color: #fff !important;
+  color: var(--color-2) !important;
 }
 
 .w3-content {
@@ -241,22 +264,17 @@ td {
   padding-top: 25px;
 }
 
-.wrapper {
-  width: 65%;
-  margin: auto;
-}
-
-/** NAVBAR ***/
+/**** navbar ****/
 
 .bg-body-tertiary {
   --bs-bg-opacity: 1;
-  background-color: #656565 !important;
-  border: solid 2px white !important;
+  background-color: var(--color-8) !important;
+  border: solid 2px var(--color-2) !important;
 }
 
 .nav-link {
   --bs-nav-link-font-weight: 600 !important;
-  --bs-nav-link-color: #ffffff !important;
+  --bs-nav-link-color: var(--color-2) !important;
   text-transform: capitalize !important;
   font-size: 1.2em !important;
 }
@@ -266,15 +284,22 @@ td {
   padding-bottom: 5px !important;
   margin-right: 2em !important;
   font-size: 1.3em !important;
-  color: #ffffff !important;
+  color: var(--color-2) !important;
   text-transform: capitalize !important;
 }
+
+/**** wrappers ****/
 
 .container-fluid {
   width: 95% !important;
 }
 
-/*** FOOTER ***/
+.wrapper {
+  width: 65%;
+  margin: auto;
+}
+
+/**** footer ****/
 footer {
   width: 100%;
 }
@@ -310,13 +335,14 @@ footer {
   padding: .3rem .4rem !important;
 }
 
-/*** PAGINATION ***/
+/**** pagination ****/
 .pagination {
   --bs-pagination-padding-x: 0.50rem !important;
 }
 
-/**** BEGIN login modal *****/
-/* Full-width input fields */
+/**** login modal ****/
+
+/**** full-width input fields ****/
 #ittAD,
 #itpAD {
   width: 100%;
@@ -327,7 +353,7 @@ footer {
   box-sizing: border-box;
 }
 
-/* Set a style for all buttons */
+/**** Set a style for all buttons ****/
 .btnAD {
   margin: 8px 0;
   width: 100%;
@@ -337,7 +363,7 @@ footer {
   opacity: 0.8;
 }
 
-/* Extra styles for the cancel button */
+/**** Extra styles for the cancel button ****/
 #cancelbtnAD:active {
   box-shadow: 8px 8px 5px var(--color-5);
 }
@@ -357,13 +383,13 @@ footer {
   height: 100%;
   overflow: auto;
   background-color: var(--color-5);
-  /* Fallback color */
+  /**** Fallback color ****/
   background-color: rgba(0, 0, 0, 0.4);
-  /* Black w/ opacity */
+  /**** Black w/ opacity ****/
   padding-top: 60px;
 }
 
-/* Modal Content/Box */
+/**** Modal Content/Box ****/
 .modal-contentAD {
   background-color: #fefefe;
   margin: 5% auto 15% auto;
@@ -371,7 +397,7 @@ footer {
   max-width: 300px;
 }
 
-/* Add Zoom Animation */
+/**** Add Zoom Animation ****/
 .animateAD {
   -webkit-animation: animatezoom 0.6s;
   animation: animatezoom 0.6s;
@@ -397,7 +423,7 @@ footer {
   }
 }
 
-/* Change styles for span and cancel button on extra small screens */
+/**** Change styles for span and cancel button on extra small screens ****/
 @media screen and (max-width: 300px) {
   span.pswAD {
     display: block;
@@ -409,7 +435,6 @@ footer {
   }
 }
 
-/**** END login modal *****/
 
 /**** CON UPDATE FORM *****/
 .form-floating>label {
