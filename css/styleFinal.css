@@ -139,6 +139,8 @@ img {
   opacity: 1;
   transition: transform 0.1875s ease-out;
   box-shadow: none !important;
+  border: solid 2px var(--color-5);
+  color: var(--color-2) !important;
 }
 
 .btn-skip:not(:focus):not(:hover) {
