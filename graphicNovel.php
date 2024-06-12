@@ -37,7 +37,7 @@ function dataDisplay($gNovels)
           <a class="nav-link" href="collection.php">Collection</a>
      </li>
      <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="graphicNovel.php">Graphic Novels</a>
+          <a class="nav-link active" aria-current="page" href="graphicNovel.php">Graphic Novels<span class="visually-hidden">(current)</span></a>
      </li>
      <li class="nav-item">
           <a class="nav-link" href="convention.php">Conventions</a>

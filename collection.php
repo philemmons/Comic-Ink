@@ -36,7 +36,7 @@ function dataDisplay($comic)
         <a class="nav-link" href="index.php">Home</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="collection.php">Collection</a>
+        <a class="nav-link active" aria-current="page" href="collection.php">Collection<span class="visually-hidden">(current)</span></a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="graphicNovel.php">Graphic Novels</a>

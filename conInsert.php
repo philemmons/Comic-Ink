@@ -37,7 +37,7 @@ if (isset($_POST['logout'])) {
     <a class="nav-link" href="login.php">Admin</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="conInsert.php">New Convention</a>
+    <a class="nav-link active" aria-current="page" href="conInsert.php">New Convention<span class="visually-hidden">(current)</span></a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="conUpdate.php">Update Convention</a>

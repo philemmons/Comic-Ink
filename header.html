@@ -32,9 +32,11 @@
   </style>
 </head>
 
-<body>
+<body id="toTop">
   <div id="bgRight"></div>
   <div id="bgLeft"></div>
+
+  <a href="#main-content" class="btn btn-primary btn-skip" aria-label="Go To Main Content">Go To Main Content</a>
 
   <header>
     <div id="wrapper-header">
@@ -47,8 +49,9 @@
   </header>
 
   <!-- https://getbootstrap.com/docs/5.0/components/navbar/-->
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary" aria-label="main menu">
     <div class="container-fluid">
+
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
         aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -57,17 +60,3 @@
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
         <a id="tipTop" class="navbar-brand navbar-nav" data-bs-toggle="tooltip" title="<img src='img/pow.png' />" href="#">Comics
           Ink</a>
-
-        <script>
-          /** tooltip - https://www.tutorialrepublic.com/codelab.php?topic=bootstrap&file=tooltips-placement-via-javascript **/
-          document.addEventListener("DOMContentLoaded", function () {
-            // Placement of tooltip on top
-            var tipTop = document.getElementById("tipTop");
-            var tooltipTop = new bootstrap.Tooltip(tipTop, {
-              placement: "top",
-              animated: 'fade',
-              placement: 'bottom',
-              html: true
-            });
-          });
-        </script>

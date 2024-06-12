@@ -82,7 +82,7 @@ if (isset($_POST['submitUpdate'])) {  //admin has submitted the "update user" fo
     <a class="nav-link" href="conInsert.php">New Convention</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="conUpdate.php">Update Convention</a>
+    <a class="nav-link active" aria-current="page" href="conUpdate.php">Update Convention<span class="visually-hidden">(current)</span></a>
   </li>
 </ul>
 

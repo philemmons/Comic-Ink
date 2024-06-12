@@ -167,7 +167,7 @@ function displayConAdmin($convention)
     <a class="nav-link" href="convention.php">Conventions</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="login.php">Admin</a>
+    <a class="nav-link active" aria-current="page" href="login.php">Admin<span class="visually-hidden">(current)</span></a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="conInsert.php">New Convention</a>
