@@ -1,4 +1,7 @@
 <br>
+
+<a href="#toTop" class="btn back-to-top" id="back-to-top-link" title="Back to Top" aria-label="Back to Top"><i class="bi bi-arrow-up" aria-hidden="true"></i></a>
+
 <footer>
     <div id='footer'>
         ©2016 - <?php echo date("Y"); ?> Phillip Emmons. All rights reserved.<a href="https://philemmons.com" target='_blank' id='sentence-case'>Contact Info</a>
