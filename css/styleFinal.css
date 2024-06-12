@@ -105,13 +105,13 @@ a {
 .back-to-top {
   position: fixed;
   cursor: pointer;
-  bottom: 16px;
+  bottom: 30px;
   right: 16px;
   left: auto;
   opacity: 0;
   transition: opacity .5s linear;
   z-index: 11;
-  background-color: var(--color-4);
+  padding: 0 !important;
 }
 
 /**** content skip ****/

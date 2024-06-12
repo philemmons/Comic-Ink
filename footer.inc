@@ -1,6 +1,6 @@
 <br>
 
-<a href="#toTop" class="btn btn-secondary back-to-top" id="back-to-top-link" title="Back to Top" aria-label="Back to Top"><img src="./img/star-trek.png" alt="star trek icon" title="back to top" /></a>
+<a href="#toTop" class="btn back-to-top" id="back-to-top-link" title="Back to Top" aria-label="Back to Top"><img src="./img/star-trek.png" alt="star trek icon" title="back to top" /></a>
 
 <footer>
     <div id='footer'>
@@ -21,3 +21,5 @@
         });
     });
 </script>
+
+<script src="../js/backToTop.js"></script>
