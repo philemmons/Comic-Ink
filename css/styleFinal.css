@@ -436,8 +436,13 @@ footer {
   }
 }
 
-
 /**** CON UPDATE FORM *****/
 .form-floating>label {
   font-size: 1.3em !important;
+}
+
+/**** datatable ****/
+
+#comDisplay_length{
+  padding: 0.5em 0em !important;
 }
