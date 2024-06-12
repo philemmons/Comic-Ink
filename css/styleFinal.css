@@ -105,7 +105,7 @@ a {
 .back-to-top {
   position: fixed;
   cursor: pointer;
-  bottom: 30px;
+  bottom: 35px;
   right: 16px;
   left: auto;
   opacity: 0;
