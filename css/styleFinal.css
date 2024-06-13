@@ -118,7 +118,7 @@ img {
 .back-to-top {
   position: fixed;
   cursor: pointer;
-  bottom: 3em;
+  bottom: 4em;
   right: 1em;
   left: auto;
   opacity: 0;
@@ -280,7 +280,6 @@ td {
 .nav-link {
   --bs-nav-link-font-weight: 600 !important;
   --bs-nav-link-color: var(--color-2) !important;
-  text-transform: capitalize !important;
 }
 
 .navbar-brand {
@@ -314,7 +313,7 @@ footer {
   color: var(--color-2);
   font-size: 0.670rem;
   margin: auto;
-  padding: 1rem;
+  padding: 0.75rem 1rem;
   width: 100%;
   text-align: right;
 }
