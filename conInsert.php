@@ -5,7 +5,7 @@ if (!isset($_SESSION["status"]) || ($_SESSION['status'] != getenv('LOGIN_STATUS'
   header("Location: login.php");
 }
 
-include_once 'header.html';
+include_once 'header.inc';
 include_once 'php/sourceFinal.php';
 
 $dbConn = getDBConnection();
@@ -56,7 +56,9 @@ if (isset($_SESSION["status"])) {
 </div><!-- /.container-fluid -->
 </nav>
 
-<<br>
+<br>
+
+<main id="main-content">
   <div class="wrapper form-display">
     <h6>
       Welcome <?= $_SESSION['name'] ?> - New Convention Form
@@ -197,34 +199,34 @@ if (isset($_SESSION["status"])) {
       </div>
     </div>
   </div>
+</main>
 
-  <br><br>
-  <?php include_once 'footer.inc' ?>
+<?php include_once 'footer.inc' ?>
 
-  <script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (() => {
-      'use strict'
+<script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (() => {
+    'use strict'
 
-      // Fetch all the forms we want to apply custom Bootstrap validation styles to
-      const forms = document.querySelectorAll('.needs-validation')
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.needs-validation')
 
-      // Loop over them and prevent submission
-      Array.from(forms).forEach(form => {
-        form.addEventListener('submit', event => {
-          if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-          } else {
-            let timeout = setTimeout($('#insertModal').modal('show'), 4000);
-          }
+    // Loop over them and prevent submission
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        } else {
+          let timeout = setTimeout($('#insertModal').modal('show'), 4000);
+        }
 
-          form.classList.add('was-validated')
-        }, false)
-      })
-    })()
-  </script>
+        form.classList.add('was-validated')
+      }, false)
+    })
+  })()
+</script>
 
-  </body>
+</body>
 
-  </html>
+</html>

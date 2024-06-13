@@ -5,7 +5,7 @@ if (!isset($_SESSION["status"]) || ($_SESSION['status'] != getenv('LOGIN_STATUS'
   header("Location: login.php");
 }
 
-include_once 'header.html';
+include_once 'header.inc';
 include_once 'php/sourceFinal.php';
 
 $dbConn = getDBConnection();
@@ -190,123 +190,125 @@ if (isset($_SESSION["status"])) {
 </nav>
 
 <br>
-<div class="wrapper form-display">
-  <h6>
-    Welcome <?= $_SESSION['name'] ?>
-  </h6>
-  <br>
-  <form method="POST" name="conForm" id="middlePage" class="row gx-4 gy-3 align-items-center">
 
-    <div class="col-auto">
-      <div class="input-group">
-        <div class="input-group-text">Name</div>
-        <input type="text" name="conName" placeholder="Enter Convention Name" />
-      </div>
-    </div>
+<main id="main-content">
+  <div class="wrapper form-display">
+    <h6>
+      Welcome <?= $_SESSION['name'] ?>
+    </h6>
+    <br>
+    <form method="POST" name="conForm" id="middlePage" class="row gx-4 gy-3 align-items-center">
 
-    <div class="col-auto">
-      <input type="submit" value="Search" name="filterForm" class="btn" />
-    </div>
-
-    <div class="col-auto">
-      <a href="conInsert.php" class="btn">Add New Con!</a>
-    </div>
-
-    <div class="col-auto">
-      <!-- Button trigger modal -->
-      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#myModal">
-        Admin Reports
-      </button>
-    </div>
-
-  </form>
-</div>
-<br><br>
-<div class="wrapper form-display" style="overflow: auto;">
-  <table class="table table-sm table-striped table-hover display nowrap" id="adminDisplay" style="width:100%;">
-    <caption>Admin Conventions</caption>
-    <!--https://www.w3schools.com/bootstrap/bootstrap_tables.asp-->
-    <thead class='table-dark'>
-      <tr>
-        <th>Name</th>
-        <th>Alter</th>
-        <th>Remove</th>
-        <th>Date</th>
-        <th>Year</th>
-        <th>Location</th>
-        <th>City</th>
-        <th>State</th>
-        <th>Country</th>
-        <th>Official</th>
-      </tr>
-    </thead>
-    <tbody>
-      <?php
-      if (isset($_POST['filterForm'])) {
-        $filterCon = goSQLcon("convention");
-        displayConAdmin($filterCon);
-      } else {
-        $convention = getConData("convention");
-        displayConAdmin($convention);
-      }
-      ?>
-    </tbody>
-  </table>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h6 class="modal-title fs-5" id="myModalLabel">Admin Report</h6>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="col-auto">
+        <div class="input-group">
+          <div class="input-group-text">Name</div>
+          <input type="text" name="conName" placeholder="Enter Convention Name" />
+        </div>
       </div>
 
-      <div class="modal-body" style="overflow: auto;">
-        <p>Average number of conventions per State:
-          <?php $num = getConAvg();
-          displayConAvg($num); ?></p>
-        <p>The States with more than four convention in descending order:<br>
-          <?php $list = getConByState();
-          displayConByState($list); ?></p>
-        <p>Total overall conventions:
-          <?php $cnt = getConTot();
-          displayConTot($cnt); ?> </p>
-        <p>One or more upcoming conventions based on today's date:</p>
-
-        <table class="table table-sm table-striped table-hover display nowrap" id="summaryDisplay" style="width:100%;">
-          <caption>Admin Upcoming Convention Summary</caption>
-          <thead class='table-dark'>
-            <tr>
-              <th>Name</th>
-              <th>Date</th>
-              <th>Year</th>
-              <th>Location</th>
-              <th>City</th>
-              <th>State</th>
-              <th>Country</th>
-              <th>Official</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php
-            $groupCons = getNextCon();
-            displayCon($groupCons);
-            ?>
-          </tbody>
-        </table>
+      <div class="col-auto">
+        <input type="submit" value="Search" name="filterForm" class="btn" />
       </div>
 
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <div class="col-auto">
+        <a href="conInsert.php" class="btn">Add New Con!</a>
       </div>
 
+      <div class="col-auto">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#myModal">
+          Admin Reports
+        </button>
+      </div>
+
+    </form>
+  </div>
+  <br><br>
+  <div class="wrapper form-display" style="overflow: auto;">
+    <table class="table table-sm table-striped table-hover display nowrap" id="adminDisplay" style="width:100%;">
+      <caption>Admin Conventions</caption>
+      <!--https://www.w3schools.com/bootstrap/bootstrap_tables.asp-->
+      <thead class='table-dark'>
+        <tr>
+          <th>Name</th>
+          <th>Alter</th>
+          <th>Remove</th>
+          <th>Date</th>
+          <th>Year</th>
+          <th>Location</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Country</th>
+          <th>Official</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+        if (isset($_POST['filterForm'])) {
+          $filterCon = goSQLcon("convention");
+          displayConAdmin($filterCon);
+        } else {
+          $convention = getConData("convention");
+          displayConAdmin($convention);
+        }
+        ?>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h6 class="modal-title fs-5" id="myModalLabel">Admin Report</h6>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body" style="overflow: auto;">
+          <p>Average number of conventions per State:
+            <?php $num = getConAvg();
+            displayConAvg($num); ?></p>
+          <p>The States with more than four convention in descending order:<br>
+            <?php $list = getConByState();
+            displayConByState($list); ?></p>
+          <p>Total overall conventions:
+            <?php $cnt = getConTot();
+            displayConTot($cnt); ?> </p>
+          <p>One or more upcoming conventions based on today's date:</p>
+
+          <table class="table table-sm table-striped table-hover display nowrap" id="summaryDisplay" style="width:100%;">
+            <caption>Admin Upcoming Convention Summary</caption>
+            <thead class='table-dark'>
+              <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Year</th>
+                <th>Location</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Country</th>
+                <th>Official</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              $groupCons = getNextCon();
+              displayCon($groupCons);
+              ?>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+
+      </div>
     </div>
   </div>
-</div>
+</main>
 
-<br><br>
 <?php include_once 'footer.inc' ?>
 
 <script>

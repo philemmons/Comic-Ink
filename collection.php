@@ -5,7 +5,7 @@ if (!isset($_SESSION["status"]) || ($_SESSION['status'] != getenv('LOGIN_STATUS'
     $_SESSION["name"] = "Guest";
 }
 
-include_once 'header.html';
+include_once 'header.inc';
 include_once 'php/sourceFinal.php';
 
 $dbConn = getDBConnection();
@@ -62,100 +62,102 @@ if (isset($_SESSION["status"])) {
 </nav>
 
 <br>
-<div class="wrapper form-display">
-    <h6>
-        Welcome <?= $_SESSION['name'] ?>
-    </h6>
-    <br>
-    <form method="POST" name="comicForm" class="row gx-4 gy-3 align-items-center">
-        <div class="col-auto">
-            <div class="input-group">
-                <div class="input-group-text">Title</div>
-                <input type="text" name="title" placeholder="Enter Title Here" />
+
+<main id="main-content">
+    <div class="wrapper form-display">
+        <h6>
+            Welcome <?= $_SESSION['name'] ?>
+        </h6>
+        <br>
+        <form method="POST" name="comicForm" class="row gx-4 gy-3 align-items-center">
+            <div class="col-auto">
+                <div class="input-group">
+                    <div class="input-group-text">Title</div>
+                    <input type="text" name="title" placeholder="Enter Title Here" />
+                </div>
             </div>
-        </div>
 
-        <div class="col-auto">
-            <div class="input-group">
-                <div class="input-group-text">Publisher</div>
-                <select name="publisher">
-                    <option value="" disabled selected>Select One</option>
-                    <?php
-                    $allPub = getDropDown('comicBook', 'publisher');
-                    //print_r($allPub);
-                    foreach ($allPub as $singlePub) {
-                        echo "<option>" . $singlePub['publisher'] . " </option>";
-                    }
-                    ?>
-                </select>
+            <div class="col-auto">
+                <div class="input-group">
+                    <div class="input-group-text">Publisher</div>
+                    <select name="publisher">
+                        <option value="" disabled selected>Select One</option>
+                        <?php
+                        $allPub = getDropDown('comicBook', 'publisher');
+                        //print_r($allPub);
+                        foreach ($allPub as $singlePub) {
+                            echo "<option>" . $singlePub['publisher'] . " </option>";
+                        }
+                        ?>
+                    </select>
+                </div>
             </div>
-        </div>
 
-        <div class="col-auto">
-            <div class="input-group">
-                <div class="input-group-text">Sort By</div>
-                <select name="sortBy">
-                    <option value="" disabled selected>Select One</option>
-                    <option value="title ASC">Title</option>
-                    <option value="publisher ASC">Publisher</option>
-                    <option value="year ASC">Year: Low to High</option>
-                    <option value="year DESC">Year: High to Low</option>
-                </select>
+            <div class="col-auto">
+                <div class="input-group">
+                    <div class="input-group-text">Sort By</div>
+                    <select name="sortBy">
+                        <option value="" disabled selected>Select One</option>
+                        <option value="title ASC">Title</option>
+                        <option value="publisher ASC">Publisher</option>
+                        <option value="year ASC">Year: Low to High</option>
+                        <option value="year DESC">Year: High to Low</option>
+                    </select>
+                </div>
             </div>
-        </div>
 
-        <div class="col-auto">
-            <input type="submit" value="Search" name="filterForm" class="btn" />
-        </div>
+            <div class="col-auto">
+                <input type="submit" value="Search" name="filterForm" class="btn" />
+            </div>
 
-        <div class="col-auto">
-            <input type="submit" value="All Comics" name="allIn" class="btn" /></span>
-        </div>
+            <div class="col-auto">
+                <input type="submit" value="All Comics" name="allIn" class="btn" /></span>
+            </div>
 
-    </form>
-</div>
-<br><br>
-<div class="wrapper form-display" style="overflow: auto;">
-    <table class="table table-sm table-striped table-hover display nowrap" id="comDisplay" style="width:100%;">
-        <!--https://www.w3schools.com/bootstrap/bootstrap_tables.asp-->
-        <thead class='table-dark'>
-            <tr>
-                <th>Title</th>
-                <th>Issue</th>
-                <th>Year</th>
-                <th>Volume</th>
-                <th>Total Issues</th>
-                <th>Publisher</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            if (isset($_POST['filterForm'])) {
-                $filterList = goSQLcomic("comicBook");
-                dataDisplay($filterList);
-            } else { // Display inventory initially.
-                $comic = getInfo("comicBook");
-                dataDisplay($comic);
-            }
-            ?>
-        </tbody>
-    </table>
-</div>
+        </form>
+    </div>
+    <br><br>
+    <div class="wrapper form-display" style="overflow: auto;">
+        <table class="table table-sm table-striped table-hover display nowrap" id="comDisplay" style="width:100%;">
+            <!--https://www.w3schools.com/bootstrap/bootstrap_tables.asp-->
+            <thead class='table-dark'>
+                <tr>
+                    <th>Title</th>
+                    <th>Issue</th>
+                    <th>Year</th>
+                    <th>Volume</th>
+                    <th>Total Issues</th>
+                    <th>Publisher</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                if (isset($_POST['filterForm'])) {
+                    $filterList = goSQLcomic("comicBook");
+                    dataDisplay($filterList);
+                } else { // Display inventory initially.
+                    $comic = getInfo("comicBook");
+                    dataDisplay($comic);
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+    <main id="main-content">
 
-<br><br>
-<?php include_once 'footer.inc' ?>
+        <?php include_once 'footer.inc' ?>
 
-<script>
-    //https://datatables.net/reference/option
-    new DataTable('#comDisplay', {
-        lengthMenu: [8, 16],
-        searching: false,
-        ordering: false,
-        responsive: true,
-        pagingType: 'simple'
-    });
-</script>
+        <script>
+            //https://datatables.net/reference/option
+            new DataTable('#comDisplay', {
+                lengthMenu: [8, 16],
+                searching: false,
+                ordering: false,
+                responsive: true,
+                pagingType: 'simple'
+            });
+        </script>
 
-</body>
+        </body>
 
-</html>
+        </html>

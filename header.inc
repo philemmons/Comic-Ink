@@ -47,7 +47,7 @@
   </header>
 
   <!-- https://getbootstrap.com/docs/5.0/components/navbar/-->
-  <nav class="navbar navbar-expand-lg bg-body-tertiary" aria-label="main menu">
+  <nav class="navbar navbar-expand-md bg-body-tertiary" aria-label="main menu">
     <div class="container-fluid">
 
       <button class="navbar-toggler my-2 border border-2 border-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"

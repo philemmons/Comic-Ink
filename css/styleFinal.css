@@ -96,9 +96,6 @@ img {
   height: auto;
 }
 
-.btn {
-  --bs-btn-font-size: 1em !important;
-}
 
 /**** accessibility ****/
 
