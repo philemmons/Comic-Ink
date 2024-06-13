@@ -17,7 +17,7 @@
   --ff-main: Raleway, Helvetica, Calibri, Arial, sans-serif;
 
   --bs-font-comics-ink: Raleway, Helvetica, Roboto, Calibri, Arial, sans-serif;
-  --bs-body-font-size: 9px !important;
+  --bs-body-font-size: 0.625rem !important;
 }
 
 /**** typography and spacing ****/
@@ -25,41 +25,43 @@
 body {
   background-color: var(--color-3);
   font-family: var(--bs-font-comics-ink) !important;
+  letter-spacing: 1px;
+  line-height: 1.5;
 }
 
 
 /**** Small devices (landscape phones, 576px and up)*/
 @media (min-width: 576px) {
   :root {
-    --bs-body-font-size: 10px !important;
+    --bs-body-font-size: 0.6875rem !important;
   }
 }
 
 /**** Medium devices (tablets, 768px and up)*/
 @media (min-width: 768px) {
   :root {
-    --bs-body-font-size: 11px !important;
+    --bs-body-font-size: 0.75rem !important;
   }
 }
 
 /**** Large devices (desktops, 992px and up)*/
 @media (min-width: 992px) {
   :root {
-    --bs-body-font-size: 12px !important;
+    --bs-body-font-size: 0.8125rem !important;
   }
 }
 
 /**** X-Large devices (large desktops, 1200px and up)*/
 @media (min-width: 1200px) {
   :root {
-    --bs-body-font-size: 13px !important;
+    --bs-body-font-size:  1rem !important;
   }
 }
 
 /**** XX-Large devices (larger desktops, 1400px and up) ****/
 @media (min-width: 1400px) {
   :root {
-    --bs-body-font-size: 14px !important;
+    --bs-body-font-size: 1.25rem !important;
   }
 }
 
@@ -180,7 +182,7 @@ img {
 
 #one {
   float: right;
-  margin-right: 30px;
+  margin-right: 2rem;
 }
 
 .title {
@@ -195,7 +197,7 @@ img {
 #wrapper-robot {
   margin: auto 0;
   display: inline-block;
-  padding: 30px;
+  padding: 2rem;
 
 }
 
@@ -203,7 +205,7 @@ img {
 
 .carousel {
   max-width: 325px !important;
-  margin: 30px auto !important;
+  margin: 2rem auto !important;
   border: 2px solid var(--color-2);
 }
 
@@ -214,18 +216,18 @@ table {
 }
 
 td {
-  padding: 5px;
-  margin: 5px;
+  padding: 0.3125rem;
+  margin: 0.3125rem;
 }
 
 #textArea {
   border: solid 2px var(--color-5);
   background-color: #ededed;
   width: 55%;
-  height: 325px;
+  height: 20.3125rem;
   display: inline-block;
   box-shadow: 15px 15px 7px var(--color-8);
-  padding: 5px;
+  padding: 0.3125rem;
 }
 
 .alert {
@@ -239,7 +241,7 @@ td {
   color: var(--color-2);
   background-color: var(--color-21);
   background-image: linear-gradient(to bottom, var(--color-21), var(--color-22));
-  padding: 0px 20px;
+  padding: 0rem 1.25rem;
   text-decoration: none;
 }
 
@@ -264,7 +266,7 @@ td {
 
 #mLogin {
   text-align: center;
-  padding-top: 25px;
+  padding-top: 1.5625rem;
 }
 
 /**** navbar ****/
@@ -279,14 +281,12 @@ td {
   --bs-nav-link-font-weight: 600 !important;
   --bs-nav-link-color: var(--color-2) !important;
   text-transform: capitalize !important;
-  font-size: 1.2em !important;
 }
 
 .navbar-brand {
-  padding-top: 5px !important;
-  padding-bottom: 5px !important;
-  margin-right: 2em !important;
-  font-size: 1.3em !important;
+  padding:  0.3125rem 0  !important;
+  margin-right: 2rem !important;
+  font-size: 1.3rem !important;
   color: var(--color-2) !important;
   text-transform: capitalize !important;
 }
@@ -314,9 +314,9 @@ footer {
   background-color: var(--color-8);
   border: solid 2px var(--color-2);
   color: var(--color-2);
-  font-size: 0.670em;
+  font-size: 0.670rem;
   margin: auto;
-  padding: 1em;
+  padding: 1rem;
   width: 100%;
   text-align: right;
 }
@@ -324,7 +324,7 @@ footer {
 #sentence-case {
   text-transform: capitalize !important;
   color: var(--color-2);
-  padding: 0 .5em;
+  padding: 0 0.5rem;
 }
 
 /*** FORM and TABLE CLASS ***/
@@ -335,7 +335,7 @@ footer {
 }
 
 .input-group-text {
-  padding: .3rem .4rem !important;
+  padding: 0.3rem 0.4rem !important;
 }
 
 /**** pagination ****/
@@ -350,7 +350,7 @@ footer {
 #itpAD {
   width: 100%;
   padding: 12px 20px;
-  margin: 8px 0;
+  margin: 0.5rem 0;
   display: inline-block;
   border: 1px solid var(--color-2);
   box-sizing: border-box;
@@ -358,7 +358,7 @@ footer {
 
 /**** Set a style for all buttons ****/
 .btnAD {
-  margin: 8px 0;
+  margin: 0.5rem 0;
   width: 100%;
 }
 
@@ -372,7 +372,7 @@ footer {
 }
 
 .containerAD {
-  padding: 16px;
+  padding: 1rem;
 }
 
 /**** The Modal (background) ****/
@@ -397,7 +397,7 @@ footer {
   background-color: #fefefe;
   margin: 5% auto 15% auto;
   border: 2px solid #555;
-  max-width: 300px;
+  max-width: 18.75rem;
 }
 
 /**** Add Zoom Animation ****/
@@ -440,11 +440,11 @@ footer {
 
 /**** CON UPDATE FORM *****/
 .form-floating>label {
-  font-size: 1.3em !important;
+  font-size: 1.3rem !important;
 }
 
 /**** datatable ****/
 
 #comDisplay_length {
-  padding: 0.5em 0em !important;
+  padding: 0.5rem 0 !important;
 }
