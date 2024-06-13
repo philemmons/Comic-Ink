@@ -284,11 +284,9 @@ td {
 }
 
 .navbar-brand {
-  padding:  0.3125rem 0  !important;
-  margin-right: 2rem !important;
+  margin-right: 3rem !important;
   font-size: 1.3rem !important;
   color: var(--color-2) !important;
-  text-transform: capitalize !important;
 }
 
 /**** wrappers ****/
@@ -350,7 +348,7 @@ footer {
 #itpAD {
   width: 100%;
   padding: 12px 20px;
-  margin: 0.5rem 0;
+  margin: 0.5rem 0rem;
   display: inline-block;
   border: 1px solid var(--color-2);
   box-sizing: border-box;
@@ -358,7 +356,7 @@ footer {
 
 /**** Set a style for all buttons ****/
 .btnAD {
-  margin: 0.5rem 0;
+  margin: 0.5rem 0rem;
   width: 100%;
 }
 
@@ -446,5 +444,5 @@ footer {
 /**** datatable ****/
 
 #comDisplay_length {
-  padding: 0.5rem 0 !important;
+  padding: 0.5rem 0rem !important;
 }
