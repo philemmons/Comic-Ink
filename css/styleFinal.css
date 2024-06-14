@@ -24,13 +24,17 @@
 
 /**** typography and spacing ****/
 
+@font-face {
+  font-family: Bangers;
+  src: url('../font/Bangers-Regular.ttf');
+}
+
 body {
   background-color: var(--color-3);
   font-family: var(--bs-font-comics-ink) !important;
   letter-spacing: 1px;
   line-height: 1.5;
 }
-
 
 /**** Small devices (landscape phones, 576px and up)*/
 @media (min-width: 576px) {
@@ -56,7 +60,7 @@ body {
 /**** X-Large devices (large desktops, 1200px and up)*/
 @media (min-width: 1200px) {
   :root {
-    --bs-body-font-size:  1rem !important;
+    --bs-body-font-size: 1rem !important;
   }
 }
 
@@ -187,6 +191,11 @@ img {
   border: solid 2px var(--color-2);
 }
 
+.text-red-white{
+  font-family: Bangers !important;
+  color: var(--color-21);
+  text-shadow: 5px 5px 3px var(--color-2);
+}
 
 /*  OLD 
 .title {
