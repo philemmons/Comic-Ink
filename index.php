@@ -40,9 +40,9 @@ if (isset($_SESSION["status"])) {
 </div><!-- .container-fluid -->
 </nav>
 
-<main id="main-content">
+<main  class="pt-5" id="main-content">
 
-  <div id="carouselExampleInterval" class="carousel slide pt-5">
+  <div id="carouselExampleInterval" class="carousel slide">
 
     <div class="carousel-inner">
 
