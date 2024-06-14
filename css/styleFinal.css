@@ -314,6 +314,10 @@ td {
   text-underline-offset: 0.25em !important;
 }
 
+.active{
+  font-weight:700;
+}
+
 
 .navbar-brand {
   margin-right: 3rem !important;
