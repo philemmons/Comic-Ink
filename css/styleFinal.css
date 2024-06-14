@@ -296,7 +296,7 @@ td {
 
 /**** navbar ****/
 
-.bg-body-tertiary {
+.bg-body-tertiary{
   --bs-bg-opacity: 1;
   background-color: var(--color-4) !important;
   border: solid 2px var(--color-2) !important;
@@ -304,20 +304,22 @@ td {
 
 .nav-link {
   --bs-nav-link-color: var(--color-2) !important;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
-.nav-link.active,
-.navbar-nav>li>a:hover{
+.nav-link.active{
+  font-weight: 700;
   color: var(--color-5) !important;
   background-color: var(--color-6);
   text-decoration: underline;
   text-underline-offset: 0.25em !important;
 }
 
-.active{
-  font-weight:700;
+.navbar-nav>li>a:hover{
+  text-decoration: underline;
+  text-underline-offset: 0.25em !important;
 }
-
 
 .navbar-brand {
   margin-right: 3rem !important;
