@@ -95,7 +95,7 @@ img {
   height: auto;
 }
 
-.m-6{
+.m-6 {
   margin: 4.5rem !important;
 }
 
@@ -193,24 +193,24 @@ img {
   border: solid 2px var(--color-2);
 }
 
-.text-red-white{
+.text-red-white {
   font-family: Bangers !important;
   color: var(--color-21);
   text-transform: uppercase;
   margin: 0;
 }
 
-.hero-h1{
-  font-size: calc(var( --bs-body-font-size) + 5.5vw);
+.hero-h1 {
+  font-size: calc(var(--bs-body-font-size) + 5.5vw);
   -webkit-text-stroke: 0.25vw var(--color-2);
 }
 
-.half-h1{
-  font-size: calc(var( --bs-body-font-size) + 2.25vw);
+.half-h1 {
+  font-size: calc(var(--bs-body-font-size) + 2.25vw);
   -webkit-text-stroke: 0.12vw var(--color-2);
 }
 
-.shadow-text-area{
+.shadow-text-area {
   padding: 1em;
   background-color: rgb(0 0 0 / 50%);
   color: var(--color-2);
@@ -234,7 +234,17 @@ img {
   border: 2px solid var(--color-2);
 }
 
-
+.carousel-control-next,
+.carousel-control-prev {
+  top: -50px !important;
+  bottom: unset !important;
+  width: 22% !important;
+  color: var(--color-5) !important;
+  border: inherit !important;
+  opacity: 1 !important;
+  transition: none !important;
+  background-color: var(--color-4);
+}
 
 /**** table format ****/
 table {
@@ -298,7 +308,7 @@ td {
 
 /**** navbar ****/
 
-.bg-body-tertiary{
+.bg-body-tertiary {
   --bs-bg-opacity: 1;
   background-color: var(--color-4) !important;
   border: solid 2px var(--color-2) !important;
@@ -310,7 +320,7 @@ td {
   padding-right: 0.825rem !important;
 }
 
-.nav-link.active{
+.nav-link.active {
   font-weight: 700;
   color: var(--color-5) !important;
   background-color: var(--color-6);
@@ -319,7 +329,7 @@ td {
 }
 
 .navbar-nav>li>a:hover,
-.navbar-nav>li>a:focus{
+.navbar-nav>li>a:focus {
   color: var(--color-2);
   text-decoration: underline;
   text-underline-offset: 0.25em !important;
