@@ -87,12 +87,6 @@ a {
   text-underline-offset: 0.25em;
 }
 
-header {
-  text-align: center;
-  padding: 30px;
-  width: 100%;
-}
-
 img {
   max-width: 100%;
   height: auto;
