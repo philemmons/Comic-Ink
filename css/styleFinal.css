@@ -194,7 +194,7 @@ img {
 .text-red-white{
   font-family: Bangers !important;
   color: var(--color-21);
-  text-shadow: 5px 5px 3px var(--color-2);
+  -webkit-text-stroke: 5px var(--color-2);
 }
 
 /*  OLD 
