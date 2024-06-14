@@ -215,17 +215,6 @@ img {
   font-size: calc(0.5vw + 0.5em);
 }
 
-/*  OLD 
-.title {
-  border: solid 2px var(--color-2);
-}
-
-#wrapper-header {
-  margin: auto 0;
-  display: inline-block;
-}
-  */
-
 /**** robot wrapper ****/
 
 #wrapper-robot {
@@ -305,8 +294,7 @@ td {
 
 /**** navbar ****/
 
-.bg-body-tertiary {
-  --bs-bg-opacity: 1;
+.navbar {
   background-color: var(--color-4) !important;
   border: solid 2px var(--color-2) !important;
 }
