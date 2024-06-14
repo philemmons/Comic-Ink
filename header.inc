@@ -48,8 +48,7 @@
   </header>
 -->
   <!-- Hero Part -->
-  <header>
-    <div class="container">
+    <header class="container">
       <div class="row justify-content-center bg-img-home m-4">
         <div class="col-xl-11 col-lg-11 col-md-10 text-center">
             <h1 class="text-red-white hero-h1">Comic Ink</h1>
@@ -57,8 +56,8 @@
             <p class="text-red-white half-h1">Discover More</p>
         </div>
       </div>
-    </div>
-  </header>
+    </header>
+  
 
   <!-- https://getbootstrap.com/docs/5.0/components/navbar/-->
   <nav class="navbar navbar-expand-md bg-body-tertiary" aria-label="main menu">
