@@ -190,6 +190,7 @@ img {
   background-image: url("../img/banner-bg.png");
   background-repeat: no-repeat;
   background-size: cover;
+  border: solid 2px var(--color-2);
 }
 
 
