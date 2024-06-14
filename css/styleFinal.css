@@ -294,7 +294,8 @@ td {
 
 /**** navbar ****/
 
-.collapse {
+.bg-body-tertiary {
+  --bs-bg-opacity: 1;
   background-color: var(--color-4) !important;
   border: solid 2px var(--color-2) !important;
 }
