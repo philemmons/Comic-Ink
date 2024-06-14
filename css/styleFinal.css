@@ -197,6 +197,12 @@ img {
   -webkit-text-stroke: 5px var(--color-2);
 }
 
+.shadow-text-area{
+  padding: 1rem;
+  background-color: rgba(101, 101, 101, 0.7);
+  color: var(--color-2);
+}
+
 /*  OLD 
 .title {
   border: solid 2px var(--color-2);
