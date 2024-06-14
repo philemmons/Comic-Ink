@@ -229,10 +229,12 @@ img {
 /*** carousel ***/
 
 .carousel {
-  max-width: 325px !important;
+  max-width: 350px !important;
   margin: 2rem auto !important;
   border: 2px solid var(--color-2);
 }
+
+
 
 /**** table format ****/
 table {
