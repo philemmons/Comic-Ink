@@ -202,12 +202,12 @@ img {
 
 .hero-h1{
   font-size: calc(var( --bs-body-font-size) + 6.5vw);
-  -webkit-text-stroke: 4px var(--color-2);
+  -webkit-text-stroke: 0.25vw var(--color-2);
 }
 
 .half-h1{
   font-size: calc(var( --bs-body-font-size) + 3.25vw);
-  -webkit-text-stroke: 2px var(--color-2);
+  -webkit-text-stroke: 0.1vw var(--color-2);
 }
 
 .shadow-text-area{
