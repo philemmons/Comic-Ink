@@ -196,7 +196,14 @@ img {
   color: var(--color-21);
   -webkit-text-stroke: 5px var(--color-2);
   text-transform: uppercase;
-  font-size: calc(var( --bs-body-font-size) + 5vw);
+}
+
+.hero-h1{
+  font-size: calc(var( --bs-body-font-size) + 6.5vw);
+}
+
+.half-h1{
+  font-size: calc(var( --bs-body-font-size) + 3.25vw);
 }
 
 .shadow-text-area{
