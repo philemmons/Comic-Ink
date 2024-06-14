@@ -12,7 +12,7 @@ if (isset($_POST['logout'])) {
 
 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
   <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="index.php">Home<span class="visually-hidden">(current)</span></a>
+    <a class="nav-link active" aria-current="page" href="/">Home<span class="visually-hidden">(current)</span></a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="collection.php">Collection</a>
@@ -40,7 +40,7 @@ if (isset($_SESSION["status"])) {
 </div><!-- .container-fluid -->
 </nav>
 
-<main  class="pt-5" id="main-content">
+<main class="pt-5" id="main-content">
 
   <div id="carouselExampleInterval" class="carousel slide">
 
