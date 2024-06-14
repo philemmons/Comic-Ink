@@ -96,6 +96,9 @@ img {
   height: auto;
 }
 
+.m-6{
+  margin: 4.5rem !important;
+}
 
 /**** accessibility ****/
 
