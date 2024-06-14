@@ -51,9 +51,9 @@
   <header>
     <div class="container">
       <div class="row justify-content-center bg-img-home m-5">
-        <div class="col-xl-7 col-lg-7 col-md-12 py-5 my-5 text-center">
+        <div class="col-xl-11 col-lg-11 col-md-10 my-5 text-center">
             <h1 class="text-red-white">Comic Ink</h1>
-            <p class= "shadow-text-area">Comic books are a publication that consists of comic art in the form of sequential juxtaposed panels that represent individual scenes.</p>
+            <p class= "shadow-text-area fs-3">Comic books are a publication that consists of comic art in the form of sequential juxtaposed panels that represent individual scenes.</p>
             <p class="text-red-white">Discover More</p>
         </div>
       </div>
