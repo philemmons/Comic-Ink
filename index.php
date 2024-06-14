@@ -42,7 +42,7 @@ if (isset($_SESSION["status"])) {
 
 <main id="main-content">
 
-  <div id="carouselExampleInterval" class="carousel slide">
+  <div id="carouselExampleInterval" class="carousel slide pt-5">
 
     <div class="carousel-inner">
 
@@ -52,7 +52,7 @@ if (isset($_SESSION["status"])) {
       <div class="carousel-item" data-bs-interval="2000">
         <img src="img/2.png" class="d-block w-100" alt="wolverine #1 from 1982">
       </div>
-      <div class="carousel-item">
+      <div class="carousel-item" data-bs-interval="2000">
         <img src="img/3.png" class="d-block w-100" alt="weird fantasy #18 from 1953">
       </div>
       <div class="carousel-item" data-bs-interval="2000">
@@ -61,7 +61,7 @@ if (isset($_SESSION["status"])) {
       <div class="carousel-item" data-bs-interval="2000">
         <img src="img/5.png" class="d-block w-100" alt="daredevil #1 from 1964">
       </div>
-      <div class="carousel-item">
+      <div class="carousel-item" data-bs-interval="2000">
         <img src="img/6.png" class="d-block w-100" alt="doctor strange #169 from 1969">
       </div>
       <div class="carousel-item" data-bs-interval="2000">
@@ -70,7 +70,7 @@ if (isset($_SESSION["status"])) {
       <div class="carousel-item" data-bs-interval="2000">
         <img src="img/8.png" class="d-block w-100" alt="tales of suspense #39 from 1963">
       </div>
-      <div class="carousel-item">
+      <div class="carousel-item" data-bs-interval="2000">
         <img src="img/9.png" class="d-block w-100" alt="detective comics #27 from 1939">
       </div>
       <div class="carousel-item" data-bs-interval="2000">
@@ -79,7 +79,7 @@ if (isset($_SESSION["status"])) {
       <div class="carousel-item" data-bs-interval="2000">
         <img src="img/11.png" class="d-block w-100" alt="action comics #1 from 1938">
       </div>
-      <div class="carousel-item">
+      <div class="carousel-item" data-bs-interval="2000">
         <img src="img/12.png" class="d-block w-100" alt="new mutants #98 from 1991">
       </div>
       <div class="carousel-item" data-bs-interval="2000">
