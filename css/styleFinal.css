@@ -17,6 +17,7 @@
   --bs-body-font-size: 0.625rem !important;
 
   --bs-navbar-nav-link-padding-x: 1rem !important;
+  --bs-navbar-color: var(--color-4) !important;
 }
 
 /**** typography and spacing ****/
