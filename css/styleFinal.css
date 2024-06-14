@@ -304,8 +304,8 @@ td {
 
 .nav-link {
   --bs-nav-link-color: var(--color-2) !important;
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
+  padding-left: 0.825rem !important;
+  padding-right: 0.825rem !important;
 }
 
 .nav-link.active{
@@ -317,6 +317,7 @@ td {
 }
 
 .navbar-nav>li>a:hover{
+  color: var(--color-2) !important;
   text-decoration: underline;
   text-underline-offset: 0.25em !important;
 }
