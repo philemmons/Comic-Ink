@@ -4,7 +4,7 @@
   --color-3: #d4d4d4;
   --color-4: #36454F;
   --color-5: #000000;
-  --color-6: #c0ccd4;
+  --color-6: #c3ced6;
 
   --color-21: #ff0000;
   --color-22: #520000;
@@ -317,7 +317,7 @@ td {
 }
 
 .navbar-nav>li>a:hover{
-  color: var(--color-2) !important;
+  color: var(--color-2);
   text-decoration: underline;
   text-underline-offset: 0.25em !important;
 }
