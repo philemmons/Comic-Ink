@@ -50,7 +50,7 @@
   <!-- Hero Part -->
   <header>
     <div class="container">
-      <div class="row justify-content-center bg-img-home m-6">
+      <div class="row justify-content-center bg-img-home m-4">
         <div class="col-xl-11 col-lg-11 col-md-10 text-center">
             <h1 class="text-red-white hero-h1">Comic Ink</h1>
             <p class= "shadow-text-area">Comic books are a publication that consists of comic art in the form of sequential juxtaposed panels that represent individual scenes.</p>

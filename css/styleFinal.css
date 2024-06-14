@@ -198,7 +198,7 @@ img {
   font-family: Bangers !important;
   color: var(--color-21);
   text-transform: uppercase;
-  margin: 0 auto;
+  margin: 0;
 }
 
 .hero-h1{
@@ -208,7 +208,7 @@ img {
 
 .half-h1{
   font-size: calc(var( --bs-body-font-size) + 3.25vw);
-  -webkit-text-stroke: 0.1vw var(--color-2);
+  -webkit-text-stroke: 0.15vw var(--color-2);
 }
 
 .shadow-text-area{
