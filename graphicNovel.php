@@ -139,7 +139,6 @@ if (isset($_SESSION["status"])) {
                </tbody>
           </table>
      </div>
-</main>
 
 <?php include_once 'footer.inc' ?>
 

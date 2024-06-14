@@ -58,7 +58,7 @@ if (isset($_SESSION["status"])) {
 
 <br>
 
-<main id="main-content">
+< id="main-content">
   <div class="wrapper form-display">
     <h6>
       Welcome <?= $_SESSION['name'] ?> - New Convention Form
@@ -199,7 +199,6 @@ if (isset($_SESSION["status"])) {
       </div>
     </div>
   </div>
-</main>
 
 <?php include_once 'footer.inc' ?>
 

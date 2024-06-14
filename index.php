@@ -100,8 +100,6 @@ if (isset($_SESSION["status"])) {
 
   </div>
 
-</main>
-
 <?php include_once 'footer.inc' ?>
 
 </body>
