@@ -18,6 +18,8 @@
 
   --bs-font-comics-ink: Raleway, Helvetica, Roboto, Calibri, Arial, sans-serif;
   --bs-body-font-size: 0.625rem !important;
+
+  --bs-navbar-nav-link-padding-x: 1rem !important;
 }
 
 /**** typography and spacing ****/
@@ -182,6 +184,16 @@ img {
   margin-right: 2rem;
 }
 
+/**** hero banner ****/
+
+.bg-img-home {
+  background-image: url("../img/banner.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+/*  OLD 
 .title {
   border: solid 2px var(--color-2);
 }
@@ -190,6 +202,9 @@ img {
   margin: auto 0;
   display: inline-block;
 }
+  */
+
+/**** robot wrapper ****/
 
 #wrapper-robot {
   margin: auto 0;
@@ -281,7 +296,6 @@ td {
 
 .navbar-brand {
   margin-right: 3rem !important;
-  font-size: 1.3rem !important;
   color: var(--color-2) !important;
 }
 

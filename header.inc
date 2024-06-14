@@ -1,4 +1,4 @@
-<!-- Comic-Ink Redo v3.0:Phillip Emmons:10-24-23 -->
+<!-- Comic-Ink Redo v3.1:Copyright 2024:Phillip Emmons:06-14-23 -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,10 +38,24 @@
 
   <a href="#main-content" class="btn btn-skip" aria-label="Go To Main Content">Go To Main Content</a>
 
+  <!--
   <header>
     <div id="wrapper-header">
       <div class="title">
         <img src="img/banner.png" alt="Comic books are a publication that consists of comic art in the form of sequential juxtaposed panels that represent individual scenes." />
+      </div>
+    </div>
+  </header>
+-->
+  <!-- Hero Part -->
+  <header class="container">
+    <div class="row justify-content-center bg-img-home">
+      <div class="col-xl-7 col-lg-7 col-md-12">
+        <div class="text-center">
+          <h1>Comic Ink</h1>
+          <p>Comic books are a publication that consists of comic art in the form of sequential juxtaposed panels that represent individual scenes.</p>
+          <p>Discover More</p>
+        </div>
       </div>
     </div>
   </header>
@@ -50,8 +64,7 @@
   <nav class="navbar navbar-expand-md bg-body-tertiary" aria-label="main menu">
     <div class="container-fluid">
 
-      <button class="navbar-toggler my-2 border border-2 border-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
-        aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler my-2 border border-2 border-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
