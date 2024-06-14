@@ -316,7 +316,8 @@ td {
   text-underline-offset: 0.25em !important;
 }
 
-.navbar-nav>li>a:hover{
+.navbar-nav>li>a:hover,
+.navbar-nav>li>a:focus{
   color: var(--color-2);
   text-decoration: underline;
   text-underline-offset: 0.25em !important;
