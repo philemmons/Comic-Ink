@@ -296,7 +296,7 @@ td {
 
 /**** navbar ****/
 
-nav {
+.bg-body-tertiary {
   --bs-bg-opacity: 1;
   background-color: var(--color-4) !important;
   border: solid 2px var(--color-2) !important;
@@ -306,22 +306,10 @@ nav {
   --bs-nav-link-color: var(--color-2) !important;
 }
 
-.nav-link.active{
-  font-weight: 600;
+.nav-link.active,
+.navbar-nav>li>a:hover{
   color: var(--color-5) !important;
   background-color: var(--color-6);
-  text-decoration: underline;
-  text-underline-offset: 0.25em !important;
-}
-
-.navbar-toggler {
-  background-color: var(--color-1);
-  border: inset 1px var(--color-5);
-}
-
-.navbar-nav>li>a:hover{
-  background-color: var(--color-7);
-  color: var(--color-2);
   text-decoration: underline;
   text-underline-offset: 0.25em !important;
 }
