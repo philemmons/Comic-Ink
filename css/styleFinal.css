@@ -187,7 +187,7 @@ img {
 /**** hero banner ****/
 
 .bg-img-home {
-  background-image: url("../img/banner.png");
+  background-image: url("../img/banner-bg.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
