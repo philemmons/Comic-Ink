@@ -198,6 +198,7 @@ img {
   font-family: Bangers !important;
   color: var(--color-21);
   text-transform: uppercase;
+  margin: 0 auto;
 }
 
 .hero-h1{
@@ -214,7 +215,7 @@ img {
   padding: 1em;
   background-color: rgb(0 0 0 / 50%);
   color: var(--color-2);
-  font-size: 1.5em;
+  font-size: calc(0.5vw + 0.5em);
 }
 
 /*  OLD 
