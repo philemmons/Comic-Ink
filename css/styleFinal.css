@@ -238,12 +238,13 @@ img {
 .carousel-control-prev {
   top: -50px !important;
   bottom: unset !important;
-  width: 22% !important;
+  width: 25% !important;
   color: var(--color-5) !important;
   border: inherit !important;
   opacity: 1 !important;
   transition: none !important;
   background-color: var(--color-4);
+  padding: revert !important;
 }
 
 /**** table format ****/
