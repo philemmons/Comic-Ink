@@ -40,68 +40,84 @@ if (isset($_SESSION["status"])) {
 </div><!-- .container-fluid -->
 </nav>
 
-<main class="pt-5" id="main-content">
+<main id="main-content">
+  <article aria-label="Comics-are-cool-because">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-10 col-md-8 pt-4">
+          <section>
+            <h2>The most significant comic books span a variety of genres, styles, and historical periods, each marking a pivotal moment in the medium's development. Below are covers of the most influential and some personal favorites.</h2>
+          </section>
+          <p>These comics are significant not only for their storytelling and artistic achievements but also for their impact on the comic book industry and popular culture. They have inspired countless adaptations in film, television, and other media, and continue to influence new generations of creators and readers.</p>
+        </div>
+      </div>
+    </div>
+  </article>
 
-  <div id="carouselExampleInterval" class="carousel slide">
 
-    <div class="carousel-inner">
 
-      <div class="carousel-item active" data-bs-interval="2000">
-        <img src="img/1.png" class="d-block w-100" alt="starwars #1 from 1977">
+  <article aria-label="13-famous-covers" class="pt-5">
+    <div id="carouselExampleInterval" class="carousel slide">
+
+      <div class="carousel-inner">
+
+        <div class="carousel-item active" data-bs-interval="2000">
+          <img src="img/1.png" class="d-block w-100" alt="starwars #1 from 1977">
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+          <img src="img/2.png" class="d-block w-100" alt="wolverine #1 from 1982">
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+          <img src="img/3.png" class="d-block w-100" alt="weird fantasy #18 from 1953">
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+          <img src="img/4.png" class="d-block w-100" alt="mad magazine #1 from 1952">
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+          <img src="img/5.png" class="d-block w-100" alt="daredevil #1 from 1964">
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+          <img src="img/6.png" class="d-block w-100" alt="doctor strange #169 from 1969">
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+          <img src="img/7.png" class="d-block w-100" alt="thor #126 from from 1966">
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+          <img src="img/8.png" class="d-block w-100" alt="tales of suspense #39 from 1963">
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+          <img src="img/9.png" class="d-block w-100" alt="detective comics #27 from 1939">
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+          <img src="img/10.png" class="d-block w-100" alt="watchmen #1 from 1986">
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+          <img src="img/11.png" class="d-block w-100" alt="action comics #1 from 1938">
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+          <img src="img/12.png" class="d-block w-100" alt="new mutants #98 from 1991">
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+          <img src="img/13.png" class="d-block w-100" alt="justice league of america #1 from 1960">
+        </div>
+
       </div>
-      <div class="carousel-item" data-bs-interval="2000">
-        <img src="img/2.png" class="d-block w-100" alt="wolverine #1 from 1982">
-      </div>
-      <div class="carousel-item" data-bs-interval="2000">
-        <img src="img/3.png" class="d-block w-100" alt="weird fantasy #18 from 1953">
-      </div>
-      <div class="carousel-item" data-bs-interval="2000">
-        <img src="img/4.png" class="d-block w-100" alt="mad magazine #1 from 1952">
-      </div>
-      <div class="carousel-item" data-bs-interval="2000">
-        <img src="img/5.png" class="d-block w-100" alt="daredevil #1 from 1964">
-      </div>
-      <div class="carousel-item" data-bs-interval="2000">
-        <img src="img/6.png" class="d-block w-100" alt="doctor strange #169 from 1969">
-      </div>
-      <div class="carousel-item" data-bs-interval="2000">
-        <img src="img/7.png" class="d-block w-100" alt="thor #126 from from 1966">
-      </div>
-      <div class="carousel-item" data-bs-interval="2000">
-        <img src="img/8.png" class="d-block w-100" alt="tales of suspense #39 from 1963">
-      </div>
-      <div class="carousel-item" data-bs-interval="2000">
-        <img src="img/9.png" class="d-block w-100" alt="detective comics #27 from 1939">
-      </div>
-      <div class="carousel-item" data-bs-interval="2000">
-        <img src="img/10.png" class="d-block w-100" alt="watchmen #1 from 1986">
-      </div>
-      <div class="carousel-item" data-bs-interval="2000">
-        <img src="img/11.png" class="d-block w-100" alt="action comics #1 from 1938">
-      </div>
-      <div class="carousel-item" data-bs-interval="2000">
-        <img src="img/12.png" class="d-block w-100" alt="new mutants #98 from 1991">
-      </div>
-      <div class="carousel-item" data-bs-interval="2000">
-        <img src="img/13.png" class="d-block w-100" alt="justice league of america #1 from 1960">
-      </div>
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true" title="Previous"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true" title="Next"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
 
     </div>
+  </article>
 
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true" title="Previous"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
+  <?php include_once 'footer.inc' ?>
 
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true" title="Next"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
+  </body>
 
-  </div>
-
-<?php include_once 'footer.inc' ?>
-
-</body>
-
-</html>
+  </html>
