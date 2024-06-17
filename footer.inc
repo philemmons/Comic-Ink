@@ -1,5 +1,5 @@
-<br>
-<a href="#toTop" class="btn back-to-top" id="back-to-top-link" title="Back to Top" aria-label="Back to Top"><img src="./img/star-trek.png" alt="star trek icon" title="back to top" /></a>
+    <br>
+    <a href="#toTop" class="btn back-to-top" id="back-to-top-link" title="Back to Top" aria-label="Back to Top"><img src="./img/star-trek.png" alt="star trek icon" title="back to top" /></a>
 </main>
 
 <footer>
