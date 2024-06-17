@@ -41,22 +41,20 @@ if (isset($_SESSION["status"])) {
 </nav>
 
 <main id="main-content">
-  <article aria-label="Comics-are-cool-because">
+  <article aria-label="Influential and favorite covers">
     <div class="container mt-5">
       <div class="row justify-content-center">
         <div class="col-md-8 p-3 bg-secondary text-white">
           <section>
-            <h2 class="h4">The most significant comic books span a variety of genres, styles, and historical periods, each marking a pivotal moment in the medium's development. Below are covers of the most influential and some personal favorites.</h2>
+            <h2 class="h4">The most significant comic mediums span a variety of genres, styles, and historical periods, each marking a pivotal moment in the medium's development. Below are thirteen covers of the most influential and some personal favorites.</h2>
           </section>
-          <p class="pt-3">These comics are significant not only for their storytelling and artistic achievements but also for their impact on the comic book industry and popular culture. They have inspired countless adaptations in film, television, and other media, and continue to influence new generations of creators and readers.</p>
         </div>
       </div>
     </div>
   </article>
 
 
-
-  <article aria-label="13-famous-covers" class="pt-5">
+  <article aria-label="Thirteen famous covers" class="pt-5">
     <div id="carouselExampleInterval" class="carousel slide">
 
       <div class="carousel-inner">
@@ -113,6 +111,17 @@ if (isset($_SESSION["status"])) {
         <span class="visually-hidden">Next</span>
       </button>
 
+    </div>
+  </article>
+
+
+  <article aria-label="Important because">
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-8 p-3 bg-secondary text-white">
+          <p>These comics are significant not only for their storytelling and artistic achievements but also for their impact on the comic book industry and popular culture. They have inspired countless adaptations in film, television, and other media, and continue to influence new generations of creators and readers.</p>
+        </div>
+      </div>
     </div>
   </article>
 

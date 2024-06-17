@@ -157,7 +157,7 @@ img {
   left: 0;
   top: 0;
   width: 15%;
-  min-height: 115%;
+  min-height: 100vh;
   z-index: -1;
   background-size: cover;
 }
@@ -168,7 +168,7 @@ img {
   right: 0;
   top: 0;
   width: 15%;
-  min-height: 115%;
+  min-height: 100vh;
   z-index: -1;
   background-size: cover;
 }
