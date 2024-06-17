@@ -358,10 +358,12 @@ footer {
 }
 
 #footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
   background-color: var(--color-4);
   border: solid 2px var(--color-2);
   color: var(--color-2);
-  font-size: 0.75rem;
   margin: auto;
   padding: 0.75rem 1rem;
   width: 100%;
