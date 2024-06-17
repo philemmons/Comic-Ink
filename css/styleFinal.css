@@ -63,12 +63,6 @@ body {
   }
 }
 
-/**** XX-Large devices (larger desktops, 1400px and up) ****/
-@media (min-width: 1400px) {
-  :root {
-    --bs-body-font-size: 1.25rem !important;
-  }
-}
 
 .h1,
 .h2,
