@@ -44,7 +44,7 @@ if (isset($_SESSION["status"])) {
   <article aria-label="Influential and favorite covers">
     <div class="container mt-5">
       <div class="row justify-content-center">
-        <div class="col-md-8 p-3 bg-body-tertiary text-white">
+        <div class="col-xl-12 p-3 bg-body-tertiary text-white">
           <section>
             <h2 class="h4">The most significant comic mediums span a variety of genres, styles, and historical periods, each marking a pivotal moment in the medium's development. Below are thirteen covers of the most influential and some personal favorites.</h2>
           </section>
@@ -118,7 +118,7 @@ if (isset($_SESSION["status"])) {
   <article aria-label="Important because">
     <div class="container mt-5">
       <div class="row justify-content-center">
-        <div class="col-xl-8 p-3 bg-body-tertiary  text-white">
+        <div class="col-xl-12 p-3 bg-body-tertiary  text-white">
           <p>These comics are significant not only for their storytelling and artistic achievements but also for their impact on the comic book industry and popular culture. They have inspired countless adaptations in film, television, and other media, and continue to influence new generations of creators and readers.</p>
         </div>
       </div>
