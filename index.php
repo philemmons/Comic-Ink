@@ -44,7 +44,7 @@ if (isset($_SESSION["status"])) {
   <article aria-label="Comics-are-cool-because">
     <div class="container mt-5">
       <div class="row justify-content-center">
-        <div class="col-md-8 p-3 bg-primary">
+        <div class="col-md-8 p-3 bg-secondary text-white">
           <section>
             <h2 class="h4">The most significant comic books span a variety of genres, styles, and historical periods, each marking a pivotal moment in the medium's development. Below are covers of the most influential and some personal favorites.</h2>
           </section>
