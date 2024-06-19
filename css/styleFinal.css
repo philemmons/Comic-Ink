@@ -510,3 +510,7 @@ footer {
 #comDisplay_length {
   padding: 0.5rem 0rem !important;
 }
+
+div.dt-container .dt-paging .dt-paging-button {
+  padding: 0 !important;
+}
