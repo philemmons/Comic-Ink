@@ -68,7 +68,7 @@ if (isset($_SESSION["status"])) {
         <h2 class="h6">Welcome <?= $_SESSION['name'] ?>.
         </h2>
         <br>
-        <form method="POST" name="comicForm" class="row gx-4 gy-3 align-items-center" aria-label="Comic collection search area">
+        <form method="POST" name="comicForm" aria-label="Comic collection search area">
             <fieldset class="text-bg-light">
                 <legend>Optional Search by Title, Publisher, or Sort</legend>
                 <div class="row gx-4 gy-3 align-items-center">
@@ -108,19 +108,23 @@ if (isset($_SESSION["status"])) {
                         </div>
                     </div>
                 </div>
+
+                <div class="row gx-4 gy-3 align-items-center">
+                    <div class="col-auto">
+                        <input type="submit" value="Search" name="filterForm" class="btn" />
+                    </div>
+
+                    <div class="col-auto">
+                        <input type="submit" value="All Comics" name="allIn" class="btn" /></span>
+                    </div>
+                </div>
+
             </fieldset>
-
-            <div class="col-auto">
-                <input type="submit" value="Search" name="filterForm" class="btn" />
-            </div>
-
-            <div class="col-auto">
-                <input type="submit" value="All Comics" name="allIn" class="btn" /></span>
-            </div>
-
         </form>
     </div>
+
     <br><br>
+
     <div class="wrapper form-display" style="overflow: auto;">
         <table class="table table-sm table-striped table-hover display nowrap" id="comDisplay" style="width:100%;" aria-labelledby="collection">
             <caption class="small" id="collection">Comic Collection - The first row consist of six columns which are Title, Issue, Year, Volume, Total Issues, and Publisher. The first column has the titles listed in alphabetical order, and the number of books will vary based on the users input of search all, title or publisher, or by sorting. The user can sort by title, Publisher, and Year. Cross reference the title row with the column for the specific data. There may be more than one title based on volume, publisher, or year.</caption>
