@@ -93,6 +93,17 @@ input{
   border: 1px solid var(--color-4) !important;
 }
 
+/* https://stackoverflow.com/questions/70536735/override-bootstrap-5-fieldset-style */
+fieldset {
+  all: revert;
+}
+
+legend {
+  float: none;
+  width: unset;
+  padding: unset;
+}
+
 .m-6 {
   margin: 4.5rem !important;
 }
