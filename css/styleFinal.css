@@ -99,6 +99,15 @@ input{
   margin: 4.5rem !important;
 }
 
+fieldset {
+  all: revert;
+}
+
+legend {
+  float: none;
+  width: unset;
+}
+
 /**** accessibility ****/
 
 .sr-only {
