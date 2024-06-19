@@ -109,12 +109,12 @@ if (isset($_SESSION["status"])) {
                     </div>
                 </div>
 
-                <div class="row gx-4 gy-3 align-items-center">
-                    <div class="col-auto">
+                <div class="row py-2">
+                    <div class="col-auto py-3">
                         <input type="submit" value="Search" name="filterForm" class="btn" />
                     </div>
 
-                    <div class="col-auto">
+                    <div class="col-auto py-3">
                         <input type="submit" value="All Comics" name="allIn" class="btn" /></span>
                     </div>
                 </div>
