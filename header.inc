@@ -19,27 +19,17 @@
 
   <script src="js/jsFinal.js"></script>
 
-
-
-
-
-
-  <!-- https://datatables.net/ -->
-  <link href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css" rel="stylesheet">
-
+  
+ <!-- https://datatables.net/ -->
+ <link href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css" rel="stylesheet">
   <link href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css" rel="stylesheet">
   <link href="https://cdn.datatables.net/responsive/3.0.2/css/responsive.bootstrap5.css" rel="stylesheet">
 
 
-
   <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
-
-
-
-
-
-
-
+  <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
+  <script src="https://cdn.datatables.net/responsive/3.0.2/js/dataTables.responsive.js"></script>
+  <script src="https://cdn.datatables.net/responsive/3.0.2/js/responsive.bootstrap5.js"></script>
 
 
   <style>
@@ -53,6 +43,15 @@
 
   <a href="#main-content" class="btn btn-skip" aria-label="Go To Main Content">Go To Main Content</a>
 
+  <!--
+  <header>
+    <div id="wrapper-header">
+      <div class="title">
+        <img src="img/banner.png" alt="Comic books are a publication that consists of comic art in the form of sequential juxtaposed panels that represent individual scenes." />
+      </div>
+    </div>
+  </header>
+-->
   <!-- Hero Part -->
     <header class="container">
       <div class="row justify-content-center bg-img-home m-4">
