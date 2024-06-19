@@ -118,7 +118,7 @@ if (isset($_SESSION["status"])) {
         </form>
     </div>
     <br><br>
-    <div class="wrapper form-display" style="overflow: auto;">
+    <div class="wrapper form-display">
         <table class="table table-sm table-striped table-hover display nowrap" id="convDisplay" style="width:100%;">
             <caption>Comic Book Conventions Updated Last 11.06.23</caption>
             <!--https://www.w3schools.com/bootstrap/bootstrap_tables.asp-->
