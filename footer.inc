@@ -4,7 +4,7 @@
 
 <footer>
     <div id='footer'>
-        ©2016 to <?php echo date("Y"); ?> <a href="https://philemmons.com" target='_blank' id='sentence-case' rel="noopener noreferrer">philemmons.com <span class="sr-only">(Opens a new window)</span></a> All rights reserved.
+        ©2016 to <?php echo date("Y"); ?> <a href="https://philemmons.com" target='_blank' rel="noopener noreferrer">philemmons.com <span class="sr-only">(Opens a new window)</span></a> All rights reserved.
     </div>
 </footer>
 
