@@ -100,7 +100,8 @@ input{
 }
 
 fieldset {
-  all: revert;
+  padding: revert;
+  border:revert;
 }
 
 legend {
