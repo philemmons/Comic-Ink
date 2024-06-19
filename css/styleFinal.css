@@ -35,13 +35,13 @@ body {
   line-height: 1.5;
 }
 
-/**** Small devices (landscape phones, 576px and up)*/
+/**** Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) {
   :root {
     --bs-body-font-size: 0.6875rem !important;
   }
 }
-
+*/
 /**** Medium devices (tablets, 768px and up)*/
 @media (min-width: 768px) {
   :root {
@@ -49,13 +49,13 @@ body {
   }
 }
 
-/**** Large devices (desktops, 992px and up)*/
+/**** Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
   :root {
     --bs-body-font-size: 0.8125rem !important;
   }
 }
-
+*/
 /**** X-Large devices (large desktops, 1200px and up)*/
 @media (min-width: 1200px) {
   :root {
@@ -111,7 +111,7 @@ img {
 .back-to-top {
   position: fixed;
   cursor: pointer;
-  bottom: 4em;
+  bottom: 1.5em;
   right: 1em;
   left: auto;
   opacity: 0;
