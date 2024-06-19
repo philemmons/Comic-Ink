@@ -65,46 +65,48 @@ if (isset($_SESSION["status"])) {
 
 <main id="main-content">
     <div class="wrapper form-display">
-        <h6>
-            Welcome <?= $_SESSION['name'] ?>
-        </h6>
+        <h2 class="h6">Welcome <?= $_SESSION['name'] ?>.
+        </h2>
         <br>
-        <form method="POST" name="comicForm" class="row gx-4 gy-3 align-items-center">
-            <div class="col-auto">
-                <div class="input-group">
-                    <div class="input-group-text">Title</div>
-                    <input type="text" name="title" placeholder="Enter Title Here" />
+        <form method="POST" name="comicForm" class="row gx-4 gy-3 align-items-center" aria-label="Comic collection search area">
+            <fieldset class="text-bg-light">
+                <legend>Optional Search by Title, Publisher, or Sort</legend>
+                <div class="col-auto">
+                    <div class="input-group">
+                        <label for="title" class="input-group-text">Title</label>
+                        <input type="text" name="title" id="title" placeholder="Enter Title Here" />
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-auto">
-                <div class="input-group">
-                    <div class="input-group-text">Publisher</div>
-                    <select name="publisher">
-                        <option value="" disabled selected>Select One</option>
-                        <?php
-                        $allPub = getDropDown('comicBook', 'publisher');
-                        //print_r($allPub);
-                        foreach ($allPub as $singlePub) {
-                            echo "<option>" . $singlePub['publisher'] . " </option>";
-                        }
-                        ?>
-                    </select>
+                <div class="col-auto">
+                    <div class="input-group">
+                        <label for="publisher" class="input-group-text">Publisher</label>
+                        <select name="publisher" id="publisher">
+                            <option value="" disabled selected>Select One</option>
+                            <?php
+                            $allPub = getDropDown('comicBook', 'publisher');
+                            //print_r($allPub);
+                            foreach ($allPub as $singlePub) {
+                                echo "<option>" . $singlePub['publisher'] . " </option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-auto">
-                <div class="input-group">
-                    <div class="input-group-text">Sort By</div>
-                    <select name="sortBy">
-                        <option value="" disabled selected>Select One</option>
-                        <option value="title ASC">Title</option>
-                        <option value="publisher ASC">Publisher</option>
-                        <option value="year ASC">Year: Low to High</option>
-                        <option value="year DESC">Year: High to Low</option>
-                    </select>
+                <div class="col-auto">
+                    <div class="input-group">
+                        <label for="sortBy" class="input-group-text">Sort By</label>
+                        <select name="sortBy" id="sortBy">
+                            <option value="" disabled selected>Select One</option>
+                            <option value="title ASC">Title</option>
+                            <option value="publisher ASC">Publisher</option>
+                            <option value="year ASC">Year: Low to High</option>
+                            <option value="year DESC">Year: High to Low</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
+            </fieldset>
 
             <div class="col-auto">
                 <input type="submit" value="Search" name="filterForm" class="btn" />
@@ -118,8 +120,8 @@ if (isset($_SESSION["status"])) {
     </div>
     <br><br>
     <div class="wrapper form-display" style="overflow: auto;">
-        <table class="table table-sm table-striped table-hover display nowrap" id="comDisplay" style="width:100%;">
-            <!--https://www.w3schools.com/bootstrap/bootstrap_tables.asp-->
+        <table class="table table-sm table-striped table-hover display nowrap" id="comDisplay" style="width:100%;" aria-labelledby="collection">
+        <caption class="small" id="collection">Comic Collection - The first row consist of six columns which are Title, Issue, Year, Volume, Total Issues, and Publisher. The first column has the titles listed in alphabetical order, and the number of books will vary based on the users input of search all, title or publisher, or by sorting.  The user can sort by title, Publisher, and Year. Cross reference the title row with the column for the specific data. There may be more than one title based on volume, publisher, or year.</caption>
             <thead class='table-dark'>
                 <tr>
                     <th>Title</th>
@@ -131,7 +133,7 @@ if (isset($_SESSION["status"])) {
                 </tr>
             </thead>
             <tbody>
-                <?php
+                <?php /* https://www.w3schools.com/bootstrap/bootstrap_tables.asp */
                 if (isset($_POST['filterForm'])) {
                     $filterList = goSQLcomic("comicBook");
                     dataDisplay($filterList);
@@ -144,19 +146,19 @@ if (isset($_SESSION["status"])) {
         </table>
     </div>
 
-        <?php include_once 'footer.inc' ?>
+    <?php include_once 'footer.inc' ?>
 
-        <script>
-            //https://datatables.net/reference/option
-            new DataTable('#comDisplay', {
-                lengthMenu: [8, 16],
-                searching: false,
-                ordering: false,
-                responsive: true,
-                pagingType: 'simple'
-            });
-        </script>
+    <script>
+        /* https://datatables.net/reference/option */
+        new DataTable('#comDisplay', {
+            lengthMenu: [8, 16],
+            searching: false,
+            ordering: false,
+            responsive: true,
+            pagingType: 'simple'
+        });
+    </script>
 
-        </body>
+    </body>
 
-        </html>
+    </html>
