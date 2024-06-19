@@ -161,7 +161,7 @@ if (isset($_SESSION["status"])) {
             searching: false,
             ordering: false,
             responsive: true,
-            pagingType: 'simple'
+            pagingType: 'first_last_numbers'
         });
     </script>
 

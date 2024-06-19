@@ -19,10 +19,26 @@
 
   <script src="js/jsFinal.js"></script>
 
+
+
+
+
+
   <!-- https://datatables.net/ -->
   <link href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css" rel="stylesheet">
 
-  <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+  <link href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css" rel="stylesheet">
+  <link href="https://cdn.datatables.net/responsive/3.0.2/css/responsive.bootstrap5.css" rel="stylesheet">
+
+
+
+  <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+
+
+
+
+
+
 
 
 
