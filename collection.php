@@ -71,39 +71,41 @@ if (isset($_SESSION["status"])) {
         <form method="POST" name="comicForm" class="row gx-4 gy-3 align-items-center" aria-label="Comic collection search area">
             <fieldset class="text-bg-light">
                 <legend>Optional Search by Title, Publisher, or Sort</legend>
-                <div class="col-auto">
-                    <div class="input-group">
-                        <label for="title" class="input-group-text">Title</label>
-                        <input type="text" name="title" id="title" placeholder="Enter Title Here" />
+                <div class="row gx-4 gy-3 align-items-center">
+                    <div class="col-auto">
+                        <div class="input-group">
+                            <label for="title" class="input-group-text">Title</label>
+                            <input type="text" name="title" id="title" placeholder="Enter Title Here" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-auto">
-                    <div class="input-group">
-                        <label for="publisher" class="input-group-text">Publisher</label>
-                        <select name="publisher" id="publisher">
-                            <option value="" disabled selected>Select One</option>
-                            <?php
-                            $allPub = getDropDown('comicBook', 'publisher');
-                            //print_r($allPub);
-                            foreach ($allPub as $singlePub) {
-                                echo "<option>" . $singlePub['publisher'] . " </option>";
-                            }
-                            ?>
-                        </select>
+                    <div class="col-auto">
+                        <div class="input-group">
+                            <label for="publisher" class="input-group-text">Publisher</label>
+                            <select name="publisher" id="publisher">
+                                <option value="" disabled selected>Select One</option>
+                                <?php
+                                $allPub = getDropDown('comicBook', 'publisher');
+                                //print_r($allPub);
+                                foreach ($allPub as $singlePub) {
+                                    echo "<option>" . $singlePub['publisher'] . " </option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-auto">
-                    <div class="input-group">
-                        <label for="sortBy" class="input-group-text">Sort By</label>
-                        <select name="sortBy" id="sortBy">
-                            <option value="" disabled selected>Select One</option>
-                            <option value="title ASC">Title</option>
-                            <option value="publisher ASC">Publisher</option>
-                            <option value="year ASC">Year: Low to High</option>
-                            <option value="year DESC">Year: High to Low</option>
-                        </select>
+                    <div class="col-auto">
+                        <div class="input-group">
+                            <label for="sortBy" class="input-group-text">Sort By</label>
+                            <select name="sortBy" id="sortBy">
+                                <option value="" disabled selected>Select One</option>
+                                <option value="title ASC">Title</option>
+                                <option value="publisher ASC">Publisher</option>
+                                <option value="year ASC">Year: Low to High</option>
+                                <option value="year DESC">Year: High to Low</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </fieldset>
@@ -121,7 +123,7 @@ if (isset($_SESSION["status"])) {
     <br><br>
     <div class="wrapper form-display" style="overflow: auto;">
         <table class="table table-sm table-striped table-hover display nowrap" id="comDisplay" style="width:100%;" aria-labelledby="collection">
-        <caption class="small" id="collection">Comic Collection - The first row consist of six columns which are Title, Issue, Year, Volume, Total Issues, and Publisher. The first column has the titles listed in alphabetical order, and the number of books will vary based on the users input of search all, title or publisher, or by sorting.  The user can sort by title, Publisher, and Year. Cross reference the title row with the column for the specific data. There may be more than one title based on volume, publisher, or year.</caption>
+            <caption class="small" id="collection">Comic Collection - The first row consist of six columns which are Title, Issue, Year, Volume, Total Issues, and Publisher. The first column has the titles listed in alphabetical order, and the number of books will vary based on the users input of search all, title or publisher, or by sorting. The user can sort by title, Publisher, and Year. Cross reference the title row with the column for the specific data. There may be more than one title based on volume, publisher, or year.</caption>
             <thead class='table-dark'>
                 <tr>
                     <th>Title</th>
