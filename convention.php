@@ -148,19 +148,25 @@ if (isset($_SESSION["status"])) {
         </table>
     </div>
 
-<?php include_once 'footer.inc' ?>
+    <?php include_once 'footer.inc' ?>
 
-<script>
-    //https://datatables.net/reference/option
-    new DataTable('#convDisplay', {
-        lengthMenu: [8, 16],
-        searching: false,
-        ordering: false,
-        responsive: true,
-        pagingType: 'simple'
-    });
-</script>
+    <script>
+        //https://datatables.net/reference/option
+        new DataTable('#convDisplay', {
+            lengthMenu: [8, 16],
+            searching: false,
+            ordering: false,
+            responsive: true,
+            pagingType: 'simple_numbers',
+            language: {
+                paginate: {
+                    next: 'Next',
+                    previous: 'Previous'
+                }
+            }
+        });
+    </script>
 
-</body>
+    </body>
 
-</html>
+    </html>

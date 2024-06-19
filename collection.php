@@ -161,7 +161,13 @@ if (isset($_SESSION["status"])) {
             searching: false,
             ordering: false,
             responsive: true,
-            pagingType: 'full_numbers'
+            pagingType: 'simple_numbers',
+            language: {
+                paginate: {
+                    next: 'Next',
+                    previous: 'Previous'
+                }
+            }
         });
     </script>
 
