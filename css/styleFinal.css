@@ -19,6 +19,8 @@
 
   --bs-navbar-nav-link-padding-x: 1rem !important;
   --bs-navbar-color: var(--color-4) !important;
+
+  --bs-secondary-color: var(--color-5) !important;
 }
 
 /**** typography and spacing ****/
