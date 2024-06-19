@@ -127,7 +127,7 @@ if (isset($_SESSION["status"])) {
 
     <div class="wrapper form-display" style="overflow: auto;">
         <table class="table table-sm table-striped table-hover display nowrap" id="comDisplay" style="width:100%;" aria-labelledby="collection">
-            <caption class="small" id="collection">Comic Collection - The first row consist of six columns which are Title, Issue, Year, Volume, Total Issues, and Publisher. The first column has the titles listed in alphabetical order, and the number of books will vary based on the users input of search all, title or publisher, or by sorting. The user can sort by title, Publisher, and Year. Cross reference the title row with the column for the specific data. There may be more than one title based on volume, publisher, or year.</caption>
+            <caption class="small" id="collection"><strong>Comic Collection</strong> - The first row consist of six columns which are Title, Issue, Year, Volume, Total Issues, and Publisher. The first column has the titles listed in alphabetical order, and the number of books will vary based on the users input of search all, title or publisher, or by sorting. The user can sort by title, Publisher, and Year. Cross reference the title row with the column for the specific data. There may be more than one title based on volume, publisher, or year.</caption>
             <thead class='table-dark'>
                 <tr>
                     <th>Title</th>
