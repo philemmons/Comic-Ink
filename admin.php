@@ -134,7 +134,7 @@ function displayConAdmin($convention)
     echo "<td>" . $eachCon['city'] . "</td>";
     echo "<td>" . $eachCon['state'] . "</td>";
     echo "<td>" . $eachCon['country'] . "</td>";
-    echo "<td> <a href='https://" . $eachCon['website'] . "' target='_blank'>" . $eachCon['website'] . "</a> </td>";
+    echo "<td> <a href='https://" . $eachCon['website'] . "' target='_blank' rel='noopener noreferrer'>" . $eachCon['website'] . "</a> </td>";
     echo "</tr>";
   }
 }

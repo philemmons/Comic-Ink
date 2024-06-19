@@ -312,7 +312,7 @@ function displayCon($convention)
         echo "<td>" . $eachCon['state'] . "</td>";
         echo "<td>" . $eachCon['country'] . "</td>";
         echo "<td>
-                <a href='https://" . $eachCon['website'] . "' target='_blank'>" . $eachCon['website'] . "</a>
+                <a href='https://" . $eachCon['website'] . "' target='_blank' rel='noopener noreferrer'>" . $eachCon['website'] . "</a>
               </td>";
         echo "</tr>";
     }

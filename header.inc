@@ -38,15 +38,6 @@
 
   <a href="#main-content" class="btn btn-skip" aria-label="Go To Main Content">Go To Main Content</a>
 
-  <!--
-  <header>
-    <div id="wrapper-header">
-      <div class="title">
-        <img src="img/banner.png" alt="Comic books are a publication that consists of comic art in the form of sequential juxtaposed panels that represent individual scenes." />
-      </div>
-    </div>
-  </header>
--->
   <!-- Hero Part -->
     <header class="container">
       <div class="row justify-content-center bg-img-home m-4">
