@@ -44,9 +44,9 @@ if (isset($_SESSION["status"])) {
   <article aria-label="Influential and favorite covers">
     <div class="container mt-5">
       <div class="row justify-content-center">
-        <div class="col-sm-8 p-3 bg-body-tertiary text-white">
+        <div class="col-sm-8 p-3 bg-body-tertiary">
           <section>
-            <h2 class="h6">The most significant comic mediums span a variety of genres, styles, and historical periods, each marking a pivotal moment in the medium's development. Below are thirteen covers of the most influential and some personal favorites.</h2>
+            <h2 class="h6 text-white">The most significant comic mediums span a variety of genres, styles, and historical periods, each marking a pivotal moment in the medium's development. Below are thirteen covers of the most influential and some personal favorites.</h2>
           </section>
         </div>
       </div>

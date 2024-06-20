@@ -83,7 +83,7 @@ h6 {
   line-height: 1.5 !important;
 }
 
-a {
+a, .dt-paging-button:hover>a {
   text-decoration: underline;
   text-underline-offset: 0.25em;
 }
@@ -513,4 +513,9 @@ footer {
 
 div.dt-container .dt-paging .dt-paging-button {
   padding: 0 !important;
+}
+
+.dt-paging-button:hover{
+  border: unset;
+  background-color: none;
 }
