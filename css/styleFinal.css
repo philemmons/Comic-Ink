@@ -518,8 +518,8 @@ div.dt-container .dt-paging .dt-paging-button {
   box-shadow: none !important;
 }
 
-.dt-paging-button>.page-item:hover,
-.dt-paging-button>.page-item:focus{
+.dt-paging-button>.page-link:hover,
+.dt-paging-button>.page-link:focus{
   text-decoration: underline;
   text-underline-offset: 0.25em;
 }
