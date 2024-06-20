@@ -206,6 +206,7 @@ legend {
   background-repeat: no-repeat;
   background-size: cover;
   border: solid 2px var(--color-2);
+  background-color: var(--color-4);
 }
 
 .text-red-white {
