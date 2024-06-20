@@ -521,6 +521,7 @@ div.dt-container .dt-paging .dt-paging-button {
 .dt-paging-button>.page-link:focus{
   text-decoration: underline;
   text-underline-offset: 0.25em;
+  border: none;
 }
 
 .dt-paging-button>.page-link>.disabled{
