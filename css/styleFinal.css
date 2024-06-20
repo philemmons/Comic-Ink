@@ -306,7 +306,6 @@ a.page-link.previous:hover {
   opacity: 0.8;
   background-image: linear-gradient(to bottom, var(--color-22), var(--color-21));
   background-color: transparent !important;
-  border-color: var(--color-2) !important;
   text-decoration: underline;
   text-underline-offset: 0.25em;
 }
