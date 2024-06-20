@@ -63,61 +63,71 @@ if (isset($_SESSION["status"])) {
 
 <main id="main-content">
      <div class="wrapper form-display">
-          <h6>
+          <h2 class="h6">
                Welcome <?= $_SESSION['name'] ?>
-          </h6>
+          </h2>
           <br>
-          <form method="POST" name="gNovelForm" class="row gx-4 gy-3 align-items-center">
-               <div class="col-auto">
-                    <div class="input-group">
-                         <div class="input-group-text">Title</div>
-                         <input type="text" name="title" placeholder="Enter Title Here" />
+          <form method="POST" name="gNovelForm" aria-label="Graphic Novel Search">
+               <fieldset class="text-bg-light">
+                    <legend>Optional Search by Title, Publisher, or Sort</legend>
+                    <div class="row gx-4 gy-3 align-items-center">
+
+                         <div class="col-auto">
+                              <div class="input-group">
+                                   <label for="title" class="input-group-text">Title</label>
+                                   <input type="text" name="title" id="title" placeholder="Enter Title Here" />
+                              </div>
+                         </div>
+
+                         <div class="col-auto">
+                              <div class="input-group">
+                                   <label for="publisher" class="input-group-text">Publisher</label>
+                                   <select name="publisher" id="publisher">
+                                        <option value="" disabled selected>Select One</option>
+                                        <?php
+                                        $allPub = getDropDown('graphicNovel', 'publisher');
+                                        //print_r($allPub);
+                                        foreach ($allPub as $singlePub) {
+                                             echo "<option>" . $singlePub['publisher'] . " </option>";
+                                        }
+                                        ?>
+                                   </select>
+                              </div>
+                         </div>
+
+                         <div class="col-auto">
+                              <div class="input-group">
+                                   <label for="sortBy" class="input-group-text">Sort By</label>
+                                   <select name="sortBy" id="sortBy">
+                                        <option value="" disabled selected>Select One</option>
+                                        <option value="title ASC">Title</option>
+                                        <option value="publisher ASC">Publisher</option>
+                                        <option value="year ASC">Year: Low to High</option>
+                                        <option value="year DESC">Year: High to Low</option>
+                                   </select>
+                              </div>
+                         </div>
                     </div>
-               </div>
 
-               <div class="col-auto">
-                    <div class="input-group">
-                         <div class="input-group-text">Publisher</div>
-                         <select name="publisher">
-                              <option value="" disabled selected>Select One</option>
-                              <?php
-                              $allPub = getDropDown('graphicNovel', 'publisher');
-                              //print_r($allPub);
-                              foreach ($allPub as $singlePub) {
-                                   echo "<option>" . $singlePub['publisher'] . " </option>";
-                              }
-                              ?>
-                         </select>
+                    <div class="row py-2">
+                         <div class="col-auto py-3">
+                              <input type="submit" value="Search" name="filterForm" class="btn" />
+                         </div>
+
+                         <div class="col-auto py-3">
+                              <input type="submit" value="All Graphic Novels" name="allIn" class="btn" /></span>
+                         </div>
                     </div>
-               </div>
 
-               <div class="col-auto">
-                    <div class="input-group">
-                         <div class="input-group-text">Sort By</div>
-                         <select name="sortBy">
-                              <option value="" disabled selected>Select One</option>
-                              <option value="title ASC">Title</option>
-                              <option value="publisher ASC">Publisher</option>
-                              <option value="year ASC">Year: Low to High</option>
-                              <option value="year DESC">Year: High to Low</option>
-                         </select>
-                    </div>
-               </div>
-
-               <div class="col-auto">
-                    <input type="submit" value="Search" name="filterForm" class="btn" />
-               </div>
-
-               <div class="col-auto">
-                    <input type="submit" value="All Graphic Novels" name="allIn" class="btn" /></span>
-               </div>
-
+               </fieldset>
           </form>
      </div>
+
      <br><br>
+
      <div class="wrapper form-display">
-          <table class="table table-sm table-striped table-hover display nowrap" id="novelDisplay" style="width:100%;">
-               <!--https://www.w3schools.com/bootstrap/bootstrap_tables.asp-->
+          <table class="table table-sm table-striped table-hover display nowrap" id="novelDisplay" style="width:100%;" aria-labelledby="graphic-novel">
+          <caption class="small" id="graphic-novel"><strong>Graphic Novel Collection</strong> - The first row consist of four columns which are Title, Volume, Year, and Publisher. The first column has the titles listed in alphabetical order, and the number of books will vary based on the users input of search all, title or publisher, or by sorting. The user can sort by title, publisher, and year. Cross reference the title row with the column for the specific data. There may be more than one title based on volume, publisher, or year.</caption>
                <thead class='table-dark'>
                     <tr>
                          <th>Title</th>

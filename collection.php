@@ -68,7 +68,7 @@ if (isset($_SESSION["status"])) {
         <h2 class="h6">Welcome <?= $_SESSION['name'] ?>.
         </h2>
         <br>
-        <form method="POST" name="comicForm" aria-label="Comic collection search area">
+        <form method="POST" name="comicForm" aria-label="Comic Collection Search">
             <fieldset class="text-bg-light">
                 <legend>Optional Search by Title, Publisher, or Sort</legend>
                 <div class="row gx-4 gy-3 align-items-center">
