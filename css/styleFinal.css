@@ -251,15 +251,10 @@ legend {
 
 .carousel-control-next,
 .carousel-control-prev {
-  top: -50px !important;
+  top: -60px !important;
   bottom: unset !important;
   width: 25% !important;
-  color: var(--color-5) !important;
-  border: inherit !important;
   opacity: 1 !important;
-  transition: none !important;
-  background-color: var(--color-4);
-  padding: revert !important;
 }
 
 /**** table format ****/
@@ -525,10 +520,4 @@ div.dt-container .dt-paging .dt-paging-button {
   background: none !important;
   box-shadow: none !important;
   border: none !important;
-}
-
-.dt-paging-button>.page-link:hover,
-.dt-paging-button>.page-link:focus {
-  text-decoration: underline;
-  text-underline-offset: 0.25em;
 }
