@@ -294,7 +294,7 @@ a.page-link.previous {
   color: var(--color-2) !important;
   background-color: var(--color-21);
   background-image: linear-gradient(to bottom, var(--color-21), var(--color-22));
-  padding: 0rem 1.25rem;
+  padding: 0.25rem 1.25rem;
   text-decoration: none;
 }
 
