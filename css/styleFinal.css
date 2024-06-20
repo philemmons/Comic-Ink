@@ -521,3 +521,8 @@ div.dt-container .dt-paging .dt-paging-button {
   box-shadow: none !important;
   border: none !important;
 }
+
+/**** DT known bug  - https://datatables.net/forums/discussion/75968/tfoot-is-missing-in-tables-drived-by-objects ****/
+tfoot{
+  display:none !important;
+}
