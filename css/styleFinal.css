@@ -84,8 +84,8 @@ h6 {
 }
 
 a{
-  text-decoration: underline;
-  text-underline-offset: 0.25em;
+  text-decoration: underline !important;
+  text-underline-offset: 0.25em !important;
 }
 
 img {
@@ -513,11 +513,6 @@ footer {
 
 div.dt-container .dt-paging .dt-paging-button {
   padding: 0 !important;
-}
-
-div.dt-container .dt-paging .dt-paging-button:hover {
-  text-decoration: underline;
-  text-underline-offset: 0.25em;
-  border: unset !important;
+  border: none !important;
   background: none !important;
 }
