@@ -1,7 +1,7 @@
 :root {
 
   --color-2: #ffffff;
-  --color-3: #d4d4d4;
+  --color-3: #ebebeb;
   --color-4: #36454F;
   --color-5: #000000;
   --color-6: #c3ced6;
@@ -522,4 +522,8 @@ div.dt-container .dt-paging .dt-paging-button {
 .dt-paging-button>.page-link:focus{
   text-decoration: underline;
   text-underline-offset: 0.25em;
+}
+
+.dt-paging-button>.page-link>.disabled{
+  color: var(--color-)
 }
