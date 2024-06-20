@@ -513,7 +513,6 @@ footer {
 
 div.dt-container .dt-paging .dt-paging-button {
   padding: 0 0.25rem !important;
-  border: 1px solid var(--color-5) !important;
   background: none !important;
   box-shadow: none !important;
 }
@@ -526,4 +525,9 @@ div.dt-container .dt-paging .dt-paging-button {
 
 .dt-paging-button>.page-link>.disabled{
   color: var(--color-)
+}
+
+a.page-link.next,
+a.page-link.previous{
+  border: 1px solid var(--color-5) !important;
 }
