@@ -515,13 +515,13 @@ div.dt-container .dt-paging .dt-paging-button {
   padding: 0 0.25rem !important;
   background: none !important;
   box-shadow: none !important;
+  border: unset;
 }
 
 .dt-paging-button>.page-link:hover,
 .dt-paging-button>.page-link:focus{
   text-decoration: underline;
   text-underline-offset: 0.25em;
-  border: unset;
 }
 
 .dt-paging-button>.page-link>.disabled{
