@@ -515,7 +515,7 @@ div.dt-container .dt-paging .dt-paging-button {
   padding: 0 0.25rem !important;
   background: none !important;
   box-shadow: none !important;
-  border: unset;
+  border: none !important;
 }
 
 .dt-paging-button>.page-link:hover,
