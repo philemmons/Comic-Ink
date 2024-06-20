@@ -83,7 +83,7 @@ h6 {
   line-height: 1.5 !important;
 }
 
-a{
+a {
   text-decoration: underline;
   text-underline-offset: 0.25em;
 }
@@ -289,9 +289,9 @@ td {
 .btnAD,
 a.page-link.next,
 a.page-link.previous {
-  border: 2px solid var(--color-5);
+  border: 2px solid var(--color-5) !important;
   box-shadow: 10px 10px 3px rgba(101, 101, 101, 0.7);
-  color: var(--color-2);
+  color: var(--color-2) !important;
   background-color: var(--color-21);
   background-image: linear-gradient(to bottom, var(--color-21), var(--color-22));
   padding: 0rem 1.25rem;
@@ -306,11 +306,16 @@ a.page-link.previous:hover {
   opacity: 0.8;
   background-image: linear-gradient(to bottom, var(--color-22), var(--color-21));
   background-color: transparent !important;
+  border-color: var(--color-2) !important;
 }
 
-.btn:active,
-.btnAD:active {
-  color: var(--color-2) !important;
+.btn:focus,
+.btnAD:focus,
+a.page-link.next:focus,
+a.page-link.previous:focus {
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .25);
 }
 
 .w3-content {
@@ -521,7 +526,7 @@ div.dt-container .dt-paging .dt-paging-button {
 }
 
 .dt-paging-button>.page-link:hover,
-.dt-paging-button>.page-link:focus{
+.dt-paging-button>.page-link:focus {
   text-decoration: underline;
   text-underline-offset: 0.25em;
 }
