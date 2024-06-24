@@ -530,7 +530,9 @@ tfoot {
   display: none !important;
 }
 
-/**** https://datatables.net/reference/option/columnDefs ****/
+/**** https://datatables.net/reference/option/columnDefs
 td.wrapok {
   white-space: pre-line !important;
 }
+
+****/

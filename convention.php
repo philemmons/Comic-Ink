@@ -164,9 +164,10 @@ if (isset($_SESSION["status"])) {
                     previous: 'Previous'
                 }
             },
+            /**** */
             columnDefs: [{
                 targets: [0],
-                class: "wrapok"
+                width: "150px"
             }]
         });
 
