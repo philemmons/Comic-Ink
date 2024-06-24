@@ -29,7 +29,7 @@ function validateYear(userYear) {
   if (pYear.length != 4) return false;
   if (!pYear.match(/\d{4}/)) return false;
   if (thisYear + 2 < pYear || pYear < thisYear - 2) return false;
-  
+
   return true;
 }
 
@@ -104,6 +104,19 @@ function resetFields() {
 }
 
 /* only for conUpdate */
-function myReset(myForm){
-  document.getElementById(myForm).reset(); 
+function myReset(myForm) {
+  document.getElementById(myForm).reset();
 }
+
+
+/** tooltip - https://www.tutorialrepublic.com/codelab.php?topic=bootstrap&file=tooltips-placement-via-javascript
+document.addEventListener("DOMContentLoaded", function() {
+    // Placement of tooltip on top
+    var tipTop = document.getElementById("tipTop");
+    var tooltipTop = new bootstrap.Tooltip(tipTop, {
+        placement: "top",
+        animated: 'fade',
+        placement: 'bottom',
+        html: true
+    });
+}); **/

@@ -151,7 +151,7 @@ if (isset($_SESSION["status"])) {
     <?php include_once 'footer.inc' ?>
 
     <script>
-        //https://datatables.net/reference/option
+        /** https://datatables.net/reference/option **/
         new DataTable('#convDisplay', {
             lengthMenu: [8, 16],
             searching: false,
@@ -165,6 +165,11 @@ if (isset($_SESSION["status"])) {
                 }
             }
         });
+
+/**  https://datatables.net/forums/discussion/71404/accessibility-pagination-using-actual-buttons-instead-of-links */
+        const prevNextCollection = document.getElementsByClassName("page-link");
+        prevNextCollection[0].setAttribute("role", "button");
+        prevNextCollection[1].setAttribute("role", "button");
     </script>
 
     </body>

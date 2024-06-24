@@ -170,6 +170,7 @@ if (isset($_SESSION["status"])) {
             }
         });
 
+        /**  https://datatables.net/forums/discussion/71404/accessibility-pagination-using-actual-buttons-instead-of-links */
         const prevNextCollection = document.getElementsByClassName("page-link");
         prevNextCollection[0].setAttribute("role", "button");
         prevNextCollection[1].setAttribute("role", "button");
