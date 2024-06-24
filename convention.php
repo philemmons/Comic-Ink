@@ -52,76 +52,84 @@ if (isset($_SESSION["status"])) {
 
 <main id="main-content">
     <div class="wrapper form-display">
-        <h6>
+        <h2 class="h6">
             Welcome <?= $_SESSION['name'] ?>
-        </h6>
+        </h2>
         <br>
-        <form method="POST" name="conForm" class="row gx-4 gy-3 align-items-center">
+        <form method="POST" name="conForm" aria-label="Convention Search">
+            <fieldset class="text-bg-light">
+                <legend>Optional Search by Name, Date, City, State, or Sort</legend>
+                <div class="row gx-4 gy-3 align-items-center">
 
-            <div class="col-auto">
-                <div class="input-group">
-                    <div class="input-group-text">Name</div>
-                    <input type="text" name="conName" placeholder="Enter Convention Name" />
+                    <div class="col-auto">
+                        <div class="input-group">
+                            <label for="conName" class="input-group-text">Name</label>
+                            <input type="text" name="conName" id="conName" placeholder="Enter Convention Name" />
+                        </div>
+                    </div>
+
+                    <div class="col-auto">
+                        <div class="input-group">
+                            <label for="conDate" class="input-group-text">Date</label>
+                            <input type="date" name="conDate" id="conDate">
+                        </div>
+                    </div>
+
+                    <div class="col-auto">
+                        <div class="input-group">
+                            <label for="conCity" class="input-group-text">City</label>
+                            <input type="text" name="conCity" id="conCity" placeholder="Enter a City" />
+                        </div>
+                    </div>
+
+                    <div class="col-auto">
+                        <div class="input-group">
+                            <label for="state" class="input-group-text">State</label>
+                            <select name="state" id="state">
+                                <option value="" disabled selected>Select One</option>
+                                <?php
+                                $allState = getDropDown('convention', 'state');
+                                foreach ($allState as $singleState) {
+                                    echo "<option>" . $singleState['state'] . " </option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-auto">
+                        <div class="input-group">
+                            <label for="sortBy" class="input-group-text">Sort By</label>
+                            <select name="sortBy" id="sortBy">
+                                <option value="" disabled selected>Select One</option>
+                                <option value="conName">Name</option>
+                                <option value="city">City</option>
+                                <option value="state">State</option>
+                                <option value="country">Country</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-auto">
-                <div class="input-group">
-                    <div class="input-group-text">Date</div>
-                    <input type="date" name="conDate" />
+                <div class="row py-2">
+                    <div class="col-auto py-3">
+                        <input type="submit" value="Search" name="filterForm" class="btn" />
+                    </div>
+
+                    <div class="col-auto py-3">
+                        <input type="submit" value="All Conventions" name="allIn" class="btn" />
+                    </div>
+
                 </div>
-            </div>
-
-            <div class="col-auto">
-                <div class="input-group">
-                    <div class="input-group-text">City</div>
-                    <input type="text" name="conCity" placeholder="Enter a City" />
-                </div>
-            </div>
-
-            <div class="col-auto">
-                <div class="input-group">
-                    <div class="input-group-text">State</div>
-                    <select name="state">
-                        <option value="" disabled selected>Select One</option>
-                        <?php
-                        $allState = getDropDown('convention', 'state');
-                        foreach ($allState as $singleState) {
-                            echo "<option>" . $singleState['state'] . " </option>";
-                        }
-                        ?>
-                    </select>
-                </div>
-            </div>
-
-            <div class="col-auto">
-                <div class="input-group">
-                    <div class="input-group-text">Sort By</div>
-                    <select name="sortBy">
-                        <option value="" disabled selected>Select One</option>
-                        <option value="conName">Name</option>
-                        <option value="city">City</option>
-                        <option value="state">State</option>
-                        <option value="country">Country</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="col-auto">
-                <input type="submit" value="Search" name="filterForm" class="btn" />
-            </div>
-
-            <div class="col-auto">
-                <input type="submit" value="All Conventions" name="allIn" class="btn" />
-            </div>
-
+            </fieldset>
         </form>
     </div>
+
     <br><br>
+
     <div class="wrapper form-display">
-        <table class="table table-sm table-striped table-hover display nowrap" id="convDisplay" style="width:100%;">
-            <caption>Comic Book Conventions Updated Last 11.06.23</caption>
-            <!--https://www.w3schools.com/bootstrap/bootstrap_tables.asp-->
+        <table class="table table-sm table-striped table-hover display nowrap" id="convDisplay" style="width:100%;" aria-labelledby="comic-conventions">
+            <caption class="small bg-body-tertiary text-white p-2 my-2" id="graphic-novel"><strong>Comic Conventions</strong> - The first row consist of eight columns which are Name, Date, Year, Location, City, State, Country, and Official. The first column has the names listed in alphabetical order, and the number of books will vary based on the users input of search all, title or publisher, or by sorting. The user can sort by title, publisher, and year. Cross reference the title row with the column for the specific data. There may be more than one title based on volume, publisher, or year.</caption>
             <thead class='table-dark'>
                 <tr>
                     <th>Name</th>
