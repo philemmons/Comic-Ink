@@ -49,7 +49,7 @@
         <div class="col-xl-11 col-lg-11 col-md-10 text-center">
             <h1 class="text-red-white hero-h1">Comic Ink</h1>
             <p class= "shadow-text-area">Comic books are a publication that consists of comic art in the form of sequential juxtaposed panels that represent individual scenes.</p>
-            <p class="text-red-white half-h1">Discover More</p>
+            <h2 class="text-red-white half-h1">Discover More</h2>
         </div>
       </div>
     </header>

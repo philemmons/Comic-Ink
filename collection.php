@@ -65,8 +65,8 @@ if (isset($_SESSION["status"])) {
 
 <main id="main-content">
     <div class="wrapper form-display">
-        <h2 class="h6">Welcome <?= $_SESSION['name'] ?>.
-        </h2>
+        <h3 class="h6">Welcome <?= $_SESSION['name'] ?>.
+        </h3>
         <br>
         <form method="POST" name="comicForm" aria-label="Comic Collection Search">
             <fieldset class="text-bg-light">
