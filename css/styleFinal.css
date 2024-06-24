@@ -26,7 +26,6 @@
 
   --bs-heading-color: var(--color-5) !important;
 
-  --bs-btn-font-size: var(--bs-body-font-size) !important;
 }
 
 /**** typography and spacing ****/
@@ -296,6 +295,7 @@ a.page-link.previous {
   background-image: linear-gradient(to bottom, var(--color-21), var(--color-22));
   padding: 0.25rem 1.25rem;
   text-decoration: none;
+  font-size: var(--bs-body-font-size) !important;
 }
 
 .btn:hover,
