@@ -532,5 +532,5 @@ tfoot {
 
 /**** https://datatables.net/reference/option/columnDefs ****/
 td.wrapok {
-  white-space: normal !important;
+  white-space: pre-line !important;
 }
