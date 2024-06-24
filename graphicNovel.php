@@ -159,17 +159,11 @@ if (isset($_SESSION["status"])) {
                searching: false,
                ordering: false,
                responsive: true,
-               pagingType: 'simple',
+               pagingType: 'simple_numbers',
                language: {
                     paginate: {
                          next: 'Next',
                          previous: 'Previous'
-                    }
-               },
-               role: {
-                    paginate: {
-                         next: 'button',
-                         previous: 'button'
                     }
                }
           });
