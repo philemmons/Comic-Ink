@@ -113,6 +113,7 @@ legend {
   float: none;
   width: unset;
   margin-left: 1rem;
+  font-size: var(--bs-body-font-size) !important;
 }
 
 /**** accessibility ****/
