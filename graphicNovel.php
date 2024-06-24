@@ -159,7 +159,7 @@ if (isset($_SESSION["status"])) {
                searching: false,
                ordering: false,
                responsive: true,
-               pagingType: 'simple_numbers',
+               pagingType: 'simple',
                language: {
                     paginate: {
                          next: 'Next',

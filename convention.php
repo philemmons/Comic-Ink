@@ -153,20 +153,20 @@ if (isset($_SESSION["status"])) {
     <script>
         /** https://datatables.net/reference/option **/
         new DataTable('#convDisplay', {
-            lengthMenu: [8, 16],
+            lengthMenu: [16,8],
             searching: false,
             ordering: false,
             responsive: true,
             pagingType: 'simple',
             language: {
                 paginate: {
-                    next:'  Next  ',
+                    next:'Next',
                     previous: 'Previous'
                 }
             }
         });
 
-/**  https://datatables.net/forums/discussion/71404/accessibility-pagination-using-actual-buttons-instead-of-links */
+        /**  https://datatables.net/forums/discussion/71404/accessibility-pagination-using-actual-buttons-instead-of-links */
         const prevNextCollection = document.getElementsByClassName("page-link");
         prevNextCollection[0].setAttribute("role", "button");
         prevNextCollection[1].setAttribute("role", "button");

@@ -164,7 +164,7 @@ if (isset($_SESSION["status"])) {
             pagingType: 'simple',
             language: {
                 paginate: {
-                    next: '  Next  ',
+                    next: 'Next',
                     previous: 'Previous'
                 }
             }
