@@ -529,3 +529,7 @@ div.dt-container .dt-paging .dt-paging-button {
 tfoot{
   display:none !important;
 }
+
+td.wrapok {
+  white-space:normal
+}

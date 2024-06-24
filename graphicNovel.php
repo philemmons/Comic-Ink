@@ -127,7 +127,7 @@ if (isset($_SESSION["status"])) {
 
      <div class="wrapper form-display">
           <table class="table table-sm table-striped table-hover display nowrap" id="novelDisplay" style="width:100%;" aria-labelledby="graphic-novel">
-               <caption class="small" id="graphic-novel"><strong>Graphic Novel Collection</strong> - The first row consist of four columns which are Title, Volume, Year, and Publisher. The first column has the titles listed in alphabetical order, and the number of books will vary based on the users input of search all, title or publisher, or by sorting. The user can sort by title, publisher, and year. Cross reference the title row with the column for the specific data. There may be more than one title based on volume, publisher, or year.</caption>
+               <caption class="small bg-body-tertiary text-white p-2 my-2" id="graphic-novel"><strong>Graphic Novel Collection</strong> - The first row consist of four columns which are Title, Volume, Year, and Publisher. The first column has the titles listed in alphabetical order, and the number of books will vary based on the users input of search all, title or publisher, or by sorting. The user can sort by title, publisher, and year. Cross reference the title row with the column for the specific data. There may be more than one title based on volume, publisher, or year.</caption>
                <thead class='table-dark'>
                     <tr>
                          <th>Title</th>
@@ -153,9 +153,9 @@ if (isset($_SESSION["status"])) {
      <?php include_once 'footer.inc' ?>
 
      <script>
-          //https://datatables.net/reference/option
+          /** https://datatables.net/examples/index **/
           new DataTable('#novelDisplay', {
-               lengthMenu: [16,8],
+               lengthMenu: [16, 8],
                searching: false,
                ordering: false,
                responsive: true,
@@ -165,7 +165,11 @@ if (isset($_SESSION["status"])) {
                          next: 'Next',
                          previous: 'Previous'
                     }
-               }
+               },
+               columnDefs: [{
+                    targets: [0],
+                    class: "wrapok"
+               }]
           });
 
           /**  https://datatables.net/forums/discussion/71404/accessibility-pagination-using-actual-buttons-instead-of-links */

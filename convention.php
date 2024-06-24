@@ -151,19 +151,23 @@ if (isset($_SESSION["status"])) {
     <?php include_once 'footer.inc' ?>
 
     <script>
-        /** https://datatables.net/reference/option **/
+        /** https://datatables.net/examples/index **/
         new DataTable('#convDisplay', {
-            lengthMenu: [16,8],
+            lengthMenu: [16, 8],
             searching: false,
             ordering: false,
             responsive: true,
             pagingType: 'simple',
             language: {
                 paginate: {
-                    next:'Next',
+                    next: 'Next',
                     previous: 'Previous'
                 }
-            }
+            },
+            columnDefs: [{
+                targets: [0],
+                class: "wrapok"
+            }]
         });
 
         /**  https://datatables.net/forums/discussion/71404/accessibility-pagination-using-actual-buttons-instead-of-links */
