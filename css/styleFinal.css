@@ -173,7 +173,7 @@ legend {
   left: 0;
   top: 0;
   width: 15%;
-  min-height: 125vh;
+  min-height: 140vh;
   z-index: -1;
   background-size: cover;
 }
@@ -184,7 +184,7 @@ legend {
   right: 0;
   top: 0;
   width: 15%;
-  min-height: 125vh;
+  min-height: 140vh;
   z-index: -1;
   background-size: cover;
 }
