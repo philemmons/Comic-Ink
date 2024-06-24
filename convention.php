@@ -58,7 +58,7 @@ if (isset($_SESSION["status"])) {
         <br>
         <form method="POST" name="conForm" aria-label="Convention Search">
             <fieldset class="text-bg-light">
-                <legend>Optional Search by Name, Date, City, State, or Sort</legend>
+                <legend class="bg-body-tertiary text-white p-1">Optional Search by Name, Date, City, State, or Sort</legend>
                 <div class="row gx-4 gy-3 align-items-center">
 
                     <div class="col-auto">

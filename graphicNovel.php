@@ -69,7 +69,7 @@ if (isset($_SESSION["status"])) {
           <br>
           <form method="POST" name="gNovelForm" aria-label="Graphic Novel Search">
                <fieldset class="text-bg-light">
-                    <legend>Optional Search by Title, Publisher, or Sort</legend>
+                    <legend class="bg-body-tertiary text-white p-1">Optional Search by Title, Publisher, or Sort</legend>
                     <div class="row gx-4 gy-3 align-items-center">
 
                          <div class="col-auto">
