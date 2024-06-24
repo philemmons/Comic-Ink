@@ -129,7 +129,7 @@ if (isset($_SESSION["status"])) {
 
     <div class="wrapper form-display">
         <table class="table table-sm table-striped table-hover display nowrap" id="convDisplay" style="width:100%;" aria-labelledby="comic-conventions">
-            <caption class="small bg-body-tertiary text-white p-2 my-2" id="graphic-novel"><strong>Comic Conventions</strong> - The first row consist of eight columns which are Name, Date, Year, Location, City, State, Country, and Official. The first column has the names listed in alphabetical order, and the number of books will vary based on the users input of search all, title or publisher, or by sorting. The user can sort by title, publisher, and year. Cross reference the title row with the column for the specific data. There may be more than one title based on volume, publisher, or year.</caption>
+            <caption class="small bg-body-tertiary text-white p-2 my-2" id="graphic-novel"><strong>Comic Conventions</strong> - The first row consist of eight columns which are Name, Date, Year, Location, City, State, Country, and Official. The first column has the convention name listed in alphabetical order, by default, or by selecting All Conventions. There may be identical conventions listed at different dates, or different Cities, or different States, depending on your search. The convention data was gathered online from various sources on 11.06.2023 Cross reference the Name row with the column for the specific data.</caption>
             <thead class='table-dark'>
                 <tr>
                     <th>Name</th>
