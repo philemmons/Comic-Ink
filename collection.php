@@ -164,11 +164,17 @@ if (isset($_SESSION["status"])) {
             pagingType: 'simple',
             language: {
                 paginate: {
-                    next:'  Next  ',
+                    next: '  Next  ',
                     previous: 'Previous'
                 }
             }
         });
+
+        const prevButton = document.getElementByClass("page-link previous");
+        prevButton.setAttribute("role", "button");
+
+        const nextButton = document.getElementByClass("page-link next");
+        prevButton.setAttribute("role", "button");
     </script>
 
     </body>
