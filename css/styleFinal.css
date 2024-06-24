@@ -133,7 +133,7 @@ legend {
 .back-to-top {
   position: fixed;
   cursor: pointer;
-  bottom: 1.5em;
+  bottom: 3.25em;
   right: 1em;
   left: auto;
   opacity: 0;
