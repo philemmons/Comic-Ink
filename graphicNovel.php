@@ -155,7 +155,7 @@ if (isset($_SESSION["status"])) {
      <script>
           //https://datatables.net/reference/option
           new DataTable('#novelDisplay', {
-               lengthMenu: [8, 16],
+               lengthMenu: [16,8],
                searching: false,
                ordering: false,
                responsive: true,
