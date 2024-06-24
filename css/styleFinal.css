@@ -25,6 +25,8 @@
   --bs-secondary-color: var(--color-5) !important;
 
   --bs-heading-color: var(--color-5) !important;
+
+  --bs-btn-font-size: var(--bs-body-font-size) !important;
 }
 
 /**** typography and spacing ****/
