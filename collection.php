@@ -170,11 +170,9 @@ if (isset($_SESSION["status"])) {
             }
         });
 
-        const prevButton = document.getElementByClass("page-link previous");
-        prevButton.setAttribute("role", "button");
-
-        const nextButton = document.getElementByClass("page-link next");
-        prevButton.setAttribute("role", "button");
+        const prevNextCollection = document.getElementsByClassName("page-link");
+        prevNextCollection[0].setAttribute("role", "button");
+        prevNextCollection[1].setAttribute("role", "button");
     </script>
 
     </body>
