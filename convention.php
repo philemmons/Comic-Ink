@@ -163,12 +163,7 @@ if (isset($_SESSION["status"])) {
                     next: 'Next',
                     previous: 'Previous'
                 }
-            },
-            /**** */
-            columnDefs: [{
-                targets: [0],
-                width: "150px"
-            }]
+            }
         });
 
         /**  https://datatables.net/forums/discussion/71404/accessibility-pagination-using-actual-buttons-instead-of-links */
