@@ -54,7 +54,7 @@ if (isset($_SESSION["status"])) {
 
 <main id="main-content">
 
-  <di id="mLogin">
+  <div class="container">
     <h3 class="h6">Please login to continue...</h3>
     <br>
     <button onclick="document.getElementById('id01').style.display='block'" class="btn">Login</button>

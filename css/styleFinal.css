@@ -235,6 +235,8 @@ legend {
   font-size: calc(0.5vw + 0.5em);
 }
 
+/**** robot wrapper ****/
+
 
 /*** carousel ***/
 
@@ -313,6 +315,11 @@ a.page-link.previous:focus {
 
 .w3-content {
   float: left;
+}
+
+#mLogin {
+  text-align: center;
+  padding-top: 1.5625rem;
 }
 
 /**** navbar ****/
