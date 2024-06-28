@@ -57,12 +57,12 @@ if (isset($_SESSION["status"])) {
   <article aria-label="Admin login screen">
     <div class="container mt-5">
       <div class="row justify-content-center">
-        <div class="col-sm-8 mx-auto">
-          <section class="mb-2 bg-body-tertiary p-2">
-            <h3 class="h6 text-white">Please login to continue.</h3>
+        <div class="col-md-6 text-center">
+          <section class="bg-body-tertiary p-2">
+            <h3 class="h5 text-white">Please login to continue.</h3>
           </section>
 
-          <button onclick="document.getElementById('id01').style.display='block'" class="btn">Login</button>
+          <button onclick="document.getElementById('id01').style.display='block'" class="btn my-4">Login</button>
 
           <?php
           if (isset($_POST['login'])) {
@@ -70,31 +70,33 @@ if (isset($_SESSION["status"])) {
           }
           ?>
 
-          <img src="img/robot.png" class="mx-auto d-block mt-4 border border-white border-2" alt="Small robot typing on a small laptop at a desk." />
+          <img src="img/robot.png" class="mx-auto d-block border border-white border-2" alt="Small robot typing on a small laptop at a desk." />
         </div>
       </div>
     </div>
   </article>
 
-  <div id="id01" class="modalAD">
-    <form method="POST" class="modal-contentAD animateAD" name="loginForm">
+  <article aria-label="Login modal">
+    <div id="id01" class="modalAD">
+      <form method="POST" class="modal-contentAD animateAD" name="loginForm">
 
-      <div class="containerAD">
-        <label for="ittAD"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="formUN" required id="ittAD">
+        <div class="containerAD">
+          <label for="ittAD"><b>Username</b></label>
+          <input type="text" placeholder="Enter Username" name="formUN" required id="ittAD">
 
-        <label for="itpAD"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="formPW" required id="itpAD">
+          <label for="itpAD"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="formPW" required id="itpAD">
 
-        <input type="submit" name="login" value="Login" class="btnAD btn" style="width: 100%;" />
-      </div>
+          <input type="submit" name="login" value="Login" class="btnAD btn" style="width: 100%;" />
+        </div>
 
-      <div class="containerAD">
-        <button type="button" onclick="document.getElementById('id01').style.display='none'" id="cancelbtnAD" class="btn">Cancel</button>
-      </div>
+        <div class="containerAD">
+          <button type="button" onclick="document.getElementById('id01').style.display='none'" id="cancelbtnAD" class="btn">Cancel</button>
+        </div>
 
-    </form>
-  </div>
+      </form>
+    </div>
+  </article>
 
   <?php include_once 'footer.inc' ?>
 
