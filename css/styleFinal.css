@@ -239,7 +239,6 @@ legend {
 
 #wrapper-robot {
   margin: auto 0;
-  display: inline-block;
   border: 2px solid var(--color-2);
 }
 
@@ -320,11 +319,6 @@ a.page-link.previous:focus {
 
 .w3-content {
   float: left;
-}
-
-#mLogin {
-  text-align: center;
-  padding-top: 1.5625rem;
 }
 
 /**** navbar ****/
