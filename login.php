@@ -57,8 +57,8 @@ if (isset($_SESSION["status"])) {
   <article aria-label="Admin login screen">
     <div class="container mt-5">
       <div class="row justify-content-center">
-        <div class="col-sm-8 p-3 bg-body-tertiary">
-          <section class="mb-2">
+        <div class="col-sm-8 mx-auto">
+          <section class="mb-2 bg-body-tertiary p-2">
             <h3 class="h6 text-white">Please login to continue.</h3>
           </section>
 
