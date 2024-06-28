@@ -235,12 +235,6 @@ legend {
   font-size: calc(0.5vw + 0.5em);
 }
 
-/**** robot wrapper ****/
-
-#wrapper-robot {
-  margin: auto 0;
-  border: 2px solid var(--color-2);
-}
 
 /*** carousel ***/
 

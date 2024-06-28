@@ -52,9 +52,9 @@ if (isset($_SESSION["status"])) {
 
 <br>
 
-<main id="main-content" class="mx-auto d-block py-3">
+<main id="main-content">
 
-
+  <di id="mLogin">
     <h3 class="h6">Please login to continue...</h3>
     <br>
     <button onclick="document.getElementById('id01').style.display='block'" class="btn">Login</button>
@@ -65,13 +65,9 @@ if (isset($_SESSION["status"])) {
     }
     ?>
 
-    <br><br>
+        <img src="img/robot.png" class="mx-auto d-block pt-3 border border-white border-2" alt="Small robot typing on a small laptop at a desk." />
 
-    <div id='wrapper-robot pt-5'>   
-        <img src="img/robot.png" alt="Small robot typing on a small laptop at a desk." />
-    </div>
-
-
+  </div>
 
   <div id="id01" class="modalAD">
     <form method="POST" class="modal-contentAD animateAD" name="loginForm">
