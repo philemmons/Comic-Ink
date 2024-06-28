@@ -178,6 +178,10 @@ if (isset($_SESSION["status"])) {
         const prevNextCollection = document.getElementsByClassName("page-link");
         prevNextCollection[0].setAttribute("role", "button");
         prevNextCollection[1].setAttribute("role", "button");
+
+        /**https://stackoverflow.com/questions/8058109/jquery-datatable-overflow-and-text-wrapping-issues */
+
+        
     </script>
 
     </body>
