@@ -54,20 +54,27 @@ if (isset($_SESSION["status"])) {
 
 <main id="main-content">
 
-  <div class="container">
-    <h3 class="h6">Please login to continue...</h3>
-    <br>
-    <button onclick="document.getElementById('id01').style.display='block'" class="btn">Login</button>
+  <article aria-label="Admin login screen">
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <div class="col-sm-8 p-3 bg-body-tertiary">
+          <section class="mb-2">
+            <h3 class="h6 text-white">Please login to continue.</h3>
+          </section>
 
-    <?php
-    if (isset($_POST['login'])) {
-      goMain();
-    }
-    ?>
+          <button onclick="document.getElementById('id01').style.display='block'" class="btn">Login</button>
 
-        <img src="img/robot.png" class="mx-auto d-block pt-3 border border-white border-2" alt="Small robot typing on a small laptop at a desk." />
+          <?php
+          if (isset($_POST['login'])) {
+            goMain();
+          }
+          ?>
 
-  </div>
+          <img src="img/robot.png" class="mx-auto d-block mt-4 border border-white border-2" alt="Small robot typing on a small laptop at a desk." />
+        </div>
+      </div>
+    </div>
+  </article>
 
   <div id="id01" class="modalAD">
     <form method="POST" class="modal-contentAD animateAD" name="loginForm">
