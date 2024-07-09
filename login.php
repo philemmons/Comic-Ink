@@ -37,9 +37,16 @@ if (isset($_POST['logout'])) {
   </li>
 </ul>
 
+<?php
+if (isset($_SESSION["status"])) {
+  echo '<form method ="POST" id="one" >';
+  echo '<input type="submit" value="Logout" class="btn" name="logout" style="box-shadow: none !important;"/>';
+  echo '</form>';
+}
+?>
+
 </div><!-- /.navbar-collapse -->
 </div><!-- /.container-fluid -->
-
 </nav>
 
 <br>
