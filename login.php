@@ -36,7 +36,6 @@ if (isset($_POST['logout'])) {
     <a class="nav-link active" aria-current="page" href="login.php">Admin<span class="visually-hidden">(current)</span></a>
   </li>
 </ul>
-
 <?php
 if (isset($_SESSION["status"])) {
   echo '<form method ="POST" id="one" >';
@@ -44,9 +43,9 @@ if (isset($_SESSION["status"])) {
   echo '</form>';
 }
 ?>
-
 </div><!-- /.navbar-collapse -->
 </div><!-- /.container-fluid -->
+
 </nav>
 
 <br>
