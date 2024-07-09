@@ -16,9 +16,7 @@ if (isset($_POST['logout'])) {
   session_destroy();
   header("Location: index.php");
 }
-
 ?>
-
 <!-- Collect the nav links, forms, and other content for toggling -->
 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
   <li class="nav-item">
@@ -37,7 +35,6 @@ if (isset($_POST['logout'])) {
     <a class="nav-link active" aria-current="page" href="login.php">Admin<span class="visually-hidden">(current)</span></a>
   </li>
 </ul>
-
 <?php
 if (isset($_SESSION["status"])) {
   echo '<form method ="POST" id="one" >';
@@ -45,7 +42,6 @@ if (isset($_SESSION["status"])) {
   echo '</form>';
 }
 ?>
-
 </div><!-- /.navbar-collapse -->
 </div><!-- /.container-fluid -->
 </nav>
@@ -62,11 +58,11 @@ if (isset($_SESSION["status"])) {
             <h3 class="h5 text-white">Please login to continue.</h3>
           </section>
           <button onclick="document.getElementById('id01').style.display='block'" class="btn my-4">Login</button>
-          <?php
-          if (isset($_POST['login'])) {
-            goMain();
-          }
-          ?>
+<?php
+if (isset($_POST['login'])) {
+  goMain();
+}
+?>
           <img src="img/robot.png" class="mx-auto d-block border border-white border-2" alt="Small robot typing on a small laptop at a desk." />
         </div>
       </div>
