@@ -3,6 +3,7 @@ session_start();
 
 if (!isset($_SESSION["status"]) || ($_SESSION['status'] != getenv('LOGIN_STATUS'))) {  //Check whether the admin has logged in
   header("Location: login.php");
+  exit;
 }
 
 include_once 'header.inc';
@@ -13,6 +14,7 @@ $dbConn = getDBConnection();
 if (isset($_POST['logout'])) {
   session_destroy();
   header("Location: index.php");
+  exit;
 }
 
 ?>

@@ -4,6 +4,7 @@ session_start();
 
 if (!isset($_SESSION["status"]) || ($_SESSION['status'] != getenv('LOGIN_STATUS'))) {  //Check whether the admin has logged in
     header("Location: login.php");
+    exit;
 }
 
 include_once 'php/dbConnection.php';
@@ -18,3 +19,4 @@ $stmt = $dbConn->prepare($sql);
 $stmt->execute($nPara);
 
 header("Location: admin.php");
+exit;

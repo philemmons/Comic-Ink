@@ -95,11 +95,11 @@ function getConData($table)
     '%M %d %Y') AS result FROM " . $table . " ORDER BY conName ASC";
     return preExeFetNOPARA($sql);
 
-/** ORIGINAL 
+    /** ORIGINAL 
     $sql = "SELECT *, STR_TO_DATE(CONCAT(start_date, ' ', year),
     '%M %d %Y') AS result FROM " . $table . " ORDER BY result IS NULL , result ASC";
     return preExeFetNOPARA($sql);
-*/
+     */
 }
 
 /*
@@ -179,7 +179,7 @@ function goSQLcon($table)
             $sql .= " WHERE ";
         }
         //Prevents SQL injection by using a named parameter.
-        $nPara[':dCity'] = '%' . htmlspecialchars($conCity,ENT_QUOTES) . '%';
+        $nPara[':dCity'] = '%' . htmlspecialchars($conCity, ENT_QUOTES) . '%';
         $sql .= " city LIKE :dCity ";
     }
 
@@ -215,7 +215,7 @@ function goMain()
 {
     global $dbConn, $nPara;
 
-    $userForm = htmlspecialchars($_POST['formUN'],ENT_QUOTES);
+    $userForm = htmlspecialchars($_POST['formUN'], ENT_QUOTES);
     $pwForm = hash('sha256', $_POST['formPW']);
 
     //Prevents SQL injection by using a named parameter.
@@ -237,7 +237,8 @@ function goMain()
         $_SESSION["username"]  = $record['userName'];
         $_SESSION["status"] = getenv('LOGIN_STATUS');
         //echo $_SESSION["status"];
-        header("Location: admin.php"); //redirect to home page
+        header("Location: admin.php");
+        exit; //redirect to home page
     }
 }
 
