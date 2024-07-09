@@ -16,7 +16,6 @@ if (isset($_POST['logout'])) {
   session_destroy();
   header("Location: index.php");
 }
-
 ?>
 
 <!-- Collect the nav links, forms, and other content for toggling -->
