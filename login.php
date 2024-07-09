@@ -16,6 +16,7 @@ if (isset($_POST['logout'])) {
   session_destroy();
   header("Location: index.php");
 }
+
 ?>
 
 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -60,15 +61,12 @@ if (isset($_SESSION["status"])) {
           <section class="bg-body-tertiary p-2">
             <h3 class="h5 text-white">Please login to continue.</h3>
           </section>
-
           <button onclick="document.getElementById('id01').style.display='block'" class="btn my-4">Login</button>
-
           <?php
           if (isset($_POST['login'])) {
             goMain();
           }
           ?>
-
           <img src="img/robot.png" class="mx-auto d-block border border-white border-2" alt="Small robot typing on a small laptop at a desk." />
         </div>
       </div>
