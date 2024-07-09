@@ -2,7 +2,7 @@
 session_start();
 
 if (isset($_SESSION["status"]) && ($_SESSION['status'] == getenv('LOGIN_STATUS'))) {  //Check whether the admin has logged in
-  header("Location:admin.php");
+  header("Location: admin.php");
   exit;
 } else {
   $_SESSION["name"] = "Guest";
