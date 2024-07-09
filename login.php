@@ -62,11 +62,11 @@ if (isset($_SESSION["status"])) {
             <h3 class="h5 text-white">Please login to continue.</h3>
           </section>
           <button onclick="document.getElementById('id01').style.display='block'" class="btn my-4">Login</button>
-          <?php
+<?php
           if (isset($_POST['login'])) {
             goMain();
           }
-          ?>
+?>
           <img src="img/robot.png" class="mx-auto d-block border border-white border-2" alt="Small robot typing on a small laptop at a desk." />
         </div>
       </div>
