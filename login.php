@@ -18,9 +18,7 @@ if (isset($_POST['logout'])) {
   header("Location: index.php");
   exit;
 }
-
 ?>
-
 <!-- Collect the nav links, forms, and other content for toggling -->
 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
   <li class="nav-item">
