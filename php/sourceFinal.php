@@ -233,10 +233,11 @@ function goMain()
         echo "<br><span style='color:red'><h4>Wrong username or password.</h4></span>";
         echo "</form>";
     } else {
-       // $_SESSION["name"] = $record['firstName'] . " " . $record['lastName'];
-       // $_SESSION["username"]  = $record['userName'];
-       // $_SESSION["status"] = getenv('LOGIN_STATUS');
+        $_SESSION["name"] = $record['firstName'] . " " . $record['lastName'];
+        $_SESSION["username"]  = $record['userName'];
+        $_SESSION["status"] = getenv('LOGIN_STATUS');
         //echo $_SESSION["status"];
+        var_dump(ob_get_level()); die;
         header("Location: admin.php");
         exit; //redirect to admin page
     }

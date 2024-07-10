@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 
 if (isset($_SESSION["status"]) && ($_SESSION['status'] == getenv('LOGIN_STATUS'))) {  //Check whether the admin has logged in
@@ -8,17 +9,19 @@ if (isset($_SESSION["status"]) && ($_SESSION['status'] == getenv('LOGIN_STATUS')
   $_SESSION["name"] = "Guest";
 }
 
+include_once 'header.inc';
+include_once 'php/sourceFinal.php';
+
+$dbConn = getDBConnection();
+
 if (isset($_POST['logout'])) {
   session_destroy();
   header("Location: index.php");
   exit;
 }
 
-include_once 'header.inc';
-include_once 'php/sourceFinal.php';
-
-$dbConn = getDBConnection();
 ?>
+
 <!-- Collect the nav links, forms, and other content for toggling -->
 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
   <li class="nav-item">
@@ -38,6 +41,14 @@ $dbConn = getDBConnection();
   </li>
 </ul>
 
+<?php
+if (isset($_SESSION["status"])) {
+  echo '<form method ="POST" id="one" >';
+  echo '<input type="submit" value="Logout" class="btn" name="logout" style="box-shadow: none !important;"/>';
+  echo '</form>';
+}
+?>
+
 </div><!-- /.navbar-collapse -->
 </div><!-- /.container-fluid -->
 </nav>
@@ -45,6 +56,7 @@ $dbConn = getDBConnection();
 <br>
 
 <main id="main-content">
+
   <article aria-label="Admin login screen">
     <div class="container mt-5">
       <div class="row justify-content-center">
