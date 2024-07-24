@@ -12,7 +12,7 @@ $dbConn = getDBConnection();
 
 if (isset($_POST['logout'])) {
     session_destroy();
-    header("Location: index.php");
+    header("Location: /");
     exit;
 }
 
@@ -181,8 +181,6 @@ if (isset($_SESSION["status"])) {
         prevNextCollection[1].setAttribute("role", "button");
 
         /**https://stackoverflow.com/questions/8058109/jquery-datatable-overflow-and-text-wrapping-issues */
-
-        
     </script>
 
     </body>

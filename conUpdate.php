@@ -13,7 +13,7 @@ $dbConn = getDBConnection();
 
 if (isset($_POST['logout'])) {
   session_destroy();
-  header("Location: index.php");
+  header("Location: /");
   exit;
 }
 //NOTE: the next 3 sections of code sequence matters for the updated output
@@ -228,8 +228,8 @@ if (isset($_SESSION["status"])) {
     </div>
   </div>
 
-<?php include_once 'footer.inc' ?>
+  <?php include_once 'footer.inc' ?>
 
-</body>
+  </body>
 
-</html>
+  </html>
