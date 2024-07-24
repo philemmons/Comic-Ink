@@ -13,7 +13,7 @@ $dbConn = getDBConnection();
 
 if (isset($_POST['logout'])) {
   session_destroy();
-  header("Location: index.php");
+  header("Location: /");
   exit;
 }
 
