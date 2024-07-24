@@ -6,17 +6,17 @@ if (!isset($_SESSION["status"]) || ($_SESSION['status'] != getenv('LOGIN_STATUS'
   exit;
 }
 
-include_once 'php/sourceFinal.php';
-
-$dbConn = getDBConnection();
-
 if (isset($_POST['logout'])) {
   session_destroy();
   header("Location: /");
   exit;
 }
-//NOTE: the next 3 sections of code sequence matters for the updated output
 
+include_once 'php/sourceFinal.php';
+
+$dbConn = getDBConnection();
+
+//NOTE: the next 3 sections of code sequence matters for the updated output
 if (isset($_POST['submitUpdate'])) {  //admin has submitted the "update user" form
   $sql = "UPDATE convention
           SET conName = :conName,

@@ -6,15 +6,15 @@ if (!isset($_SESSION["status"]) || ($_SESSION['status'] != getenv('LOGIN_STATUS'
   exit;
 }
 
-include_once 'php/sourceFinal.php';
-
-$dbConn = getDBConnection();
-
 if (isset($_POST['logout'])) {
   session_destroy();
   header("Location: /");
   exit;
 }
+
+include_once 'php/sourceFinal.php';
+
+$dbConn = getDBConnection();
 
 include_once 'header.inc';
 ?>
