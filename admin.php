@@ -6,7 +6,6 @@ if (!isset($_SESSION["status"]) || ($_SESSION['status'] != getenv('LOGIN_STATUS'
   exit;
 }
 
-include_once 'header.inc';
 include_once 'php/sourceFinal.php';
 
 $dbConn = getDBConnection();
@@ -28,12 +27,14 @@ function getConAvg()
   //print_r($ans);
   return $ans;
 }
+
 function displayConAvg($num)
 {
   foreach ($num as $digit) {
     echo $digit['result'] . " ";
   }
 }
+
 /* number of conventions per state greater than four*/
 function getConByState()
 {
@@ -49,6 +50,7 @@ function getConByState()
   //print_r($list);
   return $list;
 }
+
 function displayConByState($list)
 {
   foreach ($list as $item) {
@@ -65,6 +67,7 @@ function getConTot()
   //print_r($tot);
   return $tot;
 }
+
 function displayConTot($tot)
 {
   foreach ($tot as $part) {
@@ -140,7 +143,8 @@ function displayConAdmin($convention)
     echo "</tr>";
   }
 }
-/* end admin reports*/
+
+include_once 'header.inc';
 ?>
 
 <script>

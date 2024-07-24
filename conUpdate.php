@@ -6,7 +6,6 @@ if (!isset($_SESSION["status"]) || ($_SESSION['status'] != getenv('LOGIN_STATUS'
   exit;
 }
 
-include_once 'header.inc';
 include_once 'php/sourceFinal.php';
 
 $dbConn = getDBConnection();
@@ -47,10 +46,11 @@ if (isset($_POST['submitUpdate'])) {  //admin has submitted the "update user" fo
 
   $nPara = array();
 
-  sleep(5); // pause the modal
+  sleep(2); // pause the modal
 
 } //eof if
 
+include_once 'header.inc';
 ?>
 
 <script src='js/jsFinal.js'></script>

@@ -236,8 +236,6 @@ function goMain()
         $_SESSION["name"] = $record['firstName'] . " " . $record['lastName'];
         $_SESSION["username"]  = $record['userName'];
         $_SESSION["status"] = getenv('LOGIN_STATUS');
-        echo $_SESSION["status"];
-        var_dump(ob_get_level()); die;
         header("Location: admin.php");
         exit; //redirect to admin page
     }

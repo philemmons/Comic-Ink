@@ -9,7 +9,6 @@ if (isset($_SESSION["status"]) && ($_SESSION['status'] == getenv('LOGIN_STATUS')
   $_SESSION["name"] = "Guest";
 }
 
-include_once 'header.inc';
 include_once 'php/sourceFinal.php';
 
 $dbConn = getDBConnection();
@@ -20,6 +19,7 @@ if (isset($_POST['logout'])) {
   exit;
 }
 
+include_once 'header.inc';
 ?>
 
 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -96,7 +96,7 @@ if (isset($_SESSION["status"])) {
 
       </form>
     </div>
-  </article>a
+  </article>
 
   <?php include_once 'footer.inc' ?>
 
