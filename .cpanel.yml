@@ -6,5 +6,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/vjwszppa/Comic-Ink/
+    - export DEPLOYPATH=/home/philemmo/Comic-Ink/
     - /bin/cp -R * $DEPLOYPATH

@@ -99,7 +99,7 @@ function getConData($table)
     $sql = "SELECT *, STR_TO_DATE(CONCAT(start_date, ' ', year),
     '%M %d %Y') AS result FROM " . $table . " ORDER BY result IS NULL , result ASC";
     return preExeFetNOPARA($sql);
-     */
+     **/
 }
 
 /*
