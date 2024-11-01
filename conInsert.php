@@ -60,7 +60,7 @@ if (isset($_SESSION["status"])) {
 
 <br>
 
-< id="main-content">
+<id="main-content">
   <div class="wrapper form-display">
     <h6>
       Welcome <?= $_SESSION['name'] ?> - New Convention Form
