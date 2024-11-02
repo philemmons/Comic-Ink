@@ -54,6 +54,8 @@ body {
   :root {
     --bs-body-font-size: 0.75rem !important;
   }
+
+
 }
 
 /**** Large devices (desktops, 992px and up)
@@ -504,7 +506,7 @@ footer {
 
 /**** CON UPDATE FORM *****/
 .form-floating>label {
-  font-size: 1.3rem !important;
+  font-size: var(--bs-body-font-size) !important;
 }
 
 /**** datatable ****/
