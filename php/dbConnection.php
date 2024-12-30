@@ -17,7 +17,7 @@ function getDBConnection()
     $dbName = getenv('DB_NAME');
 
     try {
-        //Creating database connection
+        // Creating database connection
         $dbConn = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbUser, $dbPW);
         // Setting Error handling to Exception
         $dbConn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
