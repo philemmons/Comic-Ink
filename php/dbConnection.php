@@ -19,7 +19,7 @@ function getDBConnection()
     try {
         //Creating database connection
         $dbConn = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbUser, $dbPW);
-        // Setting Errorhandling to Exception
+        // Setting Error handling to Exception
         $dbConn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         //echo "Connected successfully";
     } catch (PDOException $e) {
