@@ -164,8 +164,8 @@ if (isset($_SESSION["status"])) {
         new DataTable('#convDisplay', {
             responsive: true,
     columnDefs: [
-        { responsivePriority: 1, targets: 100 },
-        { responsivePriority: 2, targets: -100 }
+        { responsivePriority: 1, targets: 0 },
+        { responsivePriority: 2, targets: -1 }
     ]
 });
             /** lengthMenu: [16, 8],
