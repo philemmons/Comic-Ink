@@ -129,7 +129,7 @@ if (isset($_SESSION["status"])) {
     <br><br>
 
     <div class="wrapper form-display mb-5">
-        <table class="table table-sm table-striped table-hover display nowrap" id="convDisplay" style="width:90%;" aria-labelledby="comic-conventions">
+        <table class="table table-sm table-striped table-hover display nowrap" id="convDisplay" style="width:94%;" aria-labelledby="comic-conventions">
             <caption class="small bg-body-tertiary text-white p-2 my-2" id="comic-conventions"><strong>Comic Conventions</strong> - The first row consist of eight columns which are Name, Date, Year, Location, City, State, Country, and Official. The first column has the convention name listed in alphabetical order, by default, or by selecting All Conventions. There may be identical conventions listed at different dates, or different Cities, or different States, depending on your search. The convention data was gathered online from various sources on 11.06.2023 Cross reference the Name row with the column for the specific data.</caption>
             <thead class='table-dark'>
                 <tr>
