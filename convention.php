@@ -162,7 +162,13 @@ if (isset($_SESSION["status"])) {
     <script>
         /** https://datatables.net/examples/index **/
         new DataTable('#convDisplay', {
-            lengthMenu: [16, 8],
+            responsive: true,
+    columnDefs: [
+        { responsivePriority: 1, targets: 100 },
+        { responsivePriority: 2, targets: -100 }
+    ]
+});
+            /** lengthMenu: [16, 8],
             searching: false,
             ordering: false,
             responsive: true,
@@ -173,18 +179,41 @@ if (isset($_SESSION["status"])) {
                     previous: 'Previous'
                 }
             },
-            columnDefs: [
-        { responsivePriority: 1, targets: 0 },
-        { responsivePriority: 2, targets: 1 },
-        { responsivePriority: 3, targets: 1 },
-        { responsivePriority: 4, targets: 100 },
-        { responsivePriority: 5, targets: 1 },
-        { responsivePriority: 6, targets: 1 },
-        { responsivePriority: 7, targets: 99 },
-        { responsivePriority: 8, targets: 0 }
-    ]
+            columnDefs: [{
+                    responsivePriority: 1,
+                    targets: 0
+                },
+                {
+                    responsivePriority: 2,
+                    targets: 1
+                },
+                {
+                    responsivePriority: 3,
+                    targets: 1
+                },
+                {
+                    responsivePriority: 4,
+                    targets: 100
+                },
+                {
+                    responsivePriority: 5,
+                    targets: 1
+                },
+                {
+                    responsivePriority: 6,
+                    targets: 1
+                },
+                {
+                    responsivePriority: 7,
+                    targets: 99
+                },
+                {
+                    responsivePriority: 8,
+                    targets: 1000
+                }
+            ] 
 
-        });
+        }); **/
 
         /**  https://datatables.net/forums/discussion/71404/accessibility-pagination-using-actual-buttons-instead-of-links */
         const prevNextCollection = document.getElementsByClassName("page-link");
