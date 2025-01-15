@@ -172,7 +172,18 @@ if (isset($_SESSION["status"])) {
                     next: 'Next',
                     previous: 'Previous'
                 }
-            }
+            },
+            columnDefs: [
+        { responsivePriority: 1, targets: 0 },
+        { responsivePriority: 2, targets: 1 },
+        { responsivePriority: 3, targets: 1 },
+        { responsivePriority: 4, targets: 100 },
+        { responsivePriority: 5, targets: 1 },
+        { responsivePriority: 6, targets: 1 },
+        { responsivePriority: 7, targets: 99 },
+        { responsivePriority: 8, targets: 0 }
+    ]
+
         });
 
         /**  https://datatables.net/forums/discussion/71404/accessibility-pagination-using-actual-buttons-instead-of-links */
