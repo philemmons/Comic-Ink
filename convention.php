@@ -203,7 +203,7 @@ if (isset($_SESSION["status"])) {
                     targets: 6
                 },
                 {
-                    responsivePriority: 7,
+                    responsivePriority: 8,
                     targets: 7
                 }
             ] 
