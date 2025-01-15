@@ -162,13 +162,8 @@ if (isset($_SESSION["status"])) {
     <script>
         /** https://datatables.net/examples/index **/
         new DataTable('#convDisplay', {
-            responsive: true,
-    columnDefs: [
-        { responsivePriority: 1, targets: 0 },
-        { responsivePriority: 2, targets: -1 }
-    ]
-});
-            /** lengthMenu: [16, 8],
+ 
+           lengthMenu: [16, 8],
             searching: false,
             ordering: false,
             responsive: true,
@@ -189,31 +184,31 @@ if (isset($_SESSION["status"])) {
                 },
                 {
                     responsivePriority: 3,
-                    targets: 1
-                },
-                {
-                    responsivePriority: 4,
-                    targets: 100
-                },
-                {
-                    responsivePriority: 5,
-                    targets: 1
-                },
-                {
-                    responsivePriority: 6,
-                    targets: 1
-                },
-                {
-                    responsivePriority: 7,
-                    targets: 99
+                    targets: 2
                 },
                 {
                     responsivePriority: 8,
-                    targets: 1000
+                    targets: 3
+                },
+                {
+                    responsivePriority: 4,
+                    targets: 4
+                },
+                {
+                    responsivePriority: 5,
+                    targets: 5
+                },
+                {
+                    responsivePriority: 6,
+                    targets: 6
+                },
+                {
+                    responsivePriority: 7,
+                    targets: 7
                 }
             ] 
 
-        }); **/
+        }); 
 
         /**  https://datatables.net/forums/discussion/71404/accessibility-pagination-using-actual-buttons-instead-of-links */
         const prevNextCollection = document.getElementsByClassName("page-link");
