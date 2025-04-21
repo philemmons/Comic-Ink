@@ -7,6 +7,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>CoMiCs InK</title>
+  <meta name="description" content="Explore iconic comic books, graphic novels, and conventions with Comic Ink: a dynamic, accessible platform for enthusiasts and collectors.">
+
+  <meta property="og:title" content="Comic Ink - Explore Comics, Graphic Novels & Pop Culture" />
+  <meta property="og:description" content="Discover iconic comics, graphic novels, and convention updates with Comic Ink. A vibrant platform for collectors and fans." />
+  <meta property="og:url" content="https://comic-ink.philemmons.dev/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/img/banner-original.png" />
+
+
+
   <link rel="icon" type="image/x-icon" href="/img/fav/favicon.ico">
   <!-- Latest Bootstrap compiled and minified CSS library-->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -19,9 +29,9 @@
 
   <script src="js/jsFinal.js"></script>
 
-  
- <!-- https://datatables.net/ -->
- <link href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css" rel="stylesheet">
+
+  <!-- https://datatables.net/ -->
+  <link href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css" rel="stylesheet">
   <link href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css" rel="stylesheet">
   <link href="https://cdn.datatables.net/responsive/3.0.2/css/responsive.bootstrap5.css" rel="stylesheet">
 
@@ -44,16 +54,16 @@
   <a href="#main-content" class="btn btn-skip" aria-label="Go To Main Content">Go To Main Content</a>
 
   <!-- Hero Part -->
-    <header class="container">
-      <div class="row justify-content-center bg-img-home m-4">
-        <div class="col-xl-11 col-lg-11 col-md-10 text-center">
-            <h1 class="text-red-white hero-h1">Comic Ink</h1>
-            <p class= "shadow-text-area">Comic books are a publication that consists of comic art in the form of sequential juxtaposed panels that represent individual scenes.</p>
-            <h2 class="text-red-white half-h1">Discover More</h2>
-        </div>
+  <header class="container">
+    <div class="row justify-content-center bg-img-home m-4">
+      <div class="col-xl-11 col-lg-11 col-md-10 text-center">
+        <h1 class="text-red-white hero-h1">Comic Ink</h1>
+        <p class="shadow-text-area">Comic books are a publication that consists of comic art in the form of sequential juxtaposed panels that represent individual scenes.</p>
+        <h2 class="text-red-white half-h1">Discover More</h2>
       </div>
-    </header>
-  
+    </div>
+  </header>
+
 
   <!-- https://getbootstrap.com/docs/5.0/components/navbar/-->
   <nav class="navbar navbar-expand-md bg-body-tertiary" aria-label="main menu">
