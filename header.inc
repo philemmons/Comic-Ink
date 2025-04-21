@@ -74,6 +74,6 @@
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 
         <span class="navbar-brand fw-bold">
-          <img width="60" height="60" class="d-inline-block" src='./img/pow.png' alt="Comic Ink Logo">
+          <img class="d-inline-block" src='./img/pow.png' alt="Comic Ink Logo">
           Comics Ink
         </span>
