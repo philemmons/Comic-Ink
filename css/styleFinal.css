@@ -52,7 +52,7 @@ body {
 /**** Medium devices (tablets, 768px and up)*/
 @media (min-width: 768px) {
   :root {
-    --bs-body-font-size: 0.75rem !important;
+    --bs-body-font-size: 0.8rem !important;
   }
 
 
