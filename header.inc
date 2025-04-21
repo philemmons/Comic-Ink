@@ -15,8 +15,6 @@
   <meta property="og:type" content="website" />
   <meta property="og:image" content="/img/banner-original.png" />
 
-
-
   <link rel="icon" type="image/x-icon" href="/img/fav/favicon.ico">
   <!-- Latest Bootstrap compiled and minified CSS library-->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
