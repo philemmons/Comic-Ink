@@ -17,7 +17,7 @@
   --ff-main: Raleway, Helvetica, Calibri, Arial, sans-serif;
 
   --bs-font-comics-ink: Raleway, Helvetica, Roboto, Calibri, Arial, sans-serif;
-  --bs-body-font-size: 0.625rem !important;
+  --bs-body-font-size: 0.75rem !important;
 
   --bs-navbar-nav-link-padding-x: 1rem !important;
   --bs-navbar-color: var(--color-4) !important;
@@ -52,7 +52,7 @@ body {
 /**** Medium devices (tablets, 768px and up)*/
 @media (min-width: 768px) {
   :root {
-    --bs-body-font-size: 0.8rem !important;
+    --bs-body-font-size: 0.85rem !important;
   }
 
 
@@ -234,7 +234,6 @@ legend {
   padding: 1em;
   background-color: rgb(0 0 0 / 50%);
   color: var(--color-2);
-  font-size: calc(0.5vw + 0.5em);
 }
 
 /**** robot wrapper ****/
