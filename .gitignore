@@ -1,2 +1,10 @@
 robots.txt
 .htaccess
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+*.enriched.csv
+*.audit.csv
+logs/
+.cache/

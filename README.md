@@ -40,3 +40,168 @@ To use the admin functionality:
 - Scalability for various browsers and mobile devices.
 - Admin function to change username and password.
 - Encrypt password with php password_hash function as it wil secure the database. https://stackoverflow.com/questions/24862499/correct-way-of-creating-salted-hash-password.
+
+### 05-06-26
+
+# Convention Enricher for Updating Conventions Data
+
+## Project purpose
+Convention Enricher is a reusable Python 3.11+ pipeline that enriches convention/event CSV records from online sources while preserving your original column order and source file. It prioritizes structured website data first, then optionally falls back to search results.
+
+The pipeline is built for rerunnable workflows:
+- it never overwrites the input CSV
+- it writes a separate enriched CSV
+- it writes a detailed audit CSV
+- it writes timestamped logs
+
+## Installation steps
+1. Install Python 3.11 or newer.
+2. Open a terminal in this project folder.
+3. (Recommended) Create and activate a virtual environment.
+4. Install dependencies:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+## CLI examples
+Basic run:
+
+```bash
+python -m convention_enricher.enrich input.csv --year 2026 --output output.csv --audit audit.csv
+```
+
+Only process first 100 rows:
+
+```bash
+python -m convention_enricher.enrich input.csv --year 2026 --limit 100 --output output.csv --audit audit.csv
+```
+
+Only fill missing fields (do not refresh existing values):
+
+```bash
+python -m convention_enricher.enrich input.csv --year 2026 --only-missing --output output.csv --audit audit.csv
+```
+
+Dry run (no file write):
+
+```bash
+python -m convention_enricher.enrich input.csv --year 2026 --dry-run
+```
+
+Resume from existing output rows by `id`:
+
+```bash
+python -m convention_enricher.enrich input.csv --year 2026 --resume --output output.csv --audit audit.csv
+```
+
+Manual search provider results:
+
+```bash
+python -m convention_enricher.enrich input.csv --year 2026 --search-provider manual --manual-search-results manual_search.json --output output.csv --audit audit.csv
+```
+
+## Required environment variables
+No environment variables are strictly required.
+
+Optional overrides:
+- `CONVENTION_ENRICHER_USER_AGENT`
+- `CONVENTION_ENRICHER_TIMEOUT_SECONDS`
+- `CONVENTION_ENRICHER_MAX_SEARCH_RESULTS`
+- `CONVENTION_ENRICHER_RETRY_TOTAL`
+- `CONVENTION_ENRICHER_RETRY_BACKOFF_SECONDS`
+- `CONVENTION_ENRICHER_RATE_LIMIT_PER_SECOND`
+
+## Search provider setup
+Supported providers:
+- `duckduckgo_html` (default)
+- `manual`
+- `none`
+
+Manual provider file format (`--manual-search-results`):
+
+```json
+{
+  "Doxacon": ["https://www.doxacon.org"],
+  "Grand Rapids Comic-Con": ["https://www.grcomiccon.com"]
+}
+```
+
+Search/extraction priority:
+1. Existing website URL in the row
+2. Search provider URLs by convention name
+
+## Output CSV explanation
+The output CSV:
+- preserves original column order
+- preserves original columns
+- updates only fields selected by update rules
+- writes unknown/unverified fields as `**`
+- normalizes enriched dates to `YYYY-MM-DD`
+
+## Audit CSV explanation
+The audit CSV contains one row per input row with:
+- row identity (`row_number`, `row_id`, `original_name`, `original_website`)
+- source details (`source_used`, `fetch_status`)
+- confidence level (`HIGH`, `MEDIUM`, `LOW`, `NONE`)
+- changed field summaries (`fields_updated`, `fields_left_unknown`)
+- value diffs (`old_values`, `new_values`)
+- warning and notes fields (`warnings`, `notes`)
+- timestamp (`timestamp_utc`)
+
+## Unknown value policy using `**`
+When data is unknown, unavailable, ambiguous, conflicting, low-confidence, or unverified, the field is set to `**` by default.
+
+For date fields, vague values such as `TBD`, `Coming soon`, or `Spring 2026` are treated as ambiguous and set to `**` with an audit warning.
+
+## Confidence levels
+Candidate values include numeric confidence scores and verification state.
+Audit output reports confidence tiers:
+- `HIGH`
+- `MEDIUM`
+- `LOW`
+- `NONE`
+
+Current behavior:
+- high-confidence, verified, non-conflicting values are accepted
+- conflicting candidate values become unknown (`**`)
+- confidence below threshold becomes unknown (`**`)
+
+## Limitations
+- HTML parsing uses regex-based heuristics, not a full browser DOM.
+- Some sites block scraping or return incomplete content.
+- Non-English and heavily scripted pages may reduce extraction quality.
+- Status normalization is heuristic-based.
+- Search result markup can change over time.
+
+## Ethical scraping notes
+- Respect each site terms of service and robots policies.
+- Use reasonable request volumes and caching.
+- Identify your scraper with a clear User-Agent.
+- Avoid scraping private, gated, or personal data.
+- Verify critical data before operational use.
+
+## Troubleshooting
+`No module named pytest`:
+- install test dependencies: `python -m pip install -r requirements.txt`
+
+Output path error (same as input):
+- choose a different `--output` file path than the input file.
+
+No enrichment happening:
+- check website URLs in input
+- run with `--verbose`
+- test with `--search-provider manual` and curated URLs
+
+Too many unknown values:
+- verify source pages contain event metadata
+- provide better manual search mappings
+- improve source CSV website/name quality
+
+Search provider not finding results:
+- use `--search-provider manual` with explicit URLs
+- check network access and site availability
+
+Resume behavior not applied:
+- confirm `--resume` is set
+- confirm output CSV exists and includes matching `id` values
