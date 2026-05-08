@@ -205,6 +205,17 @@ class Scraper:
                 "timed out",
             )
         )
+        proxy_blocked = any(
+            token in lowered_error
+            for token in (
+                "proxyerror",
+                "unable to connect to proxy",
+                "httpsconnection(host='127.0.0.1', port=9)",
+                "httpconnection(host='127.0.0.1', port=9)",
+            )
+        )
+        if proxy_blocked:
+            should_try_fallback = False
         if not should_try_fallback:
             return primary_result, attempts
 

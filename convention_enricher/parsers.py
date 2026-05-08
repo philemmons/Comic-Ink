@@ -39,6 +39,10 @@ DATE_RANGE_MONTH_DAY = re.compile(
     rf"\b({MONTH_PATTERN})\s+(\d{{1,2}})\s*[\-\u2013\u2014]\s*(\d{{1,2}}),?\s*(\d{{4}})\b",
     flags=re.IGNORECASE,
 )
+DATE_RANGE_MONTH_DAY_NO_YEAR = re.compile(
+    rf"\b({MONTH_PATTERN})\s+(\d{{1,2}})\s*(?:st|nd|rd|th)?\s*[\-\u2013\u2014]\s*(\d{{1,2}})\s*(?:st|nd|rd|th)?\b",
+    flags=re.IGNORECASE,
+)
 DATE_RANGE_MONTH_TO_MONTH = re.compile(
     rf"\b({MONTH_PATTERN})\s+(\d{{1,2}})\s*[\-\u2013\u2014]\s*({MONTH_PATTERN})\s+(\d{{1,2}}),?\s*(\d{{4}})\b",
     flags=re.IGNORECASE,
@@ -51,16 +55,77 @@ DATE_SINGLE = re.compile(
     rf"\b({MONTH_PATTERN})\s+(\d{{1,2}}),?\s*(\d{{4}})\b",
     flags=re.IGNORECASE,
 )
+DATE_SINGLE_NO_YEAR = re.compile(
+    rf"\b({MONTH_PATTERN})\s+(\d{{1,2}})\s*(?:st|nd|rd|th)?\b",
+    flags=re.IGNORECASE,
+)
 DATE_ISO = re.compile(r"\b(20\d{2}|19\d{2})-(\d{2})-(\d{2})\b")
+YEAR_PATTERN = re.compile(r"\b(19|20)\d{2}\b")
 
 MAX_PARSE_HTML_CHARS = 1_500_000
 MAX_MICRODATA_SCAN_CHARS = 400_000
 MAX_MICRODATA_VALUE_CHARS = 4000
 
+US_STATE_ABBREV_TO_NAME = {
+    "AL": "Alabama",
+    "AK": "Alaska",
+    "AZ": "Arizona",
+    "AR": "Arkansas",
+    "CA": "California",
+    "CO": "Colorado",
+    "CT": "Connecticut",
+    "DE": "Delaware",
+    "FL": "Florida",
+    "GA": "Georgia",
+    "HI": "Hawaii",
+    "ID": "Idaho",
+    "IL": "Illinois",
+    "IN": "Indiana",
+    "IA": "Iowa",
+    "KS": "Kansas",
+    "KY": "Kentucky",
+    "LA": "Louisiana",
+    "ME": "Maine",
+    "MD": "Maryland",
+    "MA": "Massachusetts",
+    "MI": "Michigan",
+    "MN": "Minnesota",
+    "MS": "Mississippi",
+    "MO": "Missouri",
+    "MT": "Montana",
+    "NE": "Nebraska",
+    "NV": "Nevada",
+    "NH": "New Hampshire",
+    "NJ": "New Jersey",
+    "NM": "New Mexico",
+    "NY": "New York",
+    "NC": "North Carolina",
+    "ND": "North Dakota",
+    "OH": "Ohio",
+    "OK": "Oklahoma",
+    "OR": "Oregon",
+    "PA": "Pennsylvania",
+    "RI": "Rhode Island",
+    "SC": "South Carolina",
+    "SD": "South Dakota",
+    "TN": "Tennessee",
+    "TX": "Texas",
+    "UT": "Utah",
+    "VT": "Vermont",
+    "VA": "Virginia",
+    "WA": "Washington",
+    "WV": "West Virginia",
+    "WI": "Wisconsin",
+    "WY": "Wyoming",
+    "DC": "District of Columbia",
+}
+
 
 def extract_candidates_from_html(html_text: str, source_url: str, source_type: SourceType) -> ExtractionOutput:
     if len(html_text) > MAX_PARSE_HTML_CHARS:
-        html_text = html_text[:MAX_PARSE_HTML_CHARS]
+        head = html_text[: MAX_PARSE_HTML_CHARS // 2]
+        tail = html_text[-(MAX_PARSE_HTML_CHARS // 2) :]
+        html_text = f"{head}\n<!-- PARSE_TRUNCATED -->\n{tail}"
     candidates: dict[str, list[FieldCandidate]] = defaultdict(list)
     warnings: dict[str, list[str]] = defaultdict(list)
 
@@ -145,7 +210,14 @@ def _extract_from_microdata_rdfa(
             content_props[prop].append(content)
 
     # Also capture non-meta tags with itemprop/property and inner text.
-    scan_html = html_text[:MAX_MICRODATA_SCAN_CHARS]
+    if len(html_text) > MAX_MICRODATA_SCAN_CHARS:
+        scan_html = (
+            html_text[: MAX_MICRODATA_SCAN_CHARS // 2]
+            + "\n<!-- MICRODATA_SCAN_TRUNCATED -->\n"
+            + html_text[-(MAX_MICRODATA_SCAN_CHARS // 2) :]
+        )
+    else:
+        scan_html = html_text
     for match in OPEN_TAG_WITH_PROP_PATTERN.finditer(scan_html):
         tag_name = clean_string(match.group(1)).lower()
         prop = clean_string(match.group(4))
@@ -207,6 +279,7 @@ def _extract_from_visible_text(
 ) -> None:
     lines = _visible_lines(html_text)
     snippet = "\n".join(lines)
+    inferred_year = _infer_reference_year(snippet)
     _extract_location_status_notes_from_text(
         snippet,
         "Visible page text",
@@ -224,6 +297,7 @@ def _extract_from_visible_text(
         candidates,
         warnings,
         require_context=True,
+        fallback_year=inferred_year,
     )
     for line in lines:
         _extract_dates_from_snippet(
@@ -235,6 +309,7 @@ def _extract_from_visible_text(
             candidates,
             warnings,
             require_context=False,
+            fallback_year=inferred_year,
         )
 
 
@@ -250,6 +325,7 @@ def _extract_from_third_party_listing_text(
     lines = _visible_lines(html_text)
     listing_lines = [line for line in lines if len(line) > 12]
     snippet = "\n".join(listing_lines)
+    inferred_year = _infer_reference_year(snippet)
     _extract_dates_from_snippet(
         snippet,
         "Third-party listing text",
@@ -259,6 +335,7 @@ def _extract_from_third_party_listing_text(
         candidates,
         warnings,
         require_context=False,
+        fallback_year=inferred_year,
     )
     for line in listing_lines:
         _extract_dates_from_snippet(
@@ -270,6 +347,7 @@ def _extract_from_third_party_listing_text(
             candidates,
             warnings,
             require_context=False,
+            fallback_year=inferred_year,
         )
     _extract_location_status_notes_from_text(
         snippet,
@@ -369,8 +447,9 @@ def _extract_dates_from_snippet(
     candidates: dict[str, list[FieldCandidate]],
     warnings: dict[str, list[str]],
     require_context: bool,
+    fallback_year: int | None = None,
 ) -> None:
-    parsed = _parse_date_text(text)
+    parsed = _parse_date_text(text, fallback_year=fallback_year)
     if not parsed or parsed["kind"] == "empty":
         return
 
@@ -433,6 +512,30 @@ def _extract_location_status_notes_from_text(
         if any(token in clean.lower() for token in ("note:", "notes:", "update:", "important:", "announcement:")):
             _append_candidate(candidates, "notes", clean, source_url, source_type, confidence * 0.85, f"{source_label}: notes/update text")
 
+        # Pattern for prose such as "held on November 14-16 at the DeVos Place in downtown GR".
+        venue_context = re.search(r"(?i)\bat\s+(?:the\s+)?([A-Z][A-Za-z0-9&'.,\- ]{2,80})\b", clean)
+        if venue_context:
+            venue = clean_string(venue_context.group(1)).strip(" .,!?:;")
+            if venue and len(venue.split()) <= 10:
+                _append_candidate(candidates, "event_location", venue, source_url, source_type, confidence * 0.72, f"{source_label}: venue from prose")
+
+        # Generic US-style address parsing from visible text.
+        addr_match = re.search(
+            r"\b\d{1,6}\s+[A-Za-z0-9 .'\-]+,\s*([A-Za-z .'\-]+),\s*([A-Z]{2})\s*\d{5}(?:-\d{4})?\b",
+            clean,
+        )
+        if addr_match:
+            city_value = clean_string(addr_match.group(1))
+            state_abbrev = clean_string(addr_match.group(2)).upper()
+            if city_value:
+                _append_candidate(candidates, "city", city_value, source_url, source_type, confidence * 0.76, f"{source_label}: city from address text")
+            if state_abbrev:
+                _append_candidate(candidates, "state_abrev", state_abbrev, source_url, source_type, confidence * 0.76, f"{source_label}: state abbreviation from address text")
+                state_name = US_STATE_ABBREV_TO_NAME.get(state_abbrev)
+                if state_name:
+                    _append_candidate(candidates, "state", state_name, source_url, source_type, confidence * 0.72, f"{source_label}: state inferred from abbreviation")
+                    _append_candidate(candidates, "country", "USA", source_url, source_type, confidence * 0.68, f"{source_label}: country inferred from US address")
+
     status = _extract_status(text)
     if status:
         _append_candidate(candidates, "status", status, source_url, source_type, confidence, f"{source_label}: status keyword")
@@ -445,10 +548,11 @@ def _extract_status(text: str) -> str:
     return match.group(1).lower()
 
 
-def _parse_date_text(value: str | None) -> dict[str, str]:
+def _parse_date_text(value: str | None, fallback_year: int | None = None) -> dict[str, str]:
     text = clean_string(value)
     if not text:
         return {"kind": "empty", "warning": ""}
+    text = re.sub(r"(\d)(st|nd|rd|th)\b", r"\1", text, flags=re.IGNORECASE)
 
     vague = AMBIGUOUS_DATE_PATTERN.search(text)
     if vague:
@@ -460,7 +564,7 @@ def _parse_date_text(value: str | None) -> dict[str, str]:
             "year": "",
         }
 
-    parsed = _parse_exact_date_range(text)
+    parsed = _parse_exact_date_range(text, fallback_year=fallback_year)
     if parsed:
         return {"kind": "exact", **parsed}
 
@@ -476,7 +580,10 @@ def _parse_date_text(value: str | None) -> dict[str, str]:
     return {"kind": "empty", "warning": ""}
 
 
-def _parse_exact_date_range(text: str) -> dict[str, str] | None:
+def _parse_exact_date_range(text: str, fallback_year: int | None = None) -> dict[str, str] | None:
+    inferred_year_match = re.search(r"\b(19|20)\d{2}\b", text)
+    inferred_year = int(inferred_year_match.group(0)) if inferred_year_match else fallback_year
+
     iso_dates = DATE_ISO.findall(text)
     if iso_dates:
         first = iso_dates[0]
@@ -506,6 +613,10 @@ def _parse_exact_date_range(text: str) -> dict[str, str] | None:
     if m1:
         month, d1, d2, year = m1.groups()
         return _build_range(month, int(d1), month, int(d2), int(year))
+    m1b = DATE_RANGE_MONTH_DAY_NO_YEAR.search(text)
+    if m1b and inferred_year:
+        month, d1, d2 = m1b.groups()
+        return _build_range(month, int(d1), month, int(d2), int(inferred_year))
 
     m2 = DATE_RANGE_MONTH_TO_MONTH.search(text)
     if m2:
@@ -522,8 +633,45 @@ def _parse_exact_date_range(text: str) -> dict[str, str] | None:
         month, day, year = m4.groups()
         single = _build_range(month, int(day), month, int(day), int(year))
         return single
+    m4b = DATE_SINGLE_NO_YEAR.search(text)
+    if m4b and inferred_year:
+        month, day = m4b.groups()
+        return _build_range(month, int(day), month, int(day), int(inferred_year))
 
     return None
+
+
+def _infer_reference_year(text: str) -> int | None:
+    years = [int(match.group(0)) for match in YEAR_PATTERN.finditer(text)]
+    if not years:
+        return None
+
+    now_year = datetime.utcnow().year
+    year_counts: dict[int, int] = {}
+    for year in years:
+        year_counts[year] = year_counts.get(year, 0) + 1
+
+    candidate_years = [year for year in year_counts if (now_year - 1) <= year <= (now_year + 3)]
+    if not candidate_years:
+        candidate_years = list(year_counts.keys())
+
+    def month_context_score(year: int) -> int:
+        pattern = re.compile(
+            rf"({MONTH_PATTERN})[^\n]{{0,40}}{year}|{year}[^\n]{{0,40}}({MONTH_PATTERN})",
+            flags=re.IGNORECASE,
+        )
+        return len(pattern.findall(text))
+
+    ranked = sorted(
+        candidate_years,
+        key=lambda year: (
+            month_context_score(year),
+            year_counts.get(year, 0),
+            -abs(year - now_year),
+        ),
+        reverse=True,
+    )
+    return ranked[0] if ranked else None
 
 
 def _build_range(start_month_text: str, start_day: int, end_month_text: str, end_day: int, year: int) -> dict[str, str] | None:

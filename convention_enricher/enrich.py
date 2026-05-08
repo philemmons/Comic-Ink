@@ -289,9 +289,6 @@ def should_update_field(
         return False
 
     row_year = parse_year(row.get(column_map["year"], ""))
-    if row_year is None or row_year >= year_target:
-        return False
-
     stale_fields = {
         "start_date",
         "end_date",
@@ -305,6 +302,10 @@ def should_update_field(
         "status",
         "notes",
     }
+    if row_year is None:
+        return field_name in stale_fields
+    if row_year >= year_target:
+        return False
     return field_name in stale_fields
 
 
@@ -484,7 +485,14 @@ def confidence_rank(level: ConfidenceLevel) -> int:
     return {"NONE": 0, "LOW": 1, "MEDIUM": 2, "HIGH": 3}[level]
 
 
-def should_preserve_existing_value(old_value: str, resolved_value: str, reason: str, unknown_value: str) -> bool:
+def should_preserve_existing_value(
+    field_name: str,
+    old_value: str,
+    resolved_value: str,
+    reason: str,
+    unknown_value: str,
+    row_is_stale: bool,
+) -> bool:
     if resolved_value != unknown_value:
         return False
     if is_missing(old_value):
@@ -498,7 +506,21 @@ def should_preserve_existing_value(old_value: str, resolved_value: str, reason: 
         "normalized to empty",
         "ambiguous values",
     )
-    return any(marker in lowered for marker in preserve_reasons)
+    if not any(marker in lowered for marker in preserve_reasons):
+        return False
+
+    # Stale rows may still be preserved when new evidence is inconclusive.
+    # We surface this in audit warnings rather than destructively replacing values.
+    if row_is_stale and "ambiguous values" in lowered:
+        return True
+    return True
+
+
+def field_has_viable_candidate(field_name: str, candidates: list[FieldCandidate], unknown_value: str) -> bool:
+    if not candidates:
+        return False
+    resolved, _, _ = resolve_field_value(field_name, candidates, unknown_value=unknown_value)
+    return resolved != unknown_value
 
 
 def summarize_fetch_status(attempts: list[FetchAttempt]) -> str:
@@ -587,6 +609,8 @@ def run_enrichment(config: RuntimeConfig) -> RunResult:
         row_id = clean_string(row.get(id_column, ""))
         original_name = clean_string(row.get(column_map["conName"], ""))
         original_website = clean_string(row.get(column_map["website"], ""))
+        reference_year = parse_year(reference_row.get(column_map["year"], ""))
+        row_is_stale = reference_year is not None and reference_year < config.year
 
         if config.resume and row_id and row_id in resumed_rows:
             resumed_row = resumed_rows[row_id]
@@ -632,7 +656,11 @@ def run_enrichment(config: RuntimeConfig) -> RunResult:
             if column_map[field] in headers and should_update_field(field, reference_row, column_map, config.year, config.only_missing)
         ]
 
-        unresolved_fields = [field for field in fields_needing_update if not candidates_by_field.get(field)]
+        unresolved_fields = [
+            field
+            for field in fields_needing_update
+            if not field_has_viable_candidate(field, candidates_by_field.get(field, []), config.unknown_value)
+        ]
 
         search_disabled = config.search_provider == "none" and not config.manual_search_results
         if unresolved_fields and original_name and not search_disabled:
@@ -715,7 +743,11 @@ def run_enrichment(config: RuntimeConfig) -> RunResult:
                     fetch_attempts,
                     scraper.scrape_candidates(normalized_url, "search"),
                 )
-                unresolved_fields = [field for field in fields_needing_update if not candidates_by_field.get(field)]
+                unresolved_fields = [
+                    field
+                    for field in fields_needing_update
+                    if not field_has_viable_candidate(field, candidates_by_field.get(field, []), config.unknown_value)
+                ]
                 if not unresolved_fields:
                     break
 
@@ -739,7 +771,14 @@ def run_enrichment(config: RuntimeConfig) -> RunResult:
                 continue
 
             resolved, reason, level = resolve_field_value(field_name, field_candidates, unknown_value=config.unknown_value)
-            if should_preserve_existing_value(old_value, resolved, reason, config.unknown_value):
+            if should_preserve_existing_value(
+                field_name,
+                old_value,
+                resolved,
+                reason,
+                config.unknown_value,
+                row_is_stale,
+            ):
                 row[column_name] = old_value
                 explicit = warnings_by_field.get(field_name, [])
                 generic_fetch = warnings_by_field.get("fetch", [])
