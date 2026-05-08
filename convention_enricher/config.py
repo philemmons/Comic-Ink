@@ -51,15 +51,18 @@ class RuntimeConfig:
     resume: bool = False
     verbose: bool = False
     cache_dir: Path = Path(".cache/convention_enricher")
-    search_provider: str = "duckduckgo_html"
+    search_provider: str = "google.com"
     manual_search_results: Path | None = None
     unknown_value: str = "**"
     timeout_seconds: float = 12.0
-    retry_total: int = 3
+    retry_total: int = 1
     retry_backoff_seconds: float = 0.6
     rate_limit_per_second: float = 2.0
+    ssl_error_host_cooldown_seconds: float = 1800.0
     user_agent: str = "ConventionEnricher/2.0"
     max_search_results: int = 3
+    search_time_limit_seconds: float = 8.0
+    stop_after_first_empty_search_query: bool = True
     columns: ColumnConfig = field(default_factory=ColumnConfig)
 
     @staticmethod
@@ -104,11 +107,29 @@ def apply_env_overrides(config: RuntimeConfig) -> RuntimeConfig:
         except ValueError:
             pass
 
+    ssl_cooldown = os.getenv("CONVENTION_ENRICHER_SSL_ERROR_HOST_COOLDOWN_SECONDS")
+    if ssl_cooldown:
+        try:
+            config.ssl_error_host_cooldown_seconds = max(0.0, float(ssl_cooldown))
+        except ValueError:
+            pass
+
     max_results = os.getenv("CONVENTION_ENRICHER_MAX_SEARCH_RESULTS")
     if max_results:
         try:
             config.max_search_results = max(1, int(max_results))
         except ValueError:
             pass
+
+    search_time_limit = os.getenv("CONVENTION_ENRICHER_SEARCH_TIME_LIMIT_SECONDS")
+    if search_time_limit:
+        try:
+            config.search_time_limit_seconds = max(0.0, float(search_time_limit))
+        except ValueError:
+            pass
+
+    stop_after_empty = os.getenv("CONVENTION_ENRICHER_STOP_AFTER_FIRST_EMPTY_SEARCH_QUERY")
+    if stop_after_empty:
+        config.stop_after_first_empty_search_query = stop_after_empty.strip().lower() not in {"0", "false", "no"}
 
     return config

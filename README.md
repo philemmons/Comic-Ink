@@ -111,12 +111,26 @@ Optional overrides:
 - `CONVENTION_ENRICHER_RETRY_TOTAL`
 - `CONVENTION_ENRICHER_RETRY_BACKOFF_SECONDS`
 - `CONVENTION_ENRICHER_RATE_LIMIT_PER_SECOND`
+- `CONVENTION_ENRICHER_SSL_ERROR_HOST_COOLDOWN_SECONDS`
+- `CONVENTION_ENRICHER_SEARCH_TIME_LIMIT_SECONDS`
+- `CONVENTION_ENRICHER_STOP_AFTER_FIRST_EMPTY_SEARCH_QUERY`
 
 ## Search provider setup
 Supported providers:
-- `duckduckgo_html` (default)
+- `google.com` (default)
+- `duckduckgo_html`
 - `manual`
 - `none`
+
+Provider behavior:
+- `google.com` automatically falls back to `duckduckgo_html` when Google returns no usable links.
+- Search uses multiple contextual query variants (name/year, official-site phrasing, location, and optional `site:` host hints).
+- Search queries stop early only after consecutive empty query results (default behavior) to avoid aborting on a single bad SERP response.
+- Per-row search has a time limit (default: 8 seconds) to prevent long pauses on blocked or rate-limited providers.
+- Hosts with SSL handshake failures are temporarily skipped in-run (default cooldown: 1800 seconds).
+- Search query and ranking logic automatically profile the input dataset (common name tokens, known host/name mappings, and frequent reusable hosts) to improve official URL selection.
+- When no verifiable replacement is found for a populated field, the existing value is preserved instead of being overwritten with `**`.
+- Website fetch attempts include automatic URL fallbacks (`www`/non-`www`, `https`/`http`) before marking fetch failure.
 
 Manual provider file format (`--manual-search-results`):
 
@@ -130,6 +144,12 @@ Manual provider file format (`--manual-search-results`):
 Search/extraction priority:
 1. Existing website URL in the row
 2. Search provider URLs by convention name
+
+Manual provider notes:
+- `manual` does not perform live web searching.
+- It only reads URLs you provide in `manual_search.json`.
+- It supports query-variant matching (for example, `official website` / year-suffixed query text) against your mapping keys.
+- It is usually the most stable option when automated search engines throttle or block requests.
 
 ## Output CSV explanation
 The output CSV:

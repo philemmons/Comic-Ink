@@ -17,6 +17,10 @@ JSON_LD_PATTERN = re.compile(
 )
 META_TAG_PATTERN = re.compile(r"<meta\s+[^>]*>", flags=re.IGNORECASE)
 ATTR_PATTERN = re.compile(r"([a-zA-Z_:][-a-zA-Z0-9_:.]*)\s*=\s*([\"'])(.*?)\2", flags=re.DOTALL)
+OPEN_TAG_WITH_PROP_PATTERN = re.compile(
+    r"<([a-zA-Z0-9:_-]+)\b[^>]*(itemprop|property)\s*=\s*([\"'])(.*?)\3[^>]*>",
+    flags=re.IGNORECASE,
+)
 
 MONTH_PATTERN = (
     r"(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)?|"
@@ -49,8 +53,14 @@ DATE_SINGLE = re.compile(
 )
 DATE_ISO = re.compile(r"\b(20\d{2}|19\d{2})-(\d{2})-(\d{2})\b")
 
+MAX_PARSE_HTML_CHARS = 1_500_000
+MAX_MICRODATA_SCAN_CHARS = 400_000
+MAX_MICRODATA_VALUE_CHARS = 4000
+
 
 def extract_candidates_from_html(html_text: str, source_url: str, source_type: SourceType) -> ExtractionOutput:
+    if len(html_text) > MAX_PARSE_HTML_CHARS:
+        html_text = html_text[:MAX_PARSE_HTML_CHARS]
     candidates: dict[str, list[FieldCandidate]] = defaultdict(list)
     warnings: dict[str, list[str]] = defaultdict(list)
 
@@ -135,9 +145,20 @@ def _extract_from_microdata_rdfa(
             content_props[prop].append(content)
 
     # Also capture non-meta tags with itemprop/property and inner text.
-    for match in re.finditer(r"<([a-zA-Z0-9:_-]+)\s+[^>]*(itemprop|property)=([\"'])(.*?)\3[^>]*>(.*?)</\1>", html_text, flags=re.IGNORECASE | re.DOTALL):
+    scan_html = html_text[:MAX_MICRODATA_SCAN_CHARS]
+    for match in OPEN_TAG_WITH_PROP_PATTERN.finditer(scan_html):
+        tag_name = clean_string(match.group(1)).lower()
         prop = clean_string(match.group(4))
-        value = _strip_tags(match.group(5))
+        if not tag_name or not prop:
+            continue
+
+        close_pattern = f"</{re.escape(tag_name)}>"
+        close_match = re.search(close_pattern, scan_html[match.end() :], flags=re.IGNORECASE)
+        if not close_match:
+            continue
+
+        inner_html = scan_html[match.end() : match.end() + close_match.start()]
+        value = _strip_tags(inner_html[:MAX_MICRODATA_VALUE_CHARS])
         if prop and value:
             content_props[prop].append(value)
 
