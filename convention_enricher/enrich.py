@@ -379,11 +379,21 @@ def _build_search_queries_with_context(
         candidates.append(f"{compact_base} {year}")
         candidates.append(f"{compact_base} official website")
 
-    location_parts = [clean_string(city), clean_string(state)]
+    city_clean = clean_string(city)
+    state_clean = clean_string(state)
     state_abrev_clean = clean_string(state_abrev).upper()
-    if state_abrev_clean.lower() not in INVALID_STATE_VALUES and state_abrev_clean:
+    country_clean = clean_string(country)
+
+    location_parts: list[str] = []
+    if city_clean:
+        location_parts.append(city_clean)
+    # Avoid redundant "Texas TX" style fragments in queries.
+    if state_clean:
+        location_parts.append(state_clean)
+    elif state_abrev_clean.lower() not in INVALID_STATE_VALUES and state_abrev_clean:
         location_parts.append(state_abrev_clean)
-    location_parts.append(clean_string(country))
+    if country_clean:
+        location_parts.append(country_clean)
     location = " ".join([part for part in location_parts if part])
     if location:
         candidates.append(f"{base} {location} {year}")
@@ -509,10 +519,8 @@ def should_preserve_existing_value(
     if not any(marker in lowered for marker in preserve_reasons):
         return False
 
-    # Stale rows may still be preserved when new evidence is inconclusive.
-    # We surface this in audit warnings rather than destructively replacing values.
-    if row_is_stale and "ambiguous values" in lowered:
-        return True
+    # Preserve populated values for all fields when replacement evidence is inconclusive.
+    # This avoids destructive regressions where historical data is overwritten with unknowns.
     return True
 
 

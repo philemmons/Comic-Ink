@@ -1,0 +1,11 @@
+id,conName,start_date,end_date,year,event_location,city,state,state_abrev,country,website
+1,Doxacon ,2023-11-03,2023-11-04,2023,Marymount University,Arlington,Virginia,VA,USA,www.doxacon.org
+2,Grand Rapids Comic-Con ,2023-11-03,2023-11-05,2023,DeVos Place,Grand Rapids,Michigan,MI,USA,https://www.grcomiccon.com
+3,Heroes Comic Con Stockholm ,2023-11-03,2023-11-05,2023,Stockholmsmässan,Älvsjö,Stockholm,STHLM,Sweden,https://www.comicconstockholm.se/
+4,Rhode Island Comic Con ,2023-11-03,2023-11-05,2023,Convention Center / Amica Mutual Pavilion,Providence,Rhode Island,RI,USA,https://www.ricomiccon.com
+5,Twin Cities Con ,2023-11-03,2023-11-05,2023,Minneapolis Convention Center,Minneapolis,Minnesota,MN,USA,https://www.twincitiescon.com
+6,AugustaCon ,2023-11-04,2023-11-04,2023,DoubleTree Hotel,Augusta,Georgia,GA,USA,theaugustacon.com/
+7,Akron Comicon ,2023-11-04,2023-11-05,2023,Emidio & Sons Banquet Center,Cuyahoga Falls,Ohio,OH,USA,https://www.akroncomicon.com/
+8,Collect-A-Con Houston ,2023-11-04,2023-11-05,2023,George R. Brown Convention Center,Houston,Texas,TX,USA,collectaconusa.com/
+9,NC Comicon: Bull City ,2023-11-04,2023-11-05,2023,Durham Convention Center,Durham,North Carolina,NC,USA,www.nccomicon.com/
+10,Supanova Comic Con & Gaming - Adelaide ,2023-11-04,2023-11-05,2023,Adelaide Showground,Wayville,South Australia,SA,Australia,https://www.supanova.com.au/

@@ -3,6 +3,7 @@ from __future__ import annotations
 from collections import defaultdict
 from dataclasses import dataclass, field
 import logging
+import os
 import time
 from typing import Protocol
 from urllib.parse import urlparse
@@ -38,6 +39,7 @@ class UrllibPageFetcher:
     def __post_init__(self) -> None:
         self._logger = logging.getLogger(self.__class__.__name__)
         self._session = requests.Session()
+        self._configure_proxy_behavior()
         retry = Retry(
             total=self.retry_total,
             connect=0,
@@ -52,6 +54,24 @@ class UrllibPageFetcher:
         adapter = HTTPAdapter(max_retries=retry)
         self._session.mount("http://", adapter)
         self._session.mount("https://", adapter)
+
+    def _configure_proxy_behavior(self) -> None:
+        proxy_values = [
+            os.getenv("HTTP_PROXY", ""),
+            os.getenv("HTTPS_PROXY", ""),
+            os.getenv("ALL_PROXY", ""),
+        ]
+        blocked_proxy_markers = (
+            "127.0.0.1:9",
+            "localhost:9",
+        )
+        if any(marker in value for value in proxy_values for marker in blocked_proxy_markers):
+            # Some environments use loopback:9 as a "disable network" proxy sentinel.
+            # Keep the scraper functional by bypassing env proxies in this case.
+            self._session.trust_env = False
+            self._logger.warning(
+                "Detected loopback:9 proxy sentinel in environment. Bypassing env proxies for HTTP requests."
+            )
 
     def fetch(self, url: str) -> FetchResult:
         interval = 1.0 / max(self.rate_limit_per_second, 0.1)

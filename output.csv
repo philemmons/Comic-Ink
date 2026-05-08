@@ -9,3 +9,205 @@ id,conName,start_date,end_date,year,event_location,city,state,state_abrev,countr
 8,Collect-A-Con Houston ,2023-11-04,2023-11-05,2023,George R. Brown Convention Center,Houston,Texas,TX,USA,collectaconusa.com/
 9,NC Comicon: Bull City ,2023-11-04,2023-11-05,2023,Durham Convention Center,Durham,North Carolina,NC,USA,https://nccomicon.com/
 10,Supanova Comic Con & Gaming - Adelaide ,2023-11-04,2023-11-05,2023,Adelaide Showground,Wayville,South Australia,SA,Australia,https://www.supanova.com.au/
+11,TriCityComicCon  Postponed,2023-11-04,2023-11-05,2023,Polk County Commerce Center,Livingston,Texas,TX,USA,https://www.myticketing.pro/event/tricitycomiccon
+12,Tyler Comic Con ,2023-11-04,2023-11-05,2023,Cascades Country Club,Tyler,Texas,TX,USA,https://tylercomiccon.com/
+13,Angus ComiCon ,2023-11-05,2023-11-05,2023,Angus Recreation Centre,Angus,Ontario,ON,Canada,https://www.popculturecanada.ca/
+14,Comic Book & Non-Sports Card Show ,2023-11-05,2023-11-05,2023,Annandale Volunteer Fire Department,Annandale,Virginia,VA,USA,https://shoffpromotions.com/
+15,Near Mint Sundays ,2023-11-05,2023-11-05,2023,Brookhurst Community Center,Anaheim,California,CA,USA,pineapplesdocumentation.com/
+16,New Egypt Comic Book & Toy Show ,2023-11-05,2023-11-05,2023,Elks Lodge,New Egypt,New Jersey,NJ,USA,https://comic-lair.com/show/
+17,Pulp Adventurecon ,2023-11-05,2023-11-05,2023,Holiday Inn Philadelphia - South,Swedesboro,New Jersey,NJ,USA,pulp-adventurecon.square.site/
+18,All C's Fan Expo ,2023-11-10,2023-11-12,2023,Arapahoe County Fairgrounds,Aurora,Colorado,CO,USA,https://www.allcscollectibles.com/
+19,Memphis Comic and Fantasy Convention ,2023-11-10,2023-11-12,2023,Holiday Inn Memphis-Univ of Memphis,Memphis,Tennessee,TN,USA,memphiscfc.com/home/
+20,Motor City Comic Con ,2023-11-10,2023-11-12,2023,Suburban Collection Showplace,Novi,Michigan,MI,USA,http://theaugustacon.com/
+21,Rangerstop Convention ,2023-11-10,2023-11-12,2023,DoubleTree Hotel at SeaWorld,Orlando,Florida,FL,USA,https://www.diariozm.com/
+22,Grit City Comic Show ,2023-11-11,2023-11-11,2023,Greater Tacoma Convention Center,Tacoma,Washington,WA,USA,https://gritcitycomicshow.com/
+23,Kids Con New England,2023-11-11,2023-11-11,2023,DoubleTree Hotel,South Portland,Maine,ME,USA,https://kidsconne.com/
+24,"Sports Card, Comic Book, Pokemon & Collectibles Expo ",2023-11-11,2023-11-11,2023,Virginia Beach Fieldhouse,Virginia Beach,Virginia,VA,USA,757cardshows.com/
+25,Lawton Super Con ,2023-11-11,2023-11-12,2023,Comanche County Fairgrounds,Lawton,Oklahoma,OK,USA,https://www.superanimefest.com/ama
+26,One-Con  Cancelled,2023-11-11,2023-11-12,2023,Wyndham Lancaster Resort and Convention Center,Lancaster,Pennsylvania,PA,USA,www.theonecon.com/
+27,QuadCon Peoria ,2023-11-11,2023-11-12,2023,Northwoods Mall,Peoria,Illinois,IL,USA,https://quadcitycon.com/
+28,Rocky Mountain Con ,2023-11-11,2023-11-12,2023,Embassy Suites at Central Park,Denver,Colorado,CO,USA,www.rockymountaincon.com/
+29,Supanova Comic Con & Gaming - Brisbane ,2023-11-11,2023-11-12,2023,Brisbane Convention & Exhibition Centre,South Brisbane,Queensland,QLD,Australia,https://www.supanova.com.au/
+30,TORG Gaming Expo ,2023-11-11,2023-11-12,2023,Ohio Expo Center - Bricker Building & Celeste Center,Columbus,Ohio,OH,USA,www.torgevents.com/
+31,Canadian ToyCon ,2023-11-12,2023-11-12,2023,Holiday Inn Oakville Centre,Oakville,Ontario,ON,Canada,www.gtacons.com/
+32,Capital Trade Shows ,2023-11-12,2023-11-12,2023,Nepean Sportsplex,Nepean,Ontario,ON,Canada,https://www.capitaltradeshows.ca
+33,Philcon ,2023-11-17,2023-11-19,2023,DoubleTree at Cherry Hill Philadelphia,Cherry Hill,New Jersey,NJ,USA,https://philcon.org/
+34,CompassCon: Newmarket ,2023-11-18,2023-11-18,2023,Royal Canadian Legion Branch 426,Newmarket,Ontario,ON,Canada,https://www.compassconevents.ca
+35,Kelowna ComiCon ,2023-11-18,2023-11-18,2023,Capital News Centre,Kelowna,British Columbia,BC,Canada,www.kelownacomicon.com/
+36,Village Con ,2023-11-18,2023-11-18,2023,Whiting Village @ Crestwood VII - Fernwood Hall,Whiting,New Jersey,NJ,USA,https://jerseyshorecomicbookshow.com/
+37,Blue Hen Comic Con ,2023-11-18,2023-11-19,2023,Dover Mall - Former Sears,Dover,Delaware,DE,USA,https://omniverseevents.com/home/events/bluehencomiccon/
+38,ConFluence ,2023-11-18,2023-11-19,2023,Public Functionary - Northrup King Building,Minneapolis,Minnesota,MN,USA,publicfunctionary.org/confluence-mn
+39,Heroes Dutch Comic Con ,2023-11-18,2023-11-19,2023,Jaarbeurs,Utrecht,---,---,Netherlands,https://www.dutchcomiccon.com/
+40,QuadCon Madison ,2023-11-18,2023-11-19,2023,East Towne Mall,Madison,Wisconsin,WI,USA,https://quadcitycon.com/
+41,Saratoga Comic Con ,2023-11-18,2023-11-19,2023,Saratoga Springs City Center,Saratoga Springs,New York,NY,USA,saratogacomiccon.com/
+42,Vienna Comic Con ,2023-11-18,2023-11-19,2023,Messe Wien Exhibition Congress Center,Wien,---,---,Austria,https://viecc.com/
+43,Buckeye Comic Con ,2023-11-19,2023-11-19,2023,Courtyard by Marriott West/Hilliard,Columbus,Ohio,OH,USA,https://www.harpercomics.com/conventions.php?show=13&date=223
+44,CharlestonCon ,2023-11-19,2023-11-19,2023,Embassy Suites at Charleston Airport,North Charleston,South Carolina,SC,USA,http://charlestoncon.com/
+45,Frederick Maryland Comic Con ,2023-11-19,2023-11-19,2023,Clarion Inn Frederick Event Center,Frederick,Maryland,MD,USA,https://shoffpromotions.com/
+46,Lake County Comic Convention ,2023-11-19,2023-11-19,2023,Trilogy Orlando,Groveland,Florida,FL,USA,https://www.lakecountycomiccon.com/
+47,Fan Expo San Francisco ,2026-11-24,2026-11-26,2026,Moscone Center,San Francisco,California,CA,US,https://fanexpohq.com/fanexposanfrancisco/
+48,GalactiCon ,2023-11-24,2023-11-26,2023,Denver Marriott Tech Center,Denver,Colorado,CO,USA,https://www.galacticondenver.com/
+49,NorthEast ComicCon & Collectibles Extravaganza ,2023-11-24,2023-11-26,2023,Boxboro Regency Hotel & Conference Center,Boxborough,Massachusetts,MA,USA,necomiccons.com/
+50,Aurora ComiCon ,2023-11-25,2023-11-25,2023,Aurora Royal Canadian Legion Branch 385,Aurora,Ontario,ON,Canada,https://www.popculturecanada.ca/
+51,Collectorabilia ,2023-11-25,2023-11-25,2023,Resch Expo,Ashwaubenon,Wisconsin,WI,USA,https://collectorabiliacon.com/
+52,Cleveland Toy Show ,2023-11-25,2023-11-26,2023,Best Western Plus Strongsville Cleveland,Strongsville,Ohio,OH,USA,www.clevelandtoyshow.com/
+53,Bolton Sci-Fi Comic & Toy Fair ,2023-11-26,2023-11-26,2023,Mercure Bolton Georgian House Hotel,Blackrod,Bolton,BL,United Kingdom,www.mseevents.co.uk/
+54,SW-FloridaCon  Postponed,2023-11-26,2023-11-26,2023,Crowne Plaza Fort Myers at Bell Tower Shops,Fort Myers,Florida,FL,USA,http://swfloridacomiccon.com/
+55,CCXP ,2023-11-30,2023-12-03,2023,São Paulo Expo,São Paulo,Saint Paul,SP,Brazil,www.ccxp.com.br/
+56,GalaxyCon Columbus ,2023-12-01,2023-12-03,2023,Greater Columbus Convention Center,Columbus,Ohio,OH,USA,https://galaxycon.com/pages/galaxycon-columbus
+57,L.A. Comic Con ,2023-12-01,2023-12-03,2023,Los Angeles Convention Center,Los Angeles,California,CA,USA,comicconla.com/
+58,MCM Comic Con Birmingham ,2023-12-01,2023-12-03,2023,NEC Birmingham,Birmingham,---,---,United Kingdom,https://www.mcmcomiccon.com/birmingham/en-us.html
+59,Greater Philly Area Toy Expo ,2023-12-02,2023-12-02,2023,Kimberton Fair Grounds,Phoenixville,Pennsylvania,PA,USA,phillytoyexpo.com/
+60,Lehigh Valley Comic Convention ,2023-12-02,2023-12-02,2023,Community Services Center,Schnecksville,Pennsylvania,PA,USA,https://lehighvalleycomicconvention.com/
+61,Abilene Comic Con ,2023-12-02,2023-12-03,2023,Abilene Convention Center,Abilene,Texas,TX,USA,https://abilenecomiccon.com/
+62,Elite Comic Con,2023-12-02,2023-12-03,2023,Waco Convention Center,Waco,Texas,TX,USA,elitecomiccon.com/
+63,Pop Kon And More ,2023-12-02,2023-12-03,2023,DoubleTree Hotel at the Entrance to Universal,Orlando,Florida,FL,USA,www.popkonandmore.com/
+64,"Canton-Akron Comic Book, Toy & Nostalgia Convention ",2023-12-03,2023-12-03,2023,St George Social Center,North Canton,Ohio,OH,USA,https://www.harpercomics.com/conventions.php?show=15&date=219
+65,Clandestine Comic Book Show ,2023-12-03,2023-12-03,2023,DoubleTree Hotel,Laurel,Maryland,MD,USA,https://clandestinecomics.com/
+66,SW-FloridaCon ,2023-12-03,2023-12-03,2023,DoubleTree at Bell Tower Shops,Fort Myers,Florida,FL,USA,http://swfloridacomiccon.com/
+67,Daku Con ,2023-12-08,2023-12-10,2023,Crowne Plaza Denver Airport Convention Ctr,Denver,Colorado,CO,USA,dakucon.org/
+68,Permian Basin Comic Con X: Holiday Edition ,2023-12-08,2023-12-10,2023,Midland County Horseshoe Arena,Midland,Texas,TX,USA,pbcomicconx.com/permian-basin-comic-con-holiday-editon/
+69,Steel City Con ,2023-12-08,2023-12-10,2023,Monroeville Convention Center,Monroeville,Pennsylvania,PA,USA,https://www.steelcitycon.com/
+70,Tokyo Comic Con ,2023-12-08,2023-12-10,2023,Makuhari Messe,Chiba,---,---,Japan,https://tokyocomiccon.jp/
+71,Yama-Con ,2023-12-08,2023-12-10,2023,LeConte Center at Pigeon Forge,Pigeon Forge,Tennessee,TN,USA,https://yamacon.org/
+72,Kuya's Collectibles Show ,2023-12-09,2023-12-09,2023,Niagara Falls Convention Centre,Niagara Falls,Ontario,ON,Canada,www.kuyascollectibles.com/
+73,LouisvilleCon ,2023-12-09,2023-12-09,2023,Triple Crown Pavilion,Jeffersontown,Kentucky,KY,USA,http://louisvillecon.com/
+74,Ocean City Comic Con ,2023-12-09,2023-12-09,2023,Roland E. Powell Convention Center,Ocean City,Maryland,MD,USA,https://oceancitycomiccon.com/
+75,Delhi Comic Con ,2023-12-09,2023-12-11,2023,NSIC Exhibition Ground,New Delhi,Delhi,DL,India,www.comicconindia.com/all-cities-main-page/delhi
+76,Comic Con Stuttgart ,2023-12-09,2023-12-10,2023,Landesmesse Stuttgart,Stuttgart,---,---,Germany,https://www.comiccon.de/
+77,Comic World Taiwan ,2023-12-09,2023-12-10,2023,NTU Sports Center,Taipei,---,---,Taiwan,https://www.comicworld.com.tw/Act1/143
+78,QuadCon Davenport ,2023-12-09,2023-12-10,2023,NorthPark Mall,Davenport,Iowa,IA,USA,https://quadcitycon.com/
+79,Capital Trade Shows ,2023-12-10,2023-12-10,2023,Nepean Sportsplex,Nepean,Ontario,ON,Canada,capitaltradeshows.com/
+80,Comic Book & Non-Sports Card Show ,2023-12-10,2023-12-10,2023,Annandale Volunteer Fire Department,Annandale,Virginia,VA,USA,https://shoffpromotions.com/
+81,Jim & Dan Comic & Toy Show ,2023-12-10,2023-12-10,2023,Wright State University Student Union,Fairborn,Ohio,OH,USA,https://jimanddancomics.com/shows
+82,Big Apple Comic Con ,2023-12-16,2023-12-16,2023,The New Yorker Hotel,New York,New York,NY,USA,https://bigapplecc.com/
+83,Springfield Toy & Comic Show ,2023-12-16,2023-12-16,2023,Clark County Fairgrounds - Mercantile Building,Springfield,Ohio,OH,USA,www.springfieldtoyshow.com/
+84,QuadCon Des Moines ,2023-12-16,2023-12-17,2023,Merle Hay Mall,Des Moines,Iowa,IA,USA,https://quadcitycon.com/
+85,Toronto Comic Book Show ,2023-12-27,2023-12-27,2023,Montecassino Hotel and Event Centre,Toronto,Ontario,ON,Canada,https://torontocomicbookshow.com/
+86,Comic Market ,2023-12-30,2023-12-31,2023,Tokyo Big Sight,Tokyo,---,---,Japan,https://www.comiket.co.jp/
+87,Fan Expo New Orleans ,2027-01-08,2027-01-10,2027,New Orleans Ernest N. Morial Center,New Orleans,Louisiana,LA,USA,https://fanexpohq.com/fanexponeworleans/
+88,FT-LauderdaleCon ,2024-01-07,2024-01-07,2024,Embassy Suites by 17th Street,Fort Lauderdale,Florida,FL,USA,http://ftlauderdalecon.com/
+89,Fan Expo Portland ,2027-01-29,2027-01-31,2027,Oregon Convention Center,Portland,Oregon,OR,US,https://fanexpohq.com/fanexpoportland/
+90,Charlie's Comic Con ,2024-01-13,2024-01-13,2024,Riverside Community Center,Fort Myers,Florida,FL,USA,www.charliescomiccon.com/
+91,Wild Con ,2024-01-13,2024-01-13,2024,Wildwood Convention Center,Wildwood,New Jersey,NJ,USA,jerseyshorecomicbookshow.com/wild-con
+92,Middle Georgia Comic Convention ,2024-01-13,2024-01-14,2024,Edgar H. Wilson Convention Center,Macon,Georgia,GA,USA,https://midgacomicconvention.com/
+93,TriCityComicCon ,2024-01-13,2024-01-14,2024,Polk County Commerce Center,Livingston,Texas,TX,USA,https://www.myticketing.pro/event/tricitycomiccon
+94,NorthernKyCon ,2024-01-14,2024-01-14,2024,Marriott Cincinnati Airport,Hebron,Kentucky,KY,USA,https://northernkycon.com/
+95,"Eckman's Card, Comic & Toy Show ",2024-01-20,2024-01-20,2024,San Antonio Shrine Auditorium,San Antonio,Texas,TX,USA,https://eckmanstoyshow.com/
+96,Panama City Mini Con ,2024-01-20,2024-01-20,2024,Bay County Fairgrounds,Panama City,Florida,FL,USA,panamacitycomics.godaddysites.com/
+97,QuadCon Brookfield ,2024-01-20,2024-01-21,2024,Brookfield Square Mall,Brookfield,Wisconsin,WI,USA,https://quadcitycon.com/
+98,Festival de la Bande Dessinée d’Angoulême,2024-01-25,2024-01-28,2024,Various Locations,Angoulême,---,---,France,www.bdangouleme.com/
+99,Original Arts Expo ,2024-01-26,2024-01-28,2024,DoubleTree Hotel at the Entrance to Universal,Orlando,Florida,FL,USA,https://www.oax.art
+100,FrankfortCon - Winter ,2024-01-27,2024-01-27,2024,Capital Plaza Hotel,Frankfort,Kentucky,KY,USA,http://frankfortcomiccon.com/
+101,QuadCon Columbia ,2024-01-27,2024-01-28,2024,Columbia Mall,Columbia,Missouri,MO,USA,https://quadcitycon.com/
+102,"Sports Card, Comic Book, Pokemon & Collectibles Expo ",2024-01-27,2024-01-28,2024,Virginia Beach Fieldhouse,Virginia Beach,Virginia,VA,USA,757cardshows.com/
+103,MegaCon Orlando ,2027-05-20,2027-05-23,2027,Orange County Convention Center,Orlando,Florida,FL,USA,https://fanexpohq.com/megaconorlando/
+104,LumaCon ,2024-02-03,2024-02-03,2024,Petaluma Community Center,Petaluma,California,CA,USA,www.lumacon.net/
+105,TulsaPopCon ,2024-02-03,2024-02-03,2024,DoubleTree Hotel at Warren Place,Tulsa,Oklahoma,OK,USA,tulsapopcon.com/
+106,East Bay Comic-Con ,2024-02-04,2024-02-04,2024,Concord Hotel - Walnut Creek,Concord,California,CA,USA,https://eastbaycomiccon.com/
+107,MissouriCon ,2024-02-10,2024-02-10,2024,Holiday Inn - Downtown Conv Center,St. Louis,Missouri,MO,USA,http://www.missouricon.com/
+108,QuadCon Cedar Rapids ,2024-02-10,2024-02-10,2024,DoubleTree at Convention Complex,Cedar Rapids,Iowa,IA,USA,https://quadcitycon.com/
+109,ConVoluted Con Cruise ,2024-02-10,2024-02-15,2024,Carnival Paradise,Departing from Tampa,Florida,FL,USA,www.facebook.com/groups/1967851583441155
+110,Beyond Comicon ,2024-02-17,2024-02-17,2024,Marjorie and William McDonald Center,North Miami Beach,Florida,FL,USA,beyondcomicon.com/
+111,Cosmic Con NY ,2024-02-17,2024-02-18,2024,Tangram,Queens,New York,NY,USA,https://cosmicconny.com/
+112,QuadCon Peoria ,2024-02-17,2024-02-18,2024,Northwoods Mall,Peoria,Illinois,IL,USA,https://quadcitycon.com/
+113,Fan Expo Vancouver ,2027-02-13,2027-02-15,2027,Vancouver Convention Centre,Vancouver,British Columbia,BC,Canada,https://fanexpohq.com/fanexpovancouver/
+114,Imagi-Con ,2024-02-24,2024-02-24,2024,Tupper Lightfoot Memorial Library,Brundidge,Alabama,AL,USA,https://www.tupperlightfootbrundidgelib.org/401/login.php?redirect=/imagicon.html
+115,Happy Valley Comic & Collectibles Convention ,2024-02-24,2024-02-25,2024,Nittany Valley Sports Centre,State College,Pennsylvania,PA,USA,https://happyvalleycomiccon.com/
+116,Texoma Comic Con ,2024-02-24,2024-02-25,2024,Choctaw Event Center,Durant,Oklahoma,OK,USA,www.texomacomiccon.com/
+117,Khroma Kon ,2024-03-01,2024-03-03,2024,Hilton at Inner Harbor,Baltimore,Maryland,MD,USA,https://varanasilocaltours.com/chitrakoot/
+118,Middle East Film and Comic Con ,2026-09-11,2026-09-13,2026,Abu Dhabi National Exhibition Centre (ADNEC),Abu Dhabi,---,---,UAE,https://www.mefcc.com/home/
+119,PeoriaCon ,2024-03-02,2024-03-03,2024,Peoria Civic Center,Peoria,Illinois,IL,USA,www.peoriacon.com/
+120,UI-Con ,2024-03-02,2024-03-03,2024,Illini Union,Urbana,Illinois,IL,USA,https://www.ui-con.org/
+121,QuadCon Omaha ,2024-03-02,2024-03-04,2024,Oak View Mall,Omaha,Nebraska,NE,USA,https://quadcitycon.com/
+122,SW-FloridaCon ,2024-03-03,2024-03-03,2024,DoubleTree at Bell Tower Shops,Fort Myers,Florida,FL,USA,http://swfloridacomiccon.com/
+123,Power Comicon ,2024-03-04,2024-03-04,2024,Florence Center,Florence,South Carolina,SC,USA,www.powercomicon.com/
+124,Comic Conroe ,2024-03-08,2024-03-10,2024,The Lone Star Convention & Expo Center,Conroe,Texas,TX,USA,https://comicconroe.com/
+125,Indie Comics Creator Con ,2024-03-09,2024-03-09,2024,S.C.S.U. - Adanti Student Center,New Haven,Connecticut,CT,USA,https://indiecomicscreatorcon.substack.com/
+126,ACEcon ,2024-03-09,2024-03-10,2024,Palm Harbor Library,Palm Harbor,Florida,FL,USA,acecon.carrd.co/
+127,Colorado Cosmic Con ,2024-03-09,2024-03-10,2024,Colorado Springs Marriott,Colorado Springs,Colorado,CO,USA,https://coloradocosmiccon.com/
+128,Louisiana Comic Con ,2024-03-09,2024-03-10,2024,Cajundome Convention Center,Lafayette,Louisiana,LA,USA,https://www.lacclft.com/
+129,Sac Comic-Con ,2024-03-09,2024-03-10,2024,SAFE Credit Union Convention Center,Sacramento,California,CA,USA,https://www.sac-con.com/
+130,Toronto Comicon ,2027-03-19,2027-03-21,2027,Metro Toronto Convention Centre,Toronto,Ontario,ON,Canada,https://fanexpohq.com/comicontoronto/
+131,Florida PolyCon ,2024-03-16,2024-03-16,2024,Florida Polytechnic University,Lakeland,Florida,FL,USA,flpolycon.org/
+132,QuadCon St Charles ,2024-03-17,2024-03-17,2024,Steel Shop Athletics & Events,St Charles,Missouri,MO,USA,https://quadcitycon.com/
+133,Zenkaikon ,2024-03-22,2024-03-24,2024,Lancaster County Convention Center,Lancaster,Pennsylvania,PA,USA,https://zenkaikon.com/
+134,One Day Comic Book Expo ,2024-03-24,2024-03-24,2024,Holiday Inn Philadelphia,Cherry Hill,New Jersey,NJ,USA,https://www.comicbookcollectiveinc.com/odce
+135,Collingwood ComiCon ,2024-04-06,2024-04-06,2024,Royal Canadian Legion Branch 63,Collingwood,Ontario,ON,Canada,https://www.popculturecanada.ca/
+136,RodCon ,2024-04-06,2024-04-06,2024,U.N.I. - Rod Library,Cedar Falls,Iowa,IA,USA,https://rodcon.library.uni.edu/
+137,Fan Expo Cleveland ,2027-03-12,2027-03-14,2027,Huntington Convention Cente,Cleveland,Ohio,OH,US,https://fanexpohq.com/fanexpocleveland/
+138,Napanee ComiCon ,2024-04-13,2024-04-13,2024,Strathcona Paper Centre,Napanee,Ontario,ON,Canada,https://www.popculturecanada.ca/
+139,Peli Con ,2024-04-13,2024-04-13,2024,William H. Scott Civic Center,New Roads,Louisiana,LA,USA,https://www.marvelouscomiccloset.com/pelicon
+140,QuadCon St. Cloud ,2024-04-13,2024-04-14,2024,Crossroads Center,St. Cloud,Minnesota,MN,USA,https://quadcitycon.com/
+141,Yellow City Comic Convention ,2024-04-19,2024-04-21,2024,Amarillo Civic Center Complex,Amarillo,Texas,TX,USA,https://yellowcitycon.com/
+142,Mid Valley Comic Art Expo ,2024-04-20,2024-04-21,2024,State Fair & Exposition Center - Columbia Hall,Salem,Oregon,OR,USA,https://mvcae.com/
+143,HCLS Fan Fest ,2024-04-21,2024-04-21,2024,Bay St Louis Community Hall,Bay St Louis,Mississippi,MS,USA,https://hcls.info/fan-fest
+144,Kingston ComiCon ,2024-04-21,2024-04-21,2024,Royal Canadian Legion Branch 560,Kingston,Ontario,ON,Canada,https://www.popculturecanada.ca/
+145,Calgary Expo ,2027-04-22,2027-04-25,2027,Stampede Park,Calgary,Alberta,AB,Canada,https://fanexpohq.com/calgaryexpo/
+146,Lvl Up Expo ,2024-04-26,2024-04-28,2024,Las Vegas Convention Center,Las Vegas,Nevada,NV,USA,https://lvlupexpo.com/
+147,Four State Comic-Con ,2024-04-27,2024-04-28,2024,Hagerstown Community College ARCC,Hagerstown,Maryland,MD,USA,www.fourstatecon.com/
+148,Fan Expo Philadelphia ,2026-05-29,2026-05-31,2026,Philadelphia Convention Center,Philadelphia PA,Pennsylvania,PA,US,https://fanexpohq.com/fanexpophiladelphia/
+149,Metrotham Con ,2024-05-17,2024-05-19,2024,Chattanooga Convention Center,Chattanooga,Tennessee,TN,USA,https://metrothamcon.com/
+150,"Eckman's Card, Comic & Toy Show ",2024-05-18,2024-05-18,2024,San Antonio Shrine Auditorium,San Antonio,Texas,TX,USA,https://eckmanstoyshow.com/
+151,Comic Con Revolution ,2024-05-18,2024-05-19,2024,Ontario Convention Center,Ontario,California,CA,USA,www.comicconrevolution.com/ontario/
+152,Thy Geekdom Con ,2024-05-24,2024-05-26,2024,The Greater Philadelphia Expo Center,Oaks,Pennsylvania,PA,USA,https://thygeekdomcon.com/
+153,RochesterCon ,2024-05-26,2024-05-26,2024,DoubleTree Hotel,Rochester,New York,NY,USA,http://www.therochestercon.com/
+154,3 Rivers Comicon ,2024-06-01,2024-06-02,2024,David L. Lawrence Convention Center,Pittsburgh,Pennsylvania,PA,USA,https://3riverscomicon.com/
+155,Fan Expo Dallas ,2026-09-11,2026-09-13,2026,Kay Bailey Hutchison Convention Center,Dallas TX,Texas,TX,US,https://fanexpohq.com/fanexpodallas/
+156,Washington State Summer Con ,2024-06-21,2024-06-23,2024,Washington State Fair and Events Center,Puyallup,Washington,WA,USA,https://www.wasummercon.com/
+157,Kelowna ComiCon ,2024-06-22,2024-06-23,2024,Capital News Centre,Kelowna,British Columbia,BC,Canada,www.kelownacomicon.com/
+158,Shenanicon ,2024-06-22,2024-06-23,2024,Embassy Suites,Parsippany-Troy Hills,New Jersey,NJ,USA,shenanicon.com/
+159,Fan Expo Boston ,2026-08-07,2026-08-09,2026,Boston Convention and Exhibition Center,Boston MA,Massachusetts,MA,US,https://fanexpohq.com/fanexpoboston/
+160,Hershey Comic Con ,2024-06-29,2024-06-30,2024,Holiday Inn Harrisburg (Hershey Area),Grantville,Pennsylvania,PA,USA,https://hersheycomiccon.weebly.com/
+161,Fan Expo Denver ,2026-05-28,2026-05-31,2026,Colorado Convention Center,Denver CO,Colorado,CO,US,https://fanexpohq.com/fanexpodenver/
+162,Infinity Con Tallahassee ,2024-07-06,2024-07-07,2024,Donald L. Tucker Civic Center,Tallahassee,Florida,FL,USA,https://www.infinitycon.com/tally
+163,NiagaraCon ,2024-07-27,2024-07-27,2024,Sheraton Niagara Falls,Niagara Falls,New York,NY,USA,http://theniagaracon.com/
+164,Wicked Comic Con ,2024-08-10,2024-08-11,2024,The Westin Boston Seaport District,Boston,Massachusetts,MA,USA,https://www.wickedcomiccon.com/
+165,Fan Expo Chicago ,2026-08-14,2026-08-16,2026,Donald E. Stephens Convention Center,Chicago IL,Illinois,IL,US,https://fanexpohq.com/fanexpochicago/
+166,Collingwood ComiCon ,2024-08-17,2024-08-17,2024,Royal Canadian Legion Branch 63,Collingwood,Ontario,ON,Canada,https://www.popculturecanada.ca/
+167,Las Cruces Comic Con ,2024-08-17,2024-08-18,2024,Las Cruces Convention Center,Las Cruces,New Mexico,NM,USA,lascrucescomiccon.com/
+168,Fan Expo Canada ,2026-08-22,2026-08-25,2026,Metro Toronto Convention Centre,Toronto,Ontario,ON,Canada,https://fanexpohq.com/fanexpocanada/
+169,Hub City Comic Con ,2024-08-23,2024-08-25,2024,Lubbock Memorial Civic Center,Lubbock,Texas,TX,USA,https://hubcitycomiccon.com/
+170,Harrisburg Comic & Pop Con ,2024-08-24,2024-08-26,2024,Farm Show Complex - Giant Expo Hall,Harrisburg,Pennsylvania,PA,USA,https://www.fourstatecon.com/harrisburg
+171,Comic Con Northern Ireland ,2024-09-07,2024-09-08,2024,Eikon Exhibition Centre,Lisburn,Northern Ireland,---,United Kingdom,www.comicconnorthernireland.co.uk/
+172,Ultracon ,2024-09-20,2024-09-22,2024,Expo Center at the South Florida Fairgrounds,West Palm Beach,Florida,FL,USA,ultraconcity.com/
+173,Kingston ComiCon ,2024-09-22,2024-09-22,2024,Royal Canadian Legion Branch 560,Kingston,Ontario,ON,Canada,https://www.popculturecanada.ca/
+174,The Uncanny Experience ,2024-09-28,2024-09-29,2024,Minneapolis Club,Minneapolis,Minnesota,MN,USA,https://theuncannyexperience.com/
+175,"Eckman's Card, Comic & Toy Show ",2024-10-12,2024-10-12,2024,San Antonio Shrine Auditorium,San Antonio,Texas,TX,USA,https://eckmanstoyshow.com/
+176,Alamo City Comic Con,2024-05-03,2024-05-05,2024,Alamodome,San Antonio,Texas,TX,USA,alamocitycomiccon.com/
+177,Baltimore Comic-Con,2024-09-20,2024-09-22,2024,The Baltimore Convention Center,Baltimore,Maryland,MD,USA,https://baltimorecomiccon.com/
+178,Big Apple Comic Con,2023-12-16,2023-12-16,2023,The New Yorker Hotel,New York City,New York,NY,USA,https://bigapplecc.com/
+179,Chicago Comic & Entertainment Expo,2027-04-26,2027-04-28,2027,Mccormick Place,Chicago,Illinois,IL,USA,www.c2e2.com/
+180,Comicpalooza,2024-05-24,2024-05-26,2024,George R. Brown Convention Center,Houston,Texas,TX,USA,https://www.comicpalooza.com/
+181,Dallas Comic Con,2026-09-11,2026-09-13,2026,Kay Bailey Hutchison Convention Center,Dallas TX,Texas,TX,US,https://fanexpohq.com/fanexpodallas/
+182,Denver Pop Culture Con,2026-05-28,2026-05-31,2026,Colorado Convention Center,Denver CO,Colorado,CO,US,https://fanexpohq.com/fanexpodenver/
+183,Dragon Con,2024-08-29,2024-09-02,2024,Americasmart Convention Center,Atlanta,Georgia,GA,USA,www.dragoncon.org/
+184,East Coast Black Age of Comics Convention,**,**,2024,Temple University,Philadelphia,Pennsylvania,PA,USA,https://ecbacc2025.powerappsportals.com
+185,East Coast Comicon,**,**,2024,Meadowlands Exposition Center,Secaucus,New Jersey,NJ,USA,eastcoastcomicon.com
+186,Emerald City Comic Con,2024-02-29,2024-03-03,2024,Seattle Convention Center,Seattle,Washington,WA,USA,www.emeraldcitycomiccon.com/
+187,Fan Expo Boston,2026-08-07,2026-08-09,2026,Boston Convention & Exhibition Center,Boston MA,Massachusetts,MA,US,https://fanexpohq.com/fanexpoboston/
+188,FanX,2024-09-26,2024-09-28,2024,Salt Palace Convention Center,Salt Lake City,Utah,UT,USA,fanxsaltlake.com/
+189,Heroes Convention,2024-06-14,2024-06-16,2024,Charlotte Convention Center,Charlotte,North Carolina,NC,USA,https://www.heroesonline.com/heroescon/
+190,L.A. Comic Con,2024-12-01,2024-12-03,2024,Los Angeles Convention Center,Los Angeles,California,CA,USA,comicconla.com/
+191,MegaCon,2027-05-20,2027-05-23,2027,Orange County Convention Center,Orlando,Florida,FL,USA,https://fanexpohq.com/megaconorlando/
+192,Memphis Comic and Fantasy Convention,2023-11-10,2023-11-12,2023,Holiday In At The University Of Mephis,Memphis,Tennessee,TN,USA,https://memphiscfc.com/
+193,Motor City Comic Con,2023-11-10,2023-11-12,2023,Suburban Collection Showplace,Novi,Michigan,MI,USA,https://motorcitycomiccon.com/
+194,New York Comic Con,2024-10-17,2024-10-20,2024,Javitis Center,New York City,New York,NY,USA,www.newyorkcomiccon.com/
+195,Pensacola Comic Convention,2023-09-23,2023-09-24,2023,Pensacola Interstate Fair Expo Hall,Pensacola,Florida,FL,USA,www.pensacolaparacon.com
+196,Phoenix Fan Fusion,2024-05-24,2024-05-26,2024,Phoenix Convention Center,Phoenix,Arizona,AZ,USA,https://www.phoenixfanfusion.com/
+197,Pittsburgh Comicon,2023-12-08,2023-12-10,2023,Monroeville Convention Center,Monroeville,Pennsylvania,PA,USA,https://www.steelcitycon.com/
+198,Planet Comicon Kansas City,2024-03-08,2024-03-10,2024,Kansas City Convention Center,Kansas City,Missouri,MO,USA,planetcomicon.com//
+199,PopCon Indy,2024-04-26,2024-04-28,2024,Indiana Convention Center,Indianapolis,Indiana,IN,USA,https://popcon.us/popcon-indy/
+200,Rhode Island Comic Con,2023-11-03,2023-11-05,2023,Convention Center / Amica Mutual Pavilion,Providence,Rhode Island,RI,USA,https://www.ricomiccon.com
+201,Rose City Comic Con,2024-09-06,2024-09-08,2024,Oregon Convention Center,Portland,Oregon,OR,USA,https://rosecitycomiccon.com/
+202,San Diego Comic-Con,2024-07-25,2024-07-28,2024,San Diego Convention Center,San Diego,California,CA,USA,https://www.comic-con.org/
+203,Silicon Valley Comic Con,**,**,2024,San Jose Convention Center,San Jose,California,CA,USA,https://siliconsj.com/silicon-2023/
+204,Small Press Expo,2023-09-09,2023-09-10,2023,Bethesda North Marriott Hotel / Conference Center,Bethesda,Maryland,MD,USA,https://www.smallpressexpo.com/
+205,STAPLE!,**,**,2024,Millennium Youth Entertainment Complex,Austin,Texas,TX,USA,https://staple-austin.org/
+206,Wizard World Chicago,2026-08-14,2026-08-16,2026,Donald E. Stephens Convention Center,Chicago IL,Illinois,IL,US,https://fanexpohq.com/fanexpochicago/
+207,WonderCon,2024-03-29,2024-03-31,2024,Anaheim Convention Center,Anaheim,California,CA,USA,https://www.comic-con.org/wc/
+208,Fan Expo New Orleans,2027-01-08,2027-01-10,2027,Ernest N. Morial Convention Center,New Orleans,Louisiana,LA,USA,https://fanexpohq.com/fanexponeworleans/
+209,Fan Expo Portland,2027-01-29,2027-01-31,2027,Oregon Convention Center,Portland,Oregon,OR,US,https://fanexpohq.com/fanexpoportland/
+210,Fan Expo Cleveland,2027-03-12,2027-03-14,2027,Huntington Convention Center,Cleveland,Ohio,OH,US,https://fanexpohq.com/fanexpocleveland/
+211,Fan Expo Philadelphia,2026-05-29,2026-05-31,2026,Pennsylvania Convention Center,Philadelphia PA,Pennsylvania,PA,US,https://fanexpohq.com/fanexpophiladelphia/
+212,Fan Expo Chicago,2026-08-14,2026-08-16,2026,Donald E. Stephens Convention Center,Chicago IL,Illinois,IL,US,https://fanexpohq.com/fanexpochicago/

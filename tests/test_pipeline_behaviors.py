@@ -109,7 +109,7 @@ def test_overwrite_rules_only_missing_keeps_existing_values(tmp_path: Path, monk
     assert out_rows[0]["city"] == "Toronto"
 
 
-def test_overwrite_rules_stale_values_can_be_replaced(tmp_path: Path, monkeypatch) -> None:  # type: ignore[no-untyped-def]
+def test_overwrite_rules_stale_values_preserve_existing_when_no_evidence(tmp_path: Path, monkeypatch) -> None:  # type: ignore[no-untyped-def]
     input_csv = tmp_path / "input.csv"
     output_csv = tmp_path / "output.csv"
     audit_csv = tmp_path / "audit.csv"
@@ -151,7 +151,55 @@ def test_overwrite_rules_stale_values_can_be_replaced(tmp_path: Path, monkeypatc
     )
 
     _, out_rows = read_csv_rows(result.output_csv)
-    assert out_rows[0]["city"] == "**"
+    assert out_rows[0]["city"] == "Old City"
+
+
+def test_overwrite_rules_stale_values_can_be_replaced_with_verified_candidates(
+    tmp_path: Path, monkeypatch
+) -> None:  # type: ignore[no-untyped-def]
+    input_csv = tmp_path / "input.csv"
+    output_csv = tmp_path / "output.csv"
+    audit_csv = tmp_path / "audit.csv"
+    event_html = Path("tests/fixtures/jsonld_event.html").read_text(encoding="utf-8")
+
+    rows = [
+        {
+            "id": "1",
+            "conName": "Fixture Comic Con",
+            "start_date": "January 1",
+            "end_date": "January 2",
+            "year": "2020",
+            "event_location": "Old Venue",
+            "city": "Old City",
+            "state": "Old State",
+            "state_abrev": "OS",
+            "country": "Old Country",
+            "website": "https://fixture.example/event",
+            "status": "scheduled",
+            "notes": "old",
+        }
+    ]
+    write_csv_rows(input_csv, HEADERS, rows)
+
+    class FakeFetcher(CountingFetcher):
+        def __init__(self, **kwargs: object) -> None:
+            super().__init__({"https://fixture.example/event": event_html}, **kwargs)
+
+    monkeypatch.setattr("convention_enricher.enrich.UrllibPageFetcher", FakeFetcher)
+    result = run_enrichment(
+        RuntimeConfig(
+            input_csv=input_csv,
+            output_csv=output_csv,
+            audit_csv=audit_csv,
+            year=2026,
+            only_missing=False,
+            search_provider="none",
+            cache_dir=tmp_path / ".cache",
+        )
+    )
+
+    _, out_rows = read_csv_rows(result.output_csv)
+    assert out_rows[0]["city"] == "Grand Rapids"
 
 
 def test_audit_row_generation_includes_date_warning_for_vague_date(tmp_path: Path, monkeypatch) -> None:  # type: ignore[no-untyped-def]

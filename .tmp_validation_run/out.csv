@@ -1,0 +1,2 @@
+id,conName,start_date,end_date,year,event_location,city,state,state_abrev,country,website,status,notes
+1,Stale City Con,2020-01-01,2020-01-02,2020,Old Venue,Old City,Old State,OS,Old Country,**,scheduled,old
