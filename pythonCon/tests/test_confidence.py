@@ -1,5 +1,5 @@
-from convention_enricher.confidence import resolve_field_value
-from convention_enricher.models import FieldCandidate
+from pythonCon.convention_enricher.confidence import resolve_field_value
+from pythonCon.convention_enricher.models import FieldCandidate
 
 
 def test_confidence_selects_best_verified_candidate() -> None:

@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import argparse
 from collections import Counter, defaultdict
@@ -173,7 +173,7 @@ def _suggest_host_hints(convention_name: str, traits: SearchDatasetTraits, max_h
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        prog="python -m convention_enricher.enrich",
+        prog="python -m pythonCon.convention_enricher.enrich",
         description="Enrich convention/event CSV values using website-first scraping with search fallback.",
     )
     parser.add_argument("input", help="Path to input CSV")

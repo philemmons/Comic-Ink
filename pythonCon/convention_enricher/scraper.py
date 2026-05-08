@@ -4,13 +4,21 @@ from collections import defaultdict
 from dataclasses import dataclass, field
 import logging
 import os
+import ssl
 import time
 from typing import Protocol
+from urllib import error as urllib_error
+from urllib import request as urllib_request
 from urllib.parse import urlparse
 
-import requests
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
+try:
+    import requests
+    from requests.adapters import HTTPAdapter
+    from urllib3.util.retry import Retry
+except ImportError:  # pragma: no cover - exercised by environment compatibility only
+    requests = None  # type: ignore[assignment]
+    HTTPAdapter = None  # type: ignore[assignment]
+    Retry = None  # type: ignore[assignment]
 
 from .cache import FileCache
 from .models import ExtractionOutput, FetchAttempt, FetchResult, FieldCandidate, SourceType
@@ -32,12 +40,17 @@ class UrllibPageFetcher:
     ssl_error_host_cooldown_seconds: float
     user_agent: str
     _logger: logging.Logger = field(init=False, repr=False)
-    _session: requests.Session = field(init=False, repr=False)
+    _session: object | None = field(init=False, repr=False, default=None)
     _last_request_at: float = field(init=False, repr=False, default=0.0)
     _ssl_blocked_hosts: dict[str, float] = field(init=False, repr=False, default_factory=dict)
 
     def __post_init__(self) -> None:
         self._logger = logging.getLogger(self.__class__.__name__)
+        if requests is None or Retry is None or HTTPAdapter is None:
+            self._logger.warning("requests is not installed; using urllib fallback fetcher without retry adapter.")
+            self._session = None
+            return
+
         self._session = requests.Session()
         self._configure_proxy_behavior()
         retry = Retry(
@@ -98,34 +111,77 @@ class UrllibPageFetcher:
                 error=f"Host temporarily skipped after SSL handshake failure ({remaining:.1f}s remaining)",
             )
 
+        if self._session is not None and requests is not None:
+            try:
+                response = self._session.get(
+                    url,
+                    timeout=self.timeout_seconds,
+                    headers={
+                        "User-Agent": self.user_agent,
+                        "Accept-Language": "en-US,en;q=0.9",
+                    },
+                    allow_redirects=True,
+                )
+                self._last_request_at = time.monotonic()
+                ok = 200 <= response.status_code < 400
+                text = response.text if ok else ""
+                error_text = "" if ok else f"HTTP {response.status_code}"
+                return FetchResult(
+                    ok=ok,
+                    url=str(response.url),
+                    status_code=response.status_code,
+                    text=text,
+                    error=error_text or None,
+                )
+            except requests.exceptions.SSLError as exc:
+                self._last_request_at = time.monotonic()
+                if host and self.ssl_error_host_cooldown_seconds > 0:
+                    self._ssl_blocked_hosts[host] = self._last_request_at + self.ssl_error_host_cooldown_seconds
+                self._logger.warning("Fetch failed for %s: %s", url, exc)
+                return FetchResult(ok=False, url=url, status_code=None, text="", error=str(exc))
+            except requests.RequestException as exc:
+                self._last_request_at = time.monotonic()
+                self._logger.warning("Fetch failed for %s: %s", url, exc)
+                return FetchResult(ok=False, url=url, status_code=None, text="", error=str(exc))
+            except Exception as exc:  # noqa: BLE001
+                self._last_request_at = time.monotonic()
+                self._logger.warning("Fetch failed for %s: %s", url, exc)
+                return FetchResult(ok=False, url=url, status_code=None, text="", error=str(exc))
+
         try:
-            response = self._session.get(
+            request = urllib_request.Request(
                 url,
-                timeout=self.timeout_seconds,
                 headers={
                     "User-Agent": self.user_agent,
                     "Accept-Language": "en-US,en;q=0.9",
                 },
-                allow_redirects=True,
+                method="GET",
             )
+            with urllib_request.urlopen(request, timeout=self.timeout_seconds) as response:
+                status_code = int(getattr(response, "status", 200))
+                final_url = str(getattr(response, "url", url))
+                content_type = response.headers.get_content_charset() or "utf-8"
+                text = response.read().decode(content_type, errors="replace")
             self._last_request_at = time.monotonic()
-            ok = 200 <= response.status_code < 400
-            text = response.text if ok else ""
-            error_text = "" if ok else f"HTTP {response.status_code}"
+            ok = 200 <= status_code < 400
             return FetchResult(
                 ok=ok,
-                url=str(response.url),
-                status_code=response.status_code,
-                text=text,
-                error=error_text or None,
+                url=final_url,
+                status_code=status_code,
+                text=text if ok else "",
+                error=None if ok else f"HTTP {status_code}",
             )
-        except requests.exceptions.SSLError as exc:
+        except ssl.SSLError as exc:
             self._last_request_at = time.monotonic()
             if host and self.ssl_error_host_cooldown_seconds > 0:
                 self._ssl_blocked_hosts[host] = self._last_request_at + self.ssl_error_host_cooldown_seconds
             self._logger.warning("Fetch failed for %s: %s", url, exc)
             return FetchResult(ok=False, url=url, status_code=None, text="", error=str(exc))
-        except requests.RequestException as exc:
+        except urllib_error.HTTPError as exc:
+            self._last_request_at = time.monotonic()
+            self._logger.warning("Fetch failed for %s: HTTP %s", url, exc.code)
+            return FetchResult(ok=False, url=url, status_code=exc.code, text="", error=f"HTTP {exc.code}")
+        except urllib_error.URLError as exc:
             self._last_request_at = time.monotonic()
             self._logger.warning("Fetch failed for %s: %s", url, exc)
             return FetchResult(ok=False, url=url, status_code=None, text="", error=str(exc))

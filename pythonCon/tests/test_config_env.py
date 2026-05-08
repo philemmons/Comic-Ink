@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from convention_enricher.config import RuntimeConfig, apply_env_overrides
+from pythonCon.convention_enricher.config import RuntimeConfig, apply_env_overrides
 
 
 def test_env_overrides_are_applied(monkeypatch, tmp_path: Path) -> None:  # type: ignore[no-untyped-def]

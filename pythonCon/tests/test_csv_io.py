@@ -3,7 +3,7 @@ from __future__ import annotations
 import csv
 from pathlib import Path
 
-from convention_enricher.csv_io import read_csv_rows, write_csv_rows
+from pythonCon.convention_enricher.csv_io import read_csv_rows, write_csv_rows
 
 
 def test_csv_round_trip_preserves_header_order(tmp_path: Path) -> None:

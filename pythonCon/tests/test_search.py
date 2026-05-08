@@ -3,9 +3,9 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from convention_enricher.enrich import SearchDatasetTraits, _build_search_queries_with_context, rank_official_url
-from convention_enricher.models import FetchResult
-from convention_enricher.search import GoogleComSearchProvider, ManualSearchProvider
+from pythonCon.convention_enricher.enrich import SearchDatasetTraits, _build_search_queries_with_context, rank_official_url
+from pythonCon.convention_enricher.models import FetchResult
+from pythonCon.convention_enricher.search import GoogleComSearchProvider, ManualSearchProvider
 
 
 class FakeFetcher:

@@ -2,12 +2,12 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from convention_enricher.cache import FileCache
-from convention_enricher.config import RuntimeConfig
-from convention_enricher.csv_io import read_csv_rows, write_csv_rows
-from convention_enricher.enrich import run_enrichment
-from convention_enricher.models import FetchResult
-from convention_enricher.scraper import Scraper
+from pythonCon.convention_enricher.cache import FileCache
+from pythonCon.convention_enricher.config import RuntimeConfig
+from pythonCon.convention_enricher.csv_io import read_csv_rows, write_csv_rows
+from pythonCon.convention_enricher.enrich import run_enrichment
+from pythonCon.convention_enricher.models import FetchResult
+from pythonCon.convention_enricher.scraper import Scraper
 
 
 HEADERS = [
@@ -92,7 +92,7 @@ def test_overwrite_rules_only_missing_keeps_existing_values(tmp_path: Path, monk
         def __init__(self, **kwargs: object) -> None:
             super().__init__({}, **kwargs)
 
-    monkeypatch.setattr("convention_enricher.enrich.UrllibPageFetcher", FakeFetcher)
+    monkeypatch.setattr("pythonCon.convention_enricher.enrich.UrllibPageFetcher", FakeFetcher)
     result = run_enrichment(
         RuntimeConfig(
             input_csv=input_csv,
@@ -137,7 +137,7 @@ def test_overwrite_rules_stale_values_preserve_existing_when_no_evidence(tmp_pat
         def __init__(self, **kwargs: object) -> None:
             super().__init__({}, **kwargs)
 
-    monkeypatch.setattr("convention_enricher.enrich.UrllibPageFetcher", FakeFetcher)
+    monkeypatch.setattr("pythonCon.convention_enricher.enrich.UrllibPageFetcher", FakeFetcher)
     result = run_enrichment(
         RuntimeConfig(
             input_csv=input_csv,
@@ -185,7 +185,7 @@ def test_overwrite_rules_stale_values_can_be_replaced_with_verified_candidates(
         def __init__(self, **kwargs: object) -> None:
             super().__init__({"https://fixture.example/event": event_html}, **kwargs)
 
-    monkeypatch.setattr("convention_enricher.enrich.UrllibPageFetcher", FakeFetcher)
+    monkeypatch.setattr("pythonCon.convention_enricher.enrich.UrllibPageFetcher", FakeFetcher)
     result = run_enrichment(
         RuntimeConfig(
             input_csv=input_csv,
@@ -231,7 +231,7 @@ def test_audit_row_generation_includes_date_warning_for_vague_date(tmp_path: Pat
         def __init__(self, **kwargs: object) -> None:
             super().__init__({"https://fixture.example/vague": vague_html}, **kwargs)
 
-    monkeypatch.setattr("convention_enricher.enrich.UrllibPageFetcher", FakeFetcher)
+    monkeypatch.setattr("pythonCon.convention_enricher.enrich.UrllibPageFetcher", FakeFetcher)
     run_enrichment(
         RuntimeConfig(
             input_csv=input_csv,
@@ -295,7 +295,7 @@ def test_resume_behavior_reuses_previous_output_row(tmp_path: Path, monkeypatch)
         def __init__(self, **kwargs: object) -> None:
             super().__init__({}, **kwargs)
 
-    monkeypatch.setattr("convention_enricher.enrich.UrllibPageFetcher", FakeFetcher)
+    monkeypatch.setattr("pythonCon.convention_enricher.enrich.UrllibPageFetcher", FakeFetcher)
     result = run_enrichment(
         RuntimeConfig(
             input_csv=input_csv,
@@ -350,8 +350,8 @@ def test_network_optimization_skips_search_if_website_already_has_candidates(tmp
 
     search_provider = CountingSearchProvider(["https://search.example/should-not-be-used"])
 
-    monkeypatch.setattr("convention_enricher.enrich.UrllibPageFetcher", FakeFetcher)
-    monkeypatch.setattr("convention_enricher.enrich.build_search_provider", lambda *args, **kwargs: search_provider)
+    monkeypatch.setattr("pythonCon.convention_enricher.enrich.UrllibPageFetcher", FakeFetcher)
+    monkeypatch.setattr("pythonCon.convention_enricher.enrich.build_search_provider", lambda *args, **kwargs: search_provider)
 
     run_enrichment(
         RuntimeConfig(
@@ -399,7 +399,7 @@ def test_audit_includes_source_detail_columns(tmp_path: Path, monkeypatch) -> No
         def __init__(self, **kwargs: object) -> None:
             super().__init__({"https://fixture.example/event": event_html}, **kwargs)
 
-    monkeypatch.setattr("convention_enricher.enrich.UrllibPageFetcher", FakeFetcher)
+    monkeypatch.setattr("pythonCon.convention_enricher.enrich.UrllibPageFetcher", FakeFetcher)
     run_enrichment(
         RuntimeConfig(
             input_csv=input_csv,

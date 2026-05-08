@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from convention_enricher.parsers import extract_candidates_from_html
+from pythonCon.convention_enricher.parsers import extract_candidates_from_html
 
 
 def test_json_ld_event_parsing_from_fixture() -> None:

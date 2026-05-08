@@ -1,4 +1,4 @@
-from convention_enricher.normalize import (
+from pythonCon.convention_enricher.normalize import (
     format_month_day,
     is_missing,
     normalize_field_value,

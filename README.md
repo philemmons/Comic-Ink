@@ -4,7 +4,7 @@
 
 ###### by Phillip Emmons
 
-05-08-2017
+05-08-2017  In development
 
 ### Our story
 
@@ -61,44 +61,44 @@ The pipeline is built for rerunnable workflows:
 4. Install dependencies:
 
 ```bash
-python -m pip install -r requirements.txt
+python -m pip install -r pythonCon/requirements.txt
 ```
 
 ## CLI examples
 Basic run:
 
 ```bash
-python -m convention_enricher.enrich input.csv --year 2026 --output output.csv --audit audit.csv
+python -m pythonCon.convention_enricher.enrich input.csv --year 2026 --output output.csv --audit audit.csv
 ```
 
 Only process first 100 rows:
 
 ```bash
-python -m convention_enricher.enrich input.csv --year 2026 --limit 100 --output output.csv --audit audit.csv
+python -m pythonCon.convention_enricher.enrich input.csv --year 2026 --limit 100 --output output.csv --audit audit.csv
 ```
 
 Only fill missing fields (do not refresh existing values):
 
 ```bash
-python -m convention_enricher.enrich input.csv --year 2026 --only-missing --output output.csv --audit audit.csv
+python -m pythonCon.convention_enricher.enrich input.csv --year 2026 --only-missing --output output.csv --audit audit.csv
 ```
 
 Dry run (no file write):
 
 ```bash
-python -m convention_enricher.enrich input.csv --year 2026 --dry-run
+python -m pythonCon.convention_enricher.enrich input.csv --year 2026 --dry-run
 ```
 
 Resume from existing output rows by `id`:
 
 ```bash
-python -m convention_enricher.enrich input.csv --year 2026 --resume --output output.csv --audit audit.csv
+python -m pythonCon.convention_enricher.enrich input.csv --year 2026 --resume --output output.csv --audit audit.csv
 ```
 
 Manual search provider results:
 
 ```bash
-python -m convention_enricher.enrich input.csv --year 2026 --search-provider manual --manual-search-results manual_search.json --output output.csv --audit audit.csv
+python -m pythonCon.convention_enricher.enrich input.csv --year 2026 --search-provider manual --manual-search-results manual_search.json --output output.csv --audit audit.csv
 ```
 
 ## Required environment variables
@@ -203,7 +203,7 @@ Current behavior:
 
 ## Troubleshooting
 `No module named pytest`:
-- install test dependencies: `python -m pip install -r requirements.txt`
+- install test dependencies: `python -m pip install -r pythonCon/requirements.txt`
 
 Output path error (same as input):
 - choose a different `--output` file path than the input file.

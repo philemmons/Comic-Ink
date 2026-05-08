@@ -2,9 +2,9 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from convention_enricher.audit import write_audit_csv
-from convention_enricher.csv_io import read_csv_rows
-from convention_enricher.models import AuditRecord
+from pythonCon.convention_enricher.audit import write_audit_csv
+from pythonCon.convention_enricher.csv_io import read_csv_rows
+from pythonCon.convention_enricher.models import AuditRecord
 
 
 def test_write_audit_csv(tmp_path: Path) -> None:
