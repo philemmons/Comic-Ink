@@ -1,9 +1,8 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 from pathlib import Path
-from typing import Any
 
-from .utils import read_json_file, sha1_text, write_json_file
+from .utils import read_json, sha256_text, write_json
 
 
 class FileCache:
@@ -12,18 +11,8 @@ class FileCache:
         self.cache_dir.mkdir(parents=True, exist_ok=True)
 
     def _path(self, namespace: str, key: str, extension: str) -> Path:
-        digest = sha1_text(key)
+        digest = sha256_text(key)
         return self.cache_dir / namespace / f"{digest}.{extension}"
-
-    def get_json(self, namespace: str, key: str) -> Any | None:
-        path = self._path(namespace, key, "json")
-        if not path.exists():
-            return None
-        return read_json_file(path)
-
-    def set_json(self, namespace: str, key: str, value: Any) -> None:
-        path = self._path(namespace, key, "json")
-        write_json_file(path, value)
 
     def get_text(self, namespace: str, key: str) -> str | None:
         path = self._path(namespace, key, "txt")
@@ -35,3 +24,11 @@ class FileCache:
         path = self._path(namespace, key, "txt")
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(value, encoding="utf-8")
+
+    def get_json(self, namespace: str, key: str) -> object | None:
+        path = self._path(namespace, key, "json")
+        return read_json(path)
+
+    def set_json(self, namespace: str, key: str, value: object) -> None:
+        path = self._path(namespace, key, "json")
+        write_json(path, value)

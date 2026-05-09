@@ -1,1 +1,1 @@
-"""Convention enricher package."""
+﻿__all__: list[str] = []

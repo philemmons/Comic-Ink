@@ -1,104 +1,54 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
-import json
+from dataclasses import dataclass
+import tempfile
 from pathlib import Path
 
-from pythonCon.convention_enricher.enrich import SearchDatasetTraits, _build_search_queries_with_context, rank_official_url
-from pythonCon.convention_enricher.models import FetchResult
-from pythonCon.convention_enricher.search import GoogleComSearchProvider, ManualSearchProvider
+from convention_enricher.cache import FileCache
+from convention_enricher.models import FetchedPage
+from convention_enricher.search import BingSearchAdapter, DuckDuckGoSearchAdapter, GoogleSearchAdapter
 
 
-class FakeFetcher:
-    def __init__(self, html_text: str, status_code: int = 200) -> None:
-        self.html_text = html_text
-        self.status_code = status_code
+def _scratch() -> Path:
+    return Path(tempfile.mkdtemp(prefix="ce_test_", dir=Path.cwd()))
 
-    def fetch(self, url: str) -> FetchResult:
-        return FetchResult(
-            ok=200 <= self.status_code < 400,
-            url=url,
-            status_code=self.status_code,
-            text=self.html_text,
-            error=None if 200 <= self.status_code < 400 else f"HTTP {self.status_code}",
+
+@dataclass
+class FakeHttpClient:
+    html: str
+
+    def fetch(self, url: str) -> FetchedPage:
+        return FetchedPage(
+            requested_url=url,
+            final_url=url,
+            status_code=200,
+            ok=True,
+            html=self.html,
+            fetched_at_utc="2026-01-01T00:00:00",
         )
 
 
-def _empty_traits() -> SearchDatasetTraits:
-    return SearchDatasetTraits(
-        common_name_tokens=set(),
-        known_hosts_by_name_key={},
-        name_tokens_by_key={},
-        frequent_hosts=set(),
-    )
-
-
-def test_build_search_queries_with_context_adds_site_and_location() -> None:
-    queries = _build_search_queries_with_context(
-        convention_name="TriCityComicCon Postponed",
-        year=2026,
-        city="Livingston",
-        state="Texas",
-        state_abrev="TX",
-        country="USA",
-        website="https://www.myticketing.pro/event/tricitycomiccon",
-        traits=_empty_traits(),
-    )
-
-    assert any("TriCityComicCon 2026" in query for query in queries)
-    assert any("Livingston Texas USA" in query for query in queries)
-    assert any("site:myticketing.pro" in query for query in queries)
-    assert all("Postponed" not in query for query in queries)
-
-
-def test_manual_search_provider_fuzzy_matches_query_variant(tmp_path: Path) -> None:
-    mapping_path = tmp_path / "manual.json"
-    mapping_path.write_text(
-        json.dumps({"Grand Rapids Comic-Con": ["https://www.grcomiccon.com"]}, ensure_ascii=False),
-        encoding="utf-8",
-    )
-
-    provider = ManualSearchProvider(str(mapping_path))
-    urls = provider.search("Grand Rapids Comic-Con official website 2026", 3)
-
-    assert urls == ["https://www.grcomiccon.com"]
-
-
-def test_google_search_provider_extracts_url_param_links() -> None:
-    html_text = """
-    <html>
-      <body>
-        <a href='/url?sa=t&url=https%3A%2F%2Fwww.grcomiccon.com%2F&ved=2ah'>Official</a>
-        <a href='/url?sa=t&q=https%3A%2F%2Fwww.example.org%2Fevents'>Secondary</a>
-      </body>
-    </html>
+def test_google_adapter_extracts_redirect_urls() -> None:
+    base = _scratch()
+    markup = """
+    <a href='/url?sa=t&url=https%3A%2F%2Falpha.example%2Fhome'>A</a>
+    <a href='/url?sa=t&q=https%3A%2F%2Fbeta.example%2Fevent'>B</a>
     """
-    provider = GoogleComSearchProvider(fetcher=FakeFetcher(html_text), cache=None)
-    urls = provider.search("Grand Rapids Comic-Con 2026", 3)
+    provider = GoogleSearchAdapter(FakeHttpClient(markup), cache=FileCache(base / "cache"))
+    results = provider.search("Alpha Con", 5)
 
-    assert "https://www.grcomiccon.com/" in urls
-    assert "https://www.example.org/events" in urls
+    assert any(item.url == "https://alpha.example/home" for item in results)
+    assert any(item.url == "https://beta.example/event" for item in results)
 
 
-def test_rank_official_url_prefers_hint_host_over_social() -> None:
-    official_score = rank_official_url(
-        "https://www.grcomiccon.com/",
-        "Grand Rapids Comic-Con",
-        2026,
-        _empty_traits(),
-        website_hint="https://www.grcomiccon.com",
-        city="Grand Rapids",
-        state="Michigan",
-        country="USA",
-    )
-    social_score = rank_official_url(
-        "https://www.facebook.com/grcomiccon/",
-        "Grand Rapids Comic-Con",
-        2026,
-        _empty_traits(),
-        website_hint="https://www.grcomiccon.com",
-        city="Grand Rapids",
-        state="Michigan",
-        country="USA",
-    )
+def test_bing_and_ddg_adapters_parse_urls() -> None:
+    base = _scratch()
+    markup = """
+    <a href='https://gamma.example/convention'>Gamma</a>
+    <a href='https://duckduckgo.com/l/?uddg=https%3A%2F%2Fdelta.example%2Fdates'>Delta</a>
+    """
+    bing = BingSearchAdapter(FakeHttpClient(markup), cache=FileCache(base / "cache_b"))
+    ddg = DuckDuckGoSearchAdapter(FakeHttpClient(markup), cache=FileCache(base / "cache_d"))
 
-    assert official_score > social_score
+    assert any(item.url == "https://gamma.example/convention" for item in bing.search("Gamma", 5))
+    assert any(item.url == "https://delta.example/dates" for item in ddg.search("Delta", 5))

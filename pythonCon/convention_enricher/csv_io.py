@@ -1,56 +1,56 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import csv
 from pathlib import Path
 import tempfile
-from typing import Iterable
+
+from .models import OUTPUT_FIELDS
+from .utils import clean_source_text
 
 
-def read_csv_rows(path: Path) -> tuple[list[str], list[dict[str, str]]]:
-    with path.open("r", newline="", encoding="utf-8-sig") as handle:
-        reader = csv.DictReader(handle)
-        if not reader.fieldnames:
-            raise ValueError(f"Input CSV is missing a header row: {path}")
-        headers = list(reader.fieldnames)
-        rows: list[dict[str, str]] = []
-        for row in reader:
-            normalized: dict[str, str] = {}
-            for header in headers:
-                value = row.get(header, "")
-                normalized[header] = "" if value is None else value
-            rows.append(normalized)
-    return headers, rows
+def load_search_targets(path: Path) -> list[str]:
+    rows: list[list[str]] = []
+    last_error: UnicodeDecodeError | None = None
+    for encoding in ("utf-8-sig", "cp1252", "latin-1"):
+        try:
+            with path.open("r", encoding=encoding, newline="") as handle:
+                reader = csv.reader(handle)
+                rows = list(reader)
+            last_error = None
+            break
+        except UnicodeDecodeError as exc:
+            last_error = exc
+            continue
+    if last_error is not None:
+        raise last_error
+    if not rows:
+        return []
+    data_rows = rows[1:]
+    targets: list[str] = []
+    for row in data_rows:
+        if not row:
+            continue
+        raw_value = row[0] if len(row) > 0 else ""
+        cleaned = clean_source_text(raw_value)
+        if cleaned:
+            targets.append(cleaned)
+    return targets
 
 
-def write_csv_rows(path: Path, headers: list[str], rows: Iterable[dict[str, str]]) -> None:
+def write_output_rows(path: Path, rows: list[dict[str, str]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    # Write atomically to reduce risk of partial/corrupt files if interrupted.
     with tempfile.NamedTemporaryFile(
         mode="w",
-        newline="",
         encoding="utf-8",
+        newline="",
         delete=False,
         dir=path.parent,
         prefix=f".{path.name}.",
         suffix=".tmp",
     ) as handle:
-        writer = csv.DictWriter(handle, fieldnames=headers)
+        writer = csv.DictWriter(handle, fieldnames=OUTPUT_FIELDS)
         writer.writeheader()
         for row in rows:
-            writer.writerow({header: row.get(header, "") for header in headers})
-        temp_path = Path(handle.name)
-    temp_path.replace(path)
-
-
-def read_existing_rows_by_key(path: Path, key_column: str) -> dict[str, dict[str, str]]:
-    if not path.exists():
-        return {}
-    headers, rows = read_csv_rows(path)
-    if key_column not in headers:
-        return {}
-    output: dict[str, dict[str, str]] = {}
-    for row in rows:
-        key = row.get(key_column, "").strip()
-        if key:
-            output[key] = row
-    return output
+            writer.writerow({key: row.get(key, "") for key in OUTPUT_FIELDS})
+        tmp_path = Path(handle.name)
+    tmp_path.replace(path)
