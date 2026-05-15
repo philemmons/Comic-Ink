@@ -83,6 +83,7 @@ Input policy:
 - use only column 1
 - ignore all other columns
 - one row = one search target
+- search query is exactly the column 1 value (no appended query variants)
 
 ## Output
 
@@ -143,6 +144,10 @@ Implemented:
 - robots-aware pacing
 - connection/session reuse
 - snapshot persistence
+
+Crawl scope:
+- capture only the site homepage/index HTML for each discovered domain
+- do not follow internal links beyond the homepage
 
 Snapshot data includes:
 - raw HTML

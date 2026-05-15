@@ -1,6 +1,7 @@
 ﻿from __future__ import annotations
 
 from dataclasses import dataclass
+import os
 import threading
 import time
 from urllib import request as urllib_request
@@ -33,9 +34,12 @@ class HttpClient:
     def __init__(self, config: HttpClientConfig) -> None:
         self.config = config
         self.session = None
+        self._disable_env_proxy = self._should_disable_env_proxy()
 
         if requests is not None and Retry is not None and HTTPAdapter is not None:
             self.session = requests.Session()
+            if self._disable_env_proxy:
+                self.session.trust_env = False
             retry = Retry(
                 total=max(0, config.max_retries),
                 read=max(0, config.max_retries),
@@ -52,7 +56,23 @@ class HttpClient:
 
         self._lock = threading.Lock()
         self._last_request_monotonic = 0.0
-        self._robots_cache: dict[str, robotparser.RobotFileParser] = {}
+        self._robots_cache: dict[str, robotparser.RobotFileParser | None] = {}
+
+    def reset_robots_cache(self) -> None:
+        self._robots_cache.clear()
+
+    @staticmethod
+    def _should_disable_env_proxy() -> bool:
+        proxy_values = [
+            os.getenv("HTTP_PROXY", ""),
+            os.getenv("HTTPS_PROXY", ""),
+            os.getenv("ALL_PROXY", ""),
+            os.getenv("http_proxy", ""),
+            os.getenv("https_proxy", ""),
+            os.getenv("all_proxy", ""),
+        ]
+        blocked_markers = ("127.0.0.1:9", "localhost:9")
+        return any(marker in value for value in proxy_values for marker in blocked_markers)
 
     def _pace(self) -> None:
         interval = 1.0 / max(self.config.requests_per_second, 0.1)
@@ -63,7 +83,7 @@ class HttpClient:
                 time.sleep(wait)
             self._last_request_monotonic = time.monotonic()
 
-    def _robot_parser_for(self, url: str) -> robotparser.RobotFileParser:
+    def _robot_parser_for(self, url: str) -> robotparser.RobotFileParser | None:
         parsed = urlparse(url)
         base = f"{parsed.scheme}://{parsed.netloc}"
         if base in self._robots_cache:
@@ -85,13 +105,17 @@ class HttpClient:
                 charset = response.headers.get_content_charset() or "utf-8"
                 body = response.read().decode(charset, errors="replace")
             parser.parse(body.splitlines())
+            self._robots_cache[base] = parser
+            return parser
         except Exception:
-            pass
-        self._robots_cache[base] = parser
-        return parser
+            # Fail open when robots retrieval fails (network, SSL, DNS, etc).
+            self._robots_cache[base] = None
+            return None
 
     def is_allowed_by_robots(self, url: str) -> bool:
         parser = self._robot_parser_for(url)
+        if parser is None:
+            return True
         try:
             return parser.can_fetch(self.config.user_agent, url)
         except Exception:
@@ -140,7 +164,12 @@ class HttpClient:
                 },
                 method="GET",
             )
-            with urllib_request.urlopen(req, timeout=self.config.timeout_seconds) as response:
+            if self._disable_env_proxy:
+                opener = urllib_request.build_opener(urllib_request.ProxyHandler({}))
+                response_ctx = opener.open(req, timeout=self.config.timeout_seconds)
+            else:
+                response_ctx = urllib_request.urlopen(req, timeout=self.config.timeout_seconds)
+            with response_ctx as response:
                 status = int(getattr(response, "status", 200))
                 final_url = str(getattr(response, "url", url))
                 charset = response.headers.get_content_charset() or "utf-8"

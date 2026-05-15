@@ -1,5 +1,6 @@
 ﻿from __future__ import annotations
 
+from dataclasses import asdict
 from pathlib import Path
 
 from .models import FetchedPage, SnapshotRecord
@@ -27,5 +28,5 @@ class SnapshotStore:
             content_hash=content_hash,
             html_path=str(html_path),
         )
-        write_json(meta_path, record.__dict__)
+        write_json(meta_path, asdict(record))
         return record

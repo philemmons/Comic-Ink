@@ -20,6 +20,9 @@ class FakeHttpClient:
     pages: dict[str, str]
     blocked: set[str] | None = None
 
+    def reset_robots_cache(self) -> None:
+        return None
+
     def is_allowed_by_robots(self, url: str) -> bool:
         return url not in (self.blocked or set())
 
@@ -66,3 +69,27 @@ def test_crawler_respects_robots_block() -> None:
         [DiscoveredUrl("https://alpha.example/", "google", "q", "convention", 100, 1.0, 100.0)],
     )
     assert docs == []
+
+
+def test_crawler_captures_homepage_only() -> None:
+    base = _scratch()
+    pages = {
+        "https://alpha.example/": "<p>Home page</p>",
+        "https://alpha.example/dates": "<p>Date page</p>",
+    }
+    crawler = Crawler(
+        http_client=FakeHttpClient(pages),
+        cache=FileCache(base / "cache"),
+        snapshot_store=SnapshotStore(base / "snapshots"),
+        bounds=CrawlBounds(max_depth=1, max_pages_per_domain=6, max_pages_per_convention=6, max_retries=1, max_runtime_seconds_per_convention=10, max_concurrency=2),
+    )
+
+    docs = crawler.crawl(
+        "Alpha",
+        [DiscoveredUrl("https://alpha.example/dates", "google", "q", "convention", 100, 1.0, 100.0)],
+    )
+
+    assert len(docs) == 1
+    assert docs[0].url == "https://alpha.example/"
+    assert docs[0].final_url == "https://alpha.example/"
+    assert docs[0].html == "<p>Home page</p>"

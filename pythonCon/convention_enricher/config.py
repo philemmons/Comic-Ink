@@ -19,6 +19,8 @@ class RuntimeConfig:
     input_csv: Path
     output_csv: Path
     work_dir: Path
+    bootstrap_csv: Path | None = None
+    resume_checkpoint: bool = False
     unknown_value: str = "**"
     request_timeout_seconds: float = 12.0
     requests_per_second: float = 1.5
@@ -30,6 +32,7 @@ class RuntimeConfig:
     max_search_seconds_per_convention: float = 12.0
     network_failure_threshold: int = 25
     progress_every: int = 10
+    allow_zero_success: bool = False
     crawl_bounds: CrawlBounds = field(default_factory=CrawlBounds)
 
     @property

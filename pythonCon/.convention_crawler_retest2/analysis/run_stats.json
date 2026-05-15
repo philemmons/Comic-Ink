@@ -2,9 +2,9 @@
   "conventions_total": 10,
   "conventions_completed": 10,
   "search_results_seen": 0,
-  "discovered_urls": 0,
-  "crawled_pages": 0,
-  "snapshots_written": 0,
+  "discovered_urls": 2,
+  "crawled_pages": 2,
+  "snapshots_written": 2,
   "cache_hits": 0,
   "cache_misses": 0
 }
