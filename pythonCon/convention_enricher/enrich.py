@@ -1,321 +1,271 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
-import argparse
+import csv
+import random
+import time
 from dataclasses import dataclass
 from pathlib import Path
-import shutil
+from typing import Iterable
+from urllib.parse import parse_qs, unquote, urlparse
 
-from .analyzer import Analyzer
-from .cache import FileCache
-from .config import RuntimeConfig
-from .exporter import CsvExporter
-from .http_client import HttpClient, HttpClientConfig
-from .input_loader import InputLoader
-from .models import AnalyzerStats, ConventionOutputRow, SearchResult
-from .search import (
-    CompositeSearch,
-    GoogleSearchAdapter,
-    HtmlSearchProvider,
+import requests
+from bs4 import BeautifulSoup, Tag
+
+DDG_HTML_ENDPOINT = "https://html.duckduckgo.com/html/"
+USER_AGENT = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+    "AppleWebKit/537.36 (KHTML, like Gecko) "
+    "Chrome/124.0.0.0 Safari/537.36"
 )
-from .utils import now_utc_iso, token_overlap, write_json
+REQUEST_TIMEOUT_SECONDS = 12
+MAX_RETRIES = 3
+RETRY_BACKOFF_SECONDS = 1.2
+REQUEST_DELAY_RANGE_SECONDS = (0.7, 1.5)
+
+# This script lives in pythonCon/convention_enricher/, so pythonCon root is 1 level up.
+PYTHONCON_ROOT = Path(__file__).resolve().parents[1]
+INPUT_CSV = PYTHONCON_ROOT / "input.csv"
+OUTPUT_CSV = PYTHONCON_ROOT / "output.csv"
 
 
 @dataclass(slots=True)
-class RunResult:
-    output_csv: Path
-    rows_written: int
+class RowResult:
+    original_value: str
+    search_query: str
+    found: bool
 
 
-def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Convention discovery crawler")
-    parser.add_argument("input", help="Path to input.csv")
-    parser.add_argument("--output", help="Path to output.csv")
-    parser.add_argument("--work-dir", default=".convention_crawler", help="Directory for cache and analysis outputs")
-    parser.add_argument("--requests-per-second", type=float, default=1.5)
-    parser.add_argument("--search-results-per-provider", type=int, default=8)
-    parser.add_argument("--offset", type=int, default=0, help="Start processing at this zero-based input index.")
-    parser.add_argument("--limit", type=int, help="Process at most this many conventions from input.")
-    parser.add_argument(
-        "--max-search-seconds",
-        type=float,
-        default=12.0,
-        help="Per-convention time budget for search requests.",
+@dataclass(slots=True)
+class RunStats:
+    rows_seen: int = 0
+    header_rows_skipped: int = 0
+    empty_rows_skipped: int = 0
+    rows_processed: int = 0
+    found_true: int = 0
+    found_false: int = 0
+
+
+def read_first_column_values(csv_path: Path) -> tuple[list[str], RunStats]:
+    stats = RunStats()
+    values: list[str] = []
+
+    with csv_path.open("r", encoding="utf-8", newline="") as handle:
+        reader = csv.reader(handle)
+        for row_index, row in enumerate(reader, start=1):
+            stats.rows_seen += 1
+
+            first_value = row[0] if row else ""
+            if row_index == 1 and first_value.strip().lower() in {"convention", "query", "search_query"}:
+                stats.header_rows_skipped += 1
+                continue
+
+            # We only skip truly empty/whitespace values in the first column.
+            if first_value.strip() == "":
+                stats.empty_rows_skipped += 1
+                continue
+
+            # Keep the first-column value exactly as parsed from CSV.
+            values.append(first_value)
+
+    return values, stats
+
+
+def parse_redirect_href(href: str) -> str:
+    if not href:
+        return ""
+    lowered = href.lower()
+    if lowered.startswith("http://") or lowered.startswith("https://"):
+        parsed = urlparse(href)
+        if parsed.netloc.endswith("duckduckgo.com") and parsed.path.startswith("/l/"):
+            encoded = parse_qs(parsed.query).get("uddg", [""])[0]
+            if encoded:
+                return unquote(encoded)
+        return href
+
+    if href.startswith("/l/"):
+        parsed = urlparse(href)
+        encoded = parse_qs(parsed.query).get("uddg", [""])[0]
+        if encoded:
+            return unquote(encoded)
+
+    return ""
+
+
+def contains_block_page(html: str) -> bool:
+    lowered = html.lower()
+    block_signals = (
+        "captcha",
+        "detected unusual traffic",
+        "verify you are human",
+        "access denied",
+        "forbidden",
+        "robot check",
     )
-    parser.add_argument(
-        "--network-failure-threshold",
-        type=int,
-        default=25,
-        help="After N consecutive no-search-result conventions, short-circuit to unknown output.",
+    return any(signal in lowered for signal in block_signals)
+
+
+def candidate_result_containers(soup: BeautifulSoup) -> list[Tag]:
+    selectors = (
+        "div#links div.result",
+        "div.result",
+        "article.result",
+        "div.web-result",
+        "div.results_links",
     )
-    parser.add_argument("--progress-every", type=int, default=10, help="Log progress every N conventions.")
-    parser.add_argument(
-        "--quiet-steps",
-        action="store_true",
-        help="Disable detailed per-convention step logs and investigation output.",
+    seen: set[int] = set()
+    containers: list[Tag] = []
+    for selector in selectors:
+        for tag in soup.select(selector):
+            tag_id = id(tag)
+            if tag_id in seen:
+                continue
+            seen.add(tag_id)
+            containers.append(tag)
+    return containers
+
+
+def is_ad_container(container: Tag) -> bool:
+    classes = [cls.lower() for cls in container.get("class", [])]
+    if any(cls.startswith("result--ad") for cls in classes):
+        return True
+    if any("sponsored" in cls for cls in classes):
+        return True
+    return any(cls in {"ad", "ads", "badge--ad"} for cls in classes)
+
+
+def has_meaningful_organic_result(html: str) -> bool:
+    if not html.strip() or contains_block_page(html):
+        return False
+
+    soup = BeautifulSoup(html, "html.parser")
+    no_result_markers = (
+        "no results.",
+        "no results found",
+        "did not match any documents",
     )
-    parser.add_argument(
-        "--allow-zero-success",
-        action="store_true",
-        help="Allow run completion even when no non-unknown rows are produced.",
-    )
-    parser.add_argument(
-        "--max-retries",
-        type=int,
-        default=2,
-        help="HTTP retry count for search provider requests.",
-    )
-    return parser
+    page_text = soup.get_text(" ", strip=True).lower()
+    if any(marker in page_text for marker in no_result_markers):
+        return False
 
-
-def build_config(args: argparse.Namespace) -> RuntimeConfig:
-    input_csv = Path(args.input)
-    output_csv = Path(args.output) if args.output else input_csv.with_name("output.csv")
-    work_dir = Path(args.work_dir)
-
-    config = RuntimeConfig(input_csv=input_csv, output_csv=output_csv, work_dir=work_dir)
-    config.requests_per_second = max(0.1, float(args.requests_per_second))
-    config.search_results_per_provider = max(1, int(args.search_results_per_provider))
-    config.offset = max(0, int(args.offset))
-    config.limit = None if args.limit is None else max(0, int(args.limit))
-    config.max_search_seconds_per_convention = max(0.1, float(args.max_search_seconds))
-    config.network_failure_threshold = max(1, int(args.network_failure_threshold))
-    config.progress_every = max(1, int(args.progress_every))
-    config.allow_zero_success = bool(args.allow_zero_success)
-    config.show_steps = not bool(args.quiet_steps)
-    config.max_retries = max(0, int(args.max_retries))
-    return config
-
-
-def run(config: RuntimeConfig) -> RunResult:
-    _log_step(
-        config.show_steps,
-        f"step=run_config mode=baseline_search_only cache_policy=reset_each_run work_dir={config.work_dir}",
-    )
-    loader = InputLoader()
-    all_targets = loader.load(config.input_csv)
-    if config.offset >= len(all_targets):
-        targets = []
-    else:
-        targets = all_targets[config.offset :]
-    if config.limit is not None:
-        targets = targets[: config.limit]
-
-    analyzer = Analyzer()
-    analyzer.stats.conventions_total = len(targets)
-
-    if config.cache_dir.exists():
-        shutil.rmtree(config.cache_dir, ignore_errors=True)
-    cache = FileCache(config.cache_dir)
-
-    http_client = HttpClient(
-        HttpClientConfig(
-            timeout_seconds=config.request_timeout_seconds,
-            requests_per_second=config.requests_per_second,
-            user_agent=config.user_agent,
-            max_retries=config.max_retries,
-        )
-    )
-    preflight_ok, preflight_error = _preflight_network(http_client)
-
-    search = CompositeSearch(
-        providers=[
-            GoogleSearchAdapter(http_client=http_client, cache=cache),
-        ]
-    )
-    exporter = CsvExporter()
-
-    output_rows: list[ConventionOutputRow] = []
-    consecutive_network_misses = 0
-    offline_short_circuit = False
-    successful_rows = 0
-
-    for idx, convention_name in enumerate(targets, start=1):
-        _log_step(config.show_steps, f"step=convention_start idx={idx}/{len(targets)} name={convention_name}")
-        if offline_short_circuit:
-            _log_step(config.show_steps, "step=short_circuit_active action=write_unknown_row")
-            output = ConventionOutputRow(convention_name=convention_name)
-            output_rows.append(output)
-            analyzer.stats.conventions_completed += 1
+    for container in candidate_result_containers(soup):
+        if is_ad_container(container):
             continue
 
-        _log_step(config.show_steps, "step=search_start")
-        search_results = search.search_all(
-            convention_name,
-            config.search_results_per_provider,
-            max_seconds=config.max_search_seconds_per_convention,
-        )
-        _log_step(config.show_steps, f"step=search_done results={len(search_results)}")
-        analyzer.stats.search_results_seen += len(search_results)
-        analyzer.stats.discovered_urls += len(search_results)
+        # A meaningful organic result needs at least one plausible result link.
+        for anchor in container.select("a.result__a, h2 a, a[href]"):
+            href = anchor.get("href", "")
+            resolved = parse_redirect_href(href)
+            if resolved.startswith("http://") or resolved.startswith("https://"):
+                return True
 
-        output = _resolve_search_only_output(convention_name, search_results)
-        _log_step(config.show_steps, f"step=search_only_resolve website={output.website_url}")
-        if _row_has_success(output, config.unknown_value):
-            successful_rows += 1
-        _log_step(
-            config.show_steps,
-            f"step=resolve_done website={output.website_url} success={_row_has_success(output, config.unknown_value)}",
-        )
+    return False
 
-        if not search_results:
-            consecutive_network_misses += 1
-            _log_step(
-                config.show_steps,
-                f"step=no_network_evidence miss_streak={consecutive_network_misses}/{config.network_failure_threshold}",
-            )
-            _investigate_convention_failure(config.show_steps, convention_name, search)
-            if consecutive_network_misses >= config.network_failure_threshold:
-                offline_short_circuit = True
-                _log_step(config.show_steps, "step=short_circuit_enabled reason=network_miss_threshold")
-        else:
-            consecutive_network_misses = 0
 
-        output_rows.append(output)
-        analyzer.stats.conventions_completed += 1
-        if idx % config.progress_every == 0:
-            print(f"progress={idx}/{len(targets)} short_circuit={offline_short_circuit}")
-
-    exporter.export(config.output_csv, output_rows)
-    diagnostics = {
-        "timestamp_utc": now_utc_iso(),
-        "preflight_network_ok": preflight_ok,
-        "preflight_network_error": preflight_error,
-        "successful_rows": successful_rows,
-        "total_rows": len(output_rows),
-        "search_results_seen": analyzer.stats.search_results_seen,
-        "discovered_urls": analyzer.stats.discovered_urls,
+def query_duckduckgo(session: requests.Session, query: str) -> bool:
+    headers = {
+        "User-Agent": USER_AGENT,
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Referer": "https://duckduckgo.com/",
     }
-    analysis_dir = config.work_dir / "analysis"
-    analyzer.write(analysis_dir / "run_stats.json")
-    write_json(analysis_dir / "run_diagnostics.json", diagnostics)
+    payload = {"q": query}
 
-    if successful_rows == 0 and not config.allow_zero_success:
-        _log_step(config.show_steps, "step=run_failure_investigation_start")
-        _investigate_run_failure(config.show_steps, targets, search, analyzer.stats)
-        raise RuntimeError(
-            "Run produced zero successful rows in baseline search mode. "
-            f"Preflight ok={preflight_ok}, error='{preflight_error}'. "
-            "See run_diagnostics.json for details. "
-            "Use --allow-zero-success to bypass this guard."
-        )
-    return RunResult(output_csv=config.output_csv, rows_written=len(output_rows))
+    for attempt in range(1, MAX_RETRIES + 2):
+        try:
+            response = session.post(
+                DDG_HTML_ENDPOINT,
+                headers=headers,
+                data=payload,
+                timeout=REQUEST_TIMEOUT_SECONDS,
+                allow_redirects=True,
+            )
+        except requests.RequestException:
+            if attempt <= MAX_RETRIES:
+                time.sleep(RETRY_BACKOFF_SECONDS * attempt)
+                continue
+            return False
 
+        if response.status_code in {429, 500, 502, 503, 504}:
+            if attempt <= MAX_RETRIES:
+                time.sleep(RETRY_BACKOFF_SECONDS * attempt)
+                continue
+            return False
 
-def _log_step(enabled: bool, message: str) -> None:
-    if enabled:
-        print(message)
+        if response.status_code != 200:
+            return False
 
+        # Redirect-only responses or non-DDG destinations are not meaningful SERP pages.
+        if "duckduckgo.com" not in urlparse(response.url).netloc.lower():
+            return False
 
-def _investigate_convention_failure(enabled: bool, convention_name: str, search: CompositeSearch) -> None:
-    if not enabled:
-        return
-    print(f"investigate=convention_no_results name={convention_name}")
-    query = convention_name.strip()
-    if not query:
-        print("investigate=skip reason=empty_query")
-        return
-    for provider in search.providers:
-        if not isinstance(provider, HtmlSearchProvider):
-            print(f"investigate=provider name={provider.name} status=unsupported_provider_type")
-            continue
-        probe = provider.debug_probe(query)
-        print(
-            "investigate=provider "
-            f"name={provider.name} ok={probe.get('ok')} status={probe.get('status')} "
-            f"html_len={probe.get('html_len')} extracted_urls={probe.get('extracted_urls')} "
-            f"error={probe.get('error')}"
-        )
+        return has_meaningful_organic_result(response.text)
+
+    return False
 
 
-def _investigate_run_failure(
-    enabled: bool,
-    targets: list[str],
-    search: CompositeSearch,
-    stats: AnalyzerStats,
-) -> None:
-    if not enabled:
-        return
+def build_results(queries: Iterable[str]) -> tuple[list[RowResult], int]:
+    session = requests.Session()
+    # Ignore HTTP(S)_PROXY/ALL_PROXY env vars to prevent local proxy config
+    # from causing false negatives in DuckDuckGo checks.
+    session.trust_env = False
+    results: list[RowResult] = []
+    if not isinstance(queries, list):
+        queries = list(queries)
+    total = len(queries)
+    failures = 0
+
+    for index, query in enumerate(queries, start=1):
+        found = query_duckduckgo(session, query)
+        results.append(RowResult(original_value=query, search_query=query, found=found))
+
+        state = "SUCCESS" if found else "FAILURE"
+        print(f"[{index}/{total}] query={query} state={state}")
+
+        if not found:
+            failures += 1
+
+        time.sleep(random.uniform(*REQUEST_DELAY_RANGE_SECONDS))
+
+    return results, failures
+
+
+def write_output_csv(output_path: Path, rows: list[RowResult]) -> None:
+    with output_path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.writer(handle)
+        writer.writerow(["original_value", "search_query", "found"])
+        for row in rows:
+            writer.writerow([row.original_value, row.search_query, "TRUE" if row.found else "FALSE"])
+
+
+def main() -> int:
+    if not INPUT_CSV.exists():
+        print(f"ERROR: input.csv not found at project root: {INPUT_CSV}")
+        return 1
+
+    queries, stats = read_first_column_values(INPUT_CSV)
     print(
-        "investigate=run_summary "
-        f"search_results_seen={stats.search_results_seen} discovered_urls={stats.discovered_urls} "
-        "mode=baseline_search_only"
-    )
-    if targets:
-        _investigate_convention_failure(enabled, targets[0], search)
-
-
-def _preflight_network(http_client: HttpClient) -> tuple[bool, str]:
-    probe_urls = [
-        "https://www.google.com/",
-        "https://www.bing.com/",
-        "https://html.duckduckgo.com/html/?q=test",
-    ]
-    errors: list[str] = []
-    for url in probe_urls:
-        fetched = http_client.fetch(url)
-        if fetched.ok:
-            return True, ""
-        if fetched.error:
-            errors.append(f"{url}: {fetched.error}")
-    return False, " | ".join(errors[:3])
-
-
-def _row_has_success(row: ConventionOutputRow, unknown: str) -> bool:
-    return any(
-        value != unknown
-        for value in (
-            row.event_date,
-            row.event_location,
-            row.city,
-            row.state,
-            row.country,
-            row.website_url,
-        )
+        "Loaded input rows: "
+        f"seen={stats.rows_seen}, "
+        f"header_skipped={stats.header_rows_skipped}, "
+        f"empty_skipped={stats.empty_rows_skipped}, "
+        f"queries={len(queries)}"
     )
 
+    results, failures = build_results(queries)
+    write_output_csv(OUTPUT_CSV, results)
 
-def _resolve_search_only_output(convention_name: str, search_results: list[SearchResult]) -> ConventionOutputRow:
-    output = ConventionOutputRow(convention_name=convention_name)
-    if not search_results:
-        return output
-    chosen = _choose_best_search_result(convention_name, search_results)
-    output.website_url = chosen.url if chosen else output.website_url
-    return output
+    stats.rows_processed = len(results)
+    stats.found_true = sum(1 for row in results if row.found)
+    stats.found_false = sum(1 for row in results if not row.found)
 
-
-def _choose_best_search_result(convention_name: str, search_results: list[SearchResult]) -> SearchResult | None:
-    if not search_results:
-        return None
-    low_value_markers = (
-        "merriam-webster.com",
-        "dictionary.",
-        "cambridge.org",
-        "oxfordlearnersdictionaries.com",
-        "wikipedia.org",
-    )
-    best: SearchResult | None = None
-    best_score = float("-inf")
-    for result in search_results:
-        score = token_overlap(convention_name, result.url) * 100.0
-        url_l = result.url.lower()
-        if any(marker in url_l for marker in low_value_markers):
-            score -= 25.0
-        if any(marker in url_l for marker in ("comic", "con", "expo", "event", "tickets", "register")):
-            score += 12.0
-        if score > best_score:
-            best_score = score
-            best = result
-    return best
-
-
-def main() -> None:
-    parser = build_parser()
-    args = parser.parse_args()
-    config = build_config(args)
-    result = run(config)
-    print(f"output_csv={result.output_csv}")
-    print(f"rows_written={result.rows_written}")
+    print("Run complete:")
+    print(f"  output_file={OUTPUT_CSV}")
+    print(f"  rows_processed={stats.rows_processed}")
+    print(f"  found_true={stats.found_true}")
+    print(f"  found_false={stats.found_false}")
+    print(f"  request_failures={failures}")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

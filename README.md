@@ -44,170 +44,58 @@ To use the admin functionality:
 
 ### 05-08-26
 
-## Convention Discovery Crawler (Python)
+## Convention Enricher (Python)
 
-This repository includes a production-style convention discovery crawler under `pythonCon/convention_enricher`.
+The convention enricher lives in `pythonCon/convention_enricher` and runs a simple pipeline:
 
-Pipeline:
+`INPUT (CSV) -> DUCKDUCKGO CHECK -> OUTPUT (CSV)`
 
-`INPUT -> SEARCH -> EXPORT`
+## Behavior
 
-Goal:
-- gather convention/event data from authoritative sources
-- preserve source wording as presented
-- export only required fields
+- Uses only DuckDuckGo HTML endpoint: `https://html.duckduckgo.com/html/`
+- Uses only first column from `pythonCon/input.csv`
+- Ignores all other input columns
+- Uses first-column value as the exact query string
+- Preserves original formatting from CSV, including quotation marks
+- Skips rows with empty first-column values
+- Adds retry handling, timeout handling, random delays, and desktop User-Agent
+- If all retries fail for a row, marks it as not found instead of crashing
 
-## Scope Rules
-
-The crawler is a source gathering pipeline. It is **not** a normalization or transformation engine.
-
-It does **not**:
-- infer missing geography
-- geocode
-- parse or reformat dates for export
-- synthesize merged values from conflicting sources
-
-Allowed cleanup only:
-- trim leading/trailing whitespace
-- collapse accidental duplicated whitespace from scraping
-
-Unknown values are exported as:
-- `**`
-
-## Input
+## Input and Output
 
 Input file:
-- `input.csv`
-
-Input policy:
-- use only column 1
-- ignore all other columns
-- one row = one search target
-- search query is exactly the column 1 value (no appended query variants)
-
-## Output
+- `pythonCon/input.csv`
 
 Output file:
-- `output.csv`
+- `pythonCon/output.csv`
 
-Exported columns (exactly):
-- `convention_name`
-- `event_date`
-- `event_location`
-- `city`
-- `state`
-- `country`
-- `website_url`
+Output columns (exactly):
+- `original_value`
+- `search_query`
+- `found`
 
-## Search Providers
+`found` is written as:
+- `TRUE`: at least one meaningful organic DuckDuckGo result container found
+- `FALSE`: no meaningful organic result found (including error/block/empty cases)
 
-Provider adapters are implemented for:
-- Google
-- Bing
-- DuckDuckGo
+## Dependencies
 
-Provider logic is swappable through the adapter layer.
-
-## Authority and Conflict Resolution
-
-When conflicting values exist, authority order is:
-1. official convention source
-2. official registration source
-3. official organizer source
-4. official venue source
-5. trusted listing source
-
-Higher authority wins. Values are not merged.
-
-## Extraction Priority
-
-Priority order:
-1. Meta tags (`title`, `description`, canonical, Open Graph/social metadata)
-2. Visible content (`h1/h2`, headings, schedule/registration/about/contact blocks)
-3. Semantic HTML (`address`, `time`, `dl/dt/dd`, labeled blocks)
-4. Structured data fallback (`JSON-LD`, microdata, schema.org Event)
-
-Structured data is fallback/tie-breaker only.
-
-## Runtime Behavior
-
-Implemented:
-- search-only baseline run mode
-- first-column input targeting
-- per-convention search time budget
-- automatic provider-failure investigation logs
-- cache reset on every execution
-- run diagnostics JSON output
-
-## Architecture
-
-Modules are split by responsibility:
-- input loader
-- search adapters
-- exporter
-- cache
-- analyzer
-
-## Setup
-
-1. Install Python 3.11+.
-2. Install dependencies:
+Install with:
 
 ```bash
-python -m pip install -r pythonCon/requirements.txt
+python -m pip install -r pythonCon/convention_enricher/requirements.txt
 ```
+
+Packages used:
+- `requests`
+- `beautifulsoup4`
 
 ## Run
 
-### From repo root
+From repo root:
 
 ```bash
-python -m pythonCon.convention_enricher.enrich "c:\Users\phile\Desktop\Comic-Ink\pythonCon\convention_enricher\input.csv" --output "c:\Users\phile\Desktop\Comic-Ink\pythonCon\convention_enricher\output.csv" --work-dir "c:\Users\phile\Desktop\Comic-Ink\pythonCon\.convention_crawler"
+python pythonCon/convention_enricher/enrich.py
 ```
 
-### Alternative (run inside `pythonCon`)
-
-```bash
-cd c:\Users\phile\Desktop\Comic-Ink\pythonCon
-python -m convention_enricher.enrich "c:\Users\phile\Desktop\Comic-Ink\pythonCon\convention_enricher\input.csv" --output "c:\Users\phile\Desktop\Comic-Ink\pythonCon\convention_enricher\output.csv" --work-dir "c:\Users\phile\Desktop\Comic-Ink\pythonCon\.convention_crawler"
-```
-
-### Running from repo root, so use:
-
-```bash
-python -m pythonCon.convention_enricher.enrich "c:\Users\phile\Desktop\Comic-Ink\pythonCon\convention_enricher\input.csv" --output "c:\Users\phile\Desktop\Comic-Ink\pythonCon\convention_enricher\output.csv" --work-dir "c:\Users\phile\Desktop\Comic-Ink\pythonCon\.convention_crawler"
-```
-
-### Quick pilot run (limit 25 rows)
-
-```bash
-python -m pythonCon.convention_enricher.enrich "c:\Users\phile\Desktop\Comic-Ink\pythonCon\convention_enricher\input.csv" --output "c:\Users\phile\Desktop\Comic-Ink\pythonCon\convention_enricher\output.csv" --work-dir "c:\Users\phile\Desktop\Comic-Ink\pythonCon\.convention_crawler" --limit 25 --progress-every 1
-```
-
-### Useful runtime controls (baseline mode)
-
-```bash
---requests-per-second
---search-results-per-provider
---max-search-seconds
---max-retries
---network-failure-threshold
---progress-every
---quiet-steps
---offset
---limit
-```
-
-By default the enricher prints step-by-step processing logs and automatic
-investigation lines when search fails. Use `--quiet-steps` to turn that off.
-
-## Reports
-
-Recursive improvement artifacts are tracked in:
-- `pythonCon/analysis_report.md`
-- `pythonCon/CHANGELOG.md`
-
-## Notes
-
-- If input encoding is not UTF-8, loader fallback supports `cp1252` and `latin-1`.
-- If column 1 is blank, the row is skipped as a search target.
+The script prints per-row progress (`row/query/success-failure`) and summary totals when complete.
