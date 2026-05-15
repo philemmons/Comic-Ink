@@ -13,6 +13,4 @@ def _scratch() -> Path:
 def test_runtime_config_paths() -> None:
     base = _scratch()
     cfg = RuntimeConfig(input_csv=base / "in.csv", output_csv=base / "out.csv", work_dir=base / ".work")
-    assert cfg.checkpoint_path.name == "checkpoint.json"
-    assert cfg.snapshots_dir.name == "snapshots"
     assert cfg.cache_dir.name == "cache"

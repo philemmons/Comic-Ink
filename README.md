@@ -50,7 +50,7 @@ This repository includes a production-style convention discovery crawler under `
 
 Pipeline:
 
-`SEARCH -> DISCOVER -> CRAWL -> EXTRACT -> PRESERVE -> EXPORT`
+`INPUT -> SEARCH -> EXPORT`
 
 Goal:
 - gather convention/event data from authoritative sources
@@ -129,48 +129,24 @@ Priority order:
 
 Structured data is fallback/tie-breaker only.
 
-## Crawler Boundaries and Reliability
+## Runtime Behavior
 
 Implemented:
-- max depth
-- max pages per domain
-- max pages per convention
-- max retries
-- max runtime per convention
-- max concurrency
-- caching
-- checkpointing/resume
-- duplicate-request prevention
-- robots-aware pacing
-- connection/session reuse
-- snapshot persistence
-
-Crawl scope:
-- capture only the site homepage/index HTML for each discovered domain
-- do not follow internal links beyond the homepage
-
-Snapshot data includes:
-- raw HTML
-- fetched URL
-- final redirected URL
-- timestamp
-- content hash
+- search-only baseline run mode
+- first-column input targeting
+- per-convention search time budget
+- automatic provider-failure investigation logs
+- cache reset on every execution
+- run diagnostics JSON output
 
 ## Architecture
 
 Modules are split by responsibility:
 - input loader
 - search adapters
-- discovery ranker
-- crawler
-- snapshot store
-- extractor
-- deduper
 - exporter
 - cache
-- checkpoint manager
 - analyzer
-- learning memory (official domains)
 
 ## Setup
 
@@ -202,23 +178,28 @@ python -m convention_enricher.enrich "c:\Users\phile\Desktop\Comic-Ink\pythonCon
 python -m pythonCon.convention_enricher.enrich "c:\Users\phile\Desktop\Comic-Ink\pythonCon\convention_enricher\input.csv" --output "c:\Users\phile\Desktop\Comic-Ink\pythonCon\convention_enricher\output.csv" --work-dir "c:\Users\phile\Desktop\Comic-Ink\pythonCon\.convention_crawler"
 ```
 
-### Useful runtime controls
+### Quick pilot run (limit 25 rows)
 
 ```bash
---max-depth
---max-pages-per-domain
---max-pages-per-convention
---max-runtime-seconds
---max-concurrency
+python -m pythonCon.convention_enricher.enrich "c:\Users\phile\Desktop\Comic-Ink\pythonCon\convention_enricher\input.csv" --output "c:\Users\phile\Desktop\Comic-Ink\pythonCon\convention_enricher\output.csv" --work-dir "c:\Users\phile\Desktop\Comic-Ink\pythonCon\.convention_crawler" --limit 25 --progress-every 1
+```
+
+### Useful runtime controls (baseline mode)
+
+```bash
 --requests-per-second
 --search-results-per-provider
---discovery-top-n
 --max-search-seconds
+--max-retries
 --network-failure-threshold
 --progress-every
+--quiet-steps
 --offset
 --limit
 ```
+
+By default the enricher prints step-by-step processing logs and automatic
+investigation lines when search fails. Use `--quiet-steps` to turn that off.
 
 ## Reports
 

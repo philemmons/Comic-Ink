@@ -49,6 +49,13 @@ def canonicalize_url(url: str) -> str:
         host = host[:-3]
     if host.endswith(":443") and parsed.scheme.lower() == "https":
         host = host[:-4]
+    host_name = host.split(":", 1)[0]
+    if not re.fullmatch(r"[a-z0-9.-]+", host_name):
+        return ""
+    if "." not in host_name and host_name != "localhost":
+        return ""
+    if host_name.startswith(".") or host_name.endswith(".") or ".." in host_name:
+        return ""
     path = parsed.path or "/"
     return urlunparse((parsed.scheme.lower() or "https", host, path, "", parsed.query, ""))
 

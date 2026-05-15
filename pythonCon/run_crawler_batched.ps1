@@ -16,14 +16,8 @@ for ($offset = 0; $offset -lt $total; $offset += $BatchSize) {
     --work-dir $WorkDir `
     --offset $offset `
     --limit $BatchSize `
-    --max-depth 0 `
-    --max-pages-per-domain 2 `
-    --max-pages-per-convention 4 `
-    --max-runtime-seconds 1 `
-    --max-concurrency 4 `
-    --search-results-per-provider 1 `
-    --discovery-top-n 2 `
-    --max-search-seconds 2 `
+    --search-results-per-provider 8 `
+    --max-search-seconds 12 `
     --network-failure-threshold 3 `
     --progress-every 10
 
