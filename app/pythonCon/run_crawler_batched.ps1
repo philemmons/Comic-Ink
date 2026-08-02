@@ -1,11 +1,25 @@
-﻿param(
+param(
   [int]$BatchSize = 50,
-  [string]$InputCsv = "c:\Users\phile\Desktop\Comic-Ink\pythonCon\convention_enricher\input.csv",
-  [string]$OutputCsv = "c:\Users\phile\Desktop\Comic-Ink\pythonCon\convention_enricher\output.csv",
-  [string]$WorkDir = "c:\Users\phile\Desktop\Comic-Ink\pythonCon\.convention_crawler"
+  [string]$InputCsv,
+  [string]$OutputCsv,
+  [string]$WorkDir
 )
 
-$env:PYTHONPATH = "c:\Users\phile\Desktop\Comic-Ink\pythonCon"
+$PythonConRoot = $PSScriptRoot
+
+if (-not $InputCsv) {
+  $InputCsv = Join-Path $PythonConRoot "input.csv"
+}
+
+if (-not $OutputCsv) {
+  $OutputCsv = Join-Path $PythonConRoot "output.csv"
+}
+
+if (-not $WorkDir) {
+  $WorkDir = Join-Path $PythonConRoot ".convention_crawler"
+}
+
+$env:PYTHONPATH = $PythonConRoot
 $lines = (Get-Content $InputCsv | Measure-Object -Line).Lines
 $total = [Math]::Max($lines - 1, 0)
 

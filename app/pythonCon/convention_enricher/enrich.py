@@ -24,7 +24,7 @@ RETRY_BACKOFF_SECONDS = 1.2
 REQUEST_DELAY_RANGE_SECONDS = (0.7, 1.5)
 MAX_SEARCH_QUERIES = 10
 
-# This script lives in pythonCon/convention_enricher/, so pythonCon root is 1 level up.
+# This script lives in app/pythonCon/convention_enricher/, so pythonCon root is 1 level up.
 PYTHONCON_ROOT = Path(__file__).resolve().parents[1]
 INPUT_CSV = PYTHONCON_ROOT / "input.csv"
 OUTPUT_CSV = PYTHONCON_ROOT / "output.csv"
@@ -267,7 +267,7 @@ def write_output_csv(output_path: Path, rows: list[RowResult]) -> None:
 
 def main() -> int:
     if not INPUT_CSV.exists():
-        print(f"ERROR: input.csv not found at project root: {INPUT_CSV}")
+        print(f"ERROR: input.csv not found at pythonCon root: {INPUT_CSV}")
         return 1
 
     queries, stats = read_first_column_values(INPUT_CSV)

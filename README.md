@@ -44,16 +44,16 @@ To use the admin functionality:
 
 ### 05-08-26
 
-## Convention Enricher (Python)
+## Convention Enricher (Python) -- Work in Progress
 
-The convention enricher lives in `pythonCon/convention_enricher` and runs a simple pipeline:
+The convention enricher lives in `app/pythonCon/convention_enricher` and runs a simple pipeline:
 
 `INPUT (CSV) -> DUCKDUCKGO CHECK -> OUTPUT (CSV)`
 
 ## Behavior
 
 - Uses only DuckDuckGo HTML endpoint: `https://html.duckduckgo.com/html/`
-- Uses only first column from `pythonCon/input.csv`
+- Uses only first column from `app/pythonCon/input.csv`
 - Ignores all other input columns
 - Uses first-column value as the exact query string
 - Preserves original formatting from CSV, including quotation marks
@@ -64,10 +64,10 @@ The convention enricher lives in `pythonCon/convention_enricher` and runs a simp
 ## Input and Output
 
 Input file:
-- `pythonCon/input.csv`
+- `app/pythonCon/input.csv`
 
 Output file:
-- `pythonCon/output.csv`
+- `app/pythonCon/output.csv`
 
 Output columns (exactly):
 - `original_value`
@@ -83,7 +83,7 @@ Output columns (exactly):
 Install with:
 
 ```bash
-python -m pip install -r pythonCon/convention_enricher/requirements.txt
+python -m pip install -r app/pythonCon/convention_enricher/requirements.txt
 ```
 
 Packages used:
@@ -95,7 +95,7 @@ Packages used:
 From repo root:
 
 ```bash
-python pythonCon/convention_enricher/enrich.py
+python app/pythonCon/convention_enricher/enrich.py
 ```
 
 The script prints per-row progress (`row/query/success-failure`) and summary totals when complete.
