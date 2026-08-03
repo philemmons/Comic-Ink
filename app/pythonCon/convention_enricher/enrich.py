@@ -1,18 +1,21 @@
 from __future__ import annotations
 
+import base64
 import csv
 import random
 import re
 import time
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable
+from typing import Callable, Iterable
 from urllib.parse import parse_qs, unquote, urlparse
 
 import requests
 from bs4 import BeautifulSoup
 
 DDG_HTML_ENDPOINT = "https://html.duckduckgo.com/html/"
+GOOGLE_SEARCH_ENDPOINT = "https://www.google.com/search"
+BING_SEARCH_ENDPOINT = "https://www.bing.com/search"
 USER_AGENT = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
     "AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -21,7 +24,11 @@ USER_AGENT = (
 REQUEST_TIMEOUT_SECONDS = 12
 MAX_RETRIES = 3
 RETRY_BACKOFF_SECONDS = 1.2
-REQUEST_DELAY_RANGE_SECONDS = (0.7, 1.5)
+QUERY_DELAY_RANGE_SECONDS = (2.0, 4.0)
+PROVIDER_SWITCH_DELAY_RANGE_SECONDS = (0.8, 1.6)
+PROVIDER_COOLDOWN_RANGE_SECONDS = (45.0, 90.0)
+MAX_PROVIDER_FAILURES_BEFORE_COOLDOWN = 2
+MAX_CONSECUTIVE_QUERIES_PER_PROVIDER = 2
 MAX_SEARCH_QUERIES = 10
 
 # This script lives in app/pythonCon/convention_enricher/, so pythonCon root is 1 level up.
@@ -36,6 +43,27 @@ class RowResult:
     original_value: str
     search_query: str
     found: bool
+
+
+@dataclass(slots=True)
+class SearchAttempt:
+    found: bool
+    saved_path: str
+    provider: str
+    blocked: bool = False
+    attempted_providers: tuple[str, ...] = ()
+
+
+@dataclass(slots=True)
+class ProviderState:
+    name: str
+    consecutive_queries: int = 0
+    consecutive_failures: int = 0
+    cooldown_until: float = 0.0
+    total_attempts: int = 0
+
+
+SearchFunction = Callable[[requests.Session, str, int], SearchAttempt]
 
 
 @dataclass(slots=True)
@@ -106,11 +134,58 @@ def parse_redirect_href(href: str) -> str:
     return ""
 
 
+def parse_google_redirect_href(href: str) -> str:
+    if not href:
+        return ""
+    if href.startswith("/url?"):
+        parsed = urlparse(href)
+        params = parse_qs(parsed.query)
+        return prefer_https(params.get("q", [""])[0] or params.get("url", [""])[0])
+    if href.startswith(("http://", "https://")):
+        return prefer_https(href)
+    return ""
+
+
+def decode_bing_target(raw_value: str) -> str:
+    if not raw_value:
+        return ""
+    value = unquote(raw_value)
+    if value.startswith(("http://", "https://")):
+        return prefer_https(value)
+
+    if value.startswith("a1") and len(value) > 2:
+        payload = value[2:]
+        padding = "=" * ((4 - (len(payload) % 4)) % 4)
+        try:
+            decoded = base64.urlsafe_b64decode((payload + padding).encode("ascii")).decode("utf-8", errors="ignore")
+        except Exception:
+            return ""
+        if decoded.startswith(("http://", "https://")):
+            return prefer_https(decoded)
+    return ""
+
+
+def parse_bing_redirect_href(href: str) -> str:
+    if not href:
+        return ""
+    if href.startswith(("http://", "https://")) and "bing.com/ck/a" not in href:
+        return prefer_https(href)
+    if "bing.com/ck/a" in href:
+        parsed = urlparse(href)
+        params = parse_qs(parsed.query)
+        return decode_bing_target(params.get("u", [""])[0])
+    return ""
+
+
 def contains_block_page(html: str) -> bool:
     lowered = html.lower()
     block_signals = (
+        "anomaly-modal",
+        "bots use duckduckgo too",
         "captcha",
+        "confirm this search was made by a human",
         "detected unusual traffic",
+        "please complete the following challenge",
         "verify you are human",
         "access denied",
         "forbidden",
@@ -152,6 +227,73 @@ def has_meaningful_organic_result(html: str) -> bool:
     return False
 
 
+def has_meaningful_google_result(html: str) -> bool:
+    if not html.strip():
+        return False
+
+    soup = BeautifulSoup(html, "html.parser")
+    no_result_markers = (
+        "did not match any documents",
+        "no results found",
+    )
+    page_text = soup.get_text(" ", strip=True).lower()
+    if any(marker in page_text for marker in no_result_markers):
+        return False
+
+    anchors = soup.select("a[href]")
+    for anchor in anchors:
+        href = (anchor.get("href") or "").strip()
+        if not href:
+            continue
+
+        resolved = ""
+        if href.startswith("/url?"):
+            parsed = urlparse(href)
+            params = parse_qs(parsed.query)
+            resolved = prefer_https(params.get("q", [""])[0] or params.get("url", [""])[0])
+        elif href.startswith(("http://", "https://")):
+            resolved = prefer_https(href)
+
+        if not resolved.startswith("https://"):
+            continue
+
+        host = urlparse(resolved).netloc.lower()
+        if not host or any(marker in host for marker in ("google.", "gstatic.com", "googleusercontent.com")):
+            continue
+        return True
+
+    return False
+
+
+def has_meaningful_bing_result(html: str) -> bool:
+    if not html.strip() or contains_block_page(html):
+        return False
+
+    soup = BeautifulSoup(html, "html.parser")
+    no_result_markers = (
+        "there are no results for",
+        "did not match any documents",
+        "no results found",
+    )
+    page_text = soup.get_text(" ", strip=True).lower()
+    if any(marker in page_text for marker in no_result_markers):
+        return False
+
+    anchors = soup.select("a[href]")
+    for anchor in anchors:
+        href = (anchor.get("href") or "").strip()
+        resolved = parse_bing_redirect_href(href)
+        if not resolved.startswith("https://"):
+            continue
+
+        host = urlparse(resolved).netloc.lower()
+        if not host or any(marker in host for marker in ("bing.com", "microsoft.com")):
+            continue
+        return True
+
+    return False
+
+
 def build_snapshot_name(query: str, index: int) -> str:
     normalized = query.strip().strip("\"'").lower()
     safe = re.sub(r"[^a-z0-9]+", "_", normalized).strip("_")
@@ -160,14 +302,26 @@ def build_snapshot_name(query: str, index: int) -> str:
     return f"{index:04d}_{safe[:60]}"
 
 
-def save_ddg_search_html(snapshot_base_name: str, html: str) -> str:
+def save_search_html(snapshot_base_name: str, provider: str, html: str) -> str:
     SNAPSHOTS_DIR.mkdir(parents=True, exist_ok=True)
-    output_path = SNAPSHOTS_DIR / f"{snapshot_base_name}_ddg.html"
+    output_path = SNAPSHOTS_DIR / f"{snapshot_base_name}_{provider}.html"
     output_path.write_text(html, encoding="utf-8", errors="replace")
     return str(output_path)
 
 
-def query_duckduckgo(session: requests.Session, query: str, row_index: int) -> tuple[bool, str]:
+def save_ddg_search_html(snapshot_base_name: str, html: str) -> str:
+    return save_search_html(snapshot_base_name, "ddg", html)
+
+
+def save_google_search_html(snapshot_base_name: str, html: str) -> str:
+    return save_search_html(snapshot_base_name, "google", html)
+
+
+def save_bing_search_html(snapshot_base_name: str, html: str) -> str:
+    return save_search_html(snapshot_base_name, "bing", html)
+
+
+def query_duckduckgo(session: requests.Session, query: str, row_index: int) -> SearchAttempt:
     headers = {
         "User-Agent": USER_AGENT,
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.7,*/*;q=0.6",
@@ -189,7 +343,7 @@ def query_duckduckgo(session: requests.Session, query: str, row_index: int) -> t
             if attempt <= MAX_RETRIES:
                 time.sleep(RETRY_BACKOFF_SECONDS * attempt)
                 continue
-            return False, ""
+            return SearchAttempt(found=False, saved_path="", provider="duckduckgo")
 
         # Some environments are blocked on POST. Try GET fallback before fail.
         if response.status_code == 403:
@@ -205,27 +359,266 @@ def query_duckduckgo(session: requests.Session, query: str, row_index: int) -> t
                 if attempt <= MAX_RETRIES:
                     time.sleep(RETRY_BACKOFF_SECONDS * attempt)
                     continue
-                return False, ""
+                return SearchAttempt(found=False, saved_path="", provider="duckduckgo", blocked=True)
 
         if response.status_code in {429, 500, 502, 503, 504}:
             if attempt <= MAX_RETRIES:
                 time.sleep(RETRY_BACKOFF_SECONDS * attempt)
                 continue
-            return False, ""
+            return SearchAttempt(
+                found=False,
+                saved_path="",
+                provider="duckduckgo",
+                blocked=response.status_code == 429,
+            )
 
         snapshot_name = build_snapshot_name(query, row_index)
         saved_path = save_ddg_search_html(snapshot_name, response.text)
 
+        blocked = contains_block_page(response.text)
+        if blocked:
+            return SearchAttempt(found=False, saved_path=saved_path, provider="duckduckgo", blocked=True)
+
         if response.status_code != 200:
-            return False, saved_path
+            return SearchAttempt(
+                found=False,
+                saved_path=saved_path,
+                provider="duckduckgo",
+                blocked=response.status_code in {403, 429},
+            )
 
         # Redirect-only responses or non-DDG destinations are not meaningful SERP pages.
         if "duckduckgo.com" not in urlparse(response.url).netloc.lower():
-            return False, saved_path
+            return SearchAttempt(found=False, saved_path=saved_path, provider="duckduckgo")
 
-        return has_meaningful_organic_result(response.text), saved_path
+        return SearchAttempt(
+            found=has_meaningful_organic_result(response.text),
+            saved_path=saved_path,
+            provider="duckduckgo",
+        )
 
-    return False, ""
+    return SearchAttempt(found=False, saved_path="", provider="duckduckgo")
+
+
+def query_google(session: requests.Session, query: str, row_index: int) -> SearchAttempt:
+    headers = {
+        "User-Agent": USER_AGENT,
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.7,*/*;q=0.6",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Referer": "https://www.google.com/",
+    }
+    params = {"q": query, "hl": "en", "gl": "us", "pws": "0"}
+
+    for attempt in range(1, MAX_RETRIES + 2):
+        try:
+            response = session.get(
+                GOOGLE_SEARCH_ENDPOINT,
+                headers=headers,
+                params=params,
+                timeout=REQUEST_TIMEOUT_SECONDS,
+                allow_redirects=True,
+            )
+        except requests.RequestException:
+            if attempt <= MAX_RETRIES:
+                time.sleep(RETRY_BACKOFF_SECONDS * attempt)
+                continue
+            return SearchAttempt(found=False, saved_path="", provider="google")
+
+        if response.status_code in {429, 500, 502, 503, 504}:
+            if attempt <= MAX_RETRIES:
+                time.sleep(RETRY_BACKOFF_SECONDS * attempt)
+                continue
+            return SearchAttempt(found=False, saved_path="", provider="google")
+
+        snapshot_name = build_snapshot_name(query, row_index)
+        saved_path = save_google_search_html(snapshot_name, response.text)
+
+        if response.status_code != 200:
+            return SearchAttempt(found=False, saved_path=saved_path, provider="google")
+
+        if "google." not in urlparse(response.url).netloc.lower():
+            return SearchAttempt(found=False, saved_path=saved_path, provider="google")
+
+        return SearchAttempt(
+            found=has_meaningful_google_result(response.text),
+            saved_path=saved_path,
+            provider="google",
+        )
+
+    return SearchAttempt(found=False, saved_path="", provider="google")
+
+
+def query_bing(session: requests.Session, query: str, row_index: int) -> SearchAttempt:
+    headers = {
+        "User-Agent": USER_AGENT,
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.7,*/*;q=0.6",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Referer": "https://www.bing.com/",
+    }
+    params = {"q": query, "setlang": "en-us"}
+
+    for attempt in range(1, MAX_RETRIES + 2):
+        try:
+            response = session.get(
+                BING_SEARCH_ENDPOINT,
+                headers=headers,
+                params=params,
+                timeout=REQUEST_TIMEOUT_SECONDS,
+                allow_redirects=True,
+            )
+        except requests.RequestException:
+            if attempt <= MAX_RETRIES:
+                time.sleep(RETRY_BACKOFF_SECONDS * attempt)
+                continue
+            return SearchAttempt(found=False, saved_path="", provider="bing")
+
+        if response.status_code in {429, 500, 502, 503, 504}:
+            if attempt <= MAX_RETRIES:
+                time.sleep(RETRY_BACKOFF_SECONDS * attempt)
+                continue
+            return SearchAttempt(
+                found=False,
+                saved_path="",
+                provider="bing",
+                blocked=response.status_code == 429,
+            )
+
+        snapshot_name = build_snapshot_name(query, row_index)
+        saved_path = save_bing_search_html(snapshot_name, response.text)
+
+        blocked = contains_block_page(response.text)
+        if blocked:
+            return SearchAttempt(found=False, saved_path=saved_path, provider="bing", blocked=True)
+
+        if response.status_code != 200:
+            return SearchAttempt(
+                found=False,
+                saved_path=saved_path,
+                provider="bing",
+                blocked=response.status_code in {403, 429},
+            )
+
+        if "bing.com" not in urlparse(response.url).netloc.lower():
+            return SearchAttempt(found=False, saved_path=saved_path, provider="bing")
+
+        return SearchAttempt(
+            found=has_meaningful_bing_result(response.text),
+            saved_path=saved_path,
+            provider="bing",
+        )
+
+    return SearchAttempt(found=False, saved_path="", provider="bing")
+
+
+class SearchRotationStrategy:
+    def __init__(
+        self,
+        provider_queries: dict[str, SearchFunction],
+        provider_order: tuple[str, ...] = ("google", "bing", "duckduckgo"),
+    ) -> None:
+        self.provider_queries = provider_queries
+        self.provider_order = provider_order
+        self.provider_states = {name: ProviderState(name=name) for name in provider_order}
+        self.primary_index = 0
+
+    def _provider_names_from(self, start_index: int) -> list[str]:
+        names = list(self.provider_order)
+        return names[start_index:] + names[:start_index]
+
+    def _active_names(self, now: float) -> list[str]:
+        return [name for name in self.provider_order if self.provider_states[name].cooldown_until <= now]
+
+    def _advance_primary(self, now: float) -> None:
+        for offset in range(1, len(self.provider_order) + 1):
+            candidate_index = (self.primary_index + offset) % len(self.provider_order)
+            candidate_name = self.provider_order[candidate_index]
+            if self.provider_states[candidate_name].cooldown_until <= now:
+                self.primary_index = candidate_index
+                return
+        earliest_name = min(self.provider_order, key=lambda name: self.provider_states[name].cooldown_until)
+        self.primary_index = self.provider_order.index(earliest_name)
+
+    def providers_for_query(self) -> list[str]:
+        now = time.monotonic()
+        primary_name = self.provider_order[self.primary_index]
+        primary_state = self.provider_states[primary_name]
+        if (
+            primary_state.cooldown_until > now
+            or primary_state.consecutive_queries >= MAX_CONSECUTIVE_QUERIES_PER_PROVIDER
+        ):
+            self._advance_primary(now)
+            primary_name = self.provider_order[self.primary_index]
+
+        ordered = self._provider_names_from(self.primary_index)
+        active = [name for name in ordered if self.provider_states[name].cooldown_until <= now]
+        if active:
+            return active
+
+        earliest_name = min(ordered, key=lambda name: self.provider_states[name].cooldown_until)
+        return [earliest_name]
+
+    def record_attempt(self, provider_name: str, attempt: SearchAttempt) -> None:
+        now = time.monotonic()
+        state = self.provider_states[provider_name]
+        state.total_attempts += 1
+
+        if attempt.blocked:
+            state.consecutive_failures += 1
+            state.consecutive_queries = 0
+            state.cooldown_until = now + random.uniform(*PROVIDER_COOLDOWN_RANGE_SECONDS)
+            if provider_name == self.provider_order[self.primary_index]:
+                self._advance_primary(now)
+            return
+
+        if attempt.found:
+            state.consecutive_failures = 0
+            state.cooldown_until = 0.0
+            for other_name, other_state in self.provider_states.items():
+                if other_name == provider_name:
+                    other_state.consecutive_queries += 1
+                else:
+                    other_state.consecutive_queries = 0
+            self.primary_index = self.provider_order.index(provider_name)
+            return
+
+        state.consecutive_failures += 1
+        state.consecutive_queries = 0
+        if state.consecutive_failures >= MAX_PROVIDER_FAILURES_BEFORE_COOLDOWN:
+            state.cooldown_until = now + random.uniform(*PROVIDER_COOLDOWN_RANGE_SECONDS)
+            if provider_name == self.provider_order[self.primary_index]:
+                self._advance_primary(now)
+
+
+def query_search(
+    session: requests.Session,
+    query: str,
+    row_index: int,
+    strategy: SearchRotationStrategy,
+) -> SearchAttempt:
+    attempted_providers: list[str] = []
+    last_attempt: SearchAttempt | None = None
+    provider_names = strategy.providers_for_query()
+
+    for position, provider_name in enumerate(provider_names):
+        attempt = strategy.provider_queries[provider_name](session, query, row_index)
+        attempted_providers.append(provider_name)
+        attempt = SearchAttempt(
+            found=attempt.found,
+            saved_path=attempt.saved_path,
+            provider=attempt.provider,
+            blocked=attempt.blocked,
+            attempted_providers=tuple(attempted_providers),
+        )
+        strategy.record_attempt(provider_name, attempt)
+        last_attempt = attempt
+        if attempt.found:
+            return attempt
+        if position < len(provider_names) - 1:
+            time.sleep(random.uniform(*PROVIDER_SWITCH_DELAY_RANGE_SECONDS))
+
+    if last_attempt is not None:
+        return last_attempt
+    return SearchAttempt(found=False, saved_path="", provider="", attempted_providers=tuple())
 
 
 def build_results(queries: Iterable[str]) -> tuple[list[RowResult], int]:
@@ -233,6 +626,13 @@ def build_results(queries: Iterable[str]) -> tuple[list[RowResult], int]:
     # Ignore HTTP(S)_PROXY/ALL_PROXY env vars to prevent local proxy config
     # from causing false negatives in DuckDuckGo checks.
     session.trust_env = False
+    strategy = SearchRotationStrategy(
+        provider_queries={
+            "google": query_google,
+            "bing": query_bing,
+            "duckduckgo": query_duckduckgo,
+        }
+    )
     results: list[RowResult] = []
     if not isinstance(queries, list):
         queries = list(queries)
@@ -240,19 +640,23 @@ def build_results(queries: Iterable[str]) -> tuple[list[RowResult], int]:
     failures = 0
 
     for index, query in enumerate(queries, start=1):
-        found, saved_path = query_duckduckgo(session, query, index)
-        results.append(RowResult(original_value=query, search_query=query, found=found))
+        attempt = query_search(session, query, index, strategy)
+        results.append(RowResult(original_value=query, search_query=query, found=attempt.found))
 
-        state = "SUCCESS" if found else "FAILURE"
-        if saved_path:
-            print(f"[{index}/{total}] query={query} state={state} html={saved_path}")
+        state = "SUCCESS" if attempt.found else "FAILURE"
+        tried = "->".join(attempt.attempted_providers) if attempt.attempted_providers else attempt.provider
+        if attempt.saved_path:
+            print(
+                f"[{index}/{total}] query={query} providers={tried} final_provider={attempt.provider} "
+                f"state={state} html={attempt.saved_path}"
+            )
         else:
-            print(f"[{index}/{total}] query={query} state={state}")
+            print(f"[{index}/{total}] query={query} providers={tried} final_provider={attempt.provider} state={state}")
 
-        if not found:
+        if not attempt.found:
             failures += 1
 
-        time.sleep(random.uniform(*REQUEST_DELAY_RANGE_SECONDS))
+        time.sleep(random.uniform(*QUERY_DELAY_RANGE_SECONDS))
 
     return results, failures
 
